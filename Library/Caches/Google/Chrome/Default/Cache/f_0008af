@@ -1,0 +1,589 @@
+//Enable submit button
+function submitEnable() {
+	if (document.getElementById('confirmPassword').value != null) {
+		document.getElementById('submitButton').disabled = false;
+	} else {
+		document.getElementById('submitButton').disabled = true;
+	}
+}
+
+// Add Hint Text
+function hintText() {
+	if (document.getElementById('appleId').value == '') {
+		document.getElementById('appleId').setAttribute('placeholder',
+				'Apple ID');
+	}
+	if (document.getElementById('accountPassword').value == '') {
+		document.getElementById('accountPassword').setAttribute('placeholder',
+				'Password');
+	}
+}
+
+function keyUpEventDelagate(evt, obj) {
+        if ((obj.getAttribute("id") == "newPassword") && ("password" == obj.getAttribute("type"))) {
+            document.getElementById("passwordfocus").style.display = "block";
+            if(document.getElementById("password-validation-wrapper")!=undefined)
+            {
+            document.getElementById("password-validation-wrapper").style.display = "block";
+            }
+            passwordStrengthCalculator(obj.value, document.getElementById("passwordMinimumLength").value);
+            validate(obj.value);
+        } 
+    }
+    
+// Password Strength Calculator
+function passwordStrengthCalculator(passwd, pswdMiniLength) {
+	var passwordScore = 0;
+	var passwordStrength = "";
+	var passText = document.getElementById("passText");
+	// password length 6-7
+	if (passwd.length > 5 && passwd.length < 8) {
+		passwordScore = (passwordScore + 6);
+	}
+	// password length 8-15
+	else if (passwd.length > 7 && passwd.length < 16) {
+		passwordScore = (passwordScore + 12);
+	} else if (passwd.length > 15) // password length > 15
+	{
+		passwordScore = (passwordScore + 18);
+	}
+
+	// Character Check: lower and upper character check
+	if (passwd.match(/[a-z]/)) {
+		passwordScore = (passwordScore + 1)
+	}
+
+	if (passwd.match(/[A-Z]/)) {
+		passwordScore = (passwordScore + 5);
+	}
+
+	// Number Check
+	if (passwd.match(/\d+/)) // at least one numeric
+	{
+		passwordScore = (passwordScore + 5);
+	}
+
+	if (passwd.match(/(.*[0-9].*[0-9].*[0-9])/)) // at least three numeric
+	{
+		passwordScore = (passwordScore + 5);
+	}
+
+	// Symbol Check
+	if (passwd.match(/.[!,@,#,$,%,^,&,*,?,_,~]/)) // at least one special
+	// character
+	{
+		passwordScore = (passwordScore + 5);
+	}
+
+	// Symbol Check - 2
+	if (passwd.match(/(.*[!,@,#,$,%,^,&,*,?,_,~].*[!,@,#,$,%,^,&,*,?,_,~])/)) {
+		passwordScore = (passwordScore + 5);
+	}
+
+	// Mix check: upper/lower case, alpha + numeric
+	if (passwd.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) // check for both upper
+	// and lower case
+	{
+		passwordScore = (passwordScore + 2);
+	}
+
+	if (passwd.match(/([a-zA-Z])/) && passwd.match(/([0-9])/)) // check for
+	// both alpha
+	// and numeric
+	{
+		passwordScore = (passwordScore + 2);
+	}
+
+	// Mix check: alpha, numbers, and symbols
+	if (passwd
+			.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/)) {
+		passwordScore = (passwordScore + 2);
+	}
+	
+	if (passwd.length == 0) {
+		
+		passText.innerHTML = "";
+		if (document.getElementById("passText") != null) {
+			document.getElementById("passText").style.display = "none";
+		}
+		return;
+	} else {
+		if (document.getElementById("passText") != null) {
+			if(document.getElementById("passwordStrength") != null)
+			{
+			document.getElementById("passwordStrength").style.display = "inline";
+			}
+			document.getElementById("passText").style.display = "inline";
+		}
+		if (passwd.length < pswdMiniLength) {
+			var passwordStrengthTooShortHide = document
+					.getElementById("passwordStrengthTooShortHide");
+			passText.innerHTML = "<em class='weak'>"
+					+ passwordStrengthTooShortHide.value + "</em>"
+
+			return;
+		} else if (passwordScore < 25) {
+			var passwordStrengthWeakHide = document
+					.getElementById("passwordStrengthWeakHide");
+			passText.innerHTML = "<em class='weak'>"
+					+ passwordStrengthWeakHide.value + "</em>";
+			return;
+		} else if (passwordScore > 24 && passwordScore < 35) {
+			var passwordStrengthMediumHide = document
+					.getElementById("passwordStrengthMediumHide");
+			passText.innerHTML = "<em class='moderate'>"
+					+ passwordStrengthMediumHide.value + "</em>";
+			return;
+		} else if (passwordScore > 34) {
+			var passwordStrengthStrongHide = document
+			.getElementById("passwordStrengthStrongHide");
+			passText.innerHTML = "<em class='strong'>"
+					+ passwordStrengthStrongHide.value + "</em>";
+			return;
+		}
+	}
+}
+
+// To change the Display based on the Language selected
+function changeLanguage() {
+	var currentLoc = location.href;
+
+	if (currentLoc.indexOf("#b") > 0) {
+		currentLoc = currentLoc.substr(0, currentLoc.length - 2);
+	}
+
+	if (currentLoc.indexOf("?") > 0) {
+		var finalURL;
+		var arrParams = currentLoc.split("?");
+		finalUrl = arrParams[0];
+		finalUrl = finalUrl.replace("submitCR.html", "authenticate.html")
+				.replace("changePassword.html", "authenticate.html")
+				.concat("?");
+		var urlParams = arrParams[1].split("&");
+		var index = 0;
+		for (index = 0; index < urlParams.length; index++) {
+			var flag;
+			var params = urlParams[index].split("=");
+			if (params[0] == 'language') {
+				flag = 1;
+			} else {
+				finalUrl = finalUrl.concat(urlParams[index]);
+				finalUrl = finalUrl.concat("&");
+			}
+		}
+		if (flag == 1) {
+			finalUrl = finalUrl.concat("language=");
+			finalUrl = finalUrl
+					.concat(document.getElementById('languageCode').value);
+			window.location = finalUrl;
+		} else {
+			currentLoc = currentLoc.concat("&language=");
+			currentLoc = currentLoc.concat(document
+					.getElementById('languageCode').value);
+			window.location = currentLoc;
+		}
+	} else {
+		if (document.getElementById('harvestID').value == "harvest") {
+			var arrParams = currentLoc.split("/");
+			finalUrl = arrParams[arrParams.length - 1];
+			if (finalUrl.indexOf("submitCR.html") != -1) {
+				currentLoc = currentLoc.replace("submitCR.html",
+						"authenticate.html").concat("?language=");
+			}
+			if (finalUrl.indexOf("changePassword.html") != -1) {
+				currentLoc = currentLoc.replace("changePassword.html",
+						"authenticate.html").concat("?language=");
+			}
+			if (finalUrl.indexOf("authenticate.html") != -1) {
+				currentLoc = currentLoc.concat("?language=");
+			}
+			currentLoc = currentLoc.concat(document
+					.getElementById('languageCode').value);
+			currentLoc = currentLoc.concat("&errCd=");
+			currentLoc = currentLoc
+					.concat(document.getElementById('harvestID').value);
+			window.location = currentLoc;
+		}
+
+		if (document.getElementById('expiryID').value == "expiry") {
+			currentLoc = currentLoc.replace("changePassword.html",
+					"authenticate.html").concat("?language=");
+			currentLoc = currentLoc.concat(document
+					.getElementById('languageCode').value);
+			currentLoc = currentLoc.concat("&errCd=");
+			currentLoc = currentLoc
+					.concat(document.getElementById('expiryID').value);
+			window.location = currentLoc;
+		}
+		if (document.getElementById('authenticationID').value == "authentication") {
+			currentLoc = currentLoc.replace("country.html", "authenticate.html");
+			currentLoc = currentLoc.concat("?language=");
+			currentLoc = currentLoc.concat(document
+					.getElementById('languageCode').value);
+			currentLoc = currentLoc.concat("&errCd=");
+			currentLoc = currentLoc.concat(document
+					.getElementById('authenticationID').value);
+			window.location = currentLoc;
+		}
+
+	}
+}
+
+function urlStore() {
+	if (document.getElementById('hiddenUrl').value == '') {
+		document.getElementById('hiddenUrl').value = location.href;
+	} else {
+		//location.href = document.getElementById('hiddenUrl').value;
+	}
+	document.getElementById('currentUrl').value = location.href;
+}
+function fixSafariBackButton() {
+	if (navigator.userAgent.indexOf("Safari") > -1) {
+		var eventSawpper = onload;
+		if (eventSawpper) {
+			if (onunload == null) {
+				document.body.setAttribute('onunload', eventSawpper);
+			}
+		}
+	}
+}
+
+function hideBubble() {
+	document.getElementById("passwordfocus").style.display = "none";
+	document.getElementById("passwordStrength").style.display = "none";
+	document.getElementById("passText").style.display = "none";
+}
+function validate(passwd) {
+	if (passwd.length < 0) {
+		document.getElementById("passwordfocus").style.display = "none";
+	} else {
+		document.getElementById("passwordfocus").style.display = "inline";
+	}
+	var errorCode = "";
+	// var charCode = (event.which) ? event.which : event.keyCode ;
+	var passwd = document.getElementById('newPassword').value;
+	// var message = document.getElementById('confirmMessage');
+	var accountname = document.getElementById('accountName').value;
+	if (passwd.length < 8) {
+		errorCode = "-20725";
+		document.getElementById('password-eight-characters').className = 'fail';
+	} else {
+		document.getElementById('password-eight-characters').className = 'pass';
+	}
+
+	if (passwd.length > 32) {
+		errorCode = errorCode + "," + "-20726";
+	}
+
+	if (!passwd.match(/[a-z]/)) {
+		errorCode = errorCode + "," + "-21103";
+		document.getElementById('password-one-char').className = 'fail';
+	} else {
+		document.getElementById('password-one-char').className = 'pass';
+	}
+
+	if (!passwd.match(/[A-Z]/)) {
+		errorCode = errorCode + "," + "-21102";
+		document.getElementById('password-one-capital').className = 'fail';
+	} else {
+		document.getElementById('password-one-capital').className = 'pass';
+	}
+
+	if (!passwd.match(/\d+/)) {
+		errorCode = errorCode + "," + "-20734";
+		document.getElementById('password-one-number').className = 'fail';
+	} else {
+		document.getElementById('password-one-number').className = 'pass';
+	}
+
+	if (passwd.match(/(.)\1\1/)) {
+		errorCode = errorCode + "," + "-20736";
+		document.getElementById('password-three-identical').className = 'fail';
+
+	} else {
+		document.getElementById('password-three-identical').className = 'pass';
+	}
+
+	if (accountname == passwd) {
+		errorCode = errorCode + "," + "-20733";
+		document.getElementById('password-same-as-account').className = 'fail';
+	} else {
+		document.getElementById('password-same-as-account').className = 'pass';
+	}
+	
+	if(document.getElementById('password-one-char').className=='pass' && document.getElementById('password-one-capital').className=='pass' && document.getElementById('password-one-number').className=='pass' && document.getElementById('password-three-identical').className=='pass' && document.getElementById('password-same-as-account').className=='pass' && document.getElementById('password-eight-characters').className=='pass')
+	{
+		
+//		callAjax(passwd,accountname);
+					
+	}
+	else 
+	{
+		document.getElementById('password-dictionary-word').className='';
+		document.getElementById('password-used-last-year').className='';
+	}
+
+	if (passwd.length == 0) {
+		document.getElementById('password-eight-characters').className = 'neutral';
+		document.getElementById('password-one-char').className = 'neutral';
+		document.getElementById('password-one-capital').className = 'neutral';
+		document.getElementById('password-one-number').className = 'neutral';
+		document.getElementById('password-three-identical').className = 'neutral';
+		document.getElementById('password-same-as-account').className = 'neutral';
+		document.getElementById('password-dictionary-word').className='';
+		document.getElementById('password-used-last-year').className='';
+		
+	}
+
+	if (errorCode.indexOf(",") == 0) {
+		errorCode = errorCode.substring(1);
+	}
+if(document.getElementById('passworderror')!=null){
+	document.getElementById('passworderror').value = errorCode;
+}
+
+}
+function callAjax(pass, accountname) {
+	var xmlhttp;
+	document.getElementById('newPassword').className = 'requestinprocess';
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			if(xmlhttp.responseText!=null){
+			response = xmlhttp.responseText.toString();
+			if(response.length>6)
+			{
+					document.getElementById('password-dictionary-word').className='fail';
+					document.getElementById('password-used-last-year').className='fail';
+			
+			}
+			else if(response.length==0)
+			{
+					document.getElementById('password-dictionary-word').className='pass';
+					document.getElementById('password-used-last-year').className='pass';	
+			}
+			else if(response.length==6)
+			{
+				    if(response =='-20737') {
+					document.getElementById('password-dictionary-word').className='pass';
+					document.getElementById('password-used-last-year').className='fail';
+					}
+					else {
+					document.getElementById('password-dictionary-word').className='fail';
+					document.getElementById('password-used-last-year').className='pass';
+					}	
+			}
+			}
+
+		}
+	}
+	var currentLoc = location.href;
+	var finalURL;
+	if (currentLoc.indexOf("#b") > 0) {
+		currentLoc = currentLoc.substr(0, currentLoc.length - 2);
+	}
+		var arrParams = currentLoc.split("?");
+		var position=arrParams[0].lastIndexOf("/");
+		finalUrl=arrParams[0].substr(0, position);
+		finalUrl=finalUrl.concat("/validatePasswordBubbleRules.html?");
+		
+	
+	accountname = accountname.replace(/\+/g, "|PLUS|");
+	var queryString = "pass=" + encodeURIComponent(pass) + "&acAccountName="
+			+ accountname;
+	finalUrl = finalUrl+ queryString;
+	xmlhttp.open("POST", finalUrl, true);
+	xmlhttp.setRequestHeader("Content-type",
+			"application/x-www-form-urlencoded");
+	xmlhttp.send(queryString);
+
+
+}
+//following methods are to set the position of the passwordbubble on top, bottom and right  on resizing of window
+function getScrollXY() {
+	var scrOfX = 0, scrOfY = 0;
+	if( typeof( window.pageYOffset ) == 'number' ) {
+    	//Netscape compliant
+    	scrOfY = window.pageYOffset;
+    	scrOfX = window.pageXOffset;
+	} 
+	else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
+  		//DOM compliant
+    	scrOfY = document.body.scrollTop;
+    	scrOfX = document.body.scrollLeft;
+  	} 
+	else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
+    	//IE6 standards compliant mode
+    	scrOfY = document.documentElement.scrollTop;
+    	scrOfX = document.documentElement.scrollLeft;
+  	}
+  	return [ scrOfX, scrOfY ];
+}
+
+function setTop(validation, container, field) {
+
+	validation.removeClassName('horizontal');
+	validation.removeClassName('bottom');
+	validation.addClassName('top');
+	validation.setAttribute('orientation', 'top');
+	setHeight(container, field);
+}
+
+function setBottom(validation, container, field) {
+
+	validation.removeClassName('horizontal');
+	validation.removeClassName('top');
+	validation.addClassName('bottom');
+	validation.setAttribute('orientation', 'bottom');
+	setHeight(container, field);
+}
+
+function setHorizontal(validation, container, field) {
+
+	validation.removeClassName('top');
+	validation.removeClassName('bottom');
+	validation.setAttribute('orientation', 'horizontal');
+	setHeight(container, field);
+}
+// decides the orientation of the validation box
+function orientation(container, field) {
+	if(document.getElementById(field)!=null) {		
+		var validation = $(container);
+		// hard coded width (css) and generated height
+		if(validation.offsetHeight!=null) {
+		var validationHeight = validation.offsetHeight;
+		}
+		var validationWidth = 275;
+		var topNavHeight = 45;
+	
+		// find the offset values
+		var scrollOffsetX = getScrollXY()[0];
+		var scrollOffsetY = getScrollXY()[1];
+		
+		// var validationOffsetX = validation.readAttribute('validationOffsetX');
+		var passwordOffsetX = parseInt($(field).viewportOffset()[0]) + validationWidth;
+		var validationOffsetY =  parseInt($(field).viewportOffset()[1]) - validationHeight;
+		var passwordOffsetY =  parseInt($(field).viewportOffset()[1]);
+	
+		// find the viewport values
+		var windowWidth  = window.innerWidth  || (window.document.documentElement.clientWidth  || window.document.body.clientWidth),
+			windowHeight = window.innerHeight || (window.document.documentElement.clientHeight || window.document.body.clientHeight);
+		
+		var currentOrientation = validation.readAttribute('orientation');
+		
+		// default, if horizontal display mode available
+		if ((validationWidth + passwordOffsetX) < (windowWidth + scrollOffsetX) ) {
+			if(passwordOffsetY < topNavHeight) {
+				if(currentOrientation == 'bottom') return -1;
+
+				setBottom(validation, container, field);
+				return 3;
+			}
+			
+			if(currentOrientation == 'horizontal') return -1;
+			
+			setHorizontal(validation, container, field);
+			return 1;
+		}
+	
+		// if the error message 
+		else if ($('server-error') != null && $('server-error').innerHTML.length > 0) {
+			if(currentOrientation == 'top') return -1;
+			
+			setTop(validation, container, field);
+			return 2;
+		}
+		
+		else if (validationOffsetY < topNavHeight) {
+			if(currentOrientation == 'bottom') return -1;
+			
+			setBottom(validation, container, field);
+			return 3;
+		}
+		
+		else {
+			if(currentOrientation == 'top') return -1;
+			setTop(validation, container, field);
+		}
+	}
+}
+
+function setHeight(container, field) {
+var capSize = 14;
+var validation = $(container);
+
+var topOffset = 0;
+if(validation.offsetHeight!=null ) 
+{
+	if(validation.readAttribute('orientation') == 'horizontal') 
+	{
+		if(validation.offsetHeight ==0)capSize=-113;
+		topOffset = (-(validation.offsetHeight / 2) + capSize) + 'px';
+	}
+	else if(validation.readAttribute('orientation') == 'top') 
+	{
+		if(validation.offsetHeight ==0)
+		{
+			topOffset=-261+'px';
+		}
+		else{
+		topOffset = -validation.offsetHeight+ 8 + 'px';
+		}
+	}
+	else
+	{
+		if (document.getElementById('appleidedit') != null && field == 'appleid')
+			topOffset = ($(field).offsetHeight) + 25 + 'px';
+		else
+			topOffset = ($(field).offsetHeight) + 'px';	
+	}
+validation.setStyle({ top: topOffset } );		
+}	
+}
+
+function setInitialValidationBubbleClass(container, field) {
+if(document.getElementById(field)!=null) {
+	$(field).observe('focus', function(event) {
+		var password = $(field);
+		if(password.value == password.getAttribute('default')) {
+			password.value = "";
+			password.addClassName('has-content');
+		} 
+		$(container).addClassName('validation-show');
+		orientation(container, field); 
+		setHeight(container, field);
+	});
+
+	$(field).observe('blur', function(event) { 
+		var password = $(field);
+		if(password.value.length == 0) {
+			//password.value = password.getAttribute('default');
+			password.removeClassName('has-content');
+		}
+		$(container).removeClassName('validation-show'); 
+	});
+}
+}
+
+/*Setting the FDC details*/
+function setFD(){
+	//Setting the Timezone
+	var dateVar = new Date();
+	var timezone = dateVar.getTimezoneOffset();
+	//Setting the screen data
+	var s = [screen.height, screen.width, screen.colorDepth, screen.availHeight, screen.availWidth].join("x");
+	var fdDetails = timezone + "|" + s;
+	document.getElementById('fdDetails').value = fdDetails;
+}
+
+
+/*For Auto-refreshing the page*/
+function loadpage(actionName){
+	document.form = document.form2 || document.form1;
+    document.form.action = actionName;
+    document.form.submit();
+}

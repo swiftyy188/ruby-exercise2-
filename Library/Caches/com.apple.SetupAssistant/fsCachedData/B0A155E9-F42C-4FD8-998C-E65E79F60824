@@ -1,0 +1,1528 @@
+/* EMULATOR-SPECIFIC STUFF
+
+   When we're inside the emulator, we display a number of things we otherwise
+   do not. */
+
+body.emulator {
+  background-color: #f5f5f5;
+}
+
+body.emulator #main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 732px;
+  margin-left: -364px;
+  height: 402px;
+  margin-top: -201px;
+  border: 2px solid #666;
+}
+
+body.emulator .page-heading {
+  display: inherit;
+}
+
+body.emulator #footer {
+  display: inherit;
+}
+
+
+
+/* @group View Structure */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: -webkit-system-font, 'Lucida Grande', sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-user-select: none;
+  cursor: default;
+}
+body.th-th {
+  line-height: 1.6;
+}
+
+#main {
+ background: transparent;
+ width: 100%;
+ height: 100%;
+}
+
+#pages{
+  position: absolute;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+}
+
+/* Unless we're inside the emulator, we don't want to show the page headings */
+.page-heading {
+  display: none;            /* Visible in emulator mode */
+  position: absolute;
+  top: -85px;
+  width: 100%;
+  font-size: 30px;
+  text-align: center;
+}
+
+#page-title {
+  display: block;
+  color: rgba(115,115,115, 0.75);
+}
+
+#page-desc {
+  display: block;
+  font-size: 11pt;
+  padding-top: 4px;
+  color: rgba(50,50,50, 1);
+}
+
+.page {
+  display: none;        /* Will be overridden on a per-element basis */
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#footer {
+  display: none;
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  height: 24px;
+  text-align: center;
+}
+
+/* @end View Structure */
+
+
+
+
+/* @group Global */
+
+input, select {
+    -webkit-user-select: text;
+    font-size:13px;
+    font-family:inherit;
+}
+
+select {
+  font-size: 16px;
+}
+
+span.hint {
+  color:#999;
+  font-weight: normal;
+  position: absolute;
+  padding-left: 4px;
+  padding-top: 2px;
+  margin: 0;
+  border: none;
+}
+
+div.label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: bold;
+  width: 220px;
+  display: inline-block;
+  text-align: start;
+}
+
+label {
+  overflow: visible;
+  font-size: 13px;
+  color: #000;
+}
+
+.instruction > .text {
+  font-size: 11px;
+  height: auto;
+  color: rgba(0,0,0,1);
+  max-width: 450px;
+  display: inline-block;
+  cursor: default;
+}
+
+div.graphic {
+  display: block;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* This is now handled dynamically in pages.js
+div.graphic.sprited {
+  background-image: url(../imgs/sprites.png);
+}
+*/
+
+div.header.graphic {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  height: 22px;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.row.instruction {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.row.row-label {
+  height:auto;
+  padding-bottom: 0;
+}
+.row-label[dir=rtl] .label{
+  text-align:right;
+}
+
+.row.radio {
+  height: auto;
+  padding-top:6px;
+}
+
+.field {
+  display: inline-block;
+}
+
+.field input:not([type=radio]){
+  width: 214px;
+}
+
+.field select{
+  width: 219px;
+}
+
+body._10_9 input:not([type=radio]),
+body._10_8 input:not([type=radio]),
+body._10_7 input:not([type=radio]),
+body._10_6 input:not([type=radio]),
+body._10_5 input:not([type=radio]) {
+  width: 210px;
+  padding: 2px 4px 3px;
+  border: 1px solid rgba(0,0,0,0.41);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.field input:disabled::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.smallField {
+  display: inline-block;
+}
+
+.smallField input:disabled::-webkit-input-placeholder {
+  color: transparent;
+}
+
+
+/* scrollers ftw */
+
+#deviceSelectionRadio {
+  position: relative;
+}
+
+.top-scroll {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  top: 6px;
+  background: -webkit-radial-gradient(50% 0, 175px 7px, rgba(0, 0, 0, .2), transparent);
+  -webkit-transition: opacity .35s;
+}
+/*.top-scroll-border{
+  position: absolute;
+  bottom:110px;
+  height:1px;
+  left:0px;
+  right:0px;
+  background:-webkit-radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .5), transparent);
+  -webkit-transition: opacity .35s;
+}*/
+.bottom-scroll {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: 9px;
+  background: -webkit-radial-gradient(50% 100%, 175px 7px, rgba(0, 0, 0, .2), transparent) 0 100%;
+  -webkit-transition: opacity .35s;
+}
+/*.bottom-scroll-border{
+  position: absolute;
+  height:1px;
+  bottom:10px;
+  left:0px;
+  right:0px;
+  background: -webkit-radial-gradient(50% 100%,farthest-side, rgba(0, 0, 0, .5), transparent) 0 100%;
+  -webkit-transition: opacity .35s;
+}*/
+.hide{
+  opacity:0;
+}
+
+/* scrollers ftw */
+
+
+.radio-group {
+  display: inline-block;
+}
+
+.radio-group.devices{
+  display: inline-block;
+  overflow-y: auto;
+  height: 100px;
+  padding: 0 20px;
+  min-width: 260px;
+}
+
+.row > .radio-group > .field {
+  display: block;
+  /*padding-top: 3px;*/
+  padding-bottom: 7px;
+  vertical-align: middle;
+  line-height: 13px;
+  text-align: start;
+}
+
+.radio-group label{
+  vertical-align:middle;
+}
+
+.radio-group.devices label{
+  width: auto;
+  -webkit-margin-start: 3px;
+}
+
+.centerAction{
+  text-align: center;
+}
+
+.device-group{
+  width:288px;
+  height:80px;
+  overflow:scroll;
+}
+
+.row > .device-group > .field {
+  display: block;
+  /*padding-top: 3px;*/
+  padding-bottom: 7px;
+  vertical-align: middle;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#numericWidget {
+  height: 55px;
+}
+
+#numericWidget input {
+  width: 33px;
+  height: 37px;
+  margin: 3px;
+  font-size: 21px;
+  text-align:center;
+}
+
+#deviceName{
+  font-weight: bold;
+}
+
+#sendNewCode .requestSpinner{
+  display: none;
+  width: 16px;
+  -webkit-margin-start: 8px;
+}
+
+#sendNewCode.processing .requestSpinner{
+  display: initial;
+}
+
+#sendNewCode.processing .requestSpinner .sprited{
+  display: inline !important;
+}
+
+.device-group label{
+  width:264px;
+  display: inline-block;
+  line-height:20px;
+  vertical-align:middle;
+}
+
+.radio input {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.error {
+  position: absolute;
+  left: 50%;          /* Will be overridden in JS as appropriate */
+  right: 0;
+}
+
+.error div, .check div, .small-spinner div {
+  position: absolute;
+  left: 0;
+}
+.validation-link{
+  z-index: 2;
+}
+.error .text, .check .text, .small-spinner .text {
+  position: static;
+  font-size: 11px;
+  color: rgba(220,0,0,1);
+  text-align: left;
+  margin-left: 24px;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.error-row {
+  color: rgba(220,0,0,1);
+  height: 19px;
+  display: none;
+}
+
+
+
+.error[dir=rtl] .text, .check[dir=rtl] .text, .small-spinner[dir=rtl] .text{
+  text-align: right;
+  margin-right: 24px;
+}
+
+
+.error .icon {
+  background-position: -18px -285px;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+._10_6 .error .icon,
+._10_7 .error .icon,
+._10_8 .error .icon,
+._10_9 .error .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.error[dir=rtl] .icon, .check[dir=rtl] .icon, .small-spinner[dir=rtl] .icon{
+  right: 0;
+}
+/*flip the error icon */
+.error[dir=rtl] .icon{
+  -webkit-transform: scaleX(-1);
+}
+
+
+.check {
+  position: absolute;
+  left: 50%;          /* Will be overridden in JS as appropriate */
+  right: 0;
+}
+
+.check .icon {
+  background-position: 0 -285px;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+
+
+
+/* PAGE-SPECIFIC CONTENT */
+
+/* @group Device Not Eligible page */
+
+#deviceNotQualifiedLabel {
+  max-width: 400px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 170px;
+}
+
+#deviceNotQualifiedLabel > .text {
+  text-align: center;
+  font-size: 14px;
+  height: auto;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* @end */
+
+/* @group Security Questions Upgrade Opt In*/
+#updateQuestionsHeader{
+  background-position: -500px -139px;
+  width: 118px;
+  height: 160px;
+  margin-top: 48px;
+  padding-bottom: 24px;
+}
+
+#updateQuestionsRadio{
+  margin-top: 48px;
+}
+
+#updateRecoveryLabel{
+  margin-top: 145px;
+}
+
+#updateNameSection{
+  margin-top: 135px;
+}
+/* @end */
+
+/* @group Enter birthday page */
+
+#enter-birthday-header {
+  background-position: -341px -135px;
+  width: 151px;
+  height: 147px;
+  margin-top: 43px;
+}
+
+#dateInput,
+#dateUpdateInput{
+  cursor: default;
+  margin-top: 63px;
+  text-align: center;
+}
+
+#dateInput .subfield ,
+#dateUpdateInput .subfield{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#dateInput .subfield select,
+#dateUpdateInput .subfield select{
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+#birthdayDesc {
+  margin-top: 11px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 396px;
+  text-align: center;
+}
+
+#nameLabel {
+  padding-top: 87px;
+}
+
+#lastNameRow{
+  padding-top:4px;
+}
+
+/* @end */
+
+
+
+/* @group Happy birthday page */
+
+@-webkit-keyframes dissolve
+{
+  100% {opacity:1}
+}
+
+@-webkit-keyframes hide
+{
+  100% {opacity:0}
+}
+
+
+.happy-birthday-header {
+  top:83px;
+  left:50%;
+  position: absolute;
+  width: 170px;
+  height: 284px;
+}
+
+/*  We need to a higher selector-precedence because of margin-left
+    on div.header.graphic. */
+div.header.graphic.happy-birthday-header {
+  margin-left: -85px; /* Half the width */
+}
+
+#happy-birthday-header {
+  background-position: 0 0;
+  opacity:0;
+  z-index:1;
+  -webkit-animation: dissolve .2s;
+  -webkit-animation-delay: 0.8s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+#happy-birthday-header-grey {
+  background-position: -170px 0;
+  -webkit-animation: hide .2s;
+  -webkit-animation-delay: 0.85s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes ignite
+{
+  0%   {background-position-x: 0; opacity:1;}
+  24.9999%   {background-position-x: 0}
+  25%  {background-position-x: -50px}
+  49.9999%  {background-position-x: -50px}
+  50%  {background-position-x: -100px}
+  74.9999%  {background-position-x: -100px}
+  75% {background-position-x: -150px}
+  99.9999%   {background-position-x: -150px}
+  100% {opacity:0;}
+}
+
+@-webkit-keyframes flame_cycle
+{
+  0%,100%   {background-position-x:-200px; opacity:1;}
+  1.6499%   {background-position-x:-200px}
+  1.65%   {background-position-x:-250px}
+  3.2999%   {background-position-x:-250px}
+  3.3%   {background-position-x:-300px}
+  4.9499%   {background-position-x:-300px}
+  4.95%   {background-position-x:-350px}
+  6.5999%   {background-position-x:-350px}
+  6.6%   {background-position-x:-400px}
+  8.2499%   {background-position-x:-400px}
+  8.25%   {background-position-x:-450px}
+  9.8999%   {background-position-x:-450px}
+  9.9%   {background-position-x:-500px}
+  11.5499%   {background-position-x:-500px}
+  11.55%   {background-position-x:-550px}
+  13.1999%   {background-position-x:-550px}
+  13.2%   {background-position-x:-600px}
+  14.8499%   {background-position-x:-600px}
+
+  14.85%   {background-position-x:-650px}
+  16.4999%   {background-position-x:-650px}
+  16.5%   {background-position-x:-700px}
+  18.1499%   {background-position-x:-700px}
+  18.15%   {background-position-x:-750px}
+  19.7999%   {background-position-x:-750px}
+  19.8%   {background-position-x:-800px}
+  21.4499%   {background-position-x:-800px}
+  21.45%   {background-position-x:-850px}
+  23.0999%   {background-position-x:-850px}
+  23.1%   {background-position-x:-900px}
+  24.7499%   {background-position-x:-900px}
+  24.75%   {background-position-x:-950px}
+  26.3999%   {background-position-x:-950px}
+  26.4%   {background-position-x:-1000px}
+  28.0499%   {background-position-x:-1000px}
+  28.05%   {background-position-x:-1050px}
+  29.6999%   {background-position-x:-1050px}
+  29.7%   {background-position-x:-1100px}
+  31.3499%   {background-position-x:-1100px}
+  31.35%   {background-position-x:-1150px}
+  32.9999%   {background-position-x:-1150px}
+  33%   {background-position-x:-1200px}
+  34.6499%   {background-position-x:-1200px}
+  34.65%   {background-position-x:-1250px}
+  36.2999%   {background-position-x:-1250px}
+
+  36.3%   {background-position-x:-1300px }
+  37.9499%   {background-position-x:-1300px }
+  37.95%   {background-position-x:-1350px}
+  39.5999%   {background-position-x:-1350px}
+  39.6%   {background-position-x:-1400px}
+  41.2499%   {background-position-x:-1400px}
+  41.25%   {background-position-x:-1450px}
+  42.8999%   {background-position-x:-1450px}
+  42.9%   {background-position-x:-1500px}
+  44.5499%   {background-position-x:-1500px}
+  44.55%   {background-position-x:-1550px}
+  46.1999%   {background-position-x:-1550px}
+  46.2%   {background-position-x:-1600px }
+  47.8499%   {background-position-x:-1600px }
+  47.85%   {background-position-x:-1650px }
+  49.4999%   {background-position-x:-1650px }
+  49.5%   {background-position-x:-1700px }
+  51.1499%   {background-position-x:-1700px }
+  51.15%   {background-position-x:-1750px }
+  52.7999%   {background-position-x:-1750px }
+  52.8%   {background-position-x:-1800px }
+  54.3999%   {background-position-x:-1800px }
+  54.45%   {background-position-x:-1850px }
+  56.0999%   {background-position-x:-1850px }
+  56.1%   {background-position-x:-1900px }
+  57.7499%   {background-position-x:-1900px }
+
+  57.75%   {background-position-x:-1950px }
+  59.3999%   {background-position-x:-1950px }
+  59.4%   {background-position-x:-2000px}
+  61.0499%   {background-position-x:-2000px}
+  61.05%   {background-position-x:-2050px }
+  62.6999%   {background-position-x:-2050px }
+  62.7%   {background-position-x:-2100px }
+  64.3499%   {background-position-x:-2100px }
+  64.35%   {background-position-x:-2150px }
+  67.6499%   {background-position-x:-2150px }
+  67.65%   {background-position-x:-2200px }
+  69.2999%   {background-position-x:-2200px }
+  69.3%   {background-position-x:-2250px }
+  70.9499%   {background-position-x:-2250px }
+  70.95%   {background-position-x:-2300px }
+  72.5999%   {background-position-x:-2300px }
+  72.6%   {background-position-x:-2350px }
+  74.2499%   {background-position-x:-2350px }
+  74.25%   {background-position-x:-2400px }
+  75.8999%   {background-position-x:-2400px }
+  75.9%   {background-position-x:-2450px }
+  77.5499%   {background-position-x:-2450px }
+  77.55%   {background-position-x:-2500px }
+  79.1999%   {background-position-x:-2500px }
+  79.2%   {background-position-x:-2550px }
+  80.8499%   {background-position-x:-2550px }
+
+  80.85%   {background-position-x:-2600px }
+  82.4999%   {background-position-x:-2600px }
+  82.5%   {background-position-x:-2650px}
+  84.1499%   {background-position-x:-2650px}
+  84.15%   {background-position-x:-2700px}
+  85.4999%   {background-position-x:-2700px}
+  85.5%   {background-position-x:-2750px}
+  87.4499%   {background-position-x:-2750px}
+  87.45%   {background-position-x:-2800px}
+  89.0999%   {background-position-x:-2800px}
+  89.1%   {background-position-x:-2850px}
+  90.7499%   {background-position-x:-2850px}
+  90.75%   {background-position-x:-2900px }
+  92.3999%   {background-position-x:-2900px }
+  92.4%   {background-position-x:-2950px }
+  94.0499%   {background-position-x:-2950px }
+  94.05%   {background-position-x:-3000px }
+  95.6999%   {background-position-x:-3000px }
+  95.7%   {background-position-x:-3050px }
+  97.3499%   {background-position-x:-3050px }
+  97.35%   {background-position-x:-3100px }
+  98.9999%   {background-position-x:-3100px }
+  99%   {background-position-x:-3150px }
+  99.9999%   {background-position-x:-3150px }
+}
+
+.flame{
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  top:17px;
+  left:50%;
+  margin-left: -25px; /* Half the width. */
+  background-image: url(../imgs/flame_ignition_sprite.png);
+  opacity:0;
+}
+
+#flame {
+  background-position: 0 0;
+  -webkit-animation: ignite .14s;
+  -webkit-animation-delay: 1s;
+}
+
+#flame2 {
+  background-position: -200px 0;
+  -webkit-animation: flame_cycle 2s infinite;
+  -webkit-animation-delay: 1.13s;
+  -webkit-animation-fill-mode: none;
+}
+
+
+/* @end Enter birthday page */
+
+#idWarning{
+  padding-top: 0;
+}
+
+#idWarning a, .error a, .check a, a.actionLink, #newAppleIDInstruction a, #existingAppleIDInstruction a{
+  color: rgba(12,105,197,1);
+  text-decoration: none;
+}
+
+#idWarning a:active, .error a:active, .check a:active, a.actionLink:active, #newAppleIDInstruction a:active, #existingAppleIDInstruction a:active{
+  color: rgba(9,78,147,1);
+  text-decoration: none;
+}
+
+#idWarning .signInLinkText{
+  font-size: 11px;
+}
+
+#nameLabel div[dir=rtl]{
+  text-align: right;
+}
+
+
+#appleID {
+  padding-top: 39px;
+}
+
+#appleID div[dir=rtl]{
+  text-align: right;
+}
+
+#suggestions-suffix {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 13px;
+  display: inline-block;
+  text-align: left;
+}
+
+.field #meDotComEmailField {
+  width:143px;
+}
+
+input#meDotComEmailField {
+  width: 132px;
+}
+body._10_9 input#meDotComEmailField,
+body._10_8 input#meDotComEmailField,
+body._10_7 input#meDotComEmailField,
+body._10_6 input#meDotComEmailField,
+body._10_5 input#meDotComEmailField {
+  width: 124px;
+}
+
+input#existingEmailField,
+input#meDotComEmailField {
+  direction: ltr; /* emails are always ltr */
+}
+
+#newAppleIDInstruction .text, #existingAppleIDInstruction .text {
+  width: 220px;
+  text-align: start;
+}
+
+#meDotComEmailFields, #existingAppleIDInstruction{
+  display: none;
+}
+
+#passwordLabel{
+  padding-top: 62px;
+}
+
+#passwordLabel div[dir=rtl]{
+  text-align: right;
+}
+
+#verifyPasswordRow{
+  padding-top: 4px;
+}
+
+#recoveryLabel {
+  padding-top: 60px;
+}
+
+#recoveryLabel div[dir=rtl]{
+  text-align: right;
+}
+
+#security_questions_page .row-label{
+  margin-top: 35px;
+}
+/* The first security question should be closer to the top of the page */
+#security_questions_page .row-label:nth-child(1){
+  margin-top: 30px;
+}
+
+#security_questions_page .label,
+#security_questions_page select,
+#security_questions_page input {
+ width: 395px;
+ box-sizing: border-box;
+}
+.da-dk #security_questions_page .label,
+.da-dk #security_questions_page select,
+.da-dk #security_questions_page input {
+  width: 385px;
+}
+
+
+#questionLabel div[dir=rtl]{
+  text-align: right;
+}
+
+#questionRow{
+  padding-bottom:3px;
+}
+
+.device-group {
+  text-align: left;
+  padding-left:252px;
+}
+
+.device-group[dir=rtl]{
+  text-align: right;
+  padding-left: 0;
+  padding-left: 252px;
+}
+
+.deviceModel{
+  color: rgb(128,128,128);
+  display: inline-block;
+  -webkit-margin-start: 0.4em;
+}
+
+#deviceSelectionRadio .centerAction{
+  padding-top: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.row.recoveryKeyField{
+  height: 45px;
+}
+
+.recovery-key {
+  position: relative;
+  display: inline-block;
+  height: 36px;
+  width: 237px;
+}
+
+.recovery-key .prefix-text {
+  visibility: hidden;
+}
+
+.recovery-key > input,
+.recovery-key > .placeholder {
+  position: absolute;
+  top: 0; bottom: 0;
+  font-size: 21px;
+  font-family: Andale Mono, Mono, monospace;
+  color: rgba(0,0,0);
+}
+
+.recovery-key > .placeholder  {
+  z-index: 1;
+  pointer-events: none;
+  line-height: 35px;
+  top: 1px;
+  left: 7px;
+}
+
+.recovery-key > .placeholder > .placeholder-text {
+  color: rgb(128,128,128);
+}
+
+.recovery-key > input {
+  left: 0; right: 0;
+  text-indent: 2px;
+}
+
+#existingEmailFields{
+  padding-top:1px;
+  padding-bottom:3px;
+}
+
+#meDotComEmailFields{
+  padding-top:1px;
+  padding-bottom:3px;
+}
+
+#optInToEmails {
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: baseline;
+  margin-top: 14px;
+  -webkit-margin-start: 34px;
+}
+._10_9 #optInToEmails,
+._10_8 #optInToEmails {
+  display: none;
+}
+
+#optInToEmails input[type=checkbox] {
+  -webkit-margin-end: 6px;
+}
+
+#optInToEmails label {
+  width: 239px;
+  text-align: start;
+  font-size: 11px;
+  position: relative;
+  top: -2px;
+}
+
+
+#tos_page{
+  text-align: center;
+}
+
+.scrollView{
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: left .35s ease-in-out;
+}
+
+
+/* Let's get this party started
+.scrollView::-webkit-scrollbar {
+    width: 12px;
+}
+
+
+.scrollView::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.scrollView::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4);
+}*/
+
+.scene2{
+  left: 500px;
+}
+
+#termsbox[dir=rtl] .scene2{
+  left: -500px;
+}
+
+
+#termsbox{
+  position:relative;
+  top:0px;
+  border: 1px rgb(128,128,128) solid;
+  background: white;
+  height: 349px;
+  font-size: 11px;
+  width: 503px;
+  /*margin-top:8px;*/
+  display: inline-block;
+  text-align: left;
+  overflow: hidden;
+  cursor: default;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#currentTermsPage {
+  white-space: pre-wrap;
+}
+
+#termsbox ol {
+  margin: 0;
+  padding-left: 0;
+}
+#termsbox[dir=rtl] ol{
+ padding-left: auto;
+ padding-right: 0;
+}
+
+
+.term-item{
+  display:none;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 5px;
+  padding-right:30px;
+  padding-left:20px;
+  min-height: 46px;
+}
+
+.term-item[dir=rtl]{
+  text-align:right;
+  padding-right:20px;
+  padding-left:30px;
+
+}
+
+.term-item li{
+  margin-left:1px;
+}
+
+.term-item-header{
+  border-bottom: 1px solid #dbdbdb;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+.term-item-header:focus { outline: none; }
+
+.term-item-header[dir=rtl]{
+  text-align:right;
+}
+
+li{
+  font-weight:bold;
+}
+
+.term-item:active{
+  background-color: rgba(226,233,248, 1);
+}
+
+.terms-title{
+  font-weight:bold;
+}
+
+.terms-title:focus { outline: none; }
+
+
+
+.arrow.graphic.sprited{
+  position: absolute;
+  height: 13px;
+  width: 10px;
+  top: -24px;
+  right: 27px;
+  background-position: -38px -285px;
+}
+
+#termsbox[dir=rtl] .arrow.graphic.sprited{
+  right: auto;
+  left: 27px;
+  -webkit-transform: rotate(180deg);
+}
+
+.term-item:active .arrow.graphic.sprited{
+  background-position: -49px -285px;
+}
+
+.license{
+  padding: 5px;
+  padding-left:6px;
+  padding-right:6px;
+}
+
+.license[dir=rtl]{
+  text-align: right;
+}
+
+.tos-legal {
+  font-size:11px;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  padding-top: 2px;
+  width: 500px;
+  display: inline-block;
+}
+
+.terms {
+  padding: 6px;
+  text-align: justify;
+}
+
+#thankYouLabel{
+  padding-top: 192px;
+}
+
+#appleIDUpdate{
+  padding-top: 130px;
+}
+
+.create-labels{
+  font-size:14px;
+  color: rgba(50,50,50,1);
+}
+
+#creatingViewLabel{
+  padding-top:13px;
+}
+
+#errorView{
+  display:none;
+}
+
+#errorUpdateView{
+  display:none;
+}
+
+@-webkit-keyframes stepSpinner {
+  0%{
+    -webkit-transform: rotate(0deg);
+  }
+  8.3299%{
+    -webkit-transform: rotate(0deg);
+  }
+  8.33% {
+    -webkit-transform: rotate(30deg);
+  }
+  16.6599% {
+    -webkit-transform: rotate(30deg);
+  }
+  16.66% {
+    -webkit-transform: rotate(60deg);
+  }
+  24.9999% {
+    -webkit-transform: rotate(60deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+  }
+  33.3299% {
+    -webkit-transform: rotate(90deg);
+  }
+  33.33% {
+    -webkit-transform: rotate(120deg);
+  }
+  41.6599% {
+    -webkit-transform: rotate(120deg);
+  }
+  41.66% {
+    -webkit-transform: rotate(150deg);
+  }
+  49.9999% {
+    -webkit-transform: rotate(150deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+  58.3299% {
+    -webkit-transform: rotate(180deg);
+  }
+  58.33% {
+    -webkit-transform: rotate(210deg);
+  }
+  66.6599% {
+    -webkit-transform: rotate(210deg);
+  }
+  66.66% {
+    -webkit-transform: rotate(240deg);
+  }
+  74.9999% {
+    -webkit-transform: rotate(240deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+  }
+  83.3299% {
+    -webkit-transform: rotate(270deg);
+  }
+  83.33% {
+    -webkit-transform: rotate(300deg);
+  }
+  91.6599% {
+    -webkit-transform: rotate(300deg);
+  }
+  91.66% {
+    -webkit-transform: rotate(330deg);
+  }
+  99.9999% {
+    -webkit-transform: rotate(330deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.graphic.sprited.spinner{
+  display: inline-block;
+  height:32px;
+  width:32px;
+  background-position: -78px -283px;
+
+  -webkit-animation-name: stepSpinner;
+  -webkit-animation-duration:1s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+.small-spinner{
+  position:absolute;
+}
+.small-spinner .graphic.sprited{
+  position: absolute;
+  height:16px;
+  width:16px;
+  background-position: -61px -284px;
+
+  -webkit-animation-name: stepSpinner;
+  -webkit-animation-duration:1s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:linear;
+}
+
+
+.spinner-row{
+  padding-top:159px;
+}
+
+.failure-row{
+  padding-top:65px;
+}
+
+#errorView .failure-message-row,
+#errorUpdateView .failure-message-row {
+  font-size: 14px;
+  color: rgb(65,65,65);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  line-height: 1.6;
+}
+
+#failureIcon{
+  display: inline-block;
+  width:152px;
+  height:135px;
+  background-position: -341px 0;
+}
+
+.con{
+  position: absolute;
+  width:100%;
+  height:10px;
+}
+
+#changeAppleID{
+  margin-top: 60px;
+}
+
+#changeEmailDescription .text{
+  width: 212px;
+  text-align: left;
+}
+
+#changeEmailDescription .text[dir=rtl]{
+  text-align: right;
+}
+
+
+#changeEmailNewEmailRow {
+  padding-bottom:4px;
+}
+
+#changeEmailDescription {
+  padding-top:0px;
+}
+
+#changeEmailPassword{
+  padding-top:4px;
+}
+
+/* @group Confirm Apple ID page */
+#stealbackLabel{
+  text-align: center;
+  font-size: 12px;
+  height: auto;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+#stealbackLabel .text{
+  color: rgb(80,80,80);
+}
+#stealbackEmailAddress {
+  color: black;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+p.p5 {
+  margin: 0.0px 0.0px 0.0px 35.0px;
+  text-indent: 1.0px;
+}
+p.p6 {
+  margin: 0.0px 0.0px 0.0px 35.0px;
+  text-indent: 1.0px;
+}
+span.s1 {
+  text-decoration: underline
+}
+
+#dateInput{
+  -webkit-transform: translateZ(0);
+}
+
+select{
+  -webkit-transform: translateZ(0);
+}
+
+#updateOSPage .update-os{
+  position: absolute;
+  left: 50%; margin-left: -81px;
+  top: 60px;
+  width: 162px;
+  height: 138px;
+  background-position: -493px 0;
+}
+
+#updateOSPage .text{
+  position: absolute;
+  width: 445px;
+  left: 50%;
+  top: 180px;
+  margin-left: -222px;
+  text-align: center;
+  font-size: 14px;
+  height: auto;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+#updateOSPage .text .message1{
+  font-weight: bold;
+}
+
+#updateOSPage .text .message2{
+  margin-top: 15px;
+}
+
+
+
+/* HiDPI */
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+  div.graphic.sprited {
+    background-image: url(../imgs/sprites@2x.png);
+    background-size: 655px 314px;
+  }
+
+  .flame{
+    background-image: url(../imgs/flame_ignition_sprite@2x.png);
+    background-size: 3200px 100px;
+  }
+}
+
+
+/*HSA2 related changes*/
+
+#parentHsa2ValidatePage {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+
+#HSA2SecondFactorValidatePage{
+	display: table-cell;
+    text-align: center;
+    padding-top: 150px;
+    /* vertical-align: middle; */
+}
+
+#HSA2SecondFactorValidatePage input + input {
+  -webkit-margin-start: 8px ;
+}
+
+#HSA2SecondFactorValidatePage  input:nth-child(4) {
+   -webkit-margin-start: 16px;
+}
+ 
+#HSA2SecondFactorValidatePage input{
+   border: 1px solid #c1c1c1; 
+   border-radius: 6px;
+   margin: 0px;
+   width: 35px;
+   height: 42px;
+   box-sizing: border-box;
+}
+
+#HSA2SecondFactorValidatePage input:focus {
+   outline: none;
+   border: none;
+   box-shadow: 0 0 0 2px #3d8ddd;
+}
+
+#HSA2SecondFactorValidatePage .row{
+  font-weight: bold;
+/*  height: 22px;*/
+  padding-top: 2px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#HSA2SecondFactorValidatePage .error-row {
+  color: rgba(220,0,0,1);
+  display: none;
+}
+
+#process .requestSpinner{
+  display: none;
+  width: 16px;
+}
+
+#process.processing .requestSpinner{
+  display: initial;
+  right: 324px;
+}
+
+#process.processing .requestSpinner .sprited{
+  display: inline !important;
+}
+
+
+/*U13 warning changes*/
+#u13_warning_page #contentWrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+#u13_warning_page #content {
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+}
+
+#u13_warning_page #description {
+  width: 70%;
+  display: block;
+  padding-left: 100px
+}
+
+/*Expired Session warning changes*/
+#expired_session_page #contentWrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+#expired_session_page #content {
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+}
+
+#expired_session_page #description {
+  width: 70%;
+  display: block;
+  padding-left: 100px
+}
+
+.familyMBuddyIcon {
+  background-image: url(../imgs/family_share.png);
+  height: 120px;
+  background-repeat: no-repeat;
+  background-position-x: 240px
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+.familyMBuddyIcon {
+    background-image: url(../imgs/family_share@2x.png);
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position-x: 240px
+  }
+}

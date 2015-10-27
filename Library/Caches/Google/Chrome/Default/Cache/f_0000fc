@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>
+		  Article Archive | HTML5 Doctor    </title>
+    <link rel="stylesheet" href="http://html5doctor.com/wp-content/themes/html5doctor2/style.css" media="screen" />
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<link rel="alternate" type="application/rss+xml" title="HTML5 Doctor &raquo; Feed" href="http://html5doctor.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="HTML5 Doctor &raquo; Comments Feed" href="http://html5doctor.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/html5doctor.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.3.1"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='contact-form-7-css'  href='http://html5doctor.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='crp_list_style-css'  href='http://html5doctor.com/wp-content/plugins/contextual-related-posts/css/default-style.css?ver=4.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='http://html5doctor.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<script type='text/javascript' src='http://html5doctor.com/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
+<script type='text/javascript' src='http://html5doctor.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://html5doctor.com/xmlrpc.php?rsd" />
+<link rel='canonical' href='http://html5doctor.com/article-archive/' />
+<link rel='shortlink' href='http://html5doctor.com/?p=817' />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+	  
+  
+	</head>
+<body class="page page-id-817 page-template-default" id="com-html5doctor">
+<header role="banner">
+    <div class="inner group">
+    <a href="http://html5doctor.com" rel="home"><div>
+        <div class="logo">
+        <h1>HTML5 Doctor</h1>
+        <h2>Helping you implement HTML5 today</h2>
+        </div><!-- end logo -->
+    </div></a><!-- wrapper div for Firefox 3.x ref: http://01i.jp/html5bll -->
+
+ 	<ul id="menu-top-nav" class="semantic-list"><li id="menu-item-3272" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3272"><a href="http://html5doctor.com/about/">About</a></li>
+<li id="menu-item-3275" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3275"><a href="http://feeds2.feedburner.com/html5doctor">RSS</a></li>
+<li id="menu-item-3276" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3276"><a href="http://feeds.feedburner.com/HTML5DoctorComments">Comments RSS</a></li>
+<li id="menu-item-3253" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3253"><a href="#">Doctor Network</a>
+<ul class="sub-menu">
+	<li id="menu-item-3273" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3273"><a href="http://html5gallery.com">HTML5 Gallery</a></li>
+	<li id="menu-item-3580" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3580"><a href="http://docteurhtml5.com/html5/">Docteur HTML5</a></li>
+	<li id="menu-item-3973" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3973"><a href="https://github.com/html5doctor/">HTML5 Doctor on Github</a></li>
+</ul>
+</li>
+</ul>      <!-- end #top-nav -->
+    
+    <nav>
+		<ul id="menu-main_nav" class=""><li id="menu-item-3297" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3297"><a href="/">Home</a></li>
+<li id="menu-item-3250" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-817 current_page_item menu-item-3250"><a href="http://html5doctor.com/article-archive/">Article Archive</a></li>
+<li id="menu-item-3291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3291"><a href="http://html5doctor.com/element-index/">Element Index</a></li>
+<li id="menu-item-3968" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3968"><a href="http://html5doctor.com/resources/">Resources</a></li>
+</ul>    	<!-- end ul -->
+    	<ul>
+    		<li><form id="search-form" action="/search/" role="search"  method="get">
+    <div>
+    <input type="text" name="q" value="" />
+    <input type="submit" id="search-button" value="Search" />
+    </div>
+</form>
+</li>
+    	</ul>
+    	<!-- end ul -->	
+    </nav>
+    <!-- end nav -->
+	</div>
+	<!-- end .inner -->
+</header>
+<!-- end header -->
+<main id="content" class="group" role="main">
+    <div class="main">
+        <article class="post group">
+            <header class="post-817 page type-page status-publish hentry" id="post-817">
+                 <h1>Article Archive</h1>
+                <p class="tweet"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="html5doctor">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></p>
+            </header>
+            <!-- end header -->
+            
+            <div class="entry">
+                <p class="area">A complete list of all our posts grouped accordingly in order to get you started with <abbr>HTML</abbr>5 or to help you understand the specification and specific elements a little more.</p>
+
+<section id="getting-started" class="area">
+<h2>HTML5 Getting Started</h2>
+<ul>
+	<li><a href="/html-5-boilerplates/">HTML5 Boilerplates</a></li>
+	<li><a href="/html-5-reset-stylesheet/">HTML5 Reset Stylesheet</a></li>
+	<li><a href="/how-to-get-html5-working-in-ie-and-firefox-2/">How to get HTML5 working in IE and Firefox 2</a></li>
+	<li><a href="/designing-a-blog-with-html5/">Designing a blog with html5</a></li>
+	<li><a href="/absent-elements-and-validation/">Absent Elements and Validation</a></li>
+	<li><a href="/how-to-use-html5-in-your-client-work-right-now/">How to use HTML5 in your client work right now</a></li>
+	<li><a href="/using-modernizr-to-detect-html5-features-and-provide-fallbacks/">Using Modernizr to detect HTML5 features and provide fallbacks</a></li>
+
+	<li><a href="/lets-talk-about-semantics/">Let&#8217;s talk about semantics</a></li>
+</ul>
+</section>
+
+<section id="semantics" class="area">
+<h2>HTML5 Semantics</h2>
+<ul>
+	<li><a href="/the-header-element/">The header element</a></li>
+	<li><a href="/the-footer-element/">The footer element</a> &#8211; <ins>(this has been superseded by the below article)</ins></li>
+	<li><a href="/the-footer-element-update/">The footer element</a></li>
+	<li><a href="/understanding-aside/">Understanding aside</a> &#8211; <ins>(this has been superseded by the below article)</ins></li>
+	<li><a href="/aside-revisited/">Aside Revisted</a></li>
+	<li><a href="/nav-element/">Semantic navigation with the nav element</a></li>
+	<li><a href="/a-little-more-conversation-with-dialog/">A little more conversation with dialog</a> &#8211; <ins>(The dialog element has been removed from the working draft of the spec)</ins></li>
+	<li><a href="/draw-attention-with-mark/">Draw attention with mark</a></li>
+	<li><a href="/the-section-element/">The section element</a></li>
+	<li><a href="/measure-up-with-the-meter-tag/">Measure up with the meter tag</a></li>
+	<li><a href="/the-address-element/">The Address Element</a></li>
+	<li><a href="/summary-figcaption-element/">Hello, summary and figcaption elements</a></li>
+	<li><a href="/the-time-element/">The Time Element</a></li>
+	<li><a href="/i-b-em-strong-element/">The i, b, em &amp; strong elements</a></li>
+        <li><a href="/small-hr-element/">The small &amp; hr elements</a></li>
+	<li><a href="/the-hgroup-element/">The hgroup element</a> &#8211; <ins>(The hgroup element has been removed from the specification, see <a href="http://html5doctor.com/howto-subheadings/">this article on how to mark up subtitles etc.</a>)</ins></li>
+	<li><a href="/the-nsfw-element/">The nsfw element</a></li>
+	<li><a href="/the-figure-figcaption-elements/">The figure &amp; figcaption elements</a></li>
+	<li><a href="/ruby-rt-rp-element/">The ruby element and her hawt friends, rt and rp</a></li>
+	<li><a href="/the-article-element/">The article element</a></li>
+	<li><a href="/the-dl-element/">The dl element</a></li>
+	<li><a href="/you-can-still-use-div/">You can still use div</a></li>
+	<li><a href="/the-abbr-element/">The abbr element</a></li>
+	<li><a href="/blockquote-q-cite/">Quoting and citing with blockquote, q, cite, and the cite attribute</a></li>
+	<li><a href="/document-outlines/">Document Outlines</a></li>
+	<li><a href="/the-details-and-summary-elements/">The details and summary elements</a></li>
+	<li><a href="/u-element/">The return of the u element</a></li>
+	<li><a href="/the-output-element/">The output element</a></li>
+	<li><a href="/ol-element-attributes/">The ol Element and Related Attributes: type, start, value, and reversed</a></li>
+	<li><a href="http://html5doctor.com/the-main-element/">The main element</a></li>
+	<li><a href="http://html5doctor.com/ins-del-s/">Comparing and contrasting ins, del, and s</a></li>
+	<li><a href="http://html5doctor.com/cite-and-blockquote-reloaded/">Cite and blockquote reloaded</a></li>
+
+
+</ul>
+</section>
+
+<section id="new-attributes" class="area">
+<h2>New Attributes</h2>
+<ul>
+	<li><a href="/the-scoped-attribute/">The scoped attribute</a></li>
+<li><a href="/the-contenteditable-attribute/">The contenteditable attribute</a></li>
+<li><a href="/using-aria-in-html/">Using ARIA in HTML</a></li>
+</ul>
+</section>
+
+<section id="forms" class="area">
+<h2>Forms</h2>
+<ul>
+	<li><a href="/html5-forms-introduction-and-new-attributes/">HTML5 forms introduction and new attributes</a></li>
+<li><a href="/html5-forms-input-types/">HTML5 forms input types</a></li>	
+<li><a href="/css3-pseudo-classes-and-html5-forms/">CSS3 Pseudo-Classes and HTML5 Forms</a></li>
+</ul>
+</section>
+
+<section is="sexy-new-html5-elements" class="area">
+<h2>Sexy new HTML5 elements</h2>
+<ul>
+	<li><a href="/the-video-element/">The video element</a></li>
+	<li><a href="/native-audio-in-the-browser/">Native Audio in the browser</a></li>
+	<li><a href="/video-the-track-element-and-webm-codec/">The track element and webM codec</a></li>
+	<li><a href="/an-introduction-to-the-canvas-2d-api/">An introduction to the canvas 2D API</a></li>
+	<li><a href="/video-canvas-magic/">Video + Canvas = Magic</a></li>
+	<li><a href="/video-subtitling-and-webvtt/">Video subtitling and WebVTT</a></li>
+	<li><a href="/html5-audio-the-state-of-play/">HTML5 Audio &#8211; The State of Play</a></li>
+	<li><a href="/multimedia-troubleshooting/">Multimedia Troubleshooting</a></li>
+	<li><a href="/taking-web-audio-offline-in-ios-6-safari/">Taking Web Audio Offline in iOS 6 Safari</a></li>
+</ul>
+</section>
+
+<section id="extend-html5" class="area">
+<h2>Extend HTML5</h2>
+<ul>
+	<li><a href="/microformats/">Extending HTML5 &#8211; Microformats</a></li>
+	<li><a href="/microdata/">Extending HTML5 &#8211; Microdata</a></li>
+</ul>
+</section>
+
+<section id="javascript-goodness" class="area">
+<h2>Javascript Goodness</h2>
+<ul>
+	<li><a href="/native-drag-and-drop/">Native Drag and Drop</a></li>
+	<li><a href="/accessibility-native-drag-and-drop/">Accessibility and Native Drag and Drop</a></li>
+	<li><a href="/introducing-web-sql-databases/">Introducing Web <abbr>SQL</abbr> Databases</a></li>
+	<li><a href="/html5-custom-data-attributes/">HTML5 Custom Data Attributes</a></li>
+	<li><a href="/methods-of-communication/">Methods of Communication</a></li>
+	<li><a href="/go-offline-with-application-cache/">Go offline with application cache</a></li>
+	<li><a href="/finding-your-position-with-geolocation/">Finding your position with geolocation</a></li>
+	<li><a href="/storing-data-the-simple-html5-way-and-a-few-tricks-you-might-not-have-known/">Storing Data the Simple HTML5 Way (and a few tricks you might not have known)</a></li>
+	<li><a href="/history-api/">Pushing and popping with the History API</a></li>
+	<li><a href="http://html5doctor.com/server-sent-events/">Server-Sent Events (or EventSource)</a></li>
+	<li><a href="http://html5doctor.com/getusermedia/">It’s Curtains for Marital Strife Thanks to getUserMedia</a></li>
+	<li><a href="/drag-and-drop-to-server/">Drag and Drop and Automatically send to the server</a></li>
+	<li><a href="http://html5doctor.com/the-classlist-api/">The classList API</a></li>
+<li><a href="/web-manifest-specification/">The Web Manifest Specification</a></li>
+</ul>
+</section>
+
+<section id="things-to-watch-out-for" class="area">
+<h2>Things to watch out for</h2>
+<ul>
+	<li><a href="/multimedia-troubleshooting/">Multimedia troubleshooting</a></li>
+        <li><a href="/dd-details-wrong-again/">dd-details wrong again</a></li>
+	<li><a href="/legend-not-such-a-legend-anymore/">Legend not such a legend anymore</a></li>
+	<li><a href="/block-level-links-in-html-5/">“Block-level” links in HTML5</a></li>
+	<li><a href="/html-5-xml-xhtml-5/">HTML5 + XML = XHTML5</a></li>
+	<li><a href="/html5-seo-search-engine-optimisation/">HTML5 and Search Engine Optimisation (SEO)</a></li>
+	<li><a href="/the-hgroup-hokey-cokey/">The hgroup hokey cokey</a></li>
+	<li><a href="/avoiding-common-html5-mistakes/">Avoiding common HTML5 mistakes</a></li>
+	<li><a href="/time-and-data-element/">Goodbye time, datetime and pubdate. Hello data and value.</a></li>
+	<li><a href="http://html5doctor.com/howto-subheadings/">How to mark up subheadings, subtitles, alternative titles and taglines</a></li>
+
+</ul>
+</section>
+
+<section id="general-miscellaneous" class="area">
+<h2>General/Miscellaneous</h2>
+<ul>
+	<li><a href="/2022-or-when-will-html-5-be-ready/">2022, or when will <abbr>HTML</abbr>5 be ready?</a></li>
+	<li><a href="/its-bug-report-time/">It&#8217;s bug report time</a></li>
+	<li><a href="/september-html5-spec-changes/">September <abbr>HTML</abbr>5 Spec Changes</a></li>
+	<li><a href="/why-designers-should-care-about-html5/">Why designers should care about <abbr>HTML</abbr>5</a></li>
+	<li><a href="/html5-doctor-glossary/">Introducing the <abbr>HTML</abbr>5 Glossary</a></li>
+	<li><a href="/youtube-and-vimeo-support-html5-video/">YouTube and Vimeo support HTML5 video</a></li>
+	<li><a href="/web-directions-atmedia-2010/">HTML5 Clinic at Web Directions @media</a></li>
+	<li><a href="/happy-1st-birthday-us/">Happy 1st Birthday us</a></li>
+	<li><a href="/net-awards-nomination/">.net awards nomination</a></li>
+	<li><a href="/two-cheers-for-the-w3cs-html5-logo/">Two cheers for the W3C&#8217;s HTML5 logo</a></li>
+	<li><a href="/html5-living-standard/">HTML as a Living Standard — For and Against</a></li>
+	<li><a href="/html5-for-web-developers/">HTML5 for Web Developers</a></li>
+        <li><a href="/how-to-get-all-the-browsers-playing-ball/">How to get all the browsers playing ball</a></li>
+	<li></li>
+	<li><a href="/the-doctors-win-a-critter-award/">The Doctors win a Critter Award</a></li>
+	<li><a href="/injecting-new-life-into-the-doctor/">Injecting new life in the Doctor</a></li>
+	<li><a href="/html5-briefing-notes-journalists-analysts/">HTML5 Briefing notes for journalists and analysts</a></li>
+	<li><a href="/dive-into-html5-doctor/">Dive into HTML5 &#8230; on HTML5 Doctor</a></li>
+	<li><a href="/html5-doctor-drop-in-clinic/">HTML5 Doctor Drop-In Clinic</a></li>
+	<li><a href="/latest-news-an-awards-win-and-duckduckgo-plugin/">Latest News: An awards win and DuckDuckGo plugin</a></li>
+
+</ul>
+</section>
+
+<section id="interviews" class="area">
+<h2>Interviews</h2>
+<ul>
+	<li><a href="/interview-with-robin-berjon-html5-editor/">Interview with Robin Berjon, HTML5 Editor</a></li>
+	<li><a href="/interview-with-ian-hickson-html-editor/">Interview with Ian Hickson, HTML Editor</a></li>
+	<li><a href="/interview-steve-faulkner-html5-editor-new-doctor/">Interview with Steve Faulkner, HTML5 Editor and New Doctor</a>
+</ul>
+</section>
+
+<section id="html5-simplequiz" class="area">
+<h2>HTML5 Simplequiz</h2>
+<ul>
+	<li><a href="/html5-simplequiz-1/">Simplequiz #1: Products Page</a></li>
+	<li><a href="/html5-simplequiz-2-citing-people/">Simplequiz #2: Citing People</a></li>
+	<li><a href="/html5-simplequiz-3-how-to-mute-a-video/">Simplequiz #3: How to mute a video</a></li>
+	<li><a href="/html5-simplequiz-4-figures-captions-and-alt-text/">Simplequiz #4: Figures, captions and alt text</a></li>
+	<li><a href="/html5-simplequiz-5-urls-of-commenters/">Simplequiz #5: URLs of commenters</a></li>
+	<li><a href="/html5-simplequiz-6-zeldmans-fat-footer/">Simplequiz #6: Zeldmans fat footer</a></li>
+	<li><a href="/html5-simplequiz-7-pinterest/">Simplequiz #7: Pinterest</a></li>
+
+</ul>
+</section>
+
+<section id="your-questions-answered" class="area">
+<h2>Your Questions Answered</h2>
+<ul>
+	<li><a href="/your-questions-answered-1/">Round 1</a></li>
+	<li><a href="/your-questions-answered-2/">Round 2</a></li>
+	<li><a href="/your-questions-answered-3/">Round 3</a></li>
+	<li><a href="/your-questions-answered-4/">Round 4</a></li>
+	<li><a href="/your-questions-5/">Round 5</a></li>
+	<li><a href="/your-questions-answered-6/">Round 6</a></li>
+	<li><a href="/your-questions-answered-7/">Round 7</a></li>
+	<li><a href="/your-questions-answered-8/">Round 8</a></li>
+	<li><a href="/your-questions-answered-9/">Round 9</a></li>
+	<li><a href="/your-questions-answered-10/">Round 10</a></li>
+	<li><a href="/your-questions-answered-11/">Round 11</a></li>
+	<li><a href="/your-questions-12/">Round 12</a></li>
+	<li><a href="/your-questions-13/">Round 13</a></li>
+	<li><a href="/your-questions-14/">Round 14</a></li>
+	<li><a href="/your-questions-15/">Round 15</a></li>
+	<li><a href="/your-questions-16/">Round 16</a></li>
+	<li><a href="/your-questions-17/">Round 17</a></li>
+	<li><a href="/your-questions-18/">Round 18</a></li>
+	<li><a href="/your-html5-questions-19/">Round 19</a></li>
+	<li><a href="/your-html5-questions-20/">Round 20</a></li>
+</ul>
+</section>
+
+<section id="reviews" class="area">
+<h2>Reviews</h2>
+<ul>
+	<li><a href="/review-pro-html5-accessibility-by-joshue-o-connor/">Review: Pro HTML5 Accessibility by Joshue O Connor</a></li>
+        <li><a href="/review-html5-multimedia-develop-and-design/">Review: HTML5 Multimedia: Develop and Design</a></li>
+        <li><a href="/review-the-truth-about-html5-for-web-designers/">Review: The Truth About HTML5 For Web Designers</a></li>
+	<li><a href="/reviewing-html5-for-web-designers/">Reviewing HTML5 for Web Designers</a></li>
+	<li><a href="/review-html5-designing-rich-internet-applications/">Review HTML5 Designing Rich Internet Applications</a></li>
+	<li><a href="/review-html5-now-dvd/">HTML5 Now (DVD)</a></li>
+</ul>
+</section>                        
+            </div>
+            <!-- end .entry -->
+                
+        </article>
+        <!-- end .post -->
+    </div>
+    <!-- end .main -->	
+                    
+	      <aside class="secondary">
+            
+        <section class="mod ads">
+            <h3>Element Index</h3>
+            <a href="/element-index/"><img src="http://html5doctor.com/wp-content/themes/html5doctor2/images/element-index.png" width="260" height="158" alt="View the HTML5 Element Index" /></a>
+        </section>
+        <!-- end nav -->
+            
+		            <aside class="mod ads group">
+                <h3>Sponsors</h3>
+                <div id="bsap_1242929" class="bsarocks bsap_ab161e2bf71edb940eeca26a4739f522"></div>
+            </aside>        
+		                       <!-- end nav -->
+        
+        <nav class="ui-tabs mod">
+          <h3>More HTML5 Doctor</h3>
+          <ul class="ui-tabs-nav group">
+            <li class="ui-tabs-selected"><a href="#articles">Articles</a></li>
+            <li class="ui-tab"><a href="#categories">Categories</a></li>
+            <li class="ui-tab"><a href="#authors">Authors</a></li>
+          </ul>
+          
+          <div class="tab" id="articles">
+              <ul>
+			<li><a href='http://html5doctor.com/on-html-belts-and-aria-braces/'>On HTML belts and ARIA braces (The Default Implicit ARIA semantics they didn&#8217;t want you to know about)</a></li>
+	<li><a href='http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/'>HTML5 &#8211; Check it Before you Wreck it with Mike[tm] Smith</a></li>
+	<li><a href='http://html5doctor.com/the-ride-to-5/'>The ride to 5</a></li>
+	<li><a href='http://html5doctor.com/web-manifest-specification/'>The Web Manifest specification</a></li>
+	<li><a href='http://html5doctor.com/using-aria-in-html/'>Using ARIA in HTML</a></li>
+              </ul>
+              <p class="btn"><a href="/article-archive/">View article archive</a></p>
+          </div>
+
+
+          <div class="tab" id="categories">
+                <ul>
+                    	<li class="cat-item cat-item-6"><a href="http://html5doctor.com/category/accessibility/" >Accessibility</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://html5doctor.com/category/attributes/" >Attributes</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="http://html5doctor.com/category/boilerplates/" >Boilerplates</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://html5doctor.com/category/browser-compatibility/" >Browser Compatibility</a>
+</li>
+	<li class="cat-item cat-item-69"><a href="http://html5doctor.com/category/comment/" >Comment</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="http://html5doctor.com/category/css/" >CSS</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://html5doctor.com/category/elements/" >Elements</a>
+</li>
+	<li class="cat-item cat-item-103"><a href="http://html5doctor.com/category/events/" >Events</a>
+</li>
+	<li class="cat-item cat-item-108"><a href="http://html5doctor.com/category/forms/" >forms</a>
+</li>
+	<li class="cat-item cat-item-380"><a href="http://html5doctor.com/category/interviews/" >interviews</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://html5doctor.com/category/javascript-apis/" >JavaScript APIs</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://html5doctor.com/category/marketing/" >Marketing</a>
+</li>
+	<li class="cat-item cat-item-132"><a href="http://html5doctor.com/category/misc/" >Misc</a>
+</li>
+	<li class="cat-item cat-item-128"><a href="http://html5doctor.com/category/multimedia/" >multimedia</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://html5doctor.com/category/questions/" >Questions</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://html5doctor.com/category/quick-tips/" >Quick Tips</a>
+</li>
+	<li class="cat-item cat-item-135"><a href="http://html5doctor.com/category/reviews/" >Reviews</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="http://html5doctor.com/category/simplequiz/" >Simplequiz</a>
+</li>
+	<li class="cat-item cat-item-68"><a href="http://html5doctor.com/category/specification-changes/" >Specification Changes</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://html5doctor.com/category/structure/" >Structure</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="http://html5doctor.com/category/validation/" >Validation</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://html5doctor.com/category/wai-aria/" >WAI-ARIA</a>
+</li>
+ 
+                </ul>
+          </div>
+          <div class="tab" id="authors">
+                <ul>
+                    <li><a href="http://html5doctor.com/author/alexg/" title="Posts by Alex Gibson">Alex Gibson</a></li><li><a href="http://html5doctor.com/author/brucel/" title="Posts by Bruce Lawson">Bruce Lawson</a></li><li><a href="http://html5doctor.com/author/cennyddb/" title="Posts by Cennydd Bowles">Cennydd Bowles</a></li><li><a href="http://html5doctor.com/author/chrisb/" title="Posts by Chris Bewick">Chris Bewick</a></li><li><a href="http://html5doctor.com/author/derekj/" title="Posts by Derek Johnson">Derek Johnson</a></li><li><a href="http://html5doctor.com/author/iand/" title="Posts by Ian Devlin">Ian Devlin</a></li><li><a href="http://html5doctor.com/author/jacko/" title="Posts by Jack Osborne">Jack Osborne</a></li><li><a href="http://html5doctor.com/author/markb/" title="Posts by Mark Boas">Mark Boas</a></li><li><a href="http://html5doctor.com/author/miker/" title="Posts by Mike Robinson">Mike Robinson</a></li><li><a href="http://html5doctor.com/author/olib/" title="Posts by Oli Studholme">Oli Studholme</a></li><li><a href="http://html5doctor.com/author/peterg/" title="Posts by Peter Gasston">Peter Gasston</a></li><li><a href="http://html5doctor.com/author/remys/" title="Posts by Remy Sharp">Remy Sharp</a></li><li><a href="http://html5doctor.com/author/richc/" title="Posts by Richard Clark">Richard Clark</a></li><li><a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner">Steve Faulkner</a></li><li><a href="http://html5doctor.com/author/taba/" title="Posts by Tab Atkins Jnr">Tab Atkins Jnr</a></li><li><a href="http://html5doctor.com/author/toml/" title="Posts by Tom Leadbetter">Tom Leadbetter</a></li>            	            	
+                </ul>
+          </div>
+        </nav>
+        <!-- end .mod -->
+        
+        <section class="ads mod">
+          <h3>Submit your site to the Gallery</h3>
+          <a href="http://html5gallery.com/"><img src="http://html5doctor.com/wp-content/themes/html5doctor2/images/the-gallery.png" alt="HTML5 Gallery" style="width:93%;" /></a>
+        </section>
+        <!-- end .mod --> 
+                 
+	<div class="mod">
+         	<h3><a href="http://thewebevolved.com">Beginning HTML5 &amp; CSS3</a></h3> 
+		<a href="http://thewebevolved.com">
+			<img class="book" src="/wp-content/uploads/2013/01/web-evolved.jpg" alt="Cover image of Beginning HTML5 and CSS3: The Web Evolved.">
+		</a>
+		<p>The Web Evolved: A new book on HTML5 &amp; CSS3 by Richard Clark, Oli Studholme, Christopher Murphy and Divya Manian.</p>
+		<p><a class="btn" href="http://thewebevolved.com">Buy it now</a></p>
+	</div>      
+		
+    </aside>
+    <!-- end .secondary -->                   
+	
+    <aside id="sub-footer" class="group">
+        <div>
+            <div class="mod">
+                <div id="crp_related" class="crp_related"><h3>Related Posts:</h3><ul class="related"><li><a href="http://html5doctor.com/howto-subheadings/"     class="crp_title">How to mark up subheadings, subtitles, alternative titles&hellip;</a></li><li><a href="http://html5doctor.com/taking-web-audio-offline-in-ios-6-safari/"     class="crp_title">Taking Web Audio Offline in iOS 6 Safari</a></li><li><a href="http://html5doctor.com/the-main-element/"     class="crp_title">The main element</a></li><li><a href="http://html5doctor.com/interview-steve-faulkner-html5-editor-new-doctor/"     class="crp_title">Interview with Steve Faulkner: HTML5 editor and new doctor</a></li><li><a href="http://html5doctor.com/html5-simplequiz-7-pinterest/"     class="crp_title">Simplequiz #7: Pinterest</a></li></ul><div class="crp_clear"></div></div>                        
+            </div><!-- end .mod -->
+            <div class="mod">
+                <h3>Recent Posts</h3>
+                <ul class="related">
+                                                        <li><a href="http://html5doctor.com/on-html-belts-and-aria-braces/">On HTML belts and ARIA braces (The Default Implicit ARIA semantics they didn&#8217;t want you to know about)</a></li>
+                                        <li><a href="http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/">HTML5 &#8211; Check it Before you Wreck it with Mike[tm] Smith</a></li>
+                                        <li><a href="http://html5doctor.com/the-ride-to-5/">The ride to 5</a></li>
+                                        <li><a href="http://html5doctor.com/web-manifest-specification/">The Web Manifest specification</a></li>
+                                        <li><a href="http://html5doctor.com/using-aria-in-html/">Using ARIA in HTML</a></li>
+                                                </ul>
+            </div><!-- end .mod -->
+        </div> 
+        <!-- end div -->
+        <div class="ads">
+            <div class="mod">
+                <h3>Recommended</h3>
+                <a href="http://introducinghtml5.com"><img src="http://html5doctor.com/wp-content/themes/html5doctor/img/introducing-html5-ad.jpg" /></a>
+                <p class="btn"><a href="http://introducinghtml5.com">Buy this book</a></p>
+            </div>
+        </div>
+        <!-- end .ads -->
+    </aside>
+    <!-- end #sub-footer -->
+
+    
+</main>
+<!-- end #content -->
+
+<footer role="contentinfo">
+	<div class="inner">
+    	<img width="64" height="64" class="w3c-logo" alt="W3C HTML5 logo (not CSS3!)" src="http://html5doctor.com/wp-content/themes/html5doctor2/images/HTML5_Badge_64.png">
+		<p id="copyright">This site is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.0/uk/" rel="license">Creative Commons Attribution-Non-Commercial 2.0</a> share alike license. Feel free to change, reuse modify and extend it. Some authors will retain their copyright on certain articles.</p>
+        <p>Copyright &copy; 2015 HTML5 Doctor. All rights reserved. Hosted by <a href="http://www.mediatemple.net/go/order/?refdom=richclarkdesign.com">(mt) Media Temple</a>. Branding by <a href="http://olik.co.uk/">Oliver Ker</a>.</p>
+	</div>
+    <!-- end .inner -->
+</footer>
+<!-- end footer -->
+
+    <!-- BuySellAds.com Ad Code -->
+    <script>
+    (function(){
+      var bsa = document.createElement('script');
+         bsa.type = 'text/javascript';
+         bsa.async = true;
+         bsa.src = '//s3.buysellads.com/ac/bsa.js';
+      (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+    })();
+    </script>
+    <!-- END BuySellAds.com Ad Code -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<!-- TODO: move scripts in head to before /body —oli -->
+	   
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/searchhi.js"></script>    
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/prettify.js"></script>    
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/master.js"></script>    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8916679-1']);
+  _gaq.push(['_setDomainName', 'html5doctor.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script async type="text/javascript" src="//cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=html5doctor" id="_fancybar_js"></script>
+</body>
+</html>
+<!-- Dynamic page generated in 0.889 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-10-24 15:08:25 -->
+
+<!-- super cache -->

@@ -1,0 +1,1001 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <title>Intel Unveils Full Lineup of Skylake Processors for Notebooks and Desktops, Early 2016 Likely for Most Macs - Mac Rumors</title>
+  <meta name="keywords" content="iMac, Mac Pro, Mac mini, MacBook Air, Retina MacBook Pro, 12-Inch MacBook, Intel, Skylake" />
+  <meta name="description" content="Intel has released detailed information about its upcoming Skylake processors for notebooks and desktops ahead of IFA 2015 in Berlin (via Ars..." />
+  <meta property="og:title" content="Intel Unveils Full Lineup of Skylake Processors for Notebooks and Desktops, Early 2016 Likely for Most Macs"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/"/>
+  <meta property="og:image" content="http://cdn.macrumors.com/article-new/2015/05/macbook_pro_15_imac_27.jpg?retina"/>
+  <link rel="stylesheet" href="http://cdn.macrumors.com/styles-new/styles.css?v=150" type="text/css" media="screen" title="no title" charset="utf-8" />
+  <link rel="stylesheet" href="http://cdn.macrumors.com/styles-new/main.css?v=53" type="text/css" media="screen" charset="utf-8">
+  <link rel="shortcut icon" href="http://cdn.macrumors.com/images-new/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="http://cdn.macrumors.com/images-new/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" href="http://feeds.macrumors.com/MacRumors-All" title="All Mac Rumors Headlines" />
+  <link rel="alternate" type="application/rss+xml" href="http://feeds.macrumors.com/MacRumors-Front" title="Front Page" />
+  <link rel="alternate" type="application/rss+xml" href="http://feeds.macrumors.com/MacRumors-Mac" title="Mac Blog" />
+  <link rel="alternate" type="application/rss+xml" href="http://feeds.macrumors.com/MacRumors-iPhone" title="iPhone/iOS Blog" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://cdn.macrumors.com/js-new/built.js?v=16" type="text/javascript" charset="utf-8"></script>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@macrumors">
+  <meta name="twitter:creator" content="@rsgnl">
+  <meta name="twitter:title" content="Intel Unveils Full Lineup of Skylake Processors for Notebooks and Desktops, Early 2016 Likely for Most Macs">
+  <meta name="twitter:description" content="Intel has released detailed information about its upcoming Skylake processors for notebooks and desktops ahead of IFA 2015 in Berlin (via Ars...">
+  <meta name="twitter:image" content="http://cdn.macrumors.com/article-new/2015/05/macbook_pro_15_imac_27.jpg?retina">
+  <link rel="mask-icon" sizes="any" href="http://cdn.macrumors.com/images-new/icons/icon.svg" color="#c01d20"/>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-105064-1']);
+  _gaq.push(['_setDomainName', 'macrumors.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- Quantcast Part 1-->
+<script type="text/javascript">
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+</script>
+
+  <!--[if IE 8]>
+  <link rel="stylesheet" href="http://cdn.macrumors.com/styles-new/ie/styles-ie8.css?v=1" type="text/css" media="screen" title="no title" charset="utf-8" />
+  <![endif]-->
+</head>
+<body>
+  <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NBTPJP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NBTPJP');</script>
+  <!-- End Google Tag Manager -->
+  <div id="OpAdRich"></div>
+  <div id="mainContainer">
+    <div id="header">
+      <!-- AdTop Begin -->
+      <div class="ad"><script type="text/javascript">
+if(hide_ads == false){
+ord=window.ord||Math.floor(Math.random()*10000000000000000);
+document.write('<script type="text/javascript" src="http://ad2.netshelter.net/adj/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=1;sz=728x90;ord='+ord+'?"><\/script>');
+}
+</script>
+<noscript>
+<a href="http://ad2.netshelter.net/jump/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=1;sz=728x90;ord=123456789?" target="_blank" ><img src="http://ad2.netshelter.net/ad/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=1;sz=728x90;ord=123456789?" border="0" alt="" /></a>
+</noscript>
+
+</div>
+      <!-- AdTop End -->
+      <div class="brand">
+        <a id="logo" href="http://www.macrumors.com/" title="Apple, Mac, iPhone, iPad News and Rumors"><img src="http://cdn.macrumors.com/images-new/logo.png" width="250" height="71" alt="Mac Rumors"></a>
+
+        <div class="utility">
+          <div class="give-feedback">
+            Got a tip for us? <a href="mailto:tips@macrumors.com?Subject=MacRumors Submission" onclick="sharePopupToggle(true); return false;">Let us know</a>
+            <div id="sharePopup">
+	<ul>
+	<li><b>a. <a href="mailto:tips@macrumors.com?Subject=MacRumors Submission">Send us an email</a></b></li>
+	<li><b>b. <a href="http://www.macrumors.com/share.php">Anonymous form</a></b></li>
+	<li id="closebox"><a href="#" onClick="sharePopupToggle(false); return false;">close (x)</a></li>
+	</ul>
+</div>
+
+          </div>
+          <div class="social-media">
+            <a class="facebook" href="http://www.facebook.com/MacRumors">&nbsp;</a>
+            <a class="twitter" href="http://twitter.com/MacRumors">&nbsp;</a>
+            <a class="g-plus" href="https://plus.google.com/+macrumors/posts">&nbsp;</a>
+            <a class="rss" href="http://feeds.macrumors.com/MacRumors-All">&nbsp;</a>
+            <a class="newsletter" href="http://macrumors.us5.list-manage.com/subscribe?u=7d0106b433773bd0aef5828e0&id=3989954cde">&nbsp;</a>
+            <a class="push-notifications" href="http://www.macrumors.com/push/">&nbsp;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <div class="primary">
+          <ul>
+            <li><a class="active front-page" href="http://www.macrumors.com/" title="Mac Rumors">Front Page</a></li>
+            <li class="mac-blog"><a href="http://www.macrumors.com/mac/" title="Mac Blog">Mac Blog</a></li>
+            <li class="ios-blog"><a href="http://www.macrumors.com/iphone/" title="iOS Blog">iOS Blog</a></li>
+            <li id="roundups">
+              <a href="#" class="parent" title="Roundups">Roundups <span></span></a>
+              <ul id="nav-dropdown">
+                
+                <li><a href="http://www.macrumors.com/roundup/steve-jobs-movie/">'Steve Jobs' Movie<img src="http://cdn.macrumors.com/article-new/2015/02/jobs_roundup_menu.jpg" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/airport/">AirPort<img src="http://cdn.macrumors.com/article-new/2013/10/airport_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/apple-car/">Apple Car<img src="http://cdn.macrumors.com/article-new/2015/02/applecarroundupmenu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/apple-pay/">Apple Pay<img src="http://cdn.macrumors.com/article-new/2014/09/apple_pay_touch_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/apple-tv/">Apple TV<img src="http://cdn.macrumors.com/article-new/2013/12/apple_tv_2015_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/apple-watch/">Apple Watch<img src="http://cdn.macrumors.com/article-new/2014/09/apple_watch_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/carplay/">CarPlay<img src="http://cdn.macrumors.com/article-new/2015/01/littlecarplay.jpg" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/imac/">iMac<img src="http://cdn.macrumors.com/article-new/2013/09/imac_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ios-9/">iOS 9<img src="http://cdn.macrumors.com/article-new/2015/02/ios_9_icon_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipad/">iPad Air 2<img src="http://cdn.macrumors.com/article-new/2013/09/ipadairroundupmenu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipad-mini/">iPad mini 4 (2015)<img src="http://cdn.macrumors.com/article-new/2013/09/retina_ipad_mini_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipad-pro/">iPad Pro<img src="http://cdn.macrumors.com/article-new/2014/11/ipad_pro_roundup_menu2.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/iphone-6/">iPhone 6<img src="http://cdn.macrumors.com/article-new/2014/09/iphone_6_6_plus_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/iphone-6c/">iPhone 6c (2015)<img src="http://cdn.macrumors.com/article-new/2013/09/iphone_5c_green_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/iphone-6s/">iPhone 6s<img src="http://cdn.macrumors.com/article-new/2014/12/iphone_6s_roundup_menu1.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/iphone-7/">iPhone 7 (2016)<img src="http://cdn.macrumors.com/article-new/2015/02/iphone_7_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipod-nano/">iPod nano<img src="http://cdn.macrumors.com/article-new/2013/10/ipod_nano_2015_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipod-shuffle/">iPod shuffle<img src="http://cdn.macrumors.com/article-new/2013/12/ipod_shuffle_2015_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/ipod-touch/">iPod touch<img src="http://cdn.macrumors.com/article-new/2013/12/ipod_touch_6_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/mac-mini/">Mac mini<img src="http://cdn.macrumors.com/article-new/2013/09/mac_mini_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/mac-pro/">Mac Pro<img src="http://cdn.macrumors.com/article-new/2013/09/mac_pro_2013_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/macbook-air/">MacBook Air<img src="http://cdn.macrumors.com/article-new/2013/09/macbook_air_2015_elcap_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/macbook-pro/">MacBook Pro<img src="http://cdn.macrumors.com/article-new/2013/09/retina_macbook_pro_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/os-x-10-11/">OS X El Capitan<img src="http://cdn.macrumors.com/article-new/2015/04/os_x_el_cap_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/retina-macbook-air/">Retina MacBook<img src="http://cdn.macrumors.com/article-new/2014/11/macbook_gold_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/displays/">Thunderbolt Display<img src="http://cdn.macrumors.com/article-new/2013/10/thunderbolt_display_elcap_roundup_menu.png" width="56" height="39"></a></li>
+                
+                <li><a href="http://www.macrumors.com/roundup/watchos-2/">watchOS 2<img src="http://cdn.macrumors.com/article-new/2015/06/watchos2_roundup_menu.png" width="56" height="39"></a></li>
+                
+              </ul>
+            </li>
+            <li class="buyers-guide"><a href="http://buyersguide.macrumors.com/" title="Buyer's Guide">Buyer's Guide</a></li>
+            <li class="forums"><a href="http://forums.macrumors.com/" title="Forums">Forums</a></li>
+          </ul>
+
+        <div class="search">
+          <span class="icon"></span>
+          <form class="search-form" action="http://www.macrumors.com/search">
+            <input type="text" class="bginput" name="s" size="20" placeholder="Search Site...">
+          </form>
+        </div>
+      </div>
+
+      <div class="secondary roundups">
+        <ul id="roundups-desktop">
+          
+          <li><a href="http://www.macrumors.com/roundup/iphone-6s/">iPhone 6s</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/apple-tv/">Apple TV</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ios-9/">iOS 9</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/os-x-10-11/">OS X El Capitan</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/imac/">iMac</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/watchos-2/">watchOS 2</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipad-pro/">iPad Pro</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/apple-car/">Apple Car</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/steve-jobs-movie/">'Steve Jobs' Movie</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/apple-watch/">Apple Watch</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/carplay/">CarPlay</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipad/">iPad Air 2</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipad-mini/">iPad mini 4 (2015)</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/iphone-6/">iPhone 6</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/iphone-6c/">iPhone 6c (2015)</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/iphone-7/">iPhone 7 (2016)</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/mac-mini/">Mac mini</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/mac-pro/">Mac Pro</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/macbook-air/">MacBook Air</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/retina-macbook-air/">Retina MacBook</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/displays/">Thunderbolt Display</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/macbook-pro/">MacBook Pro</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/airport/">AirPort</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/apple-pay/">Apple Pay</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipod-nano/">iPod nano</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipod-shuffle/">iPod shuffle</a></li>
+          
+          <li><a href="http://www.macrumors.com/roundup/ipod-touch/">iPod touch</a></li>
+          
+          <li class="last"><a title="View all Roundups" href="http://www.macrumors.com/roundup/">All &gt;</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <div id="contentContainer">
+    <div id="content">
+      <div class="wrapper">
+        <!-- Push Notifications Alert x-->
+<div id="mr-pushbanner" class="alert-push-notifications">
+	<p><strong>New in OS X:</strong> Get MacRumors <a href="http://www.macrumors.com/push/">Push Notifications</a> on your Mac</p>
+	<a id="mr-pushresubscribe" class="push-subscribe-button" href="http://www.macrumors.com/push-resubscribe/">Resubscribe Now</a>
+	<span id="close-notif-banner" class="close">Close</span>
+</div>
+<script>
+	var c = "mrpushbanner";
+	var cookie = readCookie(c);
+
+	if(cookie && cookie == "hide"){
+		$("#mr-pushbanner").css("display", "none");
+	}
+
+	if(canGetPushes(osxVersion)){
+        	if('safari' in window){
+                	isSafari = true;
+                	if('pushNotification' in window.safari){
+                        	permissionData    = window.safari.pushNotification.permission(websitePushId);
+                        	permission        = safariPNUserGrantCallback(permissionData);
+
+                        	if(permission == "default"){
+                                	permCheckId = initialCheck();
+                        	}else if(permission == "granted"){
+                                	postCheckId = postCheck();
+                        	}else if(permission == "denied"){
+                                	postCheckId = postCheck();
+
+                                	if(cookie && cookie == "hide"){
+                                  		clearInterval(postCheckId);
+                                  		$("#mr-pushbanner").css("display", "none");
+                                	}else{
+                                  		$("#mr-pushbanner").css("display", "block");
+                                  		$("#mr-pushresubscribe").css("display", "block");
+                                	}
+                        	}
+                	}
+		}
+
+		$("#close-notif-banner").click(function(){
+                	clearInterval(permCheckId);
+                	clearInterval(postCheckId);
+                	$("#mr-pushbanner").css("display", "none");
+                	drop_cookie("hide");
+        	});
+
+		/*
+        	$("#mr-pushresubscribe").click(function(e){
+                	e.preventDefault();
+                	safariRequestPerm();
+        	});
+		*/
+	}
+
+	function drop_cookie(value){
+        	var days, date, expires;
+
+                if(value == "show"){
+                	value = ";";
+			days = -1;
+		}else{
+			days = 30;
+		}
+
+		date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		expires = "; expires="+date.toGMTString();
+		if(isSafari = true){
+			document.cookie = "mrpushbanner=" + value+expires + "; domain=www.macrumors.com; path=/";
+		}else{
+			document.cookie = "mrpushbanner=" + value+expires + "; domain=.macrumors.com; path=/";
+		}
+	}
+</script>
+<!-- End Push Notifications Alert -->
+
+        
+        
+        <div class="article">
+          <h1 class="title">Intel Unveils Full Lineup of Skylake Processors for Notebooks and Desktops, Early 2016 Likely for Most Macs</h1>
+          <div class="byline">Tuesday September 1, 2015 10:35 pm PDT by Joe Rossignol</div>
+          <div class="content">Intel has released detailed information about its upcoming Skylake processors for notebooks and desktops ahead of IFA 2015 in Berlin (via <em><a href="http://arstechnica.com/gadgets/2015/09/skylake-for-laptops-faster-core-m-and-ultrabook-gpus-with-edram/">Ars Technica</a></em>). The sixth-generation chips will deliver CPU and GPU performance improvements and longer battery life, and are likely to power future MacBook, MacBook Air, MacBook Pro and iMac models released over the next year.<br/>
+<br/>
+<img src="http://cdn.macrumors.com/article-new/2015/05/macbook_pro_15_imac_27.jpg" alt="macbook_pro_15_imac_27" width="800" height="258" class="aligncenter size-full wp-image-450968" /><br/>
+<strong>Retina MacBook</strong><br/>
+<br/>
+Intel's new lineup of Core M processors appropriate for the 12-inch Retina MacBook will provide up to 10 hours of battery life, between 10%-20% faster CPU performance and up to 40% faster graphics compared to equivalent Broadwell chips.<br/>
+<br/>
+<em>CPU World</em> accurately shared <a href="http://www.macrumors.com/2015/08/28/intel-skylake-processors-retina-macbook/">Core m3, Core m5 and Core m7</a> specifications last week, with all three families of chips including Intel HD 515 graphics, 4MB of L3 cache and 4.5 watt thermal design power (TDP).<br/>
+<br/>
+<img src="http://cdn.macrumors.com/article-new/2015/08/Intel-Skylake-Core-M-MacBook.jpg" alt="Intel Skylake Core M MacBook" width="624" height="130" class="aligncenter size-full wp-image-461831" /><br/>
+The low-end Core m3 6Y30 replaces the Core M-5Y31 and is likely suited for the base model 12-inch MacBook sold for &#36;1,299. The mid-tier Core m5 6Y54 and Core m5 6Y57 replace the Core M-5Y51 on the high-end 12-inch MacBook sold for &#36;1,599, while the high-end Core m7 6Y75 replaces the Core M-5Y71 for top-of-the-line 12-inch MacBook custom configurations.<br/>
+<br/>
+Core M processors have configurable TDPs, allowing for performance and heat output to be adjusted. Core m3, m5 and m7 chips can be run at 3.5-3.8 watts or be increased to 7 watts to allow for higher CPU clock speeds. For the current 12-inch MacBook, Apple boosted the 900 MHz 5Y31 chip to 1.1 GHz, 1.1 GHz 5Y51 chip to 1.2 GHz and 1.2 GHz 5Y71 chip to 1.3 GHz.<br/>
+<br/>
+<em>Ars Technica</em> notes that Core M processors should be available to Apple and other PC makers now, meaning that Core m3, m5 and m7-powered notebooks could begin shipping within the next few months. However, given that the 12-inch MacBook just launched in April, it remains uncertain if Apple is willing to release updated models this soon or hold off until 2016.<br/>
+<!--more--><br/>
+<strong>MacBook Air</strong><br/>
+<br/>
+Intel's new 15-watt Core i5 and i7 chips appropriate for the MacBook Air feature dual-core 1.8 GHz to 2.2 GHz processors with Turbo Boost up to 2.7 GHz - 3.2 GHz, Intel Iris Graphics 540, integrated GPUs with dedicated eDRAM, 4MB of L3 cache and 1866 MHz LPDDR3 memory speed.<br/>
+<br/>
+<img src="http://cdn.macrumors.com/article-new/2015/09/Intel-Skylake-i5-i7.jpg" alt="Intel-Skylake-i5-i7" width="800" height="602" class="aligncenter size-full wp-image-462324" /><center><em>Intel's full-size Skylake-U specifications chart</em></center><br/>
+Intel's Core i5-6260U or i5-6360U chips are suitable for the low-end 11-inch and 13-inch MacBook Air, while the Core i7-6560U or i7-6650U are appropriate for the high-end 11-inch and 13-inch MacBook Air. Current generation MacBook Airs are powered by Intel's Core i5-5250U and i5-5650U chips.<br/>
+<br/>
+In July, a <a href="http://www.macrumors.com/2015/07/24/intel-skylake-processors-leaked-slides/">leaked Intel slide deck</a> revealed that Skylake "U-Series" processors will deliver up to 10% faster CPU performance, up to 34% faster Intel HD graphics and up to 1.4 hours longer battery life compared to equivalent Broadwell chips.<br/>
+<br/>
+Intel says that Skylake "U-Series" processors with integrated Iris 540 graphics will not begin shipping until early 2016, making the MacBook Air an unlikely candidate for a refresh through at least the remainder of the year.<br/>
+<br/>
+<strong>13" Retina MacBook Pro</strong><br/>
+<br/>
+Intel's new 28-watt Core i5 and i7 chips appropriate for the 13-inch Retina MacBook Pro feature dual-core 2.9 GHz to 3.3 GHz processors with Turbo Boost up to 3.1 GHz - 3.4 GHz, Intel Iris Graphics 550, integrated GPUs with dedicated eDRAM, 4MB of L3 cache and 1866 MHz LPDDR3 memory speed.<br/>
+<br/>
+<img src="http://cdn.macrumors.com/article-new/2015/09/Intel-Skylake-28-Watt-Chips.jpg" alt="Intel-Skylake-28-Watt-Chips" width="800" height="434" class="aligncenter size-full wp-image-462338" /><br/>
+Intel's Core i5-6267U chip is suitable for the low-end 13-inch MacBook Pro, while the Core i5-6287U is appropriate for the mid-range 13-inch MacBook Pro and the Core i7-6567U is suited for the high-end 13-inch MacBook Pro. Current generation 13-inch MacBook Pros are powered by Intel's Core i5-5257U, i5-5287U and i7-5557U chips. <br/>
+<br/>
+Intel Skylake "U-Series" processors with integrated Iris 550 graphics, the successor to Intel Iris 6100 graphics, will not begin shipping until early 2016, meaning the 13-inch MacBook Pro is unlikely to be refreshed through at least the remainder of the year. Early 2016 appears to be a more likely target.<br/>
+<br/>
+<strong>15" Retina MacBook Pro</strong><br/>
+<br/>
+Intel announced a number of new 45-watt "H-Series" processors, but none with the higher-end Iris Pro graphics Apple uses in the 15" Retina MacBook Pro. Skylake H-Series chips with Iris Pro graphics are not expected to launch until early 2016, and Intel has yet to release detailed specs on these chips.<br/>
+<br/>
+Apple does have another option for a 15" MacBook Pro update, however, as Intel announced Broadwell chips appropriate for the lineup back in <a href="http://www.macrumors.com/2015/06/02/intel-announces-new-broadwell-cpus-15-mbp/">early June</a>, just weeks after Apple refreshed the family without upgrading the processors from the previous generation's Haswell chips. But given that it has only been a few months since the last update, Apple may elect to skip a Broadwell refresh of the 15-inch Retina MacBook Pro and wait for Skylake early next year.<br/>
+<br/>
+<strong>iMac</strong><br/>
+<br/>
+While Apple's notebooks receive most of the attention, <i>Ars Technica</i> also highlights some <a href="http://arstechnica.com/gadgets/2015/09/skylake-for-desktops-new-socketed-processors-from-core-i7-to-pentium/">new Skylake desktop chips</a> that could make their way into future iMacs. This batch of Skylake desktop chips includes three at the Core i5 level: a 2.7 GHz 6400, a 3.2 GHz 6500, and a 3.3 GHz 6600. At the high end is a new Core i7-6700 running at 3.4 GHz.<br/>
+<br/>
+<img src="http://cdn.macrumors.com/article-new/2015/09/skylake_desktop.jpg" alt="skylake_desktop" width="746" height="564" class="aligncenter size-full wp-image-462342" /><br/>
+Apple's iMac lineup is currently a hodgepodge of Haswell chips due to Intel's numerous delays with Broadwell, with Apple having limped along by introducing some speed-bumped Haswell chips on certain models and starting to introduce Retina displays on higher-end 27-inch models. Most of Apple's iMac models use discrete graphics chips, and those machines could suffice with Intel's latest Skylake chips. But some lower-end models currently rely on Iris Pro integrated graphics and Intel has yet to announce any such chips for Skylake.<br/>
+<br/>
+<i>Ars Technica</i> notes the company currently has no plans to release any socketed Skylake desktop chips with Iris or Iris Pro graphics, but that doesn't preclude the possibility of a <a href="http://www.macrumors.com/2013/09/25/ifixit-tears-down-new-imacs-finds-soldered-cpu-on-21-5-model/">special soldered version</a> as Apple used on the original low-end Haswell iMac in the current generation.<br/>
+<br/>
+Intel will reportedly be making all of its new Skylake desktop chips available by the end of the year, but it is unclear whether Apple will be able to populate its full range of iMacs with the chips announced today, even if it can simplify its lineup somewhat as it moves away from Haswell. Rumors have suggested an <a href="http://www.macrumors.com/2015/08/03/imacs-faster-processors-improved-displays-kgi/">iMac update is coming soon</a>, but it remains to be seen what the exact specs of those machines are.<br/>
+<br/>
+<strong>Mac mini and Mac Pro</strong><br/>
+<br/>
+Apple typically uses the same chips in the Mac mini as it does in the 13-inch Retina MacBook Pro, so today's Skylake announcement does offer some new options for the Mac mini. But with the current Mac mini having yet to adopt the Broadwell chips that appeared in the MacBook Pro earlier this year and Apple's recent pattern of lengthening Mac mini product cycles amid a declining desktop market, it is unclear when and with what processors the Mac mini will be updated.<br/>
+<br/>
+With the Mac Pro using high-end chips that generally lag behind their mainstream counterparts by many months, the Mac Pro is often on a different product cycle than other Macs, and that remains the case with Skylake as Intel has yet to announce a full set of Xeon processors appropriate for the Mac Pro. An update is possible, however, as it has been nearly two years since Apple released the radically redesigned Mac Pro. It's been nearly a year since Intel released <a href="http://www.macrumors.com/2014/08/14/intel-new-xeons-mac-pro-upgrade/">"Haswell-EP" chips</a> as successors to the processors used in the 2013 Mac Pro, but Apple did not elect to release updated Mac Pros as those new Haswell chips became available and it is unclear if Apple considers them a viable option as this point in their product cycle.<br/>
+<br/>
+Apple frequently holds an October media event to focus on iPads and Macs, and many are hoping a similar event is in store for this year, perhaps centered around the "iPad Pro," some Mac updates, and a final look at OS X El Capitan before its public release. But with most of the Skylake chips needed for updated Macs not arriving until early 2016, we may only see a few Mac families updated before the holidays.<br/>
+<br/>
+<i>Eric Slivka contributed to this report.</i><br/><br/><div class="linkback">Related Roundups: <a href="http://www.macrumors.com/roundup/imac/"/>iMac</a>, <a href="http://www.macrumors.com/roundup/mac-pro/"/>Mac Pro</a>, <a href="http://www.macrumors.com/roundup/mac-mini/"/>Mac mini</a>, <a href="http://www.macrumors.com/roundup/macbook-air/"/>MacBook Air</a>, <a href="http://www.macrumors.com/roundup/macbook-pro/"/>MacBook Pro</a>, <a href="http://www.macrumors.com/roundup/retina-macbook-air/"/>Retina MacBook</a> <br>Tags: <a href="http://www.macrumors.com/roundup/intel/"/>Intel</a>, <a href="http://www.macrumors.com/roundup/skylake/"/>Skylake</a> <br>Buyer's Guide: <a href="http://buyersguide.macrumors.com/#iMac">iMac (Buy Now)</a>, <a href="http://buyersguide.macrumors.com/#Mac_Pro">Mac Pro (Don't Buy)</a>, <a href="http://buyersguide.macrumors.com/#Mac_Mini">Mac Mini (Don't Buy)</a>, <a href="http://buyersguide.macrumors.com/#MacBook_Air">MacBook Air (Neutral)</a>, <a href="http://buyersguide.macrumors.com/#Retina_MacBook_Pro">Retina MacBook Pro (Caution)</a>, <a href="http://buyersguide.macrumors.com/#MacBook">MacBook (Neutral)</a> </div></div>
+          <div class="footer">
+            <div class="comments">[ <a href="http://forums.macrumors.com/threads/intel-skylake-notebooks-desktops.1911965/">344 comments</a> ]</div>
+            <div class="social">
+              <ul>
+                <li>
+                  <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.macrumors.com%2F2015%2F09%2F02%2Fintel-skylake-notebooks-desktops%2F&text=Intel+Unveils+Full+Lineup+of+Skylake+Processors+for+Notebooks+and+Desktops%2C+Early+2016+Likely+for+Most+Macs&related=macrumors" rel="nofollow" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img class="t-share"/></a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.macrumors.com%2F2015%2F09%2F02%2Fintel-skylake-notebooks-desktops%2F" rel="nofollow" target="_blank" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img class="fb-share"/></a>
+                </li>
+                <li>
+                  <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.macrumors.com%2F2015%2F09%2F02%2Fintel-skylake-notebooks-desktops%2F" rel="nofollow" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img class="g-share"/></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- AdUnder1 Begin -->
+        <div id="contentAd"><div class="ad-left">
+<script type="text/javascript">
+if(hide_ads == false){
+//<![CDATA[
+ord = window.ord || Math.floor(Math.random()*1E16);
+document.write('<script type="text/javascript" src="http://ad1.netshelter.net/adj/ns.macrumors/general;ppos=btf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x250;ord=' + ord + '?"><\/script>');
+//]]>
+}
+</script>
+<noscript><a href="http://ad1.netshelter.net/jump/ns.macrumors/general;ppos=btf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x250;ord=123456789?" target="_blank" ><img src="http://ad1.netshelter.net/ad/ns.macrumors/general;ppos=btf;kw=;tile=2;sz=300x250;ord=123456789?" border="0" alt="" /></a></noscript>
+</div>
+<div class="ad-right">
+<style>
+.front-under-extra-responsive { width: 300px; height: 250px; }
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) { .front-under-extra-responsive { display: none !important; } }
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Front Under Extra Responsive -->
+<ins class="adsbygoogle front-under-extra-responsive"
+     style="display:inline-block"
+     data-ad-client="ca-pub-2224409576101196"
+     data-ad-slot="3333614836"></ins>
+<script>
+if(hide_ads == false){
+(adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+</div>
+</div>
+        <!-- AdUnder1 End -->
+
+        <div id="commentsContainer">
+          <!--starttopcomments-->
+          <div id="comments">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Article Matched Content -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2224409576101196"
+     data-ad-slot="3033068832"
+     data-ad-format="autorelaxed"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br /><br />
+            <h2>Top Rated Comments</h2>
+            <a href="http://forums.macrumors.com/threads/1911965" class="view_all">(View all)</a>
+            <p class="clear_left"></p>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/56236">
+                  <img src="http://forums.macrumors.com/data/avatars/m/56/56236.jpg?1433878112" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21770900">Goldfrapp</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">Just give us the Retina MacBook Air, and we&#39;ll be happy campers!</div>
+                <div class="rating"><strong>Rating:</strong> 22 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/140646">
+                  <img src="http://forums.macrumors.com/data/avatars/m/140/140646.jpg?1305631501" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21770905">Santabean2000</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">I feel like Intel needs some serious competition in the computer market; they&#39;re getting slower and slower between releases.</div>
+                <div class="rating"><strong>Rating:</strong> 18 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/858427">
+                  <img src="http://forums.macrumors.com/data/avatars/m/858/858427.jpg?1435879327" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21770912">Jess13</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">Waiting for the Space Gray Skylake 14&#34;/15&#34;/16&#34; MBP.</div>
+                <div class="rating"><strong>Rating:</strong> 14 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/987075">
+                  <img src="http://forums.macrumors.com/data/avatars/m/987/987075.jpg?1440741593" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21770909">Thebeat07</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">Wtf is this. We have to wait until next year? Wow.</div>
+                <div class="rating"><strong>Rating:</strong> 11 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/714482">
+                  <img src="http://forums.macrumors.com/data/avatars/m/714/714482.jpg?1433137908" width="75" height="42.2287390029" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21771114">Michael Goff</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content"><p class="quote">Just give us the Retina MacBook Air, and we&#39;ll be happy campers!</p>
+<br/>
+They did, and they renamed it the MacBook. The purpose of the MBA when it came out was just what the MB does today. So, yes, they did give us a computer that does what the MBA was made for WITH a retina display.</div>
+                <div class="rating"><strong>Rating:</strong> 7 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/353628">
+                  <img src="http://cdn.macrumors.com/images-new/avatar-unk.png" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21771836">scott911</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">if this gets me banned for life, so be it, but: <b>Damn It!</b><br/>
+<br/>
+&#34;amid a declining desktop market, it is unclear when and with what processors the Mac mini will be updated.&#34;<br/>
+<br/>
+The mini desktop is declining because the options are garbage.  Get a good processor inside, and option the upgrade memory, and you&#39;ll see the market improve.  Otherwise, of course it&#39;s going to decline!</div>
+                <div class="rating"><strong>Rating:</strong> 7 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/87523">
+                  <img src="http://forums.macrumors.com/data/avatars/m/87/87523.jpg?1434229152" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21771847">Janichsan</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content"><p class="quote">Estimated A9 single-core score is 4800. Highest i7-6700 single core score I found is 6000. So estimated A9 songle-core score is just 20% lower than i7.<br/>
+<br/>
+But pls correct me if you find other numbers. I&#39;m sure there are other benchmarks that tell a different story.</p>
+Maybe you should take another look at the graph you posted yourself (&#39;http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/page-3#post-21771233&#39;):<br/>
+<img src="http://forums.macrumors.com/proxy.php?image=https%3A%2F%2F9to5mac.files.wordpress.com%2F2015%2F08%2Fgeekbencha9.jpg%3Fw%3D1000%26h%3D435&#38;hash=2bcf30a4f152f04d62bab098a114c305" border="0" alt="" /><br/>
+The value of 4873 you quote is the <i><b>multi-core </b></i>score for the A9. <i><b>Single-core</b></i> is <i><b>1921</b></i>. Which is precisely 27.7 % of the i7-6700K&#39;s single-core score of 6946.</div>
+                <div class="rating"><strong>Rating:</strong> 7 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/82260">
+                  <img src="http://forums.macrumors.com/data/avatars/m/82/82260.jpg?1434620028" width="75" height="59.7510373444" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21770954">flyinmac</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content">Mac mini...  Would be cool if Apple updated it with something viable this time. Like a major performance improvement. <br/>
+<br/>
+Sadly, I expect Apple is waiting for a sky lake single core 500 MHz processor to update the mini with.</div>
+                <div class="rating"><strong>Rating:</strong> 6 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/45497">
+                  <img src="http://forums.macrumors.com/data/avatars/m/45/45497.jpg?1433414780" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21771318">zhenya</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content"><p class="quote">I really regret replacing my old Macbook Air with a new Retina Macbook Pro.<br/>
+<br/>
+First because the new Macbook Retina is a complete failure so much it&#39;s way more crazily underpowered and overpriced than any other product Apple has released.<br/>
+<br/>
+And second, because the last rMBPs performances are so ridiculous and crappy, you can&#39;t do anything &#34;pro&#34; on it, there&#39;s almost no point in having one, a Macbook Air vastly does it.<br/>
+<br/>
+So I hope for a rMBA which will replace my current useless rMBP, alongside an actual PC mini-tower that can do stuff.</p>
+<br/>
+The retina Macbook Pro IS the rMBA. It&#39;s what you get when you add the retina screen and the requisite battery to keep the minimum 10 hour life.<br/>
+<br/>
+And I have no idea what you mean by &#39;ridiculous and crappy performances&#39;. Both models of Pro laptops are considerably more powerful than the vast majority of laptops on the market, and on the PC side of things, if you want something more powerful, you will generally end up with a 4-7lb laptop. The world has been doing &#39;pro&#39; level work on laptops less powerful than these for decades, so who knows what you are on about...</div>
+                <div class="rating"><strong>Rating:</strong> 6 Votes</div>
+              </div>
+            </div>
+            
+            <div class="comment first">
+              <div class="avatar">
+                <a href="http://forums.macrumors.com//members/715755">
+                  <img src="http://forums.macrumors.com/data/avatars/m/715/715755.jpg?1433727699" width="75" height="75" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="comment_content">
+                <div class="username"><a href="http://forums.macrumors.com/threads/intel-unveils-full-lineup-of-skylake-processors-for-notebooks-and-desktops-early-2016-likely-for-most-macs.1911965/#post-21771264">xmichaelp</a></div>
+                <div class="date">8 weeks ago</div>
+                <div class="content"><p class="quote">Think it&#39;s time for Apple to start making their own chips again. The G3/G4/G5 chips (among others) were outstanding performers compared to the competition.</p>
+<br/>
+No they weren&#39;t, that&#39;s why they switched to Intel. Also, Apple didn&#39;t make those.</div>
+                <div class="rating"><strong>Rating:</strong> 5 Votes</div>
+              </div>
+            </div>
+            
+            <br />[ <a href="http://forums.macrumors.com/threads/1911965" class="view_more">Read All Comments</a> ]
+          </div>
+          <!--endtopcomments-->
+        </div>
+      </div>
+    </div>
+
+    <div id="right">
+      <!-- AdSide Begin -->
+      <div id="sideAd">
+        <script type="text/javascript">
+if(hide_ads == false){
+ord=window.ord||Math.floor(Math.random()*10000000000000000);
+document.write('<script type="text/javascript" src="http://ad2.netshelter.net/adj/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x600,300x250;ord='+ord+'?"><\/script>');
+}
+</script>
+<noscript>
+<a href="http://ad2.netshelter.net/jump/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x600,300x250;ord=123456789?" target="_blank" ><img src="http://ad2.netshelter.net/ad/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x600,300x250;ord=123456789?" border="0" alt="" /></a>
+</noscript>
+<!--
+<script type="text/javascript">
+// declare the ad zone
+var NS_AdZone = "http://ad2.netshelter.net/adj/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x250,300x600;ord=";
+// NS code
+if(!NS_Ads){var NS_AdDivs=Array();var NS_AdZones=Array();var NS_Ads=1;};var NS_sz=NS_AdZone.substring(NS_AdZone.indexOf("sz=")+3);NS_sz=NS_sz.substring(0,NS_sz.indexOf(";"));if(NS_sz.indexOf(","))NS_sz=NS_sz.substring(0,NS_sz.indexOf(","));NS_sz=NS_sz.split("x");var NS_AdDiv="ns_ad"+NS_Ads;document.write('<div id="'+NS_AdDiv+'" style="min-width:'+NS_sz[0]+'px;min-height:'+NS_sz[1]+'px;"></div>');NS_AdDivs.push(NS_AdDiv);NS_AdZones.push(NS_AdZone);NS_Ads++;
+</script>
+<noscript>
+<a href="http://ad2.netshelter.net/jump/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x600,300x250;ord=123456789?" target="_blank" ><img src="http://ad2.netshelter.net/ad/ns.macrumors/general;ppos=atf;kw=;dc_ref=http://www.macrumors.com/2015/09/02/intel-skylake-notebooks-desktops/;tile=2;sz=300x600,300x250;ord=123456789?" border="0" alt="" /></a>
+</noscript>
+-->
+
+      </div>
+      <!-- AdSide End -->
+
+                                      <!-- Upcoming Products -->
+                                <div id="upcoming-products">
+                                        <h3>Upcoming</h3>
+                                        <ul>
+                                                
+                                                <li>
+							<a class="image" href="http://www.macrumors.com/roundup/apple-tv/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', 'Apple TV']);"><img src="http://cdn.macrumors.com/article-new/2013/12/apple_tv_2015_roundup_menu.png"></a>
+                                                        <div class="text">
+                                                                <a class="product-title" href="http://www.macrumors.com/roundup/apple-tv/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', 'Apple TV']);">Apple TV <small>October 26</small></a>
+                                                                <a href="http://www.macrumors.com/roundup/apple-tv/"><p>All-new box with App Store and Siri support.</p></a>
+                                                        </div>
+                                                </li>
+                                                
+                                                <li>
+							<a class="image" href="http://www.macrumors.com/roundup/ipad-pro/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', 'iPad Pro']);"><img src="http://cdn.macrumors.com/article-new/2014/11/ipad_pro_roundup_menu2.png"></a>
+                                                        <div class="text">
+                                                                <a class="product-title" href="http://www.macrumors.com/roundup/ipad-pro/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', 'iPad Pro']);">iPad Pro <small>November</small></a>
+                                                                <a href="http://www.macrumors.com/roundup/ipad-pro/"><p>12.9-inch tablet with pencil stylus and keyboard cover accessories.</p></a>
+                                                        </div>
+                                                </li>
+                                                
+                                                <li>
+							<a class="image" href="http://www.macrumors.com/roundup/steve-jobs-movie/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', ''Steve Jobs' Movie']);"><img src="http://cdn.macrumors.com/article-new/2015/02/jobs_roundup_menu.jpg"></a>
+                                                        <div class="text">
+                                                                <a class="product-title" href="http://www.macrumors.com/roundup/steve-jobs-movie/" onClick="_gaq.push(['_trackEvent', 'Click', 'Upcoming', ''Steve Jobs' Movie']);">'Steve Jobs' Movie <small>Wide release October 23</small></a>
+                                                                <a href="http://www.macrumors.com/roundup/steve-jobs-movie/"><p>The Steve Jobs biopic starring Michael Fassbender and written by Aaron Sorkin.</p></a>
+                                                        </div>
+                                                </li>
+                                                
+                                        </ul>
+                                </div>
+                                <!-- end Upcoming Products -->
+
+
+      <div class="blue_box side_box">
+        <h2>More Blog Stories</h2>
+        <ul class="featured">
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/23/macrumors-giveaway-neosmartpen-n2/">MacRumors Giveaway: Win a Neo Smartpen N2 and Notebook Bundle</a></h4>
+            <div class="byline">2 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/23/macrumors-giveaway-neosmartpen-n2/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/neosmartpenn2.jpg?thumbretina" />For this week&#39;s giveaway, we&#39;ve teamed up with Neo Smartpen to give away a Neo Smartpen N2 and a matching N Notebook, which work together to let you write on traditional paper while also...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/macrumors-giveaway-neosmartpen-n2.1931505/">7 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/23/icloud-for-windows-5-adds-photo-library-two-factor/">iCloud for Windows 5 Adds iCloud Photo Library and Two-Factor Authentication</a></h4>
+            <div class="byline">2 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/23/icloud-for-windows-5-adds-photo-library-two-factor/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/windows-icloud-hero-pc-iphone.jpg?thumbretina" />Apple has released iCloud for Windows 5 with support for iCloud Photo Library and two-factor authentication for Apple ID accounts. Windows users were previously limited to accessing iCloud Photo...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/icloud-for-windows-5-adds-photo-library-two-factor.1931478/">47 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/23/apple-watch-now-available-target/">Apple Watch Now Available at Target in Stores and Online</a></h4>
+            <div class="byline">2 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/23/apple-watch-now-available-target/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/Target-Apple-Watch.jpg?thumbretina" />Target has delivered on its plans and is now selling the Apple Watch in U.S. stores and online (via The Loop). The large retailer is carrying both Apple Watch Sport and Apple Watch models with the...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/apple-watch-now-available-target.1931432/">29 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/23/apple-watch-launches-india-november-6/">Apple Watch Launches in India on November 6</a></h4>
+            <div class="byline">2 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/23/apple-watch-launches-india-november-6/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/09/apple-watch-trio-new-800x316.jpg?thumbretina" />Apple has updated its regional website for India to indicate the Apple Watch will be available in the world&#39;s second most populous country on November 6. 
+ 
+ 
+India will be part of the tenth...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/apple-watch-launches-india-november-6.1931362/">9 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/review/twelve-south-forte-apple-watch-stand/">Review: Twelve South's Forté is a Versatile Apple-Approved Stand for the Apple Watch</a></h4>
+            <div class="byline">3 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/review/twelve-south-forte-apple-watch-stand/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/forteapplewatchsideview.jpg?thumbretina" />Twelve South was one of the first companies to come out with an Apple Watch stand, announcing its HiRise for Apple Watch before the wrist-worn device even launched, but with watchOS 2, Apple...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/twelve-south-forte-apple-watch-stand.1931216/">20 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/22/imovie-ipad-air-2-4k-support/">iMovie Updated With 4K Support for iPad Air 2 on iOS 9.1</a></h4>
+            <div class="byline">3 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/22/imovie-ipad-air-2-4k-support/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/09/imovie.jpg?thumbretina" />Apple today updated its iMovie app for iOS devices to version 2.2.1, fixing several bugs and adding 4K support for the iPad Air 2 following yesterday&#39;s release of iOS 9.1. An iPad Air 2 running...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/imovie-ipad-air-2-4k-support.1931193/">39 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/22/griffin-launches-charging-station/">Griffin Launches New Combination Apple Watch and iPhone Charging Station</a></h4>
+            <div class="byline">3 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/22/griffin-launches-charging-station/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/griffin-watchstand-2.jpg?thumbretina" />Third-party accessory manufacturer Griffin today announced a new combination Apple Watch and iPhone charging stand called the &#34;WatchStand Powered Charging Station.&#34; The dock takes the...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/griffin-launches-charging-station.1931104/">24 comments</a></div>
+          </li>
+          
+          <li>
+            <h4><a href="http://www.macrumors.com/2015/10/22/lifeproof-battery-case-iphone-6s/">LifeProof Unveils 'FRĒ Power' Waterproof Battery Case for iPhone 6s</a></h4>
+            <div class="byline">3 days ago on  <a href="http://www.macrumors.com/iphone/">iOS Blog</a></div>
+            <div class="copy"><a href="http://www.macrumors.com/2015/10/22/lifeproof-battery-case-iphone-6s/"><img width="100" height="100" src="http://cdn.macrumors.com/article-new/2015/10/lppw-apl-iph15-eu-1.jpg?thumbretina" />Popular rugged case manufacturer LifeProof today revealed its newest protective offering for the iPhone 6s, the FRĒ Power, which promises to double the battery life of the smartphone while providing...</a></div>
+            <div class="comments"><a href="http://forums.macrumors.com/threads/lifeproof-battery-case-iphone-6s.1931081/">16 comments</a></div>
+          </li>
+          
+        </ul>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/22/fleksy-keyboard-custom-theme-builder/">Fleksy Keyboard for iOS Gains Custom Theme Builder</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/fleksy-keyboard-custom-theme-builder.1931055/">13</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/apple-new-china-clean-energy-programs/">Apple Announces New China Clean Energy Programs for Manufacturing Partners</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/apple-new-china-clean-energy-programs.1930933/">20</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/sprint-ios-9-1-enhanced-wi-fi-calling-feature/">Sprint Announces Enhanced Wi-Fi Calling Feature for iOS 9.1 Users</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/sprint-ios-9-1-enhanced-wi-fi-calling-feature.1930805/">52</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/youtube-red-ad-free-launches-october-28/">'YouTube Red' Ad-Free Subscription Service Launches in U.S. October 28</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/youtube-red-ad-free-launches-october-28.1930802/">162</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/twitter-new-twitter-for-mac-app/">Twitter Announces Upcoming Revamped Twitter for Mac App</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/twitter-new-twitter-for-mac-app.1930791/">26</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/apple-releases-itunes-12-3-1/">Apple Releases iTunes 12.3.1 With Stability and Performance Improvements</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/apple-releases-itunes-12-3-1.1930780/">61</a>)</span></div>
+        <div class="clear"></div>
+        
+        <div class="listitemb">&bull; <a href="http://www.macrumors.com/2015/10/21/twitter-create-customized-polls/">Twitter Rolling Out New Feature to Let Users Create Customized Polls</a> <span class="comments">(<a href="http://forums.macrumors.com/threads/twitter-create-customized-polls.1930751/">4</a>)</span></div>
+        <div class="clear"></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <div class="clear"></div>
+        <div id="fContainer">
+                <div id="fNew">
+                        <div id="fLeft">
+                                <img src="http://cdn.macrumors.com/images-new/logo_blue.png" width="210" height="40" alt="MacRumors">
+<p>&nbsp;</p>
+                                <p>MacRumors attracts a broad audience
+        of both consumers and professionals interested in
+        the latest technologies and products. We also boast an active community focused on
+purchasing decisions and technical aspects of the iPhone, iPod, iPad, and Mac platforms.</p>
+                                <a href="http://www.macrumors.com/contact.php" id="advertiseLink">Advertise on MacRumors</a>
+                                <div class="clear"></div>
+                                <div id="staffList">
+                                        <h2>Our Staff</h2>
+                                        <div class="staff">
+                                                <div class="staff_name">Arnold Kim</div>
+                                                <div class="staff_position">Editorial Director</div>
+                                                <div class="staff_links"><a href="mailto:arn@normalkid.com">Email</a> &bull; <a href="http://twitter.com/arnoldkim">Twitter</a> </div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Eric Slivka</div>
+                                                <div class="staff_position">Editor in Chief</div>
+                                                <div class="staff_links"><a href="mailto:ericslivka@macrumors.com">Email</a>  &bull; <a href="http://twitter.com/eslivka">Twitter</a> </div>
+
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Juli Clover</div>
+                                                <div class="staff_position">Editor</div>
+                                                <div class="staff_links"><a href="mailto:juli@macrumors.com">Email</a> &bull; <a href="https://twitter.com/julipuli">Twitter</a> </div>
+
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Joe Rossignol</div>
+                                                <div class="staff_position">Editor</div>
+                                                <div class="staff_links"><a href="mailto:joe@macrumors.com">Email</a> &bull; <a href="https://twitter.com/rsgnl">Twitter</a> &bull; <a href="https://plus.google.com/117736161871988049691/posts?rel=author">Google+</a></div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Marianne Schultz</div>
+                                                <div class="staff_position">Editor</div>
+                                                <div class="staff_links"><a href="mailto:marianne@macrumors.com">Email</a> &bull; <a href="http://twitter.com/emschultz">Twitter</a></div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Jordan Golson</div>
+                                                <div class="staff_position">Contributing Editor</div>
+                                                <div class="staff_links"><a href="mailto:jlgolson@macrumors.com">Email</a> &bull; <a href="http://twitter.com/jlgolson">Twitter</a> </div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Husain Sumra</div>
+                                                <div class="staff_position">Contributing Editor</div>
+                                                <div class="staff_links"><a href="mailto:husain@macrumors.com">Email</a> &bull; <a href="https://twitter.com/HSumra">Twitter</a> </div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Mitchel Broussard</div>
+                                                <div class="staff_position">Contributing Editor</div>
+                                                <div class="staff_links"><a href="mailto:mitchel@macrumors.com">Email</a> &bull; <a href="https://twitter.com/earthTOmitchel">Twitter</a> </div>
+                                        </div>
+                                        <div class="staff">
+                                                <div class="staff_name">Lory Gil</div>
+                                                <div class="staff_position">Contributing Writer</div>
+                                                <div class="staff_links"><a href="mailto:lory@macrumors.com">Email</a> &bull; <a href="https://twitter.com/appaholik">Twitter</a></div>
+                                        </div>
+<!--                                                        <br /><p>Looking for a job?  We are <a href="http://www.macrumors.com/jobs">hiring</a>.</p> -->
+
+
+        <div class="clear"></div>
+                                </div>
+                        </div>
+                        <div id="fRight">
+                                <h2 class="title">Links</h2>
+                                <div class="other_site_container">
+                                        <div class="other_site other_site_left">
+                                                <h2 class="toucharcade"><a href="http://toucharcade.com" title="iPhone Game Reviews">Touch Arcade</a></h2>
+                                                <ul>
+							<li><a href="http://toucharcade.com/2015/10/25/here-are-some-videos-for-those-who-didnt-make-it-to-clash-of-clans-clashcon/">Here are Some Videos for Those Who Didn't Make it to 'Clash of Clans' 'ClashCon'</a></li><li><a href="http://toucharcade.com/2015/10/24/streaming-live-on-mobcrush/">We're Streaming iOS Games Live on Mobcrush [Offline]</a></li><li><a href="http://toucharcade.com/2015/10/24/check-out-clashcon-video-of-clash-of-clans-update-spoilers-new-town-hall-11-new-defense-and-new-hero/">Check Out 'ClashCon' Video of 'Clash of Clans' Update Spoilers - New Town Hall 11, New Defense, and New Hero</a></li><li><a href="http://toucharcade.com/2015/10/23/the-toucharcade-show-228-jared-returns/">The TouchArcade Show - 228 - Jared Returns</a></li><li><a href="http://toucharcade.com/2015/10/23/toucharcade-game-of-the-week-please-dont-touch-anything/">TouchArcade Game of the Week: 'Please, Don't Touch Anything'</a></li><li><a href="http://toucharcade.com/2015/10/23/astra-review/">'Astra' Review - Per Aspera ad Astra</a></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="other_site_container">
+                                        <div class="other_site other_site_right">
+                                                <h2 class="appshopper"><a href="http://appshopper.com" title="iPhone Apps">AppShopper</a></h2>
+                                                <ul>
+							<li><a href="http://appshopper.com/blog/2015/09/09/apple-announces-new-iphone-6s-with-3d-touch/">Apple Announces New iPhone 6s with 3D Touch</a></li><li><a href="http://appshopper.com/blog/2015/09/09/ipad-pro-announced/">Apple Announces iPad Pro with 12.9-inch Retina Display</a></li><li><a href="http://appshopper.com/blog/2015/06/08/apple-announces-ios-9/">Apple Announces iOS 9, Bringing Split-Screen Multi-tasking to iPad</a></li><li><a href="http://appshopper.com/blog/2015/06/08/apple-announces-mac-os-x-10-11-el-capitan/">Apple Announces Mac OS X 10.11 'El Capitan'</a></li><li><a href="http://appshopper.com/blog/2015/03/09/apple-watch-preorders/">Apple Watch Pre-Orders to Open on April 10, Available Starting on April 24</a></li><li><a href="http://appshopper.com/blog/2015/03/09/12-inch-retina-macbook/">Apple Announces New 12-inch MacBook with Retina Display</a></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="fBottom">
+                                Copyright &copy; 2000-<script>document.write(new Date().getFullYear())</script> MacRumors.com, LLC. <br /><a href="http://www.macrumors.com/privacydmca.html" class="mobile_link">Privacy / DMCA contact / Affiliate and FTC Disclosure</a><br /><br />
+                                <br />
+                                <a href="http://www.macrumors.com/mr-toggleMobile.php?mobile=1" class="mobile_link">Mobile Version</a> | <a href="http://www.macrumors.com/mr-toggleFluid.php?fluid=0" class="mobile_link">Fixed</a> | <a href="http://www.macrumors.com/mr-toggleFluid.php?fluid=1" class="mobile_link">Fluid</a> | <a href="http://www.macrumors.com/mr-toggleFluid.php?fluid=2" class="mobile_link">Fluid HD</a>
+
+                        </div>
+                </div>
+        </div>
+
+<!-- Quantcast Tag, part 2 -->
+<script type="text/javascript">
+_qevents.push( { qacct:"p-abt0WyZtrye1Y"} );
+</script>
+<noscript>
+<div style="display: none;"><img src="//pixel.quantserve.com/pixel/p-abt0WyZtrye1Y.gif" height="1" width="1" alt="Quantcast"/></div>
+</noscript>
+
+<script type="text/javascript">
+(function() {
+    var nstrack = document.createElement("script"), el_nstrack = document.getElementsByTagName("script")[0]; nstrack.async = true;
+    nstrack.src = "http://track.netshelter.net/async/js/sites/macrumors.com-async.js";
+    el_nstrack.parentNode.insertBefore(nstrack, el_nstrack);
+  })();
+</script>
+
+<script type="text/javascript" src="//s.skimresources.com/js/73726X1523000.skimlinks.js"></script>
+
+<script type="text/javascript">
+var npc = npc || [];
+npc.push(['_customerId', '31b456fe2e1e6bed013b']);
+npc.push(['_setSections', 'Front Page,iMac,Mac Pro,Mac mini,MacBook Air,Retina MacBook Pro,12-Inch MacBook']);
+npc.push(['_setAuthors', 'Joe Rossignol']);
+(function() {
+  var nc = document.createElement('script'); nc.type = 'text/javascript'; nc.async = true;
+  nc.src = 'http://t.neodatagroup.com/npc.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(nc, s);
+})();
+</script>
+<!--  START NetShelter delayed loading tags -->
+<script type="text/javascript">
+// function moveAdDiv(from, to)
+// moves the SCRIPT child node from the source DIV to the destination DIV
+// then shows it
+function moveAdDiv(from, to) {
+                var phDiv = document.getElementById(from);
+                var adDiv = document.getElementById(to);
+                for (index = phDiv.childNodes.length - 1; index >= 0; index--)
+                {
+                                var element = phDiv.childNodes[index];
+                                if ((element.nodeName == 'SCRIPT') || (element.nodeName == 'NOSCRIPT'))
+                                                phDiv.removeChild(element);
+                }
+                phDiv.parentNode.removeChild(phDiv);
+                adDiv.parentNode.replaceChild(phDiv, adDiv);
+                phDiv.style.display = 'block';
+}
+ord = window.ord || Math.floor(Math.random()*1E16);
+var NS_i=0;
+</script>
+<div id="ns_ad1Ph" style="display:none;"></div>
+<div id="ns_ad2Ph" style="display:none;"></div>
+<div id="ns_ad3Ph" style="display:none;"></div>
+<div id="ns_ad4Ph" style="display:none;"></div>
+<!--  END NetShelter delayed loading tags -->
+
+
+<script type="text/javascript">
+    (function() {
+        function async_load(script_url){
+            var protocol = ('https:' == document.location.protocol ? 'https://' : 'http://');
+            var s = document.createElement('script'); s.src = protocol + script_url;
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        }
+        bm_website_code = 'BAD4FB35BEF2485A';
+        jQuery(document).ready(function(){async_load('asset.pagefair.com/measure.min.js')});
+        jQuery(document).ready(function(){async_load('asset.pagefair.net/ads.min.js')});
+    })();
+</script>
+
+
+
+
+<script>
+  $(function() {
+    $('.search .icon').on('click', function() {
+      $('.social').toggleClass('hide');
+      $('.primary > ul').toggleClass('hide remove');
+      $('.primary .search').toggleClass('show');
+
+      $('.search input').focus();
+    });
+
+    $('#header li#roundups a.parent').on('click', function(e) {
+      e.preventDefault();
+
+      $('li#roundups ul#nav-dropdown').toggle();
+
+      if($('ul#nav-dropdown').is(':visible')) {
+        $('li#roundups a.parent').addClass('active');
+      } else {
+        $('li#roundups a.parent').removeClass('active');
+      }
+    });
+  });
+</script>
+
+<!-- only for google plus enabled pages -->
+<script type="text/javascript">
+(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/platform.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+<script src="http://cdn.macrumors.com/js-new/js.js?v=29" type="text/javascript" charset="utf-8"></script>
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+</body>
+</html>

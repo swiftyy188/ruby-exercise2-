@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>bentotemplate</string>
+				<string>ulproject</string>
+				<string>ulysses</string>
+				<string>_ulstyle</string>
+				<string>_ultheme</string>
+				<string>pxm</string>
+				<string>nbn</string>
+				<string>mindnode</string>
+				<string>mindproj</string>
+				<string>neunote</string>
+				<string>studydeck</string>
+				<string>dayone</string>
+				<string>emberbackup</string>
+				<string>embermdbackup</string>
+				<string>embersnap</string>
+				<string>lslibrary</string>
+				<string>scd</string>
+				<string>soundhoundbookmark</string>
+				<string>soundhoundhistory</string>
+				<string>cpimage</string>
+				<string>cplink</string>
+				<string>cptext</string>
+				<string>cpweb</string>
+				<string>rgd</string>
+				<string>tka</string>
+				<string>tkp</string>
+				<string>tkv</string>
+				<string>ccc</string>
+				<string>pzdoc</string>
+				<string>scn</string>
+				<string>scene</string>
+				<string>goodnotes</string>
+				<string>scriv</string>
+				<string>qvlibrary</string>
+				<string>qvnote</string>
+				<string>qvnotebook</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Package</string>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>LSTypeIsPackage</key>
+			<true/>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>SharedPackageExtensions</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.bird.SharedPackageExtensions</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>

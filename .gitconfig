@@ -1,0 +1,7 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[user]
+	name = swiftyy188
+	email = jeffho.ml@gmail.com

@@ -1,0 +1,13 @@
+Oct 26 13:36:02 jeffs-MacBook-Pro.local Notes[4327] <Debug>: Registered for System Configuration dynamic store notifications with keys: (State:/Network/Global/IPv4, State:/Network/Global/IPv6, State:/Network/Global/DNS) patterns: (State:/Network/Interface/[^/]+/IPv4, State:/Network/Interface/[^/]+/IPv6)
+Oct 26 13:37:36 jeffs-MacBook-Pro.local Notes[4337] <Debug>: Registered for System Configuration dynamic store notifications with keys: (State:/Network/Global/IPv4, State:/Network/Global/IPv6, State:/Network/Global/DNS) patterns: (State:/Network/Interface/[^/]+/IPv4, State:/Network/Interface/[^/]+/IPv6)
+Oct 26 14:27:38 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Oct 26 14:27:38 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/awdl0/IPv6
+Oct 26 14:27:38 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/en0/IPv4
+Oct 26 14:27:38 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/en0/IPv6
+Oct 26 14:27:38 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Global/DNS, State:/Network/Global/IPv4
+Oct 26 14:27:41 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/en0/IPv6
+Oct 26 14:27:41 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/en0/IPv4
+Oct 26 14:27:41 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Global/DNS, State:/Network/Global/IPv4
+Oct 26 14:27:43 jeffs-MacBook-Pro.local Notes[4337] <Debug>: System Configuration dynamic store changed, changedKeys=State:/Network/Interface/en0/IPv6
+Oct 26 14:27:51 jeffs-MacBook-Pro.local Notes[4337] <Debug>: Network configuration changed. Network is up.
+Oct 26 16:32:15 jeffs-MacBook-Pro.local Notes[342] <Debug>: Registered for System Configuration dynamic store notifications with keys: (State:/Network/Global/IPv4, State:/Network/Global/IPv6, State:/Network/Global/DNS) patterns: (State:/Network/Interface/[^/]+/IPv4, State:/Network/Interface/[^/]+/IPv6)

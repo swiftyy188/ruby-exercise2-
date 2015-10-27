@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>chrome</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Google Chrome</string>
+		<key>LAST_USED</key>
+		<date>2015-10-25T20:10:29Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Google%20Chrome.app/</string>
+	</dict>
+	<key>spec</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Spectacle</string>
+		<key>LAST_USED</key>
+		<date>2015-10-26T21:05:20Z</date>
+		<key>URL</key>
+		<string>file:///Users/swifty/Downloads/Spectacle.app/</string>
+	</dict>
+	<key>subli</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Sublime Text</string>
+		<key>LAST_USED</key>
+		<date>2015-10-24T13:25:36Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Sublime%20Text.app/</string>
+	</dict>
+	<key>terminal</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Terminal</string>
+		<key>LAST_USED</key>
+		<date>2015-10-24T20:24:13Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Utilities/Terminal.app/</string>
+	</dict>
+	<key>xc</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>Xcode</string>
+		<key>LAST_USED</key>
+		<date>2015-10-26T21:06:21Z</date>
+		<key>URL</key>
+		<string>file:///Applications/Xcode.app/</string>
+	</dict>
+</dict>
+</plist>

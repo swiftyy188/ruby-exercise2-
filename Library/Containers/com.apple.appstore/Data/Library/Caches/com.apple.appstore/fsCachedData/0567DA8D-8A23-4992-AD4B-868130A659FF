@@ -1,0 +1,696 @@
+
+  
+  
+<div class='customer-ratings'>
+  <h4>Customer Ratings</h4>
+  <div class="ratings-container">
+    <div class="histogram-container">
+      
+      
+      We have not received enough ratings to display an average for the current version of this application.
+
+
+      
+        
+        
+        
+<div class="ratings-histogram">
+  <a href="#" aria-label='3 and a half stars, Average rating for all versions:'>Average rating for all versions:</a>
+
+  
+    <div class='rating' role='img' tabindex='-1' aria-label='3 and a half stars, 510 Ratings'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star half">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div><span class="rating-count">510 Ratings</span>
+</div>
+
+  
+
+  <div class="vote" role="text" aria-label='5 stars, 233 ratings'>
+    <div class='stars' role='img' tabindex='-1' aria-label='5 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span></div></div>
+
+    <div class="graph">
+      <span class="bar" style="width: 100%;"></span>
+    </div>
+    <span class="total">233</span>
+  </div>
+
+  <div class="vote" role="text" aria-label='4 stars, 58 ratings'>
+    <div class='stars' role='img' tabindex='-1' aria-label='4 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+    <div class="graph">
+      <span class="bar" style="width: 24%;"></span>
+    </div>
+    <span class="total">58</span>
+  </div>
+
+  <div class="vote" role="text" aria-label='3 stars, 38 ratings'>
+    <div class='stars' role='img' tabindex='-1' aria-label='3 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+    <div class="graph">
+      <span class="bar" style="width: 16%;"></span>
+    </div>
+    <span class="total">38</span>
+  </div>
+
+  <div class="vote" role="text" aria-label='2 stars, 43 ratings'>
+    <div class='stars' role='img' tabindex='-1' aria-label='2 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+    <div class="graph">
+      <span class="bar" style="width: 18%;"></span>
+    </div>
+    <span class="total">43</span>
+  </div>
+
+  <div class="vote" role="text" aria-label='1 star, 138 ratings'>
+    <div class='stars' role='img' tabindex='-1' aria-label='1 star'><div><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+    <div class="graph">
+      <span class="bar" style="width: 59%;"></span>
+    </div>
+    <span class="total">138</span>
+  </div>
+
+</div>
+
+      
+    </div>
+
+    <div class="rating-widget-container">
+      <div rating-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/userRateContent?id=497799835&displayable-kind=30' class="rate-stars"><h5 class="rating-label">Rate this application:</h5><div role=""><span star-count="1" role="radio" aria-checked="false" aria-label="rate 1 star, hate it"></span><span star-count="2" role="radio" aria-checked="false" aria-label="rate 2 stars, don't like it"></span><span star-count="3" role="radio" aria-checked="false" aria-label="rate 3 stars, it's ok"></span><span star-count="4" role="radio" aria-checked="false" aria-label="rate 4 stars, it's good"></span><span star-count="5" role="radio" aria-checked="false" aria-label="rate 5 stars, it's great"></span></div><span class="rating-desc" aria-hidden="true"></span></div>
+
+      <div class="has-not-purchased">To rate this app, you must have purchased it from the Mac App Store.</div>
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
+<div class="customer-reviews" >
+  <div class="title hidden"><h4>Write a Review</h4></div>
+  <div class="inline-review" content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/writeUserReview?id=497799835&amp;displayable-kind=30'></div>
+  <div class="title">
+    <h4>Customer Reviews</h4>
+  </div>
+  <div class="pill"><button class="active"><span>Current Version (0)</span></button><button><span>All Versions (98)</span></button></div>
+
+  <div class="paginate all-reviews" goto-page-href='https://itunes.apple.com/ca/customer-reviews?displayable-kind=30&amp;id=497799835&amp;update=1'>
+  
+  <div class="write-a-review">
+    
+    <a href='#' class="write-a-review-link see-all">Write a Review</a>
+    <div class="has-not-purchased">To review this app, you must have purchased it from the Mac App Store.</div>
+  </div>
+  
+
+
+
+  <div class="controls-container">
+
+    
+    <div class="select"><label class="select">Sort By:<select name="sort">
+      <option value='1'>Most Helpful</option><option value='2'>Most Favourable</option><option value='3'>Most Critical</option><option value='4'>Most Recent</option>
+    </select></label></div>
+    
+
+    
+    <div class="pagination-controls">
+    </div>
+    
+
+  </div>
+
+  <div class="paginated-container">
+    <div class="paginated-content" page-number='1' sort-key='1' total-number-of-pages='10' pill-identifier="0">
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Learning Objective C</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='5 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=28736181' class="reviewer">David Tuerk</a>
+     -
+     Version
+     4.3.2
+    
+    -
+     Mar 23, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=28736181' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Im 14 and Im learning how to code with objective c. So far it has been really easy and the auto correcting in xcode helps even most skilled coders. I have writen 2 small programs so far and its working great!!! Thanks apple for making it free for everyone to play with.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">137 
+      out of 
+      171
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='178731639' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=549070357'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=549070357'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Introduces numerous build and link errors</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='1 star'><div><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=34252112' class="reviewer">Pookzilla</a>
+     -
+     Version
+     5.1
+    
+    -
+     Mar 11, 2014
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=34252112' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Upgrading XCode usually results in lost productivity and today is no different. Installation of this build results in numerous warnings (for unused variables) being treated as errors despite settings being distabled. Fixing these only leads to further build and linking errors that I’ve yet to figure out. <br/><br/>Be prepared to kiss your day goodbye!
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">51 
+      out of 
+      73
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='90605274' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=957708803'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=957708803'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">does NOT work with iOS 5.1</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='3 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=21323222' class="reviewer">lwaa</a>
+     -
+     Version
+     4.3.2
+    
+    -
+     Mar 31, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=21323222' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  It will not allow me to test using my iPhone 4 running iOS 5.1, says the decive doesn't have a compatible version of iOS.<br/><br/>The phone isn't jailbroken or anything, I can no longer test out my apps on it after 'upgrading' to this version of XCode.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">36 
+      out of 
+      58
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='41999457' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=554495633'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=554495633'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Command-line tools are free</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='4 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=190963562' class="reviewer">appochimongitus</a>
+     -
+     Version
+     4.3
+    
+    -
+     Feb 24, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=190963562' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Works great as usual, will appreciate mac app store updates.<br/><br/>For those who are worried about paying $99 per year to get the command-line tools, this is not true. You can become an Apple Developer without registering to any Apple Developer Program, though Apple make it difficult to find the correct link (try the bottom of compare developer programs).<br/><br/>I hope Apple makes this link easier to find in future as I can imagine a flood of macports users and *NIX developers registering so they can continue to use the command-line tools.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">29 
+      out of 
+      32
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='1159201482' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=533203948'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=533203948'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">6.1 Is breaking my app</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='4 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=112646533' class="reviewer">The Calgary Herald</a>
+     -
+     Version
+     6.1
+    
+    -
+     Oct 21, 2014
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=112646533' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  I wish I could downgrade. I’ve lost 3 hours today trying to get my app working again after this upgrade. The easy part was the update with Swift 1.1. The hard part is that my app no longer loads on my iPhone, and the simulator won’t even start. I hope I can get this running today. I don’t want to lose more than a day of productivity because of an “upgrade&quot;
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">27 
+      out of 
+      36
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='284912131' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=1084054578'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=1084054578'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">I just updated, but...</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='5 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=42315665' class="reviewer">dzen</a>
+     -
+     Version
+     4.3.1
+    
+    -
+     Mar 12, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=42315665' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  I just updated, but…it took a lot to download and there was no more visual feedback that the button &quot;install&quot; changed to &quot;installing&quot;…at least a download/install progress bar should be useful, don't you think Apple?<br/>Once the update went trough, xCode still shows as 4.2.1. Why is that? Is that a bug? I should have the 4.3.1 installed. At least the App Store says now &quot;installed&quot;. Doesn't look like.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">26 
+      out of 
+      33
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='203342176' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=542672762'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=542672762'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Unstable</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='2 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=150466112' class="reviewer">h4xnoodle</a>
+     -
+     Version
+     4.6.2
+    
+    -
+     Apr 22, 2013
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=150466112' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Crashes all the time when I'm attempting to print an object (usually a NSNetworkQueue for some reason). XCode also doesn't clean up after itself -- many zombie processes are left behind. Since the parent is launchd, you cannot clean up. I thought I was supposed to never need to restart a Mac?<br/><br/>Frequently, my breakpoints simply do not work. I set one, and thinking my code is erroneous, I spend precious time 'debugging'; only to discover it's not me, it's XCode. <br/><br/>Overall I've lost confidence in this tool. I waste valuable time restarting, cleaning, and debugging phantom bugs that are just XCode's problems.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">25 
+      out of 
+      39
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='1047315368' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=792268378'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=792268378'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Wrecked all my games...</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='1 star'><div><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=343551806' class="reviewer">Skiddyflyer</a>
+     -
+     Version
+     6.0.1
+    
+    -
+     Sep 18, 2014
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=343551806' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  I have several games made, but not they are all wrecked.  I have a jumping game, and now they randomly spawn all over the place.  I have a flappy bird game, and the rotations are not working right anymore, and many more.  Please fix this, I want to use xcode 6 but can’t be dealing with these bugs.
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">31 
+      out of 
+      77
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='1529878783' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=1066480722'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=1066480722'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Great IDE</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='4 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=85776242' class="reviewer">Wintermute_AI</a>
+     -
+     Version
+     4.3.2
+    
+    -
+     Mar 27, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=85776242' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Great IDE but what's with all the crashing and oinkyness?
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">23 
+      out of 
+      35
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='201805709' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=551481828'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=551481828'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+    
+<div class="da-review customer-review">
+
+ <div class="review-header">
+  <div class="review-meta">
+   <h5>
+    <span class="customerReviewTitle">Constant crash when trying to debug</span>
+    <div class='rating' role='img' tabindex='-1' aria-label='3 stars'><div><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star">&nbsp;</span><span class="rating-star ghost">&nbsp;</span><span class="rating-star ghost">&nbsp;</span></div></div>
+
+   </h5>
+   <span class="user-info">by
+    <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=256215487' class="reviewer">MadVictor</a>
+     -
+     Version
+     4.3.3
+    
+    -
+     Jun 15, 2012
+   </span>
+  </div>
+  <div class="review-see-all">
+   <a href='https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewUsersUserReviews?userProfileId=256215487' class="see-all">
+   All Reviews by This User
+   </a>
+  </div>
+ </div>
+ <p class="content" data-text-truncate-lines="6">
+  Updated yesterday and was unable to debug my application. On run xcode was constantly crashing, switching to GDB as debugger solved the problem. But anyway I would like to see better stability in future versions and not afraid to upgrade .
+ </p>
+ <div class="feedback">
+   <div class="helpful-wrapper">
+    
+     <div class="stats">22 
+      out of 
+      30
+      customers found this review helpful
+     </div>
+    
+    <div class="rate" reviewer-dsid='1114698007' content='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/rateUserReview?userReviewId=602456702'>Was this review helpful? 
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='Yes'
+        class='helpful-vote' vote="1">Yes</a> |
+     <a href="javascript:void(0)" oncontextmenu="return false;"
+        alt='No'
+        class='helpful-vote' vote="0">No</a>
+    </div>
+   </div>
+   <div class="report-a-concern" report-a-concern-fragment-url='https://userpub.itunes.apple.com/WebObjects/MZUserPublishing.woa/wa/reportAConcernFragment?userReviewId=602456702'>
+    <a href="javascript:void(0)" oncontextmenu="return false;" class="report" alt='Report a Concern'>Report a Concern</a>
+   </div>
+ </div>
+</div>
+
+  
+
+</div>
+  </div>
+
+  <div class="footer">
+
+
+  
+  <div class="pagination-controls">
+  </div>
+  
+
+  </div>
+
+  </div>
+
+  
+  <div class=" current-reviews" goto-page-href='https://itunes.apple.com/ca/customer-reviews?displayable-kind=30&amp;id=497799835&amp;update=1&amp;appVersion=current'>
+  
+  <div class="write-a-review">
+    There are no reviews for the current version of this application. <a href='#' class='previous-reviews-link'>See all 98 reviews</a> for previous versions.<br/>
+    <a href='#' class="write-a-review-link see-all">Be the first to write a review</a>
+    <div class="has-not-purchased">To review this app, you must have purchased it from the Mac App Store.</div>
+  </div>
+  
+
+  </div>
+  
+</div>
+

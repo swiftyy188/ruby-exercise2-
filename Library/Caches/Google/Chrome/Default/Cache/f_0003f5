@@ -1,0 +1,660 @@
+
+// From http://blog.stevenlevithan.com/archives/parseuri
+// parseUri 1.2 <stevenlevithan.com>; MIT License
+var parseUri=function(d){var o=parseUri.options,value=o.parser[o.strictMode?"strict":"loose"].exec(d);for(var i=0,uri={};i<14;i++){uri[o.key[i]]=value[i]||""}uri[o.q.name]={};uri[o.key[12]].replace(o.q.parser,function(a,b,c){if(b)uri[o.q.name][b]=c});return uri};parseUri.options={strictMode:true,key:["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],q:{name:"queryKey",parser:/(?=.)&?([^&=]*)=?([^&]*)/g},parser:{strict:/^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,loose:/^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/}};
+
+// Global Variables
+var PageURI = parseUri(location.href);
+
+/* Element Extentions
+ * Usage: Non-Object; Use via element objects.
+ * Known Sub-Classes: None;
+ */
+var ElementExtentions = {
+	getElementsByTypeName: function(element, type) {
+		var tags = new Array();
+		element.descendants().each(function(item) {
+			if(item.type == type) {
+				tags.push(item);
+			}
+		}.bind(this));
+		return tags;
+	}
+}
+Element.addMethods(ElementExtentions);
+
+/* $RF (RadioGroup Value)
+ * Usage: Non-Object; Use directly.
+ * Known Sub-Classes: None;
+ * Based On: http://aaron.xavisys.com/using-prototype-javascript-to-get-the-value-of-a-radio-group/
+ * (No License)
+ */
+function $RF(element, radioGroup) {
+	if ($(element).tagName.toLowerCase() != 'form') {return false;}
+	return $F($(element).getInputs('radio', radioGroup).find(function(element){return element.checked;}));
+}
+
+/* ClickAction UI
+ * Usage: Non-Object; Use sub-classes.
+ * Known Sub-Classes: PanelUI [SwitcherUI], ExpanderUI
+ */
+var ClickAction = {
+	initialize: function(baseElement, options) {this.initialize_ClickAction(baseElement, options);},
+	initialize_ClickAction: function(baseElement, options) {
+		this.callbackActions = $A(new Array());
+		this.baseElement = $(baseElement);
+		this.options = $H({defaultTab: null, eventType: 'click', activeClass: null, duration: 1, stopEvent: true, doAnimation: false});
+		this.options.merge($H(options));
+		this.setupEvents = this.setupEvents.bind(this);
+		this.setupStyle = this.setupStyle.bind(this);
+		this.registerAction = this.registerAction.bind(this);
+		this.setupRefs = this.setupRefs.bind(this);
+	},
+	setupEvents: function(elem) {
+		Event.observe(elem, this.options['eventType'], this.activation.bindAsEventListener(this), false);
+	},
+	activation: function(clickEvent) {
+		if(this.options['stopEvent']) {
+			Event.stop(clickEvent);
+		}
+		this.callbackActions.each(function(callback){callback(clickEvent);}.bind(this));
+	},
+	actionElement: function(element) {
+		return $(element.href.match(/#(\w.+)/)[1]);
+	},
+	setupStyle: function() {},
+	setupRefs: function() {},
+	registerAction: function(callback) {
+		this.callbackActions.push(callback.bind(this));
+	}
+}
+
+/* Panel UI
+ * Usage: var obj = new PanelUI([TabListID], {defaultTab: [DefaultTabName], eventType: [EventType], activeClass: [ActiveTabClassName]});
+ * Known Sub-Classes: SwitcherUI
+ */
+var PanelUI = Class.create();
+Object.extend(PanelUI.prototype, ClickAction);
+Object.extend(PanelUI.prototype, {
+	initialize: function(baseElement, options) {this.initialize_PanelUI(baseElement, options);},
+	initialize_PanelUI: function(baseElement, options) {
+		this.initialize_ClickAction(baseElement, options);
+		this.registerAction(this.execute);
+		this.baseMenu = this.cleanBaseMenu($A(this.baseElement.getElementsByTagName('a')));
+		this.refs = $A(new Array());
+		this.baseMenu.each(this.setupRefs);
+		
+		if(this.options['doAnimation']) {
+			$(this.options['loadScreen']).hide();
+			new Effect.BlindDown(this.baseElement, {duration: 0.3, scaleFrom: 10, queue: 'end'});
+		}
+		this.setupStyle();
+	},
+	cleanBaseMenu: function(baseMenu) {
+		var removalList = $A(new Array());
+		baseMenu.each(function(item){
+			var linkURI = parseUri(item.href);
+			// NOT (If link is an anchor, for this page, and there exists a tag with it's ID)
+			if(!(linkURI.anchor != undefined && linkURI.anchor != undefined && linkURI.anchor != '' && document.getElementById(linkURI.anchor) != null && PageURI.host == linkURI.host && PageURI.path == linkURI.path)) {
+				removalList.push(item);
+			}
+		});
+		removalList.each(function(item){baseMenu.splice(baseMenu.indexOf(item),1);}.bind(this));
+		return baseMenu;
+	},
+	setupStyle: function() {
+		if(this.options['defaultTab'] == null) {
+			this.setActivePanel(this.baseMenu.first());
+		}
+		else {
+			this.baseMenu.each(function(tab){
+				var defaultTab = $(this.options['defaultTab']);
+				if(this.actionElement(tab) == defaultTab) {
+					this.setActivePanel(tab);
+				}
+			}.bind(this));
+		}
+	},
+	setupRefs: function(element) {
+		this.refs.push(this.actionElement(element));
+		this.setupEvents(element);
+	},
+	execute: function(clickEvent) {
+		var tab = Event.element(clickEvent);
+		this.setActivePanel(tab);
+	},
+	setActivePanel: function(tab) {
+		var panel = this.actionElement(tab);
+		
+		tab.ancestors().first().addClassName(this.options['activeClass']);
+		this.baseMenu.without(tab).each(function(othertab){othertab.ancestors().first().removeClassName(this.options['activeClass']);}.bind(this));
+		panel.show();
+		this.refs.without(panel).each(function(otherpanel){otherpanel.hide();});
+		//new Effect.BlindDown(panel, {duration: 0.3, scaleFrom: 50, queue: 'end'});
+	}
+});
+
+/* Expander UI
+ * Usage: var obj = new ExpanderUI([ExpanderAnchorTagID]);
+ * Known Sub-Classes: None
+ */
+var ExpanderUI = Class.create();
+Object.extend(ExpanderUI.prototype, ClickAction);
+Object.extend(ExpanderUI.prototype, {
+	initialize: function(baseElement, options) {this.initialize_ExpanderUI(baseElement, options);},
+	initialize_ExpanderUI: function(baseElement, options) {
+		this.initialize_ClickAction(baseElement, options);
+		this.registerAction(this.execute);
+		this.setupEvents(this.baseElement);
+		this.setupStyle();
+	},
+	setupStyle: function() {
+		//this.actionElement(this.baseElement).hide();
+	},
+	execute: function(clickEvent) {
+		this.link = Event.findElement(clickEvent, "A");
+		//var panel = this.actionElement(link);
+		var panels = $$('.' + this.link.href.match(/#(\w.+)/)[1]);
+		panels.each(function(panel){
+			if(Element.visible(panel)) {
+				this.link.removeClassName(this.options['activeClass']);
+				//new Effect.BlindUp(panel, {duration: 0.5, scaleFrom: 5, queue: 'end'});
+				//panel.hide();
+				panel.hide();
+			}
+			else {
+				this.link.addClassName(this.options['activeClass']);
+				//new Effect.BlindDown(panel, {duration: 0.5, scaleTo: 5, queue: 'end' });
+				//panel.show();
+				panel.show();
+			}
+		}.bind(this));
+	}
+});
+
+/* Switcher UI
+ * Usage: var obj = new SwitcherUI([TabListID], {defaultTab: [DefaultTabName], eventType: [EventType], activeClass: [ActiveTabClassName], duration: [Duration]});
+ * Known Sub-Classes: None
+ */
+var SwitcherUI = Class.create();
+Object.extend(SwitcherUI.prototype, PanelUI.prototype);
+Object.extend(SwitcherUI.prototype, {
+	initialize: function(baseElement, options) {this.initialize_SwitcherUI(baseElement, options);},
+	initialize_SwitcherUI: function (baseElement, options) {
+		this.initialize_PanelUI(baseElement, options);
+		this.registerAction(this.execute_stopTimer.bind(this));
+		this.currentTab = this.baseMenu.first();
+		this.startSwitchTimer.bind(this)();
+	},
+	startSwitchTimer: function() {
+		this.timer = new PeriodicalExecuter(this.switchPanels.bind(this), this.options['duration']);
+	},
+	switchPanels: function() {
+		var curIndex = this.baseMenu.indexOf(this.currentTab);
+		if(curIndex == this.baseMenu.length - 1) {
+			curIndex = -1;
+		}
+		this.currentTab = this.baseMenu[curIndex+1];
+		this.setActivePanel(this.currentTab);
+	},
+	execute_stopTimer: function(clickEvent) {
+		this.timer.stop();
+	}
+});
+
+/* SelectorUI
+ * Usage: var obj = new SelectorUI(selector, {activeClass: [ClassName]});
+ * Known Sub-Classes: None
+ */
+var SelectorUI = Class.create();
+Object.extend(SelectorUI.prototype, ClickAction);
+Object.extend(SelectorUI.prototype, {
+	initialize: function(baseSelector, options) {this.initialize_SelectorUI(baseSelector, options);},
+	initialize_SelectorUI: function(baseSelector, options) {
+		this.baseElements = $$(baseSelector);
+		if(this.baseElements.size() > 0) {
+			this.initialize_ClickAction('window', options);
+			this.options['stopEvent'] = false;
+			this.registerAction(this.execute);
+			this.baseElements.each(this.setupEvents);
+			this.setupStyle();
+		}
+	},
+	setupStyle: function() {
+		//this.baseElements.first().addClassName(this.options['activeClass']);
+	},
+	execute: function(clickEvent) {
+		var link = Event.element(clickEvent);
+		this.baseElements.each(function(item){
+			if(item == link || link.descendantOf(item)) {
+				item.addClassName(this.options['activeClass']);
+				Element.getElementsByTypeName(item, 'radio').each(function(box){box.checked=true;});
+			}
+			else {
+				item.removeClassName(this.options['activeClass']);
+				Element.getElementsByTypeName(item, 'radio').each(function(box){box.checked=false;});
+			}
+		}.bind(this));
+	}
+});
+
+/* Menu UI
+ * Usage: var obj = new MenuUI([Menu Base Element], [{defaultMain: [PageLink], defaultSub: [PageLink], activeClass: [ClassName]}]);
+ * Known Sub-Classes: SwitcherUI
+ */
+var MenuUI = Class.create();
+Object.extend(MenuUI.prototype, {
+	initialize: function(baseElement, options) {this.initialize_MenuUI(baseElement, options);},
+	initialize_MenuUI: function(baseElement, options) {
+		// Setup Options
+		this.options = $H({defaultMain: null, defaultSub: null, activeClass: null, ajaxUrl: null, menuIdPrefix: 'navMenu_', loadingIndicator: null});
+		this.options.merge($H(options));
+		
+		this.parseMenu = this.parseMenu.bind(this);
+		this.activateDefault = this.activateDefault.bind(this);
+		this.baseElement = $(baseElement);
+		
+		// Setup Defaults
+		this.defaultMain = this.options['defaultMain'];
+		this.defaultSub = this.options['defaultSub'];
+		this.ajaxUrl = this.options['ajaxUrl'];
+		this.menuIdPrefix = this.options['menuIdPrefix'];
+		this.loadingIndicator = this.options['loadingIndicator'];
+		
+		this.menus = new Hash();
+		this.parseMenu(this.baseElement, 'main');
+		
+		Event.observe($('headerMainNav'), 'mouseout', function(event){
+			var menuArea = $('headerMainNav');
+			var top = 105;
+			var height = 63;
+			var left = ($$('body')[0].getWidth() - menuArea.getWidth()) / 2;
+			var width = menuArea.getWidth();
+			var pointerX = Event.pointerX(event);
+			var pointerY = Event.pointerY(event);
+			if( (pointerX <= (left+2)) || (pointerX >= (left + width - 2)) ||
+				(pointerY <= (top+2)) || (pointerY >= (top + height - 2))) {
+				this.activateDefault();
+			}
+		}.bindAsEventListener(this));
+		
+		this.activateDefault();
+	},
+	parseMenu: function(menuElement, menuName) {
+		var menu = $A(menuElement.getElementsByTagName('a'));
+		var newMenu = new Array();
+		menu.each(function(element) {
+			var isAjax = false;
+			if(Element.hasClassName(element,'ajax')) {
+				isAjax = true;
+				Element.removeClassName(element,'ajax');
+			}
+			var menuItem = new MenuItem(this, menuName, element, element.href, element.className, isAjax, this.ajaxUrl);
+			newMenu.push(menuItem);
+			if(menuItem.getMouseAction() != null) {
+				this.parseMenu(menuItem.getMouseAction(), menuItem.getMouseActionName());
+			}
+		}.bind(this));
+		this.menus[menuName] = newMenu;
+	},
+	activateDefault: function() {
+		this.menus['main'].each(function(item){
+			if(item.getClickAction() == this.defaultMain) {
+				// Only active default main menu item if it is not already active
+				if(!item.getElement().ancestors().first().hasClassName(this.options['activeClass'])) {
+					item.mouseoverCallback();
+				}
+				if(item.getMouseAction() != null) {
+					var subItem = item.getMouseActionName();
+					this.menus[item.getMouseActionName()].each(function(item) {
+						if(item.getClickAction() == this.defaultSub) {
+							item.mouseoverCallback();
+						}
+					}.bind(this));
+				}
+			}
+		}.bind(this));
+	}
+});
+
+var MenuItem = Class.create();
+Object.extend(MenuItem.prototype, {
+	initialize: function(menuUI, baseMenuName, element, clickAction, mouseAction, isAjax, ajaxUrl) {
+		this.menuUI = menuUI;
+		this.baseMenuName = baseMenuName;
+		this.element = element;
+		this.clickAction = parseUri(clickAction).file;
+		this.mouseActionName = mouseAction;
+		this.isAjax = isAjax;
+		this.ajaxUrl = ajaxUrl;
+		
+		if(mouseAction != null && mouseAction != '') {
+			this.mouseAction = $(mouseAction);
+		}
+		else {
+			this.mouseAction = null;
+		}
+		
+		this.mouseoverCallback;
+		
+		if(!isAjax) {
+			this.mouseoverCallback = this.mouseOverActionCallback.bindAsEventListener(this);
+		}
+		else {
+			this.ajaxMenuId = mouseAction.substring(this.menuUI.menuIdPrefix.length);
+			this.mouseoverCallback = this.mouseOverAjaxCallback.bindAsEventListener(this);
+		}
+		
+		Event.observe(this.element, 'mouseover', this.mouseoverCallback);
+	},
+	getElement: function() { return this.element; },
+	getClickAction: function() { return this.clickAction; },
+	getMouseActionName: function() { return this.mouseActionName; },
+	getMouseAction: function() { return this.mouseAction; },
+	activate: function() {
+		this.menuUI.menus[this.baseMenuName].each(function(item){
+			item.getElement().ancestors().first().removeClassName(this.menuUI.options['activeClass']);
+			if(item.getMouseAction() != null) {
+				item.getMouseAction().hide();
+			}
+		}.bind(this));
+		this.element.ancestors().first().addClassName(this.menuUI.options['activeClass']);
+		if(this.mouseAction != null) {
+			this.menuUI.menus[this.mouseActionName].each(function(item) {
+				item.deactivate();
+			}.bind(this));
+			this.mouseAction.show();
+		}
+	},
+	deactivate: function() {
+		this.getElement().ancestors().first().removeClassName(this.menuUI.options['activeClass']);
+	},
+	mouseOverActionCallback: function(event) {
+		this.activate();
+	},
+	mouseOverAjaxCallback: function(event) {
+		if(this.mouseAction != null) {
+			// Remove child links
+			this.mouseAction.childElements().each(function(child){child.remove();});
+			
+			// Add loading indicator
+			this.mouseAction.update(this.menuUI.loadingIndicator);
+			
+			// Activate
+			this.activate();
+			
+			// Do ajax call
+			new Ajax.Request(this.ajaxUrl, {method: 'get', parameters: {menuId: this.ajaxMenuId}, onSuccess: this.ajaxCallback.bind(this), onFailure: this.ajaxFailureCallback.bind(this)});
+		}
+	},
+	ajaxCallback: function(transport, menulist) {
+		// Menu Template
+		var menuTemplate = new Template('<li><a href="#{hyperlink}" #{target}>#{label}</a></li>');
+		var newMenu = "";
+		
+		// Create Elements
+		menulist.each(function(menuitem) {
+			newMenu += menuTemplate.evaluate(menuitem);
+		});
+		
+		// Add new menu elements to the page
+		this.mouseAction.update(newMenu);
+		
+		// Refresh menu
+		this.menuUI.parseMenu(this.mouseAction, this.mouseActionName);
+		
+		if(this.clickAction == this.menuUI.defaultMain) {
+			this.menuUI.activateDefault();
+		}
+	},
+	ajaxFailureCallback: function(transport) {
+		// Handle Failure
+	}
+});
+
+
+/* Popup Manger
+ *
+ *
+ */
+var Popup = {
+	register: function(popup) {
+		if(!this.popups){this.popups = new Hash();}
+		this.popups[popup.getName()] = popup;
+	},
+	open: function(popupName, jumpId) {
+		this.popups[popupName].activate(jumpId);
+	},
+	openStandAlone: function(popupName, url) {
+		this.popups[popupName].doOpenWindow(url);
+	},
+	close: function() {
+		window.close();
+	}
+}
+
+/* Popup Window
+ * Usage: var obj = ;
+ * Known Sub-Classes: None
+ */
+var PopupWindow = Class.create();
+Object.extend(PopupWindow.prototype, {
+	initialize: function(name, url, options) {this.initialize_PopupWindow(name, url, options);},
+	initialize_PopupWindow: function(name, url, options) {
+		this.name = name;
+		this.url = url;
+		this.options = $H({fullWindow: false, height: 100, width: 100, location: 'no', menubar: 'no', resizable: 'no', scrollbars: 'no', status: 'no', toolbar: 'no'});
+		this.options.merge($H(options));
+		this.doOpenWindow = this.doOpenWindow.bind(this);
+		this.mergedOptions = this.mergeOptions();
+	},
+	getName: function() {
+		return this.name;
+	},
+	activate: function(jumpId) {
+		if(jumpId == undefined) { jumpId = ''; }
+		this.doOpenWindow(this.url + jumpId);
+	},
+	doOpenWindow: function(url) {
+		if(this.options['fullWindow']) {
+			window.open(url, '_blank');
+		}
+		else {
+			window.open(url, '', this.mergedOptions);
+		}
+	},
+	mergeOptions: function() {
+		var mergedOptions = new Array();
+		this.options.each(function(pair) {
+			if(pair.value != null) {
+				mergedOptions.push(pair.key + '=' + pair.value );
+			}
+		}.bind(this));
+		return mergedOptions.join(',');
+	}
+});
+
+/* UTIL ErrorFix
+ *
+ *
+ */
+var ErrorFix = Class.create();
+Object.extend(ErrorFix.prototype, {
+	initialize: function(selector, callback) {this.initialize_ErrorFix(selector, callback);},
+	initialize_ErrorFix: function(selector, callback) {
+		this.setupEvents = this.setupEvents.bind(this);
+		this.watchElements = $$(selector);
+		this.callback = callback;
+		this.watchElements.each(this.setupEvents);
+	},
+	setupEvents: function(item) {
+		Event.observe(item, 'onerror', this.callback, false);
+	}
+});
+
+var ImgErrorFix = Class.create();
+Object.extend(ImgErrorFix.prototype, ErrorFix.prototype);
+Object.extend(ImgErrorFix.prototype, {
+	initialize: function(selector, defaultImage) {this.initialize_ImgErrorFix(selector, defaultImage);},
+	initialize_ImgErrorFix: function(selector, defaultImage) {
+		this.defaultImage = defaultImage;
+		this.initialize_ErrorFix(selector, this.imageError.bindAsEventListener(this));
+	},
+	imageError: function(errorEvent) {
+		alert('broken image');
+	}
+});
+
+/**
+ * Javascript code to store data as JSON strings in cookies. 
+ * It uses prototype.js 1.5.1 (http://www.prototypejs.org)
+ * 
+ * Author : Lalit Patel
+ * Website: http://www.lalit.org/lab/jsoncookies
+ * License: Creative Commons Attribution-ShareAlike 2.5
+ *          http://creativecommons.org/licenses/by-sa/2.5/
+ * Version: 0.4
+ * Updated: Aug 11, 2007 10:09am
+ * 
+ * Chnage Log:
+ *   v 0.4
+ *   -  Removed a extra comma in options (was breaking in IE and Opera). (Thanks Jason)
+ *   -  Removed the parameter name from the initialize function
+ *   -  Changed the way expires date was being calculated. (Thanks David)
+ *   v 0.3
+ *   -  Removed dependancy on json.js (http://www.json.org/json.js)
+ *   -  empty() function only deletes the cookies set by CookieJar
+ */
+
+var CookieJar = Class.create();
+CookieJar.prototype = {
+	/**
+	 * Append before all cookie names to differntiate them.
+	 */
+	appendString: "__EP_RZ_",
+
+	/**
+	 * Initializes the cookie jar with the options.
+	 */
+	initialize: function(options) {
+		this.options = {
+			expires: 3600,		// seconds (1 hr)
+			path: '',			// cookie path
+			domain: '',			// cookie domain
+			secure: ''			// secure ?
+		};
+		Object.extend(this.options, options || {});
+
+		if (this.options.expires != '') {
+			var date = new Date();
+			date = new Date(date.getTime() + (this.options.expires * 1000));
+			this.options.expires = '; expires=' + date.toGMTString();
+		}
+		if (this.options.path != '') {
+			this.options.path = '; path=' + escape(this.options.path);
+		}
+		if (this.options.domain != '') {
+			this.options.domain = '; domain=' + escape(this.options.domain);
+		}
+		if (this.options.secure == 'secure') {
+			this.options.secure = '; secure';
+		} else {
+			this.options.secure = '';
+		}
+	},
+
+	/**
+	 * Adds a name values pair.
+	 */
+	put: function(name, value) {
+		name = this.appendString + name;
+		cookie = this.options;
+		var type = typeof value;
+		switch(type) {
+		  case 'undefined':
+		  case 'function' :
+		  case 'unknown'  : return false;
+		  case 'boolean'  : 
+		  case 'string'   : 
+		  case 'number'   : value = String(value.toString());
+		}
+		var cookie_str = name + "=" + escape(Object.toJSON(value));
+		try {
+			document.cookie = cookie_str + cookie.expires + cookie.path + cookie.domain + cookie.secure;
+		} catch (e) {
+			return false;
+		}
+		return true;
+	},
+
+	/**
+	 * Removes a particular cookie (name value pair) form the Cookie Jar.
+	 */
+	remove: function(name) {
+		name = this.appendString + name;
+		cookie = this.options;
+		try {
+			var date = new Date();
+			date.setTime(date.getTime() - (3600 * 1000));
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = name + "=" + expires + cookie.path + cookie.domain + cookie.secure;
+		} catch (e) {
+			return false;
+		}
+		return true;
+	},
+
+	/**
+	 * Return a particular cookie by name;
+	 */
+	get: function(name) {
+		name = this.appendString + name;
+		var cookies = document.cookie.match(name + '=(.*?)(;|$)');
+		if (cookies) {
+			return (unescape(cookies[1])).evalJSON();
+		} else {
+			return null;
+		}
+	},
+
+	/**
+	 * Empties the Cookie Jar. Deletes all the cookies.
+	 */
+	empty: function() {
+		keys = this.getKeys();
+		size = keys.size();
+		for(i=0; i<size; i++) {
+			this.remove(keys[i]);
+		}
+	},
+
+	/**
+	 * Returns all cookies as a single object
+	 */
+	getPack: function() {
+		pack = {};
+		keys = this.getKeys();
+
+		size = keys.size();
+		for(i=0; i<size; i++) {
+			pack[keys[i]] = this.get(keys[i]);
+		}
+		return pack;
+	},
+
+	/**
+	 * Returns all keys.
+	 */
+	getKeys: function() {
+		keys = $A();
+		keyRe= /[^=; ]+(?=\=)/g;
+		str  = document.cookie;
+		CJRe = new RegExp("^" + this.appendString);
+		while((match = keyRe.exec(str)) != undefined) {
+			if (CJRe.test(match[0].strip())) {
+				keys.push(match[0].strip().gsub("^" + this.appendString,""));
+			}
+		}
+		return keys;
+	}
+};

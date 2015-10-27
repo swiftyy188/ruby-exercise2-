@@ -1,0 +1,647 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" itemscope itemtype="http://schema.org/LocalBusiness"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" itemscope itemtype="http://schema.org/LocalBusiness"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" itemscope itemtype="http://schema.org/LocalBusiness"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" itemscope itemtype="http://schema.org/LocalBusiness"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Title and description so we can play nice with search engines -->
+
+    <title>Web Development - Bitmaker Labs</title>
+
+    
+    <meta name="description" content="Where Toronto learns front &amp; back end development, and skills related to building startups through full and part time courses.">
+    
+
+    <!-- Facebook-friendly descriptors -->
+
+    
+    <meta property="og:title" content="Web Development | Bitmaker Labs">
+    
+
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bitmakerlabs.com/images/logo-bitmaker-fb.png">
+    <meta property="og:url" content="https://bitmakerlabs.com/web-development/prepwork/index.html">
+
+    
+    <meta name="og:description" content="Bitmaker Labs’s web development full time course teaches students how to web development. ">
+    
+
+
+    <!-- Twitter-friendly descriptors -->
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bitmakerlabs">
+    <meta name="twitter:url" content="https://bitmakerlabs.com/web-development/prepwork/index.html">
+    <meta name="twitter:title" content="Web Development">
+    <meta name="twitter:image:src" content="https://bitmakerlabs.com/images/logo-bitmaker-fb.png">
+
+    
+    <meta name="twitter:description" content="Bitmaker Labs’s web development full time course teaches students how to web development. ">
+    
+
+
+    <!-- Google+-friendly descriptors -->
+
+
+    <meta itemprop="name" content="Bitmaker Labs">
+    <meta itemprop="image" content="https://bitmakerlabs.com/images/logo-bitmaker-fb.png">
+
+    
+    <meta name="description" content="Bitmaker Labs’s web development full time course teaches students how to web development. ">
+    
+
+
+    <!-- End of SEO related stuff -->
+
+    <meta name="viewport" content="width=1050">
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/3654e5e7-ce14-4e83-8af4-a0ee262235ba.css"/>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.11053ff7.css">
+
+    <script src="/scripts/head-scripts.7d72bbd1.js"></script>
+
+    <!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-48335373-1', 'bitmakerlabs.com');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+<!-- Crazy Egg! -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0021/3237.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- End Crazy Egg -->
+<!-- start Mixpanel -->
+<script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("7f33360fedea4bb52c5951e63fb09712");</script>
+<!-- end Mixpanel -->
+<!-- Biddyco Retargeting -->
+<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+_fbq.push(['addPixelId', '295559703969891']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=295559703969891&amp;ev=PixelInitialized" /></noscript>
+<!-- end Biddyco Retargeting -->
+
+
+<!-- Rocket Fuel Universal Pixel -->
+<script>
+  (function () {
+    var cachebust = (Math.random() + "").substr(2);
+    var protocol = "https:" == document.location.protocol ? 'https:' : 'http:';
+    new Image().src = protocol+"//20587403p.rfihub.com/ca.gif?rb=11995&ca=20587403&ra="+cachebust;
+})();
+</script>
+<!-- end Rocket Fuel Universal Pixel -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+    
+      
+        <div id="content">
+          <nav class="navbar ">
+  <div class="navbar-content">
+    <ul class="navbar-nav navbar-inline">
+      <li class="nav-text"> <a href="/#"><i class="bitmaker-icon landing-icon"></i></a></li>
+      <li class="nav-text"><a href="/courses">Courses</a></li>
+      <li class="nav-text"><a href="/faq">FAQ</a></li>
+      <li class="nav-text"><a href="/about">About Bitmaker Labs</a></li>
+      <li class="nav-text"><a href="/get-involved">Community</a></li>
+      <li class="nav-text"><a href="http://blog.bitmakerlabs.com">Blog</a></li>
+      <li class="nav-text"><a href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+  
+    <div class="hanging-number hanging-number-top  banner-grey ">
+      <p>Questions? Call us at <a href="tel:6474985904">(647) 498-5904!</a></p>
+    </div>
+  
+</nav>
+
+        <div id="course-navbar-top"></div>
+          
+
+<main id="course-immersive">
+  <section class="course-section-dark bg-05">
+    <div class="course-section">
+      <div class="course-intro with-gutters">
+       <h1 class="course-section-title">Web Development Immersive</h1>
+        <hr class="longer-body longer">
+        <h2 class="longer-wdi">The Prep Course
+        </h2>
+        <div class="explanation longer-wdi longer-body">
+          <p>Welcome to the Web Development Immersive Prep Course!</p>
+          <p>The goal of our prep course is for you to become familiar with the fundamentals of Ruby, UNIX, HTML, CSS, and Git. We’ve put together a carefully selected collection of publicly available materials to help guide you on your way to becoming a full stack web developer. Following these resources, we’ve added some of our own small exercises to ensure you’re prepared for the first day of class! </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blue" id="structure">
+    <div class="course-section">
+      <div class="course-reasons with-gutters">
+        <div class="prep-structure">
+          <h4>Structure of this Prep Course</h4>
+          <hr class="longer-wdi longer">
+         </div>
+        <div class="prep-explanation">
+          <p>There are five main parts to this prep-course. They are not intended to replace the actual curriculum, but are just here to get you started. It’s essential that you complete each part in order: </p>
+          <p class="larger"> Part 1: <a href="#part-1" class="prepwork-link-text">Getting Started</a></p>
+          <p class="larger"> Part 2: <a href="#part-2" class="prepwork-link-text">CLI &amp; Unix</a></p>
+          <p class="larger"> Part 3: <a href="#part-3" class="prepwork-link-text">Ruby </a></p>
+          <p class="larger"> Part 4: <a href="#part-4" class="prepwork-link-text">HTML &amp; CSS</a></p>
+          <p class="larger"> Part 5: <a href="#part-5" class="prepwork-link-text">Design and Code Your First Homepage </a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section" id="part-1">
+    <div class="course-reasons with-gutters">
+      <div class="prep-structure">
+        <h4>Part 1: Getting Started</h4>
+        <hr class="longer-wdi longer">
+      </div>
+      <div class="prep-explanation">
+        <p> We’ve compiled a list of tools you’ll need to get started. If you do not have these tools configured, please download and install them using the below links. </p>
+        <div class="links">
+          <ol>
+            <li><p><a class="prepwork-link" href="http://www.sublimetext.com/2">Sublime Text 2</a></p>
+                        <p> Our favorite text editor! Armed with a number of time saving shortcuts and great syntax highlighting, Sublime Text is a very easy to use text editor. It’s also the industry standard for web developers. The free trial works just fine, although it frequently prompts you to purchase.</p></li>
+
+            <li><p><a class="prepwork-link" href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a></p>
+                        <p> We prefer Google Chrome because of its speed, ease of use and built-in web inspector (a tool designers and developers use for examining the structure of an HTML document and debugging JavaScript). </p></li>
+           <li> <p><a class="prepwork-link" href="https://itunes.apple.com/ca/app/xcode/id497799835?mt=12">XCode</a></p>
+                       <p> This tool is for OS X users only. You’ll need XCode installed for some concepts that we introduce later in the course. Once you’ve downloaded and installed XCode, click on Preferences -> Downloads and click “Install” on the Command Line Tools item.</p></li>
+            <li><p><a class="prepwork-link" href="http://www.iterm2.com/#/section/downloads">Terminal / iTerm2</a></p>
+                        <p> A terminal emulator is a purely text-based environment, which allows you to interact with the operating system of any UNIX-based computer through a command line interface. Think of it as Finder for Mac OS or Windows File Explorer for Windows, but with words instead of pictures. We recommend using either Terminal or iTerm2.</p></li>
+           <li> <p><a class="prepwork-link" href="http://rubyinstaller.org/">Ruby</a></p>
+                       <p> Mac OS X - You already have it pre-installed! Check it out by opening Terminal or iTerm2 and typing ruby -v . Check that it returns “ruby [version number]” to ensure that Ruby is installed correctly.</p>
+                       <p> Windows - You’ll need to download the Ruby language and open the Command Prompt program. Once in Command Prompt, type in ruby -v and check that it returns “ruby [version number]” to ensure that Ruby is installed correctly.</p></li>
+           <li> <p><a class="prepwork-link" href="http://www.iterm2.com/#/section/downloads">IRB</a></p>
+                       <p> IRB is a shell for programming in the object-oriented scripting language Ruby. The program is launched from a command line and allows the execution of Ruby commands with immediate response, allowing you to experiment with Ruby commands in real-time. Think of it as a developer’s sandbox, you can’t mess anything up here. Once you’ve installed Ruby you’ll be able to access IRB through Terminal or Command Prompt (depending on your operating system) by typing irb.</p></li>
+           <li> <p><a class="prepwork-link" href="https://github.com/bitmakerlabs/rails-dev-setup-guide">Setting Up your Environment for Ruby on Rails </a></p>
+                       <p> Your awesome instructor, Ryan, has put together a step-by-step guide for what you need to do to be able to use Ruby on Rails. Although you won't need any of the tools he'll have you install to do this prepcourse, completing the steps ahead of time will allow you to focus on actually learning how to use Ruby on Rails during the immersive program.</p></li>
+          </ol>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section-dark lb-01">
+    <div class='overlay'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters">
+          <p class="bold resource-title"> Your most important support resource: us <i class="amp"></i> each other </p>
+          <hr class="longer-wdi longer">
+          <div class="explanation longer-wdi">
+            <p>Stuck? We totally understand! This is not an easy course, and it’s ok if you don’t know all the answers. That’s why there are several ways you can get help.</p>
+            <p>First off, check a bunch of online resources for help. Most of the questions you’re asking may have been answered on StackOverflow, Google, etc. </p>
+            <p> The next step to getting help is to talk to your classmates! The Google Group is a fantastic place to reach out. Heck, grab a coffee and work together if you’re really stuck! It’s likely that some of your classmates are running into the same issues as you.</p>
+            <p> Lastly, email our Lead Instructor <a href="mailto:julie@bitmakerlabs.com" class="blue-text">Julie</a>. Feel free to ask your question in your email. If it’s a bigger question (or list of questions), schedule a Skype chat or a visit to our headquarters. This is an excellent opportunity to ask any questions you have with the material or the course, and to make sure that you are well prepared for the start of the program!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section" id="part-2">
+    <div class="course-reasons with-gutters">
+      <div class="prep-structure">
+        <h4>Part 2: Using A Command Line Interface (CLI) &amp; UNIX</h4>
+        <hr class="longer-wdi longer">
+      </div>
+      <div class="prep-explanation">
+        <p> You should have a comprehensive understanding of how to manipulate files and folders by using a CLI. You should be almost as comfortable with navigating your computers directories and performing tasks with your keyboard through your CLI as you are with using your mouse to navigate through your graphical user interface (GUI). You should also gain an appreciation of using a UNIX-based file system. </p>
+        <p> In order to understand the CLI and UNIX, you should complete the following readings: </p>
+        <div class="links">
+          <div class="material">
+            <p class="indent"> <a class="prepwork-link" href="http://cli.learncodethehardway.org/book/">The Command Line Crash Course <a> </p>
+            <p class="indent"><a class="prepwork-link" href="http://www.tjhsst.edu/~dhyatt/superap/unixcmd.html">Some Basic UNIX Commands </a></p>
+            <p class="indent"> <a class="prepwork-link" href="http://www.maclife.com/article/columns/terminal_101_creating_aliases_commands">Terminal 101: Creating Aliases for Commands</a> </p>
+          </div>
+        </div>
+        <p> By the end of this section of the prepcourse you should be able to perform the following tasks: </p>
+        <ul class="inline-with-indent-paragraph">
+          <li>Navigate and list through the folders and files on your computer </li>
+          <li>Be able to copy, move and delete a file or folder </li>
+          <li>Create a permanent alias for commands </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+   <section class="course-section-dark lb-02" id="part-3">
+    <div class='overlay-blue'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters longer-wdi">
+          <h4>Part 3: Ruby</h4>
+          <hr class="longer-wdi longer">
+          <div class="explanation longer-wdi">
+            <p>Ruby is the primary language you’ll be learning and working with at Bitmaker Labs. Therefore, this section is the most vital to complete in order to hit the ground running on the first day of class. </p>
+            <p>It is also one of the more demanding sections of the prep course, so be sure to reach out to your classmates and instructors in the Google Group if you run into any issues.</p>
+          </div>
+
+          <div class="links longer-wdi">
+            <div class="material">
+              <p class="larger"> <a class="prepwork-link white-text" href="http://outspeaking.com/words-of-technology/what-is-programming.html">What is programming?</a> </p>
+              <p class="larger"> <a class="prepwork-link white-text" href="http://www.codecademy.com/tracks/ruby">Codecademy - Ruby Track</a> </p>
+              <p class="larger"><a href="http://rubymonk.com/learning/books/1-ruby-primer" class="white-text prepwork-link">Ruby Monk - Ruby Primer</a> </p>
+              <p class="larger"> <a class="prepwork-link white-text" href="http://www.rubeque.com/problems">Rubeque</a> </p>
+              <p class="larger"> <a class="prepwork-link white-text" href="https://pine.fm/LearnToProgram/">Learn to Program (chapter 1 - 8)</a> </p>
+              <p class="larger"> <a class="prepwork-link white-text" href="http://www.codecademy.com/glossary/ruby">Codecademy - Ruby Glossary</a> </p>
+            </div>
+          </div>
+          <br />
+          <p class="larger more-lh"> By the end of this section, you’ll be familiar with Ruby’s syntax, the basics of Object-Oriented Programming (OOP), and able to understand the following: </p>
+          <br />
+          <ul class="larger">
+            <li>Define/Invoke a method </li>
+            <li>Use common control flow structures</li>
+            <li>Define a class </li>
+            <li>Instantiate an object </li>
+          </ul>
+          <br />
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <section class="course-section-dark lb-01">
+    <div class='overlay-grey'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters">
+          <div class="explanation longer-wdi">
+            <h5> Assignment #1</h5>
+            <p> <span class="bold">Basic Calculator</span> Create a method called “add” that accepts two numbers and adds them. Your program should output the answer generated by your method to the terminal  </p>
+            <p> <span class="bold">Favourite Cities</span> Construct a program that iterates through an array of your 5 favorite cities and prints them out to the terminal
+            <p> <span class="bold">BitmakerLabs</span> Write a program that prints the numbers from 1 to 100. But for the multiples of 3 print “Bitmaker” instead of the number and for the multiples of 5 print “Labs” instead of the number. For numbers which are multiples of both 3 and 5 print “BitmakerLabs”  </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <section class="course-section" id="part-4">
+    <div class="course-reasons with-gutters">
+      <div class="prep-structure">
+        <h4>Part 4: HTML &amp; CSS</h4>
+        <hr class="longer-wdi longer">
+      </div>
+      <div class="prep-explanation">
+        <p> By the end of this section of the prepcourse, you should have created a HTML &amp; CSS resume. In order to prepare for this, we recommend that you complete the following: </p>
+        <p> <a class="prepwork-link" href="http://learn.shayhowe.com/html-css/">Shaye Howe: A Beginner’s Guide to HTML &amp; CSS </a> <br />
+          Read the guide once quickly to get a feeling for the scope of the material. Use Shay's guide as reference when building your HTML &amp; CSS resume</p>
+         <p> <a class="prepwork-link" href="http://www.codecademy.com/tracks/web">Codecademy: Web Fundamentals</a> <br />
+          While completing the web fundamentals track, apply concepts in the exercises immediately to your resume</p>
+         <p> <a class="prepwork-link" href="http://www.codeschool.com/courses/discover-devtools">CodeSchool: Discover DevTools </a> <br /> It is important for you to understand how to properly use your browser to inspect the DOM and files. Look at videos concerning part one and two.</p>
+      </div>
+    </div>
+  </section>
+
+   <section class="course-section-dark lb-01">
+    <div class='overlay-grey'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters">
+          <div class="explanation longer-wdi">
+            <h5> Assignment #2</h5>
+            <p> <span class="bold">Resume</span> Create a basic HTML &amp; CSS resume to solidify your understanding of the above concepts. Here are some examples to get the ideas flowing: </p>
+            <ul>
+              <li><a class="larger prepwork-link-text" href="http://bitmakerlabs.neocities.org/resume.html">Homer Simpson </a></li>
+              <li><a class="larger prepwork-link-text" href="http://bitmakerlabs.neocities.org/resume-html.html"> Bitmaker Student</a></li>
+              <li><a class="larger prepwork-link-text" href="http://www.jeffhendricksondesign.com/imgs/resumetemplates/awesomeresumetemplte.jpg">John Doe </a></li>
+              <li><a class="larger prepwork-link-text" href="http://www.careerweek.iac.gatech.edu/wp-content/uploads/MY_RESUME_by_darthkix.jpg">Francis Homo Sapien </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="course-section-dark lb-02" id="part-5">
+    <div class='overlay-blue'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters longer-wdi">
+          <h4>Part 5: Git &amp; Github</h4>
+          <hr class="longer-wdi longer">
+          <div class="explanation longer-wdi">
+            <p>Git and GitHub are two of the most important tools used by developers. Git is a distributed revision control and source code management system while GitHub is an online host for your git repositories.</p>
+            <div class="links">
+              <div class="material">
+                <p class="larger"> The best way to get started learning about both is to complete the following exercises: </p>
+                <p>Create an account on <a class="white-text prepwork-link-text" href="https://github.com/"> Github. </a> <br /> Read <a class="white-text prepwork-link-text" href="http://rogerdudler.github.io/git-guide/"> Git – The Simple Guide. </a> </p>
+              </div>
+            </div>
+
+            <p class="larger"> By the end of this section of the prepcourse you should be able to do the following: </p>
+            <br />
+            <ul class="larger">
+              <li>Initialize a new repository on your local machine / create a new repository on GitHub </li>
+              <li>Add files to a repository</li>
+              <li>Create commit messages</li>
+              <li>Push to a remote repository </li>
+            </ul>
+            <br />
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section-dark lb-01">
+    <div class='overlay-grey'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters">
+          <div class="explanation longer-wdi">
+            <h5> Assignment #3</h5>
+            <p> <span class="bold">Pushing a Resume to Github </span> </p>
+            <ol class="larger">
+              <li> Create a new folder on your computer called resume. Insert your HTML / CSS resume.</li>
+              <li> Create a new repository on GitHub called resume.</li>
+              <li> In your resume folder, follow the instructions for creating a new repository through the command line and push the files to the remote repository.</li>
+              <li> Make a change to one of the files in the resume folder on your local machine. Run through git add, git commit, and git push.</li>
+              <li> Look at the remote repository and see that the files have been changed to reflect the changes on your local machine. </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="course-section-dark lb-02">
+    <div class='overlay'>
+      <div class="course-section">
+        <div class="course-reasons with-gutters">
+          <h4>That's it!</h4>
+          <hr class="longer-wdi longer">
+          <div class="explanation longer-wdi">
+            <p>This completes your prep course requirements for the Web Development Course</p>
+            <p> If you have any questions about the full course, feel free to e-mail <a href="mailto:julie@bitmakerlabs.com" class="blue-text">julie@bitmakerlabs.com. </a></p>
+            <p> If you’d like to speak to our team, you can find us on twitter: <a href="https://twitter.com/bitmakerlabs" class="blue-text">@bitmakerlabs</a>. We’re happy to chat, and look forward to seeing you soon. </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</main>
+
+
+        </div>
+      
+    
+
+    
+      
+<div class="footer-fixed footer-landing">
+  <div class="footer-container course-section">
+    <div class="with-gutters">
+      <nav class="nav-footer">
+        <section class="footer-section connect">
+          <h1 class="nav-title">Connect</h1>
+          <ul class="contact-social">
+            <li><a href="https://www.facebook.com/bitmakerlabs" title="Bitmaker Labs on Facebook" class="webicon facebook">Facebook</a></li>
+            <li><a href="http://twitter.com/bitmakerlabs" title="@bitmakerlabs" class="webicon twitter">Twitter</a></li>
+            <li><a href="http://soundcloud.com/bit_by_bit" title="Bitmaker Labs Podcast" class="webicon soundcloud">Soundcloud</a></li>
+            <li><a href="http://www.meetup.com/bitmakerlabs/" title="Meetups at Bitmaker Labs" class="webicon meetup">Meetup</a></li>
+            <li><a href="https://www.linkedin.com/company/bitmaker-labs" title="Bitmaker Labs on LinkedIn" class="webicon linkedin">LinkedIn</a></li>
+            <li><a href="http://www.vimeo.com/bitmakerlabs" title="Bitmaker Labs on Vimeo" class="webicon vimeo">Vimeo</a></li>
+          </ul>
+          <br />
+          <div class="before-submission-main-footer">
+            <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div class="field">
+                <input type="text" name="EMAIL" id="subscribe-footer" placeholder="Your email">
+                <button type="submit" class="btn btn-primary small">Get updates</button>
+              </div>
+            </form>
+          </div>
+          <div class="after-submission-main-footer">
+            <p> You are signed up! </p>
+          </div>
+        </section>
+
+        <section class="footer-section company">
+          <h1 class="nav-title">Company</h1>
+          <ul>
+            <li class="nav-text"><a href="/about">About Bitmaker</a></li>
+            <li class="nav-text"><a href="http://blog.bitmakerlabs.com">Blog</a></li>
+            <li class="nav-text"><a href="/faq">FAQ</a></li>
+            <li class="nav-text"><a href="/careers">Careers</a></li>
+            <li class="nav-text"><a href="/contact">Contact Us</a></li>
+          </ul>
+        </section>
+      </nav>
+      <div class="nameplate">
+        <a href="/" class="bitmaker-icon"></a>
+        <address class="contact-address">
+          <strong>Bitmaker Labs</strong><br />
+          220 King St W, Suite 200<br />
+          Toronto, Ontario<br />
+          M5H 1K4<br />
+          <a href="tel:6474985904">647-498-5904</a> <br />
+        </address>
+
+        <div class="copyright">
+          &copy; 2014&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/privacy-policy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    
+      
+        <nav id="apply-bar" class="navbar-scroll top">
+  <div class="navbar-content">
+    <ul class="navbar-nav navbar-inline  wider-navbar ">
+      
+      <li class="nav-text"> <a href="/#"><i class="bitmaker-icon landing-icon course-icon"></i></a></li>
+      <li class="nav-text"><a href="#content"><strong class="course-title">Web Development</strong></a></li>
+      <li class="nav-text"><a href="#why-course">Become a web developer</a></li>
+      <li class="nav-text"><a href="#accelerate">Career opportunities</a></li>
+      <li class="nav-text"><a href="#why-bitmaker-wdi">Why Bitmaker</a></li>
+      <a href="#" class="btn btn-primary small" data-toggle="modal" data-target="#apply" data-course="wdi_prepwork" data-inquiry="full-time-course">Apply Now</a>
+      
+    </ul>
+  </div>
+  <div id="course-banner" class="hanging-number hanging-number-top  banner-grey ">
+    <p>Questions? Call us at <a href="tel:6474985904">(647) 498-5904!</a></p>
+  </div>
+</nav>
+      
+    
+
+    
+      <form id="apply" class="modal fade" tabindex="-1" role="dialog" method="post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <header class="modal-header apply-content">
+        <h1 class="custom-for-modal for-part-time-course for-full-time-course for-coming-soon-course">
+          Become a Bitmaker
+        </h1>
+
+        <h2 class="custom-for-modal for-part-time-course header-block">
+          To start your journey with Bitmaker Labs, please submit an application. Our admissions team will review your application and respond to any questions within three business days. Your spot in the course cannot be reserved until you pay a deposit.
+        </h2>
+        <h2 class="custom-for-modal for-full-time-course header-block">
+          To start your journey with Bitmaker Labs, please submit an application. Our admissions team will get in contact with you to book an interview and help determine if the course is a good fit for you. Your spot in the course cannot be reserved until you pay a deposit.
+        </h2>
+        <h2 class="custom-for-modal for-coming-soon-course header-block">
+          Thanks for your interest in the <strong>Web Development</strong> course. Give us your vitals and we'll get in touch shortly.
+        </h2>
+      </header>
+
+      <header class="modal-header more-info-content">
+        <h1 class="custom-for-modal for-more-info-course for-more-info-general">
+          Ask us Anything
+        </h1>
+
+        <h2 class="custom-for-modal for-more-info-course for-more-info-general">
+          Thinking about changing careers? Deciding which course is right for you? We can help!
+        </h2>
+      </header>
+
+      <div class="modal-body apply-part-one">
+        <div class="field-group inline">
+          <div class="field">
+            <label for="apply-first-name" class="required">First Name</label>
+            <input type="text" id="apply-first-name" name="contact[firstname]" placeholder="First Name" class="required" />
+          </div>
+          <div class="field">
+            <label for="apply-last-name" class="required">Last Name</label>
+            <input type="text" id="apply-last-name" name="contact[lastname]" placeholder="Last Name" class="required" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="apply-email" class="required">Email Address</label>
+          <input type="email" id="apply-email" name="contact[email]" placeholder="you@example.com" class="required" />
+        </div>
+
+        <div class="field">
+          <label for="note">Phone Number</label>
+          <input type="phone" id="apply-tel" name="contact[phone]" name="tel" class="required" placeholder="905-123-4567"/>
+        </div>
+
+        <h3 class="show-on-more-info-general">Which course(s) are you interested in?</h3>
+        <div class="field show-on-more-info-general">
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="Web Development" checked />
+            Web Development
+          </label>
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="Front-End Web Development"  />
+            Front-End Web Development
+          </label>
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="User Experience Design"  />
+            User Experience Design
+          </label>
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="Mobile Development"  />
+            Mobile Development
+          </label>
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="Introduction to Rails"  />
+            Introduction to Rails
+          </label>
+          
+          <label class="checkbox">
+            <input type="checkbox" name="course[]" value="Ad Optimization"  />
+            Ad Optimization
+          </label>
+          
+        </div>
+
+        <div class="field">
+          <label for="note">Specific questions or notes (optional)</label>
+          <textarea name="note" id="note" cols="30" rows="5" placeholder="Use this area to ask any specific questions or provide additional notes about yourself"></textarea>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <div class="apply-buttons">
+          <input id="apply-scholarship-code" name="scholarshipcode" value="none" type="hidden">
+          <input id="apply-intent" name="intent" value="apply" type="hidden">
+          <input name="successUrl" value="https://bitmakerlabs.com/confirmation" type="hidden">
+          <input name="errorUrl" value="http://bitmakerlabs.com/confirmation" type="hidden">
+          <input type="submit" class="btn btn-primary small" value="Apply">
+          <a href="#" class="btn btn-cancel small" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+    
+
+    
+
+    
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>window.jQuery || document.write('<script src="/_bower_components/jquery/jquery.js"><\/script>')</script>
+
+<script src="/scripts/main.067eb66f.js"></script>
+
+  </body>
+</html>

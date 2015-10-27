@@ -1,0 +1,115 @@
+{
+   "checksum": "47bf5b43e88a7f416cd08fdb2bd502ae",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "children": [ {
+               "date_added": "13090166643910534",
+               "id": "6",
+               "name": "bitmakerlabs/programming-101 · GitHub",
+               "type": "url",
+               "url": "https://github.com/bitmakerlabs/programming-101"
+            }, {
+               "date_added": "13090170382471188",
+               "id": "7",
+               "name": "HTML5 Doctor, helping you implement HTML5 today",
+               "type": "url",
+               "url": "http://html5doctor.com/"
+            }, {
+               "date_added": "13090170550579379",
+               "id": "8",
+               "name": "Firefox Developer Tools | MDN",
+               "type": "url",
+               "url": "https://developer.mozilla.org/en-US/docs/Tools"
+            }, {
+               "date_added": "13090176250238604",
+               "id": "9",
+               "name": "Code School - Discover DevTools",
+               "type": "url",
+               "url": "http://discover-devtools.codeschool.com/"
+            }, {
+               "date_added": "13090180857523716",
+               "id": "10",
+               "name": "CSS Zen Garden: The Beauty of CSS Design",
+               "type": "url",
+               "url": "http://www.csszengarden.com/"
+            }, {
+               "date_added": "13090184789438447",
+               "id": "11",
+               "name": "Google Fonts",
+               "type": "url",
+               "url": "https://www.google.com/fonts"
+            }, {
+               "date_added": "13090184814846441",
+               "id": "12",
+               "name": "Normalize.css: Make browsers render all elements more consistently.",
+               "type": "url",
+               "url": "https://necolas.github.io/normalize.css/"
+            }, {
+               "date_added": "13090254150390565",
+               "id": "14",
+               "name": "Intro To Javascript",
+               "type": "url",
+               "url": "http://bettymakes.com/fed-js/"
+            }, {
+               "date_added": "13090254911708697",
+               "id": "15",
+               "name": "Fun with Variables",
+               "type": "url",
+               "url": "http://bettymakes.github.io/fed-intro-to-js-variables/"
+            }, {
+               "date_added": "13090262032309775",
+               "id": "17",
+               "name": "Ruby-Doc.org: Documenting the Ruby Language",
+               "type": "url",
+               "url": "http://ruby-doc.org/"
+            }, {
+               "date_added": "13090272045718895",
+               "id": "18",
+               "name": "Postgres.app – the easiest way to get started with PostgreSQL on the Mac",
+               "type": "url",
+               "url": "http://postgresapp.com/"
+            }, {
+               "date_added": "13090272138658863",
+               "id": "19",
+               "name": "DataMapper - DataMapper",
+               "type": "url",
+               "url": "http://datamapper.org/"
+            } ],
+            "date_added": "13090184828810016",
+            "date_modified": "13090272138658863",
+            "id": "13",
+            "name": "Coding programing 101",
+            "type": "folder"
+         }, {
+            "date_added": "13090260644748226",
+            "id": "16",
+            "name": "Toronto Weather - AccuWeather Forecast for Ontario Canada",
+            "type": "url",
+            "url": "http://www.accuweather.com/en/ca/toronto/m5g/weather-forecast/55488"
+         } ],
+         "date_added": "13090165446788350",
+         "date_modified": "13090262032309775",
+         "id": "1",
+         "name": "Bookmarks Bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13090165446788567",
+         "date_modified": "0",
+         "id": "2",
+         "name": "Other Bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13090165446788570",
+         "date_modified": "0",
+         "id": "3",
+         "name": "Mobile Bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

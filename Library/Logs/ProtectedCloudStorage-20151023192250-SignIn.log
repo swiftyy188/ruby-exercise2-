@@ -1,0 +1,8 @@
+Oct 23 19:22:50 jeffs-MacBook-Pro.local com.apple.iCloudHelper[367] <Debug>: PCSIdentityCollectionSetup: <CFBasicHash 0x7fd330412450 [0x7fff74bd4ed0]>{type = mutable dict, count = 3,
+	entries =>
+		0 : <CFString 0x7fff7489c1e0 [0x7fff74bd4ed0]>{contents = "kPCSSetupUsername"} = <CFString 0x7fd3307389a0 [0x7fff74bd4ed0]>{contents = "swiftyy188@gmail.com"}
+		1 : <CFString 0x7fff7489c2c0 [0x7fff74bd4ed0]>{contents = "kPCSSetupDSID"} = <CFString 0x7fff7489c800 [0x7fff74bd4ed0]>{contents = "<<VALUE>>"}
+		2 : <CFString 0x7fff7489c240 [0x7fff74bd4ed0]>{contents = "kPCSSetupPassword"} = <CFString 0x7fff7489c800 [0x7fff74bd4ed0]>{contents = "<<VALUE>>"}
+	}
+Oct 23 19:22:50 jeffs-MacBook-Pro.local com.apple.iCloudHelper[367] <Debug>: __PCSAccountHasStingrayIdentities
+Oct 23 19:22:50 jeffs-MacBook-Pro.local com.apple.iCloudHelper[367] <Error>: PCSHasStingrayIdentities: NO

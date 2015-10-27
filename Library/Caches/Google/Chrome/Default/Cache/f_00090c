@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"b800a7824c","applicationID":"3203836","transactionName":"cApYEhRXWwkBQxlRREAMUQgLXVkRFx5FWFhE","queueTime":5,"applicationTime":52,"agent":"js-agent.newrelic.com/nr-768.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UAAOU15SGwACVFJaBAc="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t){try{i.console&&console.log(t)}catch(e){}}var n,r=t("ee"),o=t(1),i={};try{n=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(i.console=!0,-1!==n.indexOf("dev")&&(i.dev=!0),-1!==n.indexOf("nr_dev")&&(i.nrDev=!0))}catch(a){}i.nrDev&&r.on("internal-error",function(t){e(t.stack)}),i.dev&&r.on("fn-err",function(t,n,r){e(r.stack)}),i.dev&&(e("NR AGENT IN DEVELOPMENT MODE"),e("flags: "+o(i,function(t){return t}).join(", ")))},{1:20,ee:"QJf3ax"}],4:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,t(3),window.onerror=e;try{throw new Error}catch(f){"stack"in f&&(t(4),t(5),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:5,2:8,3:3,4:7,5:6,6:21,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=t("ee").create(),i=t(1)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t,e){function n(){return s}if(t[1]){var r=t[1];if("function"==typeof r){var s=a(r,"nr@wrapped",function(){return i(r,"fn-",n,r.name||"anonymous")});this.wrapped=t[1]=s,o.emit("initEventContext",[t,e],this.wrapped)}else"function"==typeof r.handleEvent&&i.inPlace(r,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:22,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=t("ee").create(),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:22,ee:"QJf3ax"}],7:[function(t,e){function n(t,e,n){t[0]=i(t[0],"fn-",null,n)}function r(t,e,n){function r(){return a}this.ctx={};var a={"nr@context":this.ctx};o.emit("initTimerContext",[t,n],a),t[0]=i(t[0],"fn-",r,n)}var o=t("ee").create(),i=t(1)(o);e.exports=o,i.inPlace(window,["setTimeout","setImmediate"],"setTimer-"),i.inPlace(window,["setInterval"],"setInterval-"),i.inPlace(window,["clearTimeout","clearImmediate"],"clearTimeout-"),o.on("setInterval-start",n),o.on("setTimer-start",r)},{1:22,ee:"QJf3ax"}],8:[function(t,e){function n(){f.inPlace(this,p,"fn-",o)}function r(t,e){f.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}function i(t,e){for(var n in t)e[n]=t[n];return e}var a=t("ee").create(),s=t(1),c=t(2),f=c(a),u=c(s),d=window.XMLHttpRequest,p=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=a,window.XMLHttpRequest=function(t){var e=new d(t);try{a.emit("new-xhr",[],e),e.hasOwnProperty("addEventListener")&&u.inPlace(e,["addEventListener","removeEventListener"],"-",o),e.addEventListener("readystatechange",n,!1)}catch(r){try{a.emit("internal-error",[r])}catch(i){}}return e},i(d,XMLHttpRequest),XMLHttpRequest.prototype=d.prototype,f.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),a.on("send-xhr-start",r),a.on("open-xhr-start",r)},{1:5,2:22,ee:"QJf3ax"}],9:[function(t){function e(t){var e=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!e.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=n(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(e.cat=d.split(", ").pop())}}else e.status=0;r.cbTime=this.cbTime,o("xhr",[e,r,this.startTime])}}}function n(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1),u=window.XMLHttpRequest;t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=e,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,e){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=n(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{a.emit("internal-error",[n])}catch(r){}}};for(var u=0;c>u;u++)e.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof u&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof u&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof u&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:10,3:8,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],10:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],11:[function(t,e){function n(t){return function(){r(t,[(new Date).getTime()].concat(i(arguments)))}}var r=t("handle"),o=t(1),i=t(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(t,e){window.NREUM[e]=n("api-"+e)}),e.exports=window.NREUM},{1:20,2:21,handle:"D5DuLP"}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):void(r.q&&(r.q[t]||(r.q[t]=[]),r.q[t].push(e)))}var r=t("ee").create();e.exports=n,n.ee=r,r.q={}},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info,e=f.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){s(d,function(e,n){e in t||(t[e]=n)});var n="https"===u.split(":")[0]||t.sslForHttp;p.proto=n?"https://":"http://",a("mark",["onload",i()]);var r=f.createElement("script");r.src=p.proto+t.agent,e.parentNode.insertBefore(r,e)}}function r(){"complete"===f.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=window,f=c.document;t(2);var u=(""+location).split("?")[0],d={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-768.min.js"},p=e.exports={offset:i(),origin:u,features:{}};f.addEventListener?(f.addEventListener("DOMContentLoaded",o,!1),c.addEventListener("load",n,!1)):(f.attachEvent("onreadystatechange",r),c.attachEvent("onload",n)),a("mark",["firstbyte",i()])},{1:20,2:11,handle:"D5DuLP"}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],20:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],21:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],22:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@original",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=t,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:21,ee:"QJf3ax"}]},{},["G9z0Bl",4,9]);</script>
+<title>Platform</title>
+<meta content='width=device-width,initial-scale=1.0' name='viewport'>
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-617cee3b03bb02f27b8e804468564d20b6076bcfb2efaa7ff789669d68ee57fe.ico" />
+<link rel="stylesheet" media="all" href="/assets/application-855a9d0044b0a1bf30c7d49464659ae127e54a9ae6f5a62201dc6165acbd7dc8.css" data-turbolinks-track="true" />
+<script src="/assets/application-c410072ec466b91f8eec2d5f8a0ebd8a224193325ed98e7fce2c27d81710e31f.js" data-turbolinks-track="true"></script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="2AkW/8ow1TtyfVWb/36wudm/u6vBGvaPQc161/1dRdrrjMSRQNFsSTp4hHk6b1y4T/F+yT8UhgbyqvKbVWpx6A==" />
+</head>
+<body>
+<div class='div hidden' data-course='webdevelopment'></div>
+<div class='side-nav'>
+<div class='side-nav-border first-half hide-for-medium hide-for-small'></div>
+<div class='logo center'>
+<a href="/weeks/current"></a>
+</div>
+<ul class='side-nav-menu large-7 medium-36 small-36'>
+<div class='side-nav-border second-half hide-for-medium hide-for-small'></div>
+<li class='is-active side-nav-link' data-submenu='curriculum'>
+<div class='icon'>
+<i class='fa fa-file-text'></i>
+</div>
+<span>Curriculum</span>
+</li>
+<li class='side-nav-link' data-submenu='people'>
+<div class='icon'>
+<i class='fa fa-group'></i>
+</div>
+<span>Users</span>
+</li>
+<li>
+<a href="/events"><div class='icon'>
+<i class='fa fa-calendar'></i>
+</div>
+<span>Events</span>
+</a></li>
+<li class='side-nav-link' data-submenu='hiring_board'>
+<div class='icon'>
+<i class='fa fa-suitcase'></i>
+</div>
+<span>Hiring Board</span>
+</li>
+<li>
+<a target="_blank" href="/tickets"><div class='icon'>
+<i class='fa fa-stack-exchange'></i>
+</div>
+<span>Que</span>
+</a></li>
+<li class='unlock'>
+<a href="/cohorts/37/breakouts"><div class='icon'>
+<i class='fa fa-lock'></i>
+</div>
+<span>Breakouts</span>
+</a></li>
+<li class='side-nav-link nav' data-submenu='nav'>
+<div class='icon'>
+<i class='fa fa-user'></i>
+</div>
+<span>Jeff Ho</span>
+</li>
+</ul>
+<div class='side-nav-submenu-close'>
+<i class='fa fa-caret-left'></i>
+</div>
+<!-- the class .curriculum is needed in sidenav.js -->
+<ul class='side-nav-submenu curriculum'>
+<li><a href="/cohorts/37/assignments">Assignments</a></li>
+<li><a href="/cohorts/37/lessons">Lessons</a></li>
+<li><a href="/cohorts/37/quizzes">Quizzes</a></li>
+</ul>
+<!-- the class .people is needed in sidenav.js -->
+<ul class='side-nav-submenu people'>
+<li><a href="/cohorts/37/students">Students</a></li>
+<li class='submenu-link-indent'><a href="/cohorts/37/progress">Progress</a></li>
+<li><a href="/staffs">Staff</a></li>
+</ul>
+<ul class='side-nav-submenu hiring_board'>
+<li><a target="_blank" href="/hiring_board/job_postings">Job Postings</a></li>
+<li><a target="_blank" href="/hiring_board/companies">Companies</a></li>
+<li><a target="_blank" href="/hiring_board/hiring_boards">More Jobs!</a></li>
+<li><a target="_blank" href="/hiring_board/students">Students</a></li>
+</ul>
+<!-- the class .nav is needed in sidenav.js -->
+<ul class='side-nav-submenu nav'>
+<li>Courses</li>
+<li class='submenu-course submenu-browsing-course'>
+<i class='fa fa-circle small-fa'></i>
+Web Development
+</li>
+<li><a href="/students/jeff-ho/edit">Edit Profile</a></li>
+<li><a data-no-turbolink="" href="/logout">Log Out</a></li>
+</ul>
+
+</div>
+
+<main class='wrap medium-offset-0 large-offset-7 relative small-offset-0'>
+<div class='assignment-header clearfix'>
+<h1 class='assignment-name'>
+Inception
+</h1>
+<div class='assignment-header-links'>
+<div class='tab-links'>
+<a class="tab-link is-active" href="/cohorts/37/assignments/986"><span>Article</span>
+</a><a class="tab-link" href="/cohorts/37/assignments/986/submissions"><span>Submissions</span>
+</a></div>
+<div class='buttons'>
+</div>
+</div>
+</div>
+<article>
+<div class='markdown'>
+<h2 id="what-you-will-learn">What You Will Learn</h2>&#x000A;&#x000A;<p>This assignment will allow you to revisit Git, Github, and Unix by recreating the story of <a href="http://www.imdb.com/title/tt1375666/?ref_=fn_al_tt_1">Inception</a>. Instead of using dreams and characters, we will be using files and directories. Each directory will represent a level and each file will represent a character. As you go down each level (directory), one character (file) will be left behind and you will make a commit. </p>&#x000A;&#x000A;<p>By the end of the assignment you should know how to use the command line to do the following:</p>&#x000A;&#x000A;<ul>&#x000A;<li>Create, delete, rename, move directories or files</li>&#x000A;<li>Find what your current directory contains <code>ls</code></li>&#x000A;<li>Find what your current path is <code>pwd</code></li>&#x000A;</ul>&#x000A;&#x000A;<p>You should also get a sense of what Git is, how it differs from GitHub, and how to use each of these tools. For Git, this means <code>git init</code>, <code>git add</code>, <code>git commit</code>, and <code>git status</code>. For GitHub, this means how to create a remote repository and push your local repository to it. </p>&#x000A;&#x000A;<h1 id="assignment">Assignment</h1>&#x000A;&#x000A;<p>The 7 characters from the movie are:</p>&#x000A;&#x000A;<ul>&#x000A;<li>Ariadne</li>&#x000A;<li>Arthur</li>&#x000A;<li>Cobb</li>&#x000A;<li>Eames</li>&#x000A;<li>Robert Fischer Jr.</li>&#x000A;<li>Saito</li>&#x000A;<li>Yusuf</li>&#x000A;</ul>&#x000A;&#x000A;<p><a href="http://www.inceptionending.com/wp-content/uploads/2010/08/INCEPTION-infographic-v3.5.2_dwang.jpg">Here&#39;s an infographic depicting the different dream levels and who goes where.</a></p>&#x000A;&#x000A;<h2 id="setting-up-your-project">Setting up your project</h2>&#x000A;&#x000A;<ol>&#x000A;<li>Create a git repository on GitHub, called &quot;inception&quot; or something similar</li>&#x000A;<li>Clone it to your computer and cd into the project directory</li>&#x000A;</ol>&#x000A;&#x000A;<p>Have fun and don&#39;t forget to work alongside a partner!</p>&#x000A;&#x000A;<h2 id="assignment-steps">Assignment Steps</h2>&#x000A;&#x000A;<p><strong>You must commit your changes after each step, otherwise you won&#39;t be taking snapshots in time!</strong> </p>&#x000A;&#x000A;<ol>&#x000A;<li>Create text files, one for each character listed above (Ariadne, Arthur, Cobb, etc.,)</li>&#x000A;<li>Create the first directory called <code>level_one</code> and move all your characters into it</li>&#x000A;<li>Create the next directory, <code>level_two</code> and move all but one character down into level_two</li>&#x000A;<li>Keep going for 2 more levels (<code>level_three</code>, <code>level_four</code> or even <code>limbo</code>!)</li>&#x000A;<li>Push your code to GitHub</li>&#x000A;</ol>&#x000A;&#x000A;<p>When you stage your files, you will need to use the --all flag instead of a period for git add. So instead of this:</p>&#x000A;&#x000A;<pre><code class="bash">$ git add .&#x000A;</code></pre>&#x000A;&#x000A;<p>Try this:</p>&#x000A;&#x000A;<pre><code class="bash">$ git add --all&#x000A;</code></pre>&#x000A;&#x000A;<p>At the end of the assignment you should have a repository on your GitHub that looks similar to <a href="https://github.com/bitmakerlabs/inception">this one</a>. Take note of the commits.</p>&#x000A;&#x000A;<p><img src="http://i.imgur.com/rDYj6VD.png" alt="Inception Commit History"></p>&#x000A;&#x000A;<h3 id="tips-and-tricks:">Tips and Tricks:</h3>&#x000A;&#x000A;<p>Github only tracks files and not directories. You won&#39;t be able to commit a new directory unless there&#39;s at least one file in it! See <a href="https://git.wiki.kernel.org/index.php/GitFaq#Can_I_add_empty_directories.3F">Git FAQ: Empty directories</a> for more details.</p>&#x000A;&#x000A;<p>If you want more information about a Unix command you can type:</p>&#x000A;&#x000A;<pre><code class="bash">$ man &lt;the name of the command&gt;&#x000A;</code></pre>&#x000A;&#x000A;<p>When you do this you will enter a text editor within your command line interface. To quit this text editor type q. </p>&#x000A;&#x000A;<p>You might also want to go back to a previous commit. To do this type:</p>&#x000A;&#x000A;<pre><code class="bash">$ git reset --hard HEAD^&#x000A;</code></pre>&#x000A;&#x000A;<p>If you want to know the differences between --hard, --soft, and --mixed, check <a href="http://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard">this</a> out. </p>&#x000A;&#x000A;<h3 id="important-git-commands">Important Git Commands</h3>&#x000A;&#x000A;<h4 id="git-workflow">Git Workflow</h4>&#x000A;&#x000A;<pre><code class="bash"># creates new git repository&#x000A;$ git init&#x000A;&#x000A;# stages changes to files&#x000A;$ git add .&#x000A;&#x000A;# stages changes to all files (including deleted files)&#x000A;$ git add --all&#x000A;&#x000A;# shows status of files&#x000A;$ git status&#x000A;&#x000A;# creates a new commit (a snapshot in time) with associated message&#x000A;$ git commit -m &quot;&lt;message&gt;&quot;&#x000A;&#x000A;# shows history of commits&#x000A;$ git log&#x000A;</code></pre>&#x000A;&#x000A;<h4 id="remote-repositories-(github)">Remote Repositories (Github)</h4>&#x000A;&#x000A;<pre><code class="bash"># maps server url to &quot;origin&quot;&#x000A;$ git remote add origin &lt;server url&gt;&#x000A;&#x000A;# pulls a specific branch to local repo&#x000A;$ git pull &lt;branch name&gt;&#x000A;&#x000A;# pushes local repo to remote repo&#x000A;$ git push origin &lt;branch name&gt;&#x000A;&#x000A;# copies a new remote repo to computer&#x000A;$ git clone &lt;server url&gt;&#x000A;</code></pre>&#x000A;&#x000A;<h4 id="branching">Branching</h4>&#x000A;&#x000A;<pre><code class="bash"># shows all branches&#x000A;$ git branch&#x000A;&#x000A;# creates a new branch with &lt;branch_name&gt;&#x000A;$ git branch &lt;branch_name&gt;&#x000A;&#x000A;# switches to &lt;branch_name&gt;&#x000A;$ git checkout &lt;branch_name&gt;&#x000A;&#x000A;# creates a new branch with &lt;branch_name&gt; and switches to it&#x000A;$ git checkout -b &lt;branch_name&gt;&#x000A;&#x000A;# merges (copies) commits from &lt;branch_name&gt; into current branch&#x000A;$ git merge &lt;branch_name&gt;&#x000A;</code></pre>&#x000A;&#x000A;<h3 id="additional-resources">Additional Resources</h3>&#x000A;&#x000A;<ul>&#x000A;<li><a href="https://www.codeschool.com/courses/try-git">Try Git: A Course on Code School</a></li>&#x000A;<li><a href="http://stackoverflow.com/questions/927358/how-to-undo-the-last-git-commit">How to undo the last Git commit?</a></li>&#x000A;<li><a href="http://rogerdudler.github.io/git-guide/">Git Guide</a></li>&#x000A;<li><a href="https://help.github.com/articles/create-a-repo">Create a Repository on GitHub</a></li>&#x000A;<li><a href="http://www.cs.tau.ac.il/%7Eroded/courses/soft1-b05/unix1.htm">Reference to Unix Commands</a></li>&#x000A;<li><a href="http://matt.might.net/articles/basic-unix/">Dive more into Unix</a></li>&#x000A;</ul>&#x000A;&#x000A;<h3 id="submitting">Submitting</h3>&#x000A;&#x000A;<p>If you&#39;re stuck, you can refer back to this <a href="https://github.com/bitmakerlabs/resources/blob/master/submitting_your_work.md">Submissions Cheat Sheet</a>.</p>
+</div>
+
+</article>
+
+</main>
+</body>
+</html>

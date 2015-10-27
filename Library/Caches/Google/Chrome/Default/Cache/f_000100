@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>
+		HTML5 Doctor, helping you implement HTML5 today    </title>
+    <link rel="stylesheet" href="http://html5doctor.com/wp-content/themes/html5doctor2/style.css" media="screen" />
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<link rel="alternate" type="application/rss+xml" title="HTML5 Doctor &raquo; Feed" href="http://html5doctor.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="HTML5 Doctor &raquo; Comments Feed" href="http://html5doctor.com/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/html5doctor.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.3.1"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='contact-form-7-css'  href='http://html5doctor.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.5.3' type='text/css' media='all' />
+<link rel='stylesheet' id='crp_list_style-css'  href='http://html5doctor.com/wp-content/plugins/contextual-related-posts/css/default-style.css?ver=4.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='http://html5doctor.com/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<script type='text/javascript' src='http://html5doctor.com/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
+<script type='text/javascript' src='http://html5doctor.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://html5doctor.com/xmlrpc.php?rsd" />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+	  
+  
+	<meta name="google-site-verification" content="eNFgXoATiYxkZGKen0ShwwTF-BC511Vjp8x7QTDeA34" />
+</head>
+<body class="home blog" id="com-html5doctor">
+<header role="banner">
+    <div class="inner group">
+    <a href="http://html5doctor.com" rel="home"><div>
+        <div class="logo">
+        <h1>HTML5 Doctor</h1>
+        <h2>Helping you implement HTML5 today</h2>
+        </div><!-- end logo -->
+    </div></a><!-- wrapper div for Firefox 3.x ref: http://01i.jp/html5bll -->
+
+ 	<ul id="menu-top-nav" class="semantic-list"><li id="menu-item-3272" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3272"><a href="http://html5doctor.com/about/">About</a></li>
+<li id="menu-item-3275" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3275"><a href="http://feeds2.feedburner.com/html5doctor">RSS</a></li>
+<li id="menu-item-3276" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3276"><a href="http://feeds.feedburner.com/HTML5DoctorComments">Comments RSS</a></li>
+<li id="menu-item-3253" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3253"><a href="#">Doctor Network</a>
+<ul class="sub-menu">
+	<li id="menu-item-3273" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3273"><a href="http://html5gallery.com">HTML5 Gallery</a></li>
+	<li id="menu-item-3580" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3580"><a href="http://docteurhtml5.com/html5/">Docteur HTML5</a></li>
+	<li id="menu-item-3973" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3973"><a href="https://github.com/html5doctor/">HTML5 Doctor on Github</a></li>
+</ul>
+</li>
+</ul>      <!-- end #top-nav -->
+    
+    <nav>
+		<ul id="menu-main_nav" class=""><li id="menu-item-3297" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-3297"><a href="/">Home</a></li>
+<li id="menu-item-3250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3250"><a href="http://html5doctor.com/article-archive/">Article Archive</a></li>
+<li id="menu-item-3291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3291"><a href="http://html5doctor.com/element-index/">Element Index</a></li>
+<li id="menu-item-3968" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3968"><a href="http://html5doctor.com/resources/">Resources</a></li>
+</ul>    	<!-- end ul -->
+    	<ul>
+    		<li><form id="search-form" action="/search/" role="search"  method="get">
+    <div>
+    <input type="text" name="q" value="" />
+    <input type="submit" id="search-button" value="Search" />
+    </div>
+</form>
+</li>
+    	</ul>
+    	<!-- end ul -->	
+    </nav>
+    <!-- end nav -->
+	</div>
+	<!-- end .inner -->
+</header>
+<!-- end header -->
+<main id="content" class="group" role="main">
+
+    <article id="opener" class="group">
+        <div class="main">
+                                      <article class="post">
+                <header class="post-5807 post type-post status-publish format-standard hentry category-elements" id="post-5807">
+                    <h1><a href="http://html5doctor.com/on-html-belts-and-aria-braces/" rel="bookmark" title="Permanent Link to On HTML belts and ARIA braces (The Default Implicit ARIA semantics they didn&#8217;t want you to know about)">On HTML belts and ARIA braces (The Default Implicit ARIA semantics they didn&#8217;t want you to know about)</a></h1>
+                    <small><time datetime="2015-04-14" pubdate>April 14th, 2015</time> by <a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner" rel="author">Steve Faulkner</a>.</small>
+                </header>
+                <div class="entry">
+                <p>The question of whether HTML elements need the addition of ARIA role attibutes to expose their semantics, is one that surfaces on a regular basis. The answer is maybe for a subset of elements, but increasingly no.</p>
+                <p class="read-more"><a href="http://html5doctor.com/on-html-belts-and-aria-braces/">Read full post</a></p>
+                </div>
+              </article>
+              <!-- end .post -->
+        </div>
+        <!-- end .main -->
+                
+        <aside class="secondary">
+            <section class="mod">
+             <h3>Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Jesper Allermand</span> on <a href="http://html5doctor.com/the-dl-element/#comment-2036424">The dl element</a></li><li class="recentcomments"><span class="comment-author-link">BikeLane</span> on <a href="http://html5doctor.com/lets-talk-about-semantics/#comment-2034464">Let&#039;s Talk about Semantics</a></li><li class="recentcomments"><span class="comment-author-link">Bartezz</span> on <a href="http://html5doctor.com/cite-and-blockquote-reloaded/#comment-2034125">cite and blockquote &#8211; reloaded</a></li><li class="recentcomments"><span class="comment-author-link">Emil</span> on <a href="http://html5doctor.com/the-section-element/#comment-2024104">The section element</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://rogalskydesign.pl' rel='external nofollow' class='url'>Kacper R</a></span> on <a href="http://html5doctor.com/the-main-element/#comment-2023655">The main element</a></li></ul>            </section>
+            <!-- end section -->
+
+        </aside>
+        <!-- end .secondary -->
+
+    </article>
+    <!-- end #opener -->
+
+    <section id="glossary" class="multi-ul glossary">
+        <h1><a href="/element-index/">HTML5 Element Index</a></h1>
+        <!-- todo: columns should really be done via divs not sections -->
+        <section class="glossary-first">
+            <!-- head, meta (4.1, 4.2, 4.3) -->
+            <h2>Head</h2>
+            <ul class="group">
+            <li><a href="/element-index/#doctype">doctype</a></li><!-- not actually in spec ch.4 -->
+            <li><a href="/element-index/#html">html</a></li>
+            <li><a href="/element-index/#head">head</a></li>
+            <li><a href="/element-index/#title">title</a></li>
+            <li><a href="/element-index/#base">base</a></li>
+            <li><a href="/element-index/#link">link</a></li>
+            <li><a href="/element-index/#meta">meta</a></li>
+            <li><a href="/element-index/#style">style</a></li>
+            <li><a href="/element-index/#script">script</a></li>
+            <li><a href="/element-index/#noscript">noscript</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- HTML5 structural & headers (4.4) -->
+            <h2>Sections</h2>
+            <ul class="group">
+            <li><a href="/element-index/#body">body</a></li>
+            <li><a href="/element-index/#article">article</a></li>
+            <li><a href="/element-index/#nav">nav</a></li>
+            <li><a href="/element-index/#aside">aside</a></li>
+            <li><a href="/element-index/#section">section</a></li>
+            <li><a href="/element-index/#header">header</a></li>
+            <li><a href="/element-index/#footer">footer</a></li>
+            <li><a href="/element-index/#h1-h6">h1-h6</a></li>
+            <li><a href="/element-index/#main-desc">main</a></li>
+            <li><a href="/element-index/#address">address</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- grouping content (4.5) -->
+            <h2>Grouping</h2>
+            <ul class="group">
+            <li><a href="/element-index/#p">p</a></li>
+            <li><a href="/element-index/#hr">hr</a></li>
+            <li><a href="/element-index/#pre">pre</a></li>
+            <li><a href="/element-index/#blockquote">blockquote</a></li>
+            <li><a href="/element-index/#ol">ol</a></li>
+            <li><a href="/element-index/#ul">ul</a></li>
+            <li><a href="/element-index/#li">li</a></li>
+            <li><a href="/element-index/#dl">dl, dt, dd</a></li>
+            <li><a href="/element-index/#figure">figure</a></li>
+            <li><a href="/element-index/#figcaption">figcaption</a></li>
+            <li><a href="/element-index/#div">div</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- tables (4.9) -->
+            <h2>Tables</h2>
+            <ul class="group">
+            <li><a href="/element-index/#table">table</a></li>
+            <li><a href="/element-index/#caption">caption</a></li>
+            <li><a href="/element-index/#thead">thead</a></li>
+            <li><a href="/element-index/#tbody">tbody</a></li>
+            <li><a href="/element-index/#tfoot">tfoot</a></li>
+            <li><a href="/element-index/#tr">tr</a></li>
+            <li><a href="/element-index/#th">th</a></li>
+            <li><a href="/element-index/#td">td</a></li>
+            <li><a href="/element-index/#col">col</a></li>
+            <li><a href="/element-index/#colgroup">colgroup</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- forms (4.10) -->
+            <h2>Forms</h2>
+            <ul class="group">
+            <li><a href="/element-index/#form2">form</a></li>
+            <li><a href="/element-index/#fieldset">fieldset</a></li>
+            <li><a href="/element-index/#legend">legend</a></li>
+            <li><a href="/element-index/#label">label</a></li>
+            <li><a href="/element-index/#input">input</a></li>
+            <li><a href="/element-index/#button">button</a></li>
+            <li><a href="/element-index/#select">select</a></li>
+            <li><a href="/element-index/#datalist">datalist</a></li>
+            <li><a href="/element-index/#optgroup">optgroup</a></li>
+            <li><a href="/element-index/#option">option</a></li>
+            <li><a href="/element-index/#textarea">textarea</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <h2>Forms 2</h2>
+            <ul class="group">
+            <li><a href="/element-index/#keygen">keygen</a></li>
+            <li><a href="/element-index/#output">output</a></li>
+            <li><a href="/element-index/#progress">progress</a></li>
+            <li><a href="/element-index/#meter">meter</a></li>
+            </ul>
+            <!-- interactive content (4.11) -->
+            <h2>Interactive</h2>
+            <ul class="group">
+            <li><a href="/element-index/#details">details</a></li>
+            <li><a href="/element-index/#summary">summary</a></li>
+            <li><a href="/element-index/#command">command</a></li>
+            <li><a href="/element-index/#menu">menu</a></li>
+            </ul>
+            <!-- edits (4.7) -->
+            <h2>Edits</h2>
+            <ul class="group">
+            <li><a href="/element-index/#del">del, ins</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- embedded content (4.8) -->
+            <h2>Embedded</h2>
+            <ul class="group">
+            <li><a href="/element-index/#img">img</a></li>
+            <li><a href="/element-index/#iframe">iframe</a></li>
+            <li><a href="/element-index/#embed">embed</a></li>
+            <li><a href="/element-index/#object">object</a></li>
+            <li><a href="/element-index/#param">param</a></li>
+            <li><a href="/element-index/#video">video</a></li>
+            <li><a href="/element-index/#audio">audio</a></li>
+            <li><a href="/element-index/#source">source</a></li>
+            <li><a href="/element-index/#canvas">canvas</a></li>
+            <li><a href="/element-index/#track">track</a></li>
+            <li><a href="/element-index/#map">map</a></li>
+            <li><a href="/element-index/#area">area</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section>
+            <!-- text-level semantics (4.6) -->
+            <h2>Text-level</h2>
+            <ul class="group">
+            <li><a href="/element-index/#a">a</a></li>
+            <li><a href="/element-index/#em">em</a></li>
+            <li><a href="/element-index/#strong">strong</a></li>
+            <li><a href="/element-index/#i">i, b</a></li>
+            <li><a href="/element-index/#u-def">u</a></li>
+            <li><a href="/element-index/#s">s</a></li>
+            <li><a href="/element-index/#small">small</a></li>
+            <li><a href="/element-index/#abbr">abbr</a></li>
+            <li><a href="/element-index/#q">q</a></li>
+            <li><a href="/element-index/#cite">cite</a></li>
+            <li><a href="/element-index/#dfn">dfn</a></li>
+            <li><a href="/element-index/#sub">sub, sup</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+        <section class="glossary-last">
+            <h2>Text-level 2</h2>
+            <ul class="group">
+            <li><a href="/element-index/#time">time</a></li>
+            <li><a href="/element-index/#code">code</a></li>
+            <li><a href="/element-index/#kbd">kbd</a></li>
+            <li><a href="/element-index/#samp">samp</a></li>
+            <li><a href="/element-index/#var">var</a></li>
+            <li><a href="/element-index/#mark">mark</a></li>
+            <li><a href="/element-index/#bdi">bdi</a></li>
+            <li><a href="/element-index/#bdo">bdo</a></li>
+            <li><a href="/element-index/#ruby">ruby, rt, rp</a></li>
+            <li><a href="/element-index/#span">span</a></li>
+            <li><a href="/element-index/#br">br</a></li>
+            <li><a href="/element-index/#wbr">wbr</a></li>
+            </ul>
+        </section>
+        <!-- end section -->
+    </section>
+    <!-- end #glossary -->
+
+
+    <div id="grid-list" class="grid-list">
+        <section class="main group">
+          <h1><a href="/article-archive/">More Posts from HTML5 Doctor</a></h1>
+          <!--
+          <div id="layout">
+              <button id="grid">Grid</button>
+              <button id="list" class="inactive">List</button>
+          </div>
+          -->
+
+                          <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/html5-check-it-before-you-wreck-it-with-miketm-smith/">HTML5 &#8211; Check it Before you Wreck it with Mike[tm] Smith</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>December 9th, 2014</time> by <a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner" rel="author">Steve Faulkner</a></small>
+            </header>
+            <div class="entry">
+            <p>The W3C&#8217;s Mike[tm] Smith (AKA @sideshowbarker) is the man with his head in the W3C validation markup checking tool source code; he makes the magic happen.  Questions were asked for the HTML5 Doctor reader&#8217;s delight and edification. Russian Translation: Не проверив HTML5-кода, не суйся в воду — с Майком™ Смитом First off tell us a bit about what you do and [&hellip;]</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/the-ride-to-5/">The ride to 5</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>October 28th, 2014</time> by <a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner" rel="author">Steve Faulkner</a></small>
+            </header>
+            <div class="entry">
+            <p>Forwards In recent weeks I contacted around 40 people, a cross section of those who have banged away at, or banged on about, HTML5. I asked them for their perspectives on HTML5 becoming a W3C Recommendation. Below are the words of the 28 people who responded, pretty much in the order they hit my inbox: [&hellip;]</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/web-manifest-specification/">The Web Manifest specification</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>July 29th, 2014</time> by <a href="http://html5doctor.com/author/brucel/" title="Posts by Bruce Lawson" rel="author">Bruce Lawson</a></small>
+            </header>
+            <div class="entry">
+            <p>By Marcos Cáceres and Bruce Lawson. Update 26 September 2014 The initial work for Manifest in Chromium M39 is done, and Marcos (more or less) finished coding the processor a few months ago. &#8220;I&#8217;m hoping to see it in fxos 2.2&#8220;, he said from the pool of his gorgeous Malibu home.) Update 11 November 2014 [&hellip;]</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/using-aria-in-html/">Using ARIA in HTML</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>June 21st, 2014</time> by <a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner" rel="author">Steve Faulkner</a></small>
+            </header>
+            <div class="entry">
+            <p>ARIA (WAI-ARIA if you want to be formal) is a set of attributes that you can add to HTML elements. These attributes communicate role, state and property semantics to assistive technologies via the accessibility APIs implemented in browsers. The W3C HTML specification provides information about which ARIA attributes are allowed to be used on each [&hellip;]</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/responsive-images-end-of-year-report/">Responsive images – end of year report</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>November 12th, 2013</time> by <a href="http://html5doctor.com/author/brucel/" title="Posts by Bruce Lawson" rel="author">Bruce Lawson</a></small>
+            </header>
+            <div class="entry">
+            <p>It’s nearly two years since I suggested a &lt;picture&gt; element as a strawman proposal as a way to solve the problem of responsive images, so let’s have a look at how we’re doing.</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/cite-and-blockquote-reloaded/">cite and blockquote &#8211; reloaded</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>November 4th, 2013</time> by <a href="http://html5doctor.com/author/stevef/" title="Posts by Steve Faulkner" rel="author">Steve Faulkner</a></small>
+            </header>
+            <div class="entry">
+            <p>The definitions of the blockquote and cite elements in the HTML specification have recently been updated. This article explains what the changes mean for developers.</p>
+            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/ins-del-s/">Comparing and contrasting <code>ins</code>, <code>del</code>, and <code>s</code></a></h2>
+                <small> <time datetime="2010-12-08" pubdate>August 20th, 2013</time> by <a href="http://html5doctor.com/author/olib/" title="Posts by Oli Studholme" rel="author">Oli Studholme</a></small>
+            </header>
+            <div class="entry">
+            <p>Since the mists of HTML 2 we’ve been able to semantically indicate added or removed information using the elements <code>&lt;ins&gt;</code> and <code>&lt;del&gt;</code> respectively. While seemingly simple on the surface these elements have hidden depths. I’ll also compare and contrast <code>&lt;del&gt;</code> with <code>&lt;s&gt;</code>, recently out of font style rehab and back in HTML5. Let’s start with <code>&lt;ins&gt;</code> and <code>&lt;del&gt;</code>…</p>            </div>
+          </article>
+          <!-- end .post -->
+                  <article class="post">
+            <header>
+                <h2><a href="http://html5doctor.com/the-classlist-api/">The classList API</a></h2>
+                <small> <time datetime="2010-12-08" pubdate>July 30th, 2013</time> by <a href="http://html5doctor.com/author/derekj/" title="Posts by Derek Johnson" rel="author">Derek Johnson</a></small>
+            </header>
+            <div class="entry">
+            <p>I have to be honest with you: I feel like a fraud writing about JavaScript for HTML5 Doctor. I would feel like a fraud writing about JavaScript for a click-driven ad-splattered content farm, never mind HTML5 Doctor. The thing is though, I&#8217;m writing about the <code>classList</code> API, and it&#8217;s super easy. If your JavaScript-fu isn&#8217;t great and you&#8217;re wary of HTML5 APIs, this one is at the perfect temperature for toe-dipping, and it&#8217;ll leave you pleasantly surprised at just how easy it is.</p>            </div>
+          </article>
+          <!-- end .post -->
+        
+                <p class="more-articles btn"><a href="http://html5doctor.com/article-archive/" title="Article Archive | HTML5 Doctor">Find more articles in the complete HTML5 Doctor archive</a></p>
+        </section>
+        <!-- end .main -->
+
+        <div class="secondary">
+		            <aside class="mod ads group">
+                <h3>Sponsors</h3>
+                <div id="bsap_1242929" class="bsarocks bsap_ab161e2bf71edb940eeca26a4739f522"></div>
+            </aside>
+		                       <!-- end nav -->
+
+        </div>
+        <!-- end section -->
+
+        </div>
+        <!-- end #grid-list -->
+	
+	
+        <aside id="sub-footer" class="sub-footer group">
+        <div>
+            <div class="mod ads">
+                <a href="http://html5gallery.com/">
+                <h3>HTML5 Gallery</h3>
+                <img alt="" src="http://html5doctor.com/wp-content/themes/html5doctor2/images/the-gallery.png" />
+                </a>
+            </div>
+	    <div class="mod">
+         	<h3><a href="http://thewebevolved.com">Beginning HTML5 &amp; CSS3</a></h3> 
+		<a href="http://thewebevolved.com">
+			<img class="book" src="/wp-content/uploads/2013/01/web-evolved.jpg" alt="Cover image of Beginning HTML5 and CSS3: The Web Evolved.">
+		</a>
+		<p>The Web Evolved: A new book on HTML5 &amp; CSS3 by Richard Clark, Oli Studholme, Christopher Murphy and Divya Manian.</p>
+		<p><a class="btn" href="http://thewebevolved.com">Buy it now</a></p>
+             </div>
+			        </div> 
+        <!-- end div -->
+        <div>
+            <div class="mod">
+                <h3><a href="http://diveinto.html5doctor.com">Dive into HTML5</a></h3>
+                <p>Sadly, Mark Pilgrim has stopped maintaining this project. Along with other members of the web community we want to see it continue. We’re hosting a copy and plan to help keep it up-to-date.</p>
+		<p class="btn"><a href="http://diveinto.html5doctor.com">Read Dive into HTML5</a></p>
+            </div>
+        </div>
+        <!-- end div -->
+    </aside>
+    <!-- end #sub-footer --></main>
+<!-- end #content -->
+
+<footer role="contentinfo">
+	<div class="inner">
+    	<img width="64" height="64" class="w3c-logo" alt="W3C HTML5 logo (not CSS3!)" src="http://html5doctor.com/wp-content/themes/html5doctor2/images/HTML5_Badge_64.png">
+		<p id="copyright">This site is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.0/uk/" rel="license">Creative Commons Attribution-Non-Commercial 2.0</a> share alike license. Feel free to change, reuse modify and extend it. Some authors will retain their copyright on certain articles.</p>
+        <p>Copyright &copy; 2015 HTML5 Doctor. All rights reserved. Hosted by <a href="http://www.mediatemple.net/go/order/?refdom=richclarkdesign.com">(mt) Media Temple</a>. Branding by <a href="http://olik.co.uk/">Oliver Ker</a>.</p>
+	</div>
+    <!-- end .inner -->
+</footer>
+<!-- end footer -->
+
+    <!-- BuySellAds.com Ad Code -->
+    <script>
+    (function(){
+      var bsa = document.createElement('script');
+         bsa.type = 'text/javascript';
+         bsa.async = true;
+         bsa.src = '//s3.buysellads.com/ac/bsa.js';
+      (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+    })();
+    </script>
+    <!-- END BuySellAds.com Ad Code -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<!-- TODO: move scripts in head to before /body —oli -->
+	   
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/searchhi.js"></script>    
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/prettify.js"></script>    
+	<script src="http://html5doctor.com/wp-content/themes/html5doctor2/js/master.js"></script>    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8916679-1']);
+  _gaq.push(['_setDomainName', 'html5doctor.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script async type="text/javascript" src="//cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=html5doctor" id="_fancybar_js"></script>
+</body>
+</html>
+<!-- Dynamic page generated in 0.731 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-10-24 15:01:09 -->
+
+<!-- super cache -->

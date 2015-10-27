@@ -1,0 +1,4039 @@
+/*globals AppleAccountSetup ICloudSetup macbuddyloc mmejsloc mmesetupconstants firstNameValidators lastNameValidators emailMeDotComValidators emailThirdPartyValidators passwordValidatorsWithoutMatch answerValidators yearIsLeapYear validateEmailServer validateEmailMeDotComServer validateElement _blurValidations*/
+
+
+/*
+  Add the OS X version as a classname on the body
+*/
+(function setUIVersionAndLanguage() {
+  String.prototype.getStrBetween = function(searchAfter, searchBefore) {
+    return this.substring(this.lastIndexOf(searchAfter)+searchAfter.length,
+                          this.lastIndexOf(searchBefore));
+  };
+  
+  var language = window.navigator.language;
+  $('body').addClass(language);
+
+  var clientInfo = mmesetupconstants.clientInfo;
+
+  // Only add UI version number if we are on a Mac
+  if (clientInfo.indexOf('Mac OS X') > -1) {
+    // parse out UI version as string
+    var OSXver = clientInfo.getStrBetween("OS X;", ";");
+    // strip any 2nd or 3rd decimals
+    OSXver = OSXver.split('.').slice(0, 2).join('.');
+    // periods aren’t well suited for CSS classnames
+    OSXver = OSXver.replace('.', '_');
+
+    $('body').addClass("_"+OSXver); // CSS classnames cannot begin with a number
+
+    // Example classname: “_10_9”
+  }
+}());
+
+
+// Returns the number of keys on a given object.
+// This is particularly useful for getting the number of trusted devices.
+Object.prototype.numberOfItems = function () {
+  var numberOfItems = 0;
+  var key;
+  for (key in this) {
+    if (this.hasOwnProperty(key)) {
+      numberOfItems++;
+    }
+  }
+  return numberOfItems;
+};
+
+if(window.trustedDeviceList) {
+ var hasNoTrustedDevices = trustedDeviceList.numberOfItems() === 0; 
+}
+
+
+/*
+  Define a simple .loc() function, similar to the one used elsewhere.
+*/
+String.prototype.loc = function() {
+	var ret = macbuddyloc[this];
+	if (!ret) {
+		// Fall back to mmejsloc
+		ret = mmejsloc[this];
+
+		if (!ret) {
+			console.warn("Cannot find Loc key:  '" + this + "'");
+			ret = this;
+		}
+	}
+	return ret;
+};
+
+
+ICloudSetup.NavigationBar = function(args) {
+	if (!args) args = {};
+
+	var pageController = ICloudSetup.getPageController(),
+      _leftLabel     = args.leftLabel      ||  "Back".loc(),
+      _leftCallback  = args.leftCallback   ||  pageController.previousPage,
+      _rightLabel    = args.rightLabel     ||  "Continue".loc(),
+      _rightCallback = args.rightCallback  ||  pageController.nextPage,
+      _title         = args.title          ||  "NewAppleID.title".loc(),
+      _subTitle      = args.subTitle;
+
+	var renderNavigationBar = function(valid) {
+		var K = AppleAccountSetup;
+
+		K.setNavTitle(_title);
+		K.setPageSubTitle(_subTitle);
+		K.setLeftNavButton(_leftLabel, _leftCallback);
+		if (valid) {
+			K.setRightNavButton(_rightLabel, _rightCallback);
+		}
+		else {
+			K.setRightNavButton(_rightLabel, null);
+		}
+	};
+
+	return {
+		renderValidBar: function() {
+			renderNavigationBar(true);
+		},
+		renderInvalidBar: function() {
+			renderNavigationBar(false);
+		},
+		render: function(valid) {
+			renderNavigationBar(valid);
+		}
+	};
+};
+
+
+ICloudSetup.PurchasedContentPage = function() {
+	var navigationBar;
+
+	return {
+		initialize: function() {},
+
+		nextPage: null,
+
+		getPageId: function() {
+			return "purchased_content_page";
+		},
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+				navigationBar = new ICloudSetup.NavigationBar({
+					subTitle:   "DeviceNotQualifiedPage.subtitle".loc(),
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+					rightCallback: pageController.exitFlow
+				});
+			}
+			return navigationBar;
+		}
+	};
+}();
+
+
+ICloudSetup.SecondFactorSendPage = function() {
+  var navigationBar;
+  return {
+    initialize: function() {},
+    nextPage: function() {
+      return "secondFactorValidate";
+    },
+    getPageId: function() {
+      return "second_factor_send_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "SecondFactorAuth.title".loc(),
+          subTitle: "SecondFactorAuth.subtitle".loc(),
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+          rightCallback: function(){ ICloudSetup.getPageController().nextPage(); }
+        });
+      }
+      return navigationBar;
+    },
+    beforeShowPage: function() {
+      setTimeout(CW.ScrollShadowHints, 50);
+    },
+    beforeExitPage: function() {
+      deviceRadios=document.getElementsByName("challengeDevice");
+      for(var ind=0; ind < deviceRadios.length; ind++) {
+        if(deviceRadios[ind].checked) {
+          hsa_deviceString=deviceRadios[ind].value;
+          break;
+        }
+      }
+      if(hsa_deviceString !== "") {
+        ICloudSetup.SecondFactorValidatePage.sendNewCode();
+        return true;
+      }
+      return false;
+    }
+  };
+}();
+
+ICloudSetup.SecondFactorValidatePage = function() {
+  var navigationBar;
+  var numericWidget;
+  var serverValidatedSecondaryFactor = false;
+  return {
+    initialize: function() {serverValidatedSecondaryFactor=false;},
+    nextPage: "tos",
+    previousPage: "secondFactorSend",
+    getPageId: function() {
+      return "second_factor_validate_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "SecondFactorAuth.title".loc(),
+          subTitle: "SecondFactorAuth.subtitle".loc(),
+          rightCallback: function(){ ICloudSetup.getPageController().nextPage(); }
+        });
+      }
+      return navigationBar;
+    },
+    beforeShowPage: function() {
+      numericWidget = new CW.NumericInputWidget(4);
+      $('#numericWidget').html(numericWidget.element);
+      numericWidget.autoSubmit = true;
+      // when code submits, attempt page advance
+      numericWidget.didSubmit = function(){ ICloudSetup.getPageController().nextPage(); };
+      var device = $('[type=radio]:checked + label .device-info');
+      $('#deviceName').text(device.attr('value'));
+      numericWidget.didChange = function(){ $('#invalidCode, #expiredCode').hide(); };
+    },
+    beforeExitPage: function() {
+      if(serverValidatedSecondaryFactor) return true;
+
+      var code = numericWidget.value;
+      if (code.trim().length===0){
+        numericWidget.focus();
+        return false;
+      }
+      var req = validateCode(hsa_deviceString, code);
+      $('#sendNewCode').addClass('processing'); // show spinner below field while waiting for server
+
+      req.done(function(data) {
+        $('#sendNewCode').removeClass('processing');
+        serverValidatedSecondaryFactor=true;
+        ICloudSetup.getPageController().nextPage();
+      });
+      req.fail(function(data) {
+        $('#sendNewCode').removeClass('processing');
+        var response = JSON.parse(this.xhr.responseText);
+        var errorCode = response.errorCode;
+        numericWidget.reset();
+        numericWidget.focus();
+
+        if(errorCode===-21663) {
+          NativeClient.confirmWithCallback(response.errorMessage, response.errorTitle, null, "OK", function(index) {
+            AppleAccountSetup.dismiss("go-to-login");
+          });
+        }
+        else if(errorCode < -1) {
+          $('#invalidCode').html(response.errorMessage).show();
+        }
+        else {
+          NativeClient.confirmWithCallback("SecondFactorAuth.cannotVerifyIdentityBody", "SecondFactorAuth.cannotVerifyIdentityTitle", null, "OK", function(index) {
+            AppleAccountSetup.dismiss("go-to-login");
+          });
+        }
+      });
+
+      return false;
+    },
+    sendNewCode: function() {
+      if(numericWidget) numericWidget.reset();
+      var req = sendCode(hsa_deviceString);
+      $('#sendNewCode').addClass('processing');
+      req.done(function(data) {
+        $('#sendNewCode').removeClass('processing');
+        if(numericWidget) numericWidget.focus();
+      });
+      req.fail(function(data) {
+        $('#sendNewCode').removeClass('processing');
+        var response = JSON.parse(this.xhr.responseText);
+        var errorCode = response.errorCode || 0;
+
+        if(errorCode===-21666){
+          NativeClient.confirmWithCallback("SecondFactorAuth.sentCodeTooManyTimesBody", "SecondFactorAuth.sentCodeTooManyTimesTitle", null, "OK", function(index) {
+            AppleAccountSetup.dismiss("go-to-login");
+          });
+        }else{
+          NativeClient.confirmWithCallback("SecondFactorAuth.verificationCodeNotSentBody", "SecondFactorAuth.verificationCodeNotSentTitle", null, "OK", function(index) {
+            return false;
+          });
+        }
+      });
+    }
+  };
+}();
+
+ICloudSetup.HSA2Validate= function(){
+  var navigationBar;
+  var numericWidget;
+  var serverValidatedHSA2 = false;
+  return {
+    initialize: function() {serverValidatedHSA2=false;},
+    nextPage: "tos",
+    //previousPage: "secondFactorSend",
+    getPageId: function() {
+      return "hsa2_validate_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "Hsa2.title".loc(),
+          subTitle: "Hsa2.subtitle".loc(),
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+          rightCallback: function(){ ICloudSetup.getPageController().nextPage(); }
+        });
+      }
+      return navigationBar;
+    },
+    beforeShowPage: function() {
+      numericWidget = new CW.NumericInputWidget(6);
+      $('#HSA2SecondFactorValidatePage #numericWidget').html(numericWidget.element);
+      numericWidget.autoSubmit = true;
+      // when code submits, attempt page advance
+      numericWidget.didSubmit = function(){ ICloudSetup.getPageController().nextPage(); };
+//      var device = $('[type=radio]:checked + label .device-info');
+//      $('#deviceName').text(device.attr('value'));
+      numericWidget.didChange = function(){ 
+        $('#invalidCode, #expiredCode').hide(); 
+      };
+    },
+    beforeExitPage: function() {
+      if(serverValidatedHSA2) return true;
+
+      var code = numericWidget.value;
+      if (code.trim().length===0){
+        numericWidget.focus();
+        return false;
+      }
+      hsa_deviceString="type=SMS2&id=0";
+      var req = validateCode(hsa_deviceString, code);
+      $('#process').addClass('processing'); // show spinner below field while waiting for server
+
+      req.done(function(data) {
+        $('#process').removeClass('processing');
+        serverValidatedHSA2=true;
+        ICloudSetup.getPageController().nextPage();
+      });
+      req.fail(function(data) {
+        $('#process').removeClass('processing');
+        var response = JSON.parse(this.xhr.responseText);
+        var errorCode = response.errorCode;
+        numericWidget.reset();
+        numericWidget.focus();
+
+        if(errorCode===-21663) {
+          NativeClient.confirmWithCallback(response.errorMessage, response.errorTitle, null, "OK", function(index) {
+            AppleAccountSetup.dismiss("go-to-login");
+          });
+        }
+        else if(errorCode < -1) {
+          if(response.errorMessage) {
+            $('#HSA2SecondFactorValidatePage #invalidCode').html(response.errorMessage).show();
+          } else {
+            $('#HSA2SecondFactorValidatePage #invalidCode').show();
+          }
+          
+        }
+        else {
+          NativeClient.confirmWithCallback("SecondFactorAuth.cannotVerifyIdentityBody", "SecondFactorAuth.cannotVerifyIdentityTitle", null, "OK", function(index) {
+            AppleAccountSetup.dismiss("go-to-login");
+          });
+        }
+      });
+
+      return false;
+    }
+  };
+}();
+
+ICloudSetup.RecoveryKeyPage = function() {
+  var navigationBar;
+  var numericWidget;
+  var serverValidatedRecoveryKey = false;
+  return {
+    initialize: function() {serverValidatedSecondaryFactor=false;},
+    nextPage: "tos",
+    previousPage: "secondFactorSend",
+    getPageId: function() {
+      return "recovery_key_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        if(hasNoTrustedDevices) {
+          navigationBar = new ICloudSetup.NavigationBar({
+            title: "RecoveryKey.title".loc(),
+            subTitle: "RecoveryKey.subtitle".loc(),
+            leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+            rightCallback: function(){ ICloudSetup.getPageController().nextPage(); }
+          });          
+        }
+        else {
+          navigationBar = new ICloudSetup.NavigationBar({
+            title: "RecoveryKey.title".loc(),
+            subTitle: "RecoveryKey.subtitle".loc(),
+            rightCallback: function(){ ICloudSetup.getPageController().nextPage(); }
+          }); 
+        }
+      }
+      return navigationBar;
+    },
+    beforeShowPage: function() {
+      var recoveryKeyField = $('.recoveryKeyField'),
+          recoveryWidget;
+      if($('.recovery-key').length===0){
+        recoveryWidget = new CW.RecoveryKeyWidget("RK-","XXXX-XXXX-XXXX");
+        recoveryKeyField.append(recoveryWidget.element);
+      }
+      setTimeout(function(){recoveryWidget.focus();},0);
+      
+    },
+    beforeExitPage: function() {
+      if(serverValidatedRecoveryKey) return true;
+      var recoveryKeyField = $('.recovery-key input'),
+          recoveryKey = recoveryKeyField.val();
+      if (recoveryKey.length!==17){
+        recoveryKeyField.focus();
+        return false;
+      }
+      var req = validateKey(recoveryKey);
+
+      req.done(function(data) {
+        serverValidatedRecoveryKey = true;
+        ICloudSetup.getPageController().nextPage();
+      });
+      req.fail(function(data) {
+        var response = JSON.parse(this.xhr.responseText);
+        var errorCode = response.errorCode || 0;
+
+        if(errorCode===-21661){
+          $('#invalidRecoveryKey').show();
+        }
+        if(errorCode===-21664){
+          NativeClient.confirmWithCallback("SecondFactorAuth.recoveryKeyTooManyAttemptsBody", "SecondFactorAuth.recoveryKeyTooManyAttemptsTitle", null, "OK", function(index) {
+            return false;
+          });
+        }else{
+          NativeClient.confirmWithCallback("SecondFactorAuth.cannotVerifyIdentityBody", "SecondFactorAuth.cannotVerifyIdentityTitle", null, "OK", function(index) {
+            return false;
+          });
+        }
+      });
+
+      return false;
+    },
+    lostRecoveryKey: function(){
+      NativeClient.confirmWithCallback("SecondFactorAuth.noRecoveryKeyBody", "SecondFactorAuth.noRecoveryKeyTitle", "Skip", "OK", function(index) {
+        if(index===0){ //skip
+          ICloudSetup.getPageController().exitFlow();
+        }else{ //ok
+          return false;
+        }
+      });
+    }
+  };
+}();
+
+
+ICloudSetup.UpdateMailWarningPage = function() {
+  var navigationBar;
+  return {
+    initialize: function() {},
+    nextPage: null,
+    getPageId: function() {
+        return "update_mail_warning_page";
+    },
+
+    beforeShowPage: function(){
+      this.getNavigationBar().render();
+      AppleAccountSetup.disableButtons=true;
+      NativeClient.setLeftNavButton("Back", null);
+      NativeClient.setRightNavButton("Continue", function(){
+        AppleAccountSetup.accountCreateCompleted(ICloudSetup.getAccount().getAppleId(), ICloudSetup.getAccount().getPassword(), window._delegateData);
+      });
+    },
+
+    previousPage: null,
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title:   "GlacierMailWarningPage.title".loc(),
+          subTitle: "",
+          rightLabel:    "Continue".loc(),
+          leftLabel: "Back".loc(),
+          rightCallback: function(){ AppleAccountSetup.dismiss('did-accept-terms'); },
+          leftCallback: function(){ }
+        });
+      }
+      return navigationBar;
+    }
+  };
+}();
+
+
+
+ICloudSetup.DeviceNotQualifiedPage = function() {
+	var navigationBar;
+
+	return {
+		initialize: function() {},
+
+		nextPage: null,
+
+		getPageId: function() {
+			return "device_not_qualified_page";
+		},
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+				navigationBar = new ICloudSetup.NavigationBar({
+					subTitle:   "DeviceNotQualifiedPage.subtitle".loc(),
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+					rightCallback: pageController.exitFlow
+				});
+			}
+			return navigationBar;
+		}
+	};
+}();
+
+
+ICloudSetup.BirthdayPage = function() {
+	var navigationBar;
+
+	var _getPageElements = function() {
+		return [$('#yearSelector'), $('#monthSelector'), $('#daySelector')];
+	};
+	
+  // Localize selector option text from a loc string that contains @@Number@@
+  var localizeSelector = function(selectorId, locString) {
+    $('#'+selectorId).children('option:not(:first-child)').each(function(){
+      var text = $(this).html(),
+          newText = locString.replace('@@Number@@', text); // swap in existing option text for @@Number@@
+      $(this).html(newText);
+    });
+  };
+
+	return {
+		initialize: function() {
+			// Set up the acceptable days for each month.
+			//
+			// Note:  This code is borrowed from the larger core.js; they should be
+			//        refactored to each leverage a single place once we have
+			//        suitable tools.
+			var dateHandlerFunc = function() {
+				var currentValue  = parseInt($("#monthSelector").val(), 10),
+            maxDays       = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][currentValue - 1]  ||  31,
+            $daySelector  = $('#daySelector'),
+            $yearSelector = $('#yearSelector'),
+            yearValue     = $yearSelector.val(),
+            selected      = $daySelector.val();
+
+				// If we know the year and it's not a leap year, then February maxes
+				// out at 28.
+				if (parseInt(currentValue, 10) === 2 && yearValue) {
+					yearValue = parseInt(yearValue, 10);
+					maxDays = yearIsLeapYear(yearValue) ? 29 : 28;
+				}
+
+				$daySelector.find('.varDay').remove();
+				for (var i = 29; i <= maxDays; ++i) {
+					$('<option/>').attr('value', i).addClass('varDay').text(i).appendTo($daySelector);
+				}
+				if (selected.length > 0 && parseInt(selected, 10) > maxDays) {
+					selected = "" + maxDays;
+				}
+				$daySelector.val(selected);
+			};
+			
+			// Localize Birthday Selectors
+      localizeSelector('daySelector', mmejsloc.DayNumbers);
+      localizeSelector('yearSelector', mmejsloc.YearNumbers);
+
+			$("#monthSelector").change(dateHandlerFunc);
+			$("#yearSelector").change(dateHandlerFunc);
+
+			$("#yearSelector").validateOnChange({
+				validations: [{
+					method: "minLen",
+					minLen: 1,
+					errorMsg: "EnterBirthYear".loc(),
+					errorTitle: "EnterYear".loc()
+				},
+				{
+					method: "integer",
+					min: mmesetupconstants.numberOfAllowedYears,
+					errorMsg: "EnterValidYear".loc(),
+					errorTitle: "InvalidYear".loc()
+				}]
+			});
+			$("#daySelector").validateOnChange({
+				validations: [{
+					method: "minLen",
+					minLen: 2,
+					errorMsg: "DayInvalid".loc(),
+					errorTitle: "ChooseDay".loc()
+				}]
+			});
+			$("#monthSelector").validateOnChange({
+				validations: [{
+					method: "minLen",
+					minLen: 2,
+					errorMsg: "MonthInvalid".loc(),
+					errorTitle: "ChooseMonth".loc()
+				}]
+			});
+		},
+
+		itIsTheUsersBirthday: function() {
+			// If it’s the user’s birthday, then we’ll go to the “Happy Birthday!”
+			// page.  Otherwise, we’ll move on to the name and Apple ID page.
+			var chosenMonth = parseInt($("#monthSelector").val(), 10),
+          chosenDay    = parseInt($("#daySelector").val(), 10),
+          now          = new Date();
+
+			return (chosenMonth  &&  chosenDay  &&  (now.getMonth() + 1 === chosenMonth)  &&  (now.getDate() === chosenDay));
+		},
+
+		beforeExitPage: function() {
+			var acc = ICloudSetup.getAccount();
+      // set the date in the account model object
+      acc.setDate($('#daySelector').val(), $('#monthSelector').val(), $('#yearSelector').val());
+      acc.setTimezoneOffset();
+
+      if(!this.isProperAge()){
+        // set some downstream values, because we are not going to the server for this validation
+        acc.isUnder13 = function(){ return true; };
+        ICloudSetup.repairSteps.Under13 = true;
+      }
+      else {
+        acc.isUnder13 = function(){ return false; };
+        ICloudSetup.repairSteps.Under13 = false;
+      }
+
+			return true;
+		},
+
+    beforeShowPage: function() {
+      //call this function to render the title inmediately, otherwise it will be dealyed a bit.//hack
+      this.getNavigationBar().render();
+      window.focus();
+      
+      if(CW.CookieManager.getCookie('hasEnteredChildAge')) {
+        CW.CookieManager.removeCookie('hasEnteredChildAge');
+        // ICloudSetup.repairSteps.Under13 = true;
+//
+//         var cookie = CW.CookieManager.getCookies();
+//         $('#monthSelector').attr('disabled','disabled').find('option[value="'+cookie.birthMonth+'"]').attr('selected','selected');
+//         $('#daySelector').attr('disabled','disabled').find('option[value="'+cookie.birthDay+'"]').attr('selected','selected');
+//         $('#yearSelector').attr('disabled','disabled').find('option[value="'+cookie.birthYear+'"]').attr('selected','selected');
+        
+        if(ICloudSetup.comingFromTOSPage) {
+          //this.showNotEligibleDialog();
+          $('#monthSelector').removeAttr("disabled");
+          $('#daySelector').removeAttr("disabled");
+          $('#yearSelector').removeAttr("disabled");
+        }
+      }
+      else {
+        setTimeout(function(){$("#dateInput select")[0].focus();}, 50);  
+      }
+      
+      return true;
+    },
+
+    //validate the user for proper age
+    isProperAge: function(){
+      var bday = new Date();
+      bday.setFullYear($('#yearSelector').val());
+      bday.setMonth($('#monthSelector').val() - 1);
+      bday.setDate($('#daySelector').val());
+      bday.setHours(0); // No time zone (currently, at least!) has a DST cutover at noon, but some have them at midnight
+      bday.setMinutes(0);
+      bday.setSeconds(0);
+      bday.setMilliseconds(0);
+
+      var now = new Date();
+      var cutoffDate = new Date();
+      cutoffDate.setHours(0); // No time zone (currently, at least!) has a DST cutover at noon, but some have them at midnight
+      cutoffDate.setFullYear(now.getFullYear() - mmesetupconstants.minAgeInYears);
+      cutoffDate.setMonth(now.getMonth());
+      cutoffDate.setDate(now.getDate());
+      cutoffDate.setMinutes(0);
+      cutoffDate.setSeconds(0);
+      cutoffDate.setMilliseconds(0);
+
+      //compare ages- the birthday should be before (less than) the cutoff date
+      return bday.getTime() <= cutoffDate.getTime();
+    },
+    
+    showNotEligibleDialog: function(){
+      NativeClient.confirmWithCallback("NotEligible.label", "NotEligible.title", null, "OK", function() {
+        ICloudSetup.getPageController().goToPage('tos');
+      });
+    },
+
+    /**
+     Depending on whether it is currently the user’s birthday, we’ll either show a special message
+     page or move along to the name and Apple ID page.
+     */
+    nextPage: function() {
+      if(ICloudSetup.repairSteps.InvalidName){
+        return 'updateIDForm';
+      } else if (ICloudSetup.repairSteps.NoSecurityQuestion){
+        return 'securityQuestions';
+      } else if (ICloudSetup.repairSteps.OneSecurityQuestion){
+        return 'updateQuestionsPermission';
+      }
+
+      if(!this.isProperAge() || ICloudSetup.repairSteps.NoBirthday || CW.CookieManager.getCookie('hasEnteredChildAge')) {
+        CW.CookieManager.setCookie('hasEnteredChildAge', true);
+        CW.CookieManager.setCookie('birthMonth',        $('#monthSelector').val());
+        CW.CookieManager.setCookie('birthDay',          $('#daySelector').val());
+        CW.CookieManager.setCookie('birthYear',         $('#yearSelector').val());
+        
+        this.showNotEligibleDialog();
+        
+        return 'birthday';
+      }
+      
+      else if (this.itIsTheUsersBirthday()) {
+        return 'happyBirthday';
+      }
+      
+      else {
+        return 'nameAndChooseAppleId';
+      }
+		},
+
+    previousPage: function(){
+      if(ICloudSetup.repairSteps.AppleIdNotAnEmail){
+        return 'updateID';
+      }
+
+      ICloudSetup.getPageController().exitFlow();
+      return null;
+    },
+
+    getPageId: function() {
+      return "birthday_page";
+    },
+
+    getElements: function() {
+      return _getPageElements();
+    },
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: ICloudSetup.repairSteps.NoBirthday ?  "UpdateAppleID.title".loc() : "NewAppleID.title".loc(),
+					subTitle:     "BirthdayPage.subtitle".loc()
+				});
+			}
+			return navigationBar;
+		}
+	};
+}();
+
+
+
+ICloudSetup.HappyBirthdayPage = function() {
+	var navigationBar;
+
+	return {
+		initialize: function() {},
+
+		nextPage: 'nameAndChooseAppleId',
+
+		getPageId: function() {
+			return "happy_birthday_page";
+		},
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+				navigationBar = new ICloudSetup.NavigationBar({
+					subTitle: "ItsYourBirthdayPage.subtitle".loc()
+				});
+			}
+			return navigationBar;
+		}
+	};
+}();
+
+
+
+ICloudSetup.NameAndChooseAppleId = function() {
+	var navigationBar;
+  var existingEmailVisible = true;
+	var _getPageElements = function() {
+		if (existingEmailVisible) {
+			return [$('#existingEmailField'), $('#firstNameField'), $('#lastNameField')];
+		}
+		else {
+			return [$('#meDotComEmailField'), $('#firstNameField'), $('#lastNameField')];
+		}
+	};
+
+  var _serverHasSuccessfullyValidatedUs = false,
+      _shouldAdvancePage = false;
+
+	return {
+		nextPage: 'securityInformation',
+
+		initialize: function() {
+      var emailPrefsShouldBeEnabledByDefault = ICloudSetup.MarketingEmailPref;
+      if(!emailPrefsShouldBeEnabledByDefault) $('#emailUpdatesCheckbox').removeAttr('checked');
+      
+      // We want to update the enabled state of the Next button as the user
+      // types, and only display minimum-length-style error messages after the
+      // user tabs out of the field.
+			var firstNameField = $("#firstNameField");
+      firstNameField.validateOnChange({
+				validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.FirstNameTooLong".loc(),
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'validateAnswerNotAllowedCharacters',
+          errorMsg: "FirstNameTitle".loc()
+        },
+        {
+          method:   'validateNameCharacters',
+          errorMsg: mmejsloc.NameContainsIllegalCharacter
+        }
+        ]
+			});
+
+      firstNameField.validateOnBlur({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          errorMsg: " ",
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.FirstNameTooLong".loc(),
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:   'validateAnswerNotAllowedCharacters',
+          errorMsg: "FirstNameTitle".loc(),
+          alwaysShowError: true
+        },
+        {
+          method:   'validateNameCharacters',
+          errorMsg: mmejsloc.NameContainsIllegalCharacter,
+          alwaysShowError: true
+        }
+        ]
+      });
+
+      var lastNameField = $("#lastNameField");
+			lastNameField.validateOnChange({
+				validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.LastNameTooLong".loc(),
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'validateAnswerNotAllowedCharacters',
+          errorMsg: "LastNameTitle".loc()
+        },
+        {
+          method:"validateNameCharacters",
+          errorMsg: mmejsloc.NameContainsIllegalCharacter
+        }
+        ]
+      });
+
+      lastNameField.validateOnBlur({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          errorMsg: " ",
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.LastNameTooLong".loc(),
+          alwaysShowError: true,
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'validateAnswerNotAllowedCharacters',
+          errorMsg: "LastNameTitle".loc(),
+          alwaysShowError: true
+        },
+        {
+          method:   'validateNameCharacters',
+          errorMsg: mmejsloc.NameContainsIllegalCharacter,
+          alwaysShowError: true
+        }
+        ]
+      });
+
+      //clean up the name input by preventing/removing leading and trailing spaces
+      preventLeadingSpaces(firstNameField);
+      preventLeadingSpaces(lastNameField);
+      firstNameField.bind('blur', function(evt){
+        firstNameField.val(firstNameField.val().trim());
+      });
+      lastNameField.bind('blur', function(evt){
+        lastNameField.val(lastNameField.val().trim());
+      });
+
+      var existingEmailField = $("#existingEmailField");
+      existingEmailField.validateOnChange({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 3,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            alwaysShowError: true,
+            errorMsg: "EmailTooLong".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutivePeriods',
+            errorMsg: "EmailTwoPeriodsMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutiveUnderscores',
+            errorMsg: "EmailTwoUnderscoresMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',
+            errorMsg: "EmailInvalid".loc(),
+            stopValidatingOnFailure: true
+          }
+        ]
+      });
+			existingEmailField.validateOnEvent({
+				validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 3,
+            // alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            alwaysShowError: true,
+            errorMsg: "EmailTooLong".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutivePeriods',
+            errorMsg: "EmailTwoPeriodsMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutiveUnderscores',
+            errorMsg: "EmailTwoUnderscoresMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',
+            errorMsg: "EmailInvalid".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }
+        ]
+			}, 'delayedChecks'); //custom event which we will trigger after a delay
+
+      var meDotComEmailField = $('#meDotComEmailField');
+      meDotComEmailField.validateOnChange({
+        validations: [
+          {
+            method: 'validateMinMailIdLength',
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateMaxMailIdLength',
+            stopValidatingOnFailure: true,
+            alwaysShowError: true,
+            errorMsg: "EmailMeDotComTooLongMsg".loc()
+          },
+
+          //FIXME: Does this check even work?
+          {
+            method:   'validateNewUserEnteredEmailWeak',
+            stopValidatingOnFailure: true,
+            alwaysShowError: true,
+            errorMsg: "MeDotComEmailInvalidMsg".loc()
+          },
+          {
+            method:   'validateFirstCharacter',
+            stopValidatingOnFailure: true,
+            alwaysShowError: true,
+            errorMsg:  "EmailFirstNotLetterMsg".loc()
+          },
+          {
+            method:   'validateLastCharacter',
+            errorMsg: 'EmailLastNotLetterOrNumberMsg'.loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutivePeriods',
+            errorMsg: "EmailTwoPeriodsMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateConsecutiveUnderscores',
+            errorMsg: "EmailTwoUnderscoresMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateNoDash',
+            errorMsg: "EmailNoDashMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateNoPlus',
+            errorMsg: "EmailNoPlusMsg".loc(),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateNewUserEnteredEmail',
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }
+        ]
+      });
+      
+      // block the spacebar on email inputs
+      $('#existingEmailField, #meDotComEmailField').bind('keydown', function(e){
+        var code = (e.keyCode || e.which);
+        if(code === 32) {
+          return false; 
+        }
+      });
+
+      var serverValidation =  function(evt){
+        firstNameField.trigger('blur');
+        lastNameField.trigger('blur');
+        _serverHasSuccessfullyValidatedUs = false;
+
+        if(typeof _validateEmailServerXHR !== 'undefined' && _validateEmailServerXHR.readyType !== 4){
+          _validateEmailServerXHR.abort();
+        }
+        if(typeof validationTimeout !== 'undefined'){ clearTimeout(validationTimeout); }
+        validationTimeout = setTimeout(function(){
+          var target = $(evt.target),
+              isMeDotCom = target.attr('id') === 'meDotComEmailField',
+              emailAddr = target.val(),
+              account = ICloudSetup.getAccount(),
+              setupClient = ICloudSetup.getSetupClient(),
+              method;
+          
+          // ensure data entry for validation failures exists on the field
+          if(!target.data('_validationFailures')) {
+            target.data('_validationFailures', []);
+          }
+
+          //do not run server check if other checks are failing
+          if(target.data('_validationFailures').length > 0){ return; }
+
+          //run server account check
+          account.setIsMeDotCom(isMeDotCom);
+          account.setAppleId(emailAddr + (isMeDotCom ? mmesetupconstants.emailDomain : ''));
+          method = isMeDotCom ?  validateEmailMeDotComServer : validateEmailServer;
+          _validateEmailServerXHR = method(null, emailAddr, target, function(successful){
+            setupClient.setRequestInFlight(false);
+            if(successful){
+              _serverHasSuccessfullyValidatedUs = true;
+              if(_shouldAdvancePage){ ICloudSetup.getPageController().nextPage(); }
+            }
+          });
+        }, ICloudSetup.check_availability_delay);
+      };
+ 
+      // setup a timeout to validate and display the error to the user after 1 second
+      // this prevents a jarring experience if the user is still typing
+      // we assume 1 second will be enough time between keypresses for most users
+      var delay;
+      var inputHandler = function(evt){
+        var target = $(evt.target);
+        _serverHasSuccessfullyValidatedUs = false;
+        _shouldAdvancePage = false;
+        // always clear the delay timer for checks on new input
+        if(delay){ clearTimeout(delay); }
+        delay = setTimeout(function(){
+          target.trigger('delayedChecks');
+          setTimeout(function(){
+            target.trigger('serverValidation');
+          },1);
+         },1000);
+      };
+
+      meDotComEmailField.bind('input', inputHandler);
+      existingEmailField.bind('input', inputHandler);
+      meDotComEmailField.bind('serverValidation', serverValidation);
+      existingEmailField.bind('serverValidation', serverValidation);
+
+      this.mousedownHandler = function(evt){
+
+        var target = $(evt.target);
+
+        //look for links
+        if(target.hasClass('validation-link') || target.attr('href')){
+          this.clickedOnValidationLink = true;
+          //do not follow the link
+          target.click(function(evt){
+            evt.preventDefault();
+            evt.stopPropagation();
+          });
+
+          //handle suggestions
+          if(target.attr('href') === '#suggestions'){
+            var account = ICloudSetup.getAccount(),
+                suggestions = account.suggestions;
+
+            account.suggestionsIndex = account.suggestionsIndex+1 || 0;
+            var suggestion = suggestions[account.suggestionsIndex];
+            if(!suggestion){
+              suggestion = suggestions[0];
+              account.suggestionsIndex = 0;
+            }
+            suggestion = suggestion.split('@')[0];
+            meDotComEmailField.val(suggestion);
+            var newMessage = " ";
+            if(suggestions.length > 1){
+              newMessage = [
+                "<a href=\"#suggestions\" class='validation-link'>",
+                "Validation.EmailAddressSuggestion2".loc(),
+                "</a>"].join('');
+            }
+
+            meDotComEmailField.data('_validationFailures', []);
+            ICloudSetup.getPageController().updateErrorDisplayForField(meDotComEmailField, true, true, newMessage);
+
+          } else if(target.attr('href') === '#go-to-iforgot'){
+            AppleAccountSetup.dismiss(target.attr('href').replace(/^#/,''));
+          }
+          return false;
+        }
+      };
+		},
+
+		getElements: function() {
+			return _getPageElements();
+		},
+
+
+    beforeShowPage: function() {
+      //enable mousedown handler
+      $(window).mousedown(this.mousedownHandler);
+      window.focus();
+      setTimeout(function(){$("#name_appleid_page input")[0].focus();}, 500);
+
+      //reset validation flag.
+      _serverHasSuccessfullyValidatedUs = false;
+      _shouldAdvancePage = false;
+
+    },
+
+
+		beforeExitPage: function() {
+      var setupClient    = ICloudSetup.getSetupClient(),
+          pageController = ICloudSetup.getPageController();
+          
+      var body = $('body');
+      var isYosemiteOrAbove = true;
+
+      var account = ICloudSetup.getAccount();
+      _shouldAdvancePage = true;
+      account.setFirstName($('#firstNameField').val());
+      account.setLastName($('#lastNameField').val());
+      
+      // Submit email updates checkbox value
+      if (body.hasClass('_10_9') || body.hasClass('_10_8')) isYosemiteOrAbove = false;
+      account.setEmailUpdates($('#emailUpdatesCheckbox').is(":checked"), isYosemiteOrAbove);
+      
+      if (!setupClient.isRequestInFlight() && !_serverHasSuccessfullyValidatedUs) {
+        // save fields to model object
+        var isMeDotCom = $('#meDotComEmailFields').is(':visible');
+
+        if(isMeDotCom){
+          $('#meDotComEmailField').trigger('serverValidation', true);
+        } else {
+          $('#existingEmailField').trigger('serverValidation', true);
+        }
+      }
+
+      // We don't want to let the user continue until we have heard back from
+      // the server.
+      this.getNavigationBar().renderInvalidBar();
+      //disable the mousedownhandler for other pages
+      if(_serverHasSuccessfullyValidatedUs){ $(window).unbind('mousedown', this.mousedownHandler); }
+			return !!_serverHasSuccessfullyValidatedUs;
+		},
+
+
+		getPageId: function() {
+			return "name_appleid_page";
+		},
+
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+				var pageController = ICloudSetup.getPageController();
+				navigationBar = new ICloudSetup.NavigationBar({
+					subTitle: "NameAndAppleIdPage.subtitle".loc()
+				});
+			}
+			return navigationBar;
+		},
+
+    toggleAppleID: function(){
+      var meDotComEmailField = $('#meDotComEmailField'),
+          existingEmailField = $('#existingEmailField');
+
+      meDotComEmailField.parents('.row.email').toggle(existingEmailVisible);
+      existingEmailField.parents('.row.email').toggle(!existingEmailVisible);
+      $('#newAppleIDInstruction').toggle(!existingEmailVisible);
+      $('#existingAppleIDInstruction').toggle(existingEmailVisible);
+      
+      var newCurrentField = $('input:visible', '.row.email');
+      newCurrentField.focus();
+      
+      // run validation on new field if it's not empty
+      if (newCurrentField.val() !== '') {
+        newCurrentField.focus().trigger('delayedChecks');
+        setTimeout(function() {
+          newCurrentField.trigger('serverValidation');        
+        },1);
+      }
+      
+      existingEmailVisible = !existingEmailVisible;
+    }
+	};
+
+}();
+
+//Convinience methods for links in NameAndChooseAppleId page
+ICloudSetup.goToLogin = function() {
+  AppleAccountSetup.dismiss('go-to-login');
+};
+
+ICloudSetup.changeEmailPage = function() {
+  ICloudSetup.getPageController().goToPage('changeEmailPage');
+  AppleAccountSetup.changingEmailAddress = true;
+  return false;
+};
+//END Convinience methods for links in NameAndChooseAppleId page
+
+
+ICloudSetup.SecurityInformationPage = function() {
+	var navigationBar;
+
+  //Note that stopValidatingOnFailure: gets added at the end.
+  var passwordValidations = [
+        {
+          method:   'validatePasswordNotEmpty',
+          errorMsg: "EnterPassword".loc()
+        },
+        {
+          method:   'validatePasswordNotTooShort',
+          errorMsg: "PasswordTooShort".loc()
+        },
+        {
+          method: "validatePasswordIsStandardASCII",
+          errorMsg: "IllegalPasswordCharacter".loc()
+        },
+        {
+          method:      'validateAppleIdDoesNotMatchPassword',
+          errorMsg:    "PasswordCannotBeAppleID".loc(),
+          againstEval: 'ICloudSetup.getAccount().getAppleId()'
+        },
+        {
+          method:   'validatePasswordHasCapitalLetter',
+          errorMsg: "PasswordMustContainUppercase".loc()
+        },
+        {
+          method:   'validatePasswordHasLowerCaseLetter',
+          errorMsg: "PasswordMustContainLowercase".loc()
+        },
+        {
+          method:   'validatePasswordHasDigit',
+          errorMsg: "PasswordMustContainNumber".loc()
+        },
+        {
+          method:   'validatePasswordDoesntContainThreeConsecutiveChars',
+          errorMsg: "PasswordHasIdenticalConsecutiveChars".loc()
+        }
+      ].map(function(validation){ validation.stopValidatingOnFailure = true; return validation;});
+
+	return {
+		nextPage: 'securityQuestions',
+
+		initialize: function() {
+      this.initPasswordFields();
+      this.initRecoveryField();
+		},
+
+    initRecoveryField: function(){
+      var recoveryEmailField = $('#recoveryEmailField');
+
+      var recoveryEmailValidations = [
+            {
+              method:   'validateAppleIdMaxLength',
+              maxLen:   320,
+              errorMsg: "EmailTooLong".loc(),
+              alwaysShowError: true,
+              stopValidatingOnFailure: true
+            },
+            {
+              method:   'validateEmail',
+              errorMsg: "EmailInvalid".loc(),
+              stopValidatingOnFailure: true
+            },
+            {
+              method: 'emailDoesNotMatchAppleID',
+              errorMsg: "EmailCannotBeTheSameAsAppleID".loc(),
+              alwaysShowError: true,
+              stopValidatingOnFailure: true
+            }
+          ];
+
+      var delayedChecks;
+      var inputHandler = function(evt){
+        var target = $(evt.target),
+            value = target.val().trim();
+
+        if(value){
+          // silently validate immediately to disable the continue button
+          validateElement(recoveryEmailField,recoveryEmailValidations);
+
+          validations = $.extend(true, [], recoveryEmailValidations);
+          validations.map(function(v){ v.alwaysShowError = true; return v; });
+          validateElement(recoveryEmailField,validations);
+
+
+        } else {
+          // If the field value is empty, then we need to mark the field as valid.
+          // The easiest way to do that is to revalidate with a method that will
+          // always mark the field as valid
+          validateElement(recoveryEmailField,[ {
+            method: 'validateAppleIdMinLength',
+            minLen: 0,
+            stopValidatingOnFailure: true
+          }]);
+        }
+      }.bind(this);
+
+
+      recoveryEmailField.bind('input',inputHandler);
+    },
+
+    initPasswordFields: function(){
+      // Note:  For many of these, we intentionally validate on change but only
+      //        show the user the error message on blur.  (For things like "too
+      //        short", it's really annoying to pester as he/she is typing.)
+
+      var passwordField = $("#passwordField");
+      passwordField.validateOnChange({
+        validations: passwordValidations
+      });
+
+      var blurValidations = passwordValidations;
+      passwordField.validateOnBlur({
+        validations: blurValidations.map(function(v){
+          var validation = {alwaysShowError: true};
+          $.extend(validation, v);
+          return validation;
+        })
+      });
+      var verifyPasswordField = $("#verifyPasswordField");
+      verifyPasswordField.validateOnBlur({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          errorMsg: "PasswordConfirmation".loc(),
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:        'validatePasswordMatch',
+          errorMsg:      "Validation.PasswordsDoNotMatch".loc(),
+          against:       "#passwordField",
+          alwaysShowError: true
+        }
+        ]
+      });
+
+      //once the passwords match, sync them up:
+      function bothPasswordFieldsAreValid(){
+        return passwordField.data('_validationFailures') &&
+               passwordField.data('_validationFailures').length === 0 &&
+               verifyPasswordField.data('_validationFailures') &&
+               verifyPasswordField.data('_validationFailures').length === 0;
+      }
+      var _currentlyMatchingPasswords = false,
+          _verifyPasswordFieldDidBlur = false;
+      passwordField.bind('input',function(){
+        if(verifyPasswordField.val() !== ''){
+          validateElement(verifyPasswordField, [{
+            method:        'validatePasswordMatch',
+            errorMsg:      "Validation.PasswordsDoNotMatch".loc(),
+            against:       "#passwordField",
+            alwaysShowError: true
+          }]);
+          validateElement(passwordField, [{
+            method:        'validatePasswordMatch',
+            against:       "#verifyPasswordField"
+          }]);
+          if(bothPasswordFieldsAreValid()){
+            _currentlyMatchingPasswords = true;
+          }else{
+            _currentlyMatchingPasswords = false;
+          }
+        }
+      });
+      verifyPasswordField.bind('input', function(){
+        if(verifyPasswordField.val() === passwordField.val()){
+          _currentlyMatchingPasswords = true;
+        } else {
+          _currentlyMatchingPasswords = false;
+        }
+        if(_currentlyMatchingPasswords || _verifyPasswordFieldDidBlur){
+          _verifyPasswordFieldDidBlur = false;
+          validateElement(verifyPasswordField, [{
+            method:        'validatePasswordMatch',
+            against:       "#passwordField",
+            errorMsg:      "Validation.PasswordsDoNotMatch".loc(),
+            alwaysShowError: true
+          }]);
+          validateElement(passwordField, [{
+            method:        'validatePasswordMatch',
+            against:       "#verifyPasswordField"
+          }]);
+        }
+      });
+      verifyPasswordField.blur(function(){
+        _verifyPasswordFieldDidBlur = true;
+        if(bothPasswordFieldsAreValid()){
+            _currentlyMatchingPasswords = true;
+        }
+        if(verifyPasswordField.val() !== passwordField.val()){
+            _currentlyMatchingPasswords = false;
+        }
+      });
+
+      passwordField.blur(function(){
+        if(verifyPasswordField.val() !== ''){
+          verifyPasswordField.trigger('blur');
+        }
+      });
+    },
+
+    beforeShowPage: function() {
+      window.focus();
+      setTimeout(function(){$("#passwordField")[0].focus();}, 500);
+
+      // triggering the recovery email field input will mark it as valid if
+      // there is no input, and validate it if there has already been input
+      $('#recoveryEmailField').trigger('input');
+
+      //reset validation flag.
+      _serverHasSuccessfullyValidatedUs = false;
+    },
+
+
+    beforeExitPage: function() {
+      var setupClient = ICloudSetup.getSetupClient(),
+          account     = ICloudSetup.getAccount(),
+          recoveryEmailField = $('#recoveryEmailField'),
+          recoveryEmail = recoveryEmailField.val().trim();
+
+      if(recoveryEmail){
+        validateElement(recoveryEmailField,[{
+          method:   'validateAnswerMinLength',
+          minLen:   1,
+          errorMsg: "EnterAnswerToSecurityQ".loc(),
+          alwaysShowError: true
+        }]);
+        var validationFailures = recoveryEmailField.data('_validationFailures');
+        if(!validationFailures || validationFailures.length === 0){
+          account.setRecoveryEmail(recoveryEmail);
+        }
+      }
+
+      account.setPassword($('#passwordField').val());
+
+      if (!_serverHasSuccessfullyValidatedUs) {
+        $.ajax({
+          type: "POST",
+          timeout: mmesetupconstants.ajaxTimeout,
+          processData: false,
+          url: encodeURI("/setup/web/check_availability/XXXXFF"),
+          data: "password="+encodeURIComponent(account.getPassword())+"&appleId="+encodeURIComponent(account.getAppleId()),
+          beforeSend: function(xhr) {
+            setupClient.setRequestInFlight(true);
+            console.debug("  -  about to call 'check_availability_password' on server…");
+          },
+          success: function(data, textStatus, xhr) {
+            console.debug("  -  success calling 'check_availability_password'");
+            ICloudSetup.getSetupClient().setRequestInFlight(false);
+            if (!data.success) {
+              if (data.message) console.error("Error validating password:  " + data.message);
+
+              // Translate the errors returned from the server into validation
+              // data structures that we can then use to display to the user.
+              var passwordErrorCode = data.passwordErrorCode;
+              if (passwordErrorCode !== 0) {
+                $('#passwordField').data("_validationFailures", [{
+                  source:   "server",
+                  errorMsg: data.message
+                }]);
+                $('#verifyPasswordField').data("_validationFailures", [{
+                  source:   "server",
+                  errorMsg: " "
+                }]);
+              }
+
+              this.getElements().forEach(function(elem) {
+                ICloudSetup.getPageController().updateErrorDisplayForField(elem, passwordErrorCode !== 0, true);
+              });
+            }
+            else {
+              // Allow the user to continue!
+              _serverHasSuccessfullyValidatedUs = true;
+
+              ICloudSetup.getPageController().nextPage();
+            }
+          }.bind(this),
+          error: function(xhr, textStatus, errorThrown) {
+            console.debug("  -  error calling 'check_availability_password'");
+
+            // Since the validation call itself (as opposed to the validation)
+            // has failed, there's nothing we can really do except to let the
+            // user continue and hope that there is no problem with the
+            // account.  (If there is, the creation will ultimately fail.)
+            _serverHasSuccessfullyValidatedUs = true;
+            ICloudSetup.getPageController().nextPage();
+          },
+          complete: function() {
+            console.debug("  -  completed calling 'check_availability_password'");
+            ICloudSetup.getSetupClient().setRequestInFlight(false);
+          }
+        });
+      }
+
+      this.getNavigationBar().renderInvalidBar();
+      return !!_serverHasSuccessfullyValidatedUs;
+		},
+
+		getPageId: function() {
+			return "security_info_page";
+		},
+
+    getElements: function() {
+    	// We do not want to consider the recoveryEmailField an ‘element’
+    	// for validation if it has no current value.
+    	var ret;
+    	if($('#recoveryEmailField').val().trim()) {
+    	  ret = [$('#passwordField'), $('#verifyPasswordField'), $('#recoveryEmailField')];
+    	}
+    	else {
+    	  ret = [$('#passwordField'), $('#verifyPasswordField')];
+    	}
+    	return ret;
+    },
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+				var pageController = ICloudSetup.getPageController();
+				navigationBar = new ICloudSetup.NavigationBar({
+					subTitle: "SecurityInfoPage.subtitle".loc()
+				});
+			}
+			return navigationBar;
+		}
+	};
+
+} ();
+
+ICloudSetup.SecurityQuestionsPage = function() {
+
+  return {
+
+    previousPage: function () {
+      var prevPage = 'securityInformation';
+
+      if(ICloudSetup.repairSteps.NoSecurityQuestion){
+        if(ICloudSetup.repairSteps.NoBirthday) {
+          prevPage = 'birthday';
+        } 
+        else if (ICloudSetup.repairSteps.AppleIdNotAnEmail) {
+          if (ICloudSetup.repairSteps.InvalidName) {
+            prevPage = 'updateIDForm';
+          }
+          else {
+            prevPage = 'updateID';  
+          }          
+        }
+        else if (ICloudSetup.repairSteps.InvalidName) {
+          prevPage = 'updateIDForm';
+        }
+        else {
+          ICloudSetup.getPageController().exitFlow();
+          prevPage = null;
+        }
+      }
+      else if (ICloudSetup.repairSteps.OneSecurityQuestion) {
+        prevPage = 'updateQuestionsPermission';
+      } 
+      return prevPage;
+    },
+
+    nextPage: function(){
+      if((ICloudSetup.repairSteps.OneSecurityQuestion || ICloudSetup.repairSteps.NoSecurityQuestion) && ICloudSetup.repairSteps.ShowRescueEmail){
+        return 'updateRescueEmail';
+      }
+      return 'tos';
+    },
+
+    initialize: function() {
+      for(var idx=1; idx <= 3; idx++){
+        this.initQuestionField(idx);
+      }
+    },
+
+    initQuestionField: function(fieldNumber){
+
+      var questionSelector = $("#questionSelector"+fieldNumber),
+          answerField = $("#answerField"+fieldNumber),
+          qHTML = this.questionsHTML(fieldNumber);
+
+      //inject the question's options dynamically
+      questionSelector.html(qHTML);
+
+      questionSelector.validateOnChange({
+        validations: [{
+          minLen: 1,
+          method: "minLen",
+          errorMsg: "ChooseSecurityQuestion".loc(),
+          errorTitle: "SecurityQuestionTitle".loc(),
+          alwaysShowError: true
+        },
+        {
+          method: "maxLen",
+          maxLen: 128,
+          errorMsg: "SecurityQuestionTooLong".loc(),
+          errorTitle: "InvalidSecurityQuestion".loc(),
+          alwaysShowError: true
+        },
+        {
+          method: "validateQuestionDoesNotMatchAnswerBuddy",
+          errorMsg: "QuestionAnswerCannotBeSame".loc(),
+          question: "#questionSelector"+fieldNumber,
+          answer:  "#answerField"+fieldNumber,
+          showMessageOn: "#answerField"+fieldNumber,
+          alwaysShowError: true
+        }]
+      });
+
+      questionSelector.bind('change', function(){
+        $(answerField).focus();
+        //revalidate the answer field when the question changes
+        if(answerField.val()){
+          answerField.trigger('blur');
+        }
+      });
+
+      //revalidate that answers are not the same, whenever a field changes
+      var otherAnswer1 = '#answerField'+(1+(fieldNumber+1)%3),
+          otherAnswer2 = '#answerField'+(1+(fieldNumber)%3);
+
+      answerField.bind('input', function(){
+        var alreadyInvalid = $(otherAnswer1).has('.error') || $(otherAnswer2).has('.error');
+
+        var emptyAnswersExist = false;
+        for(var idx=1; idx <= 3; idx++){
+          if ($("#answerField"+idx).val().length === 0) {
+             emptyAnswersExist = true;
+             break;
+          };
+        };
+
+        if(!emptyAnswersExist && !alreadyInvalid) {
+          validateElement($(otherAnswer1), [{
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+fieldNumber,
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }]);
+
+          validateElement($(otherAnswer1), [{
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  otherAnswer2,
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }]);
+
+          validateElement($(otherAnswer2),[{
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+fieldNumber,
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }]);
+
+          validateElement($(otherAnswer2),[{
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  otherAnswer1,
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          }]);
+        };
+      });
+
+      answerField.validateOnChange({
+        validations: [
+          {
+            method:   'validateAnswerMinLength',
+            minLen:   3,
+            stopValidatingOnFailure: true,
+            errorMsg: "AnswerTooShort".loc()
+          },
+          {
+            method:   'validateAnswerMaxLength',
+            maxLen:   32,
+            errorMsg: "AnswerTooLong".loc()
+          },
+          {
+            method:   'validateAnswerNotAllowedCharacters',
+            errorMsg: "EnterAnswerToSecurityQ".loc()
+          },
+          {
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+(1+(fieldNumber+1)%3),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+(1+(fieldNumber)%3),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method: "validateQuestionDoesNotMatchAnswerBuddy",
+            errorMsg: "QuestionAnswerCannotBeSame".loc(),
+            question: "#questionSelector"+fieldNumber,
+            answer:  "#answerField"+fieldNumber,
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      answerField.validateOnBlur({
+        validations: [
+          {
+            method:   'validateAnswerMinLength',
+            minLen:   3,
+            errorMsg: "AnswerTooShort".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateAnswerMaxLength',
+            maxLen:   32,
+            errorMsg: "AnswerTooLong".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateAnswerNotAllowedCharacters',
+            errorMsg: "EnterAnswerToSecurityQ".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+(1+(fieldNumber+1)%3),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateTwoAnswersNotSame',
+            errorMsg: "SameSecurityAnswerError".loc(),
+            against:  "#answerField"+(1+(fieldNumber)%3),
+            alwaysShowError: true,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateQuestionIsChosen',
+            errorMsg: "ChooseSecurityQuestion".loc(),
+            against:  "#questionSelector"+fieldNumber,
+            showMessageOn: "#questionSelector"+fieldNumber,
+            alwaysShowError: true
+          },
+          {
+            method: "validateQuestionDoesNotMatchAnswerBuddy",
+            errorMsg: "QuestionAnswerCannotBeSame".loc(),
+            question: "#questionSelector"+fieldNumber,
+            answer:  "#answerField"+fieldNumber,
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      preventLeadingSpaces(answerField);
+    },
+
+    questions: function(){
+      //return the cached version
+      if(this._questions) return this._questions;
+
+      var locKeys = Object.keys(macbuddyloc),
+          questions = {};
+
+      locKeys.forEach(function(key, idx){
+        var match = key.match(/SecurityQuestion\.question([\d]*)/);
+        if(match){
+          questions[match[1]] = key.loc();
+        }
+      });
+
+      return (this._questions = questions);
+    },
+
+    questionsHTML: function(questionNum){
+      var questions = this.questions(),
+          allKeys = Object.keys(questions),
+          qKeys = allKeys.slice((questionNum-1)*6,questionNum*6),
+          selectedQs = this.selectedQuestions,
+          qHTML = '<option dir="$rightToLeftKeyword" class="questionOption" value="">'+"SecurityQuestion.placeholder".loc()+'</option>';
+
+      qKeys.forEach(function(qNum, idx){
+        //don't add selected questions
+        qHTML += '<option dir="$rightToLeftKeyword" class="questionOption" value="'+qNum+'">'+questions[qNum]+'</option>';
+      });
+
+      return qHTML;
+    },
+
+    beforeShowPage: function() {
+      window.focus();
+
+      //focus the first question
+      setTimeout(function(){$("#questionSelector1")[0].focus();}, 100);
+      if(ICloudSetup.repairSteps.NoSecurityQuestion){
+        setTimeout(function(){
+          for(var idx=1; idx <= 3; idx++){
+            var qSelector = $("#questionSelector"+idx);
+
+            validateElement(qSelector, [{
+              minLen: 1,
+              method: "minLen",
+              errorMsg: "SecurityQuestionTitle".loc(),
+              alwaysShowError: true
+            }]);
+          }
+        }, 1);
+      }
+
+      //reset validation flag.
+      _serverHasSuccessfullyValidatedUs = false;
+    },
+
+
+    beforeExitPage: function() {
+      var setupClient = ICloudSetup.getSetupClient(),
+          account     = ICloudSetup.getAccount();
+
+      function setQuestionAndAnswer(qNum){
+        var question = $('#questionSelector'+qNum).val(),
+            answerField = $('#answerField'+qNum),
+            trimmedAnswer = answerField.val().trim();
+
+        account.setQuestion(question, qNum);
+
+        //manually validate the length of the answer field after trimming
+        if(!validateMinLength({minLen: 3}, trimmedAnswer)){
+          answerField.trigger('blur'); //triggers full validation and update
+          answerField.focus(); //for user convenience
+          return false;  //do not advance page
+        }
+        account.setAnswer(trimmedAnswer, qNum);
+        return true;
+      }
+
+      // set the question and answer for each question
+      var isValid = true;
+      for(var idx=1; idx <= 3; idx++){
+        if(isValid){
+          isValid = setQuestionAndAnswer(idx);
+        }
+      }
+
+      // if we could set the question and answer,
+      // then we should not exit the page
+      if(!isValid) return false;
+
+      this.getNavigationBar().renderInvalidBar();
+      return true;
+    },
+
+    getPageId: function() {
+      return "security_questions_page";
+    },
+
+    getElements: function() {
+      var elements = [];
+      for(var idx=1; idx <= 3; idx++){
+        elements.push($('#questionSelector'+idx));
+        elements.push($('#answerField'+idx));
+      }
+
+      return elements;
+    },
+
+    getNavigationBar: function() {
+      if (typeof navigationBar === 'undefined') {
+        var title = null,
+            subtitle = "SecurityQuestionsPage.subtitle".loc();
+        if(ICloudSetup.repairSteps.NoSecurityQuestion){
+          title = "UpdateAppleID.title".loc();
+          subtitle = "UpdateAppleID2.subtitle".loc();
+        } else if(ICloudSetup.repairSteps.OneSecurityQuestion){
+          title = "SecurityOptinPage.Title".loc();
+        }
+
+        var needsUpdate = ICloudSetup.repairSteps.NoSecurityQuestion;
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: title,
+          subTitle: subtitle
+        });
+      }
+      return navigationBar;
+    }
+  };
+
+} ();
+
+ICloudSetup.UpdateQuestionsPermission = function(){
+  var navigationBar;
+
+  return {
+      initialize: function() {},
+
+      getPageId: function() {
+          return "update_questions_permission";
+      },
+
+      beforeShowPage: function(){
+        this.getNavigationBar().render();
+      },
+
+      previousPage: function(){
+        if (ICloudSetup.repairSteps.InvalidName){
+          return 'updateIDForm';
+        }
+        else if (ICloudSetup.repairSteps.NoBirthday){
+          return 'birthday';
+        }
+        else if (ICloudSetup.repairSteps.AppleIdNotAnEmail){
+          return 'updateID';
+        }
+
+        AppleAccountSetup.dismiss('go-to-login');
+        return null;
+      },
+
+      nextPage: function(){
+        if(ICloudSetup.optedInToSecurity){
+          return 'securityQuestions';
+        } else {
+          return 'tos';
+        }
+      },
+
+      beforeExitPage: function() {
+        ICloudSetup.optedInToSecurity = $('#addSecurityQuestionField').attr('checked');
+        return true;
+      },
+
+      getNavigationBar: function() {
+          if (navigationBar === undefined) {
+              var pageController = ICloudSetup.getPageController();
+              navigationBar = new ICloudSetup.NavigationBar({
+                  title:   "SecurityOptinPage.Title".loc(),
+                  subTitle: "SecurityOptinPage.Subtitle".loc(),
+                  rightLabel: "Continue".loc(),
+                  leftLabel: "Back".loc()
+                  // rightCallback: function(){ },
+                  // leftCallback: function(){ }
+              });
+          }
+          return navigationBar;
+      }
+  };
+}();
+
+ICloudSetup.UpdateRescueEmail = function(){
+  var navigationBar;
+
+  return {
+      initialize: function() {
+        this.initRecoveryField();
+      },
+      initRecoveryField: function(){
+        var recoveryEmailField = $('#updateRecoveryEmailField');
+
+        var recoveryEmailValidations = [
+            {
+              method:   'validateAppleIdMaxLength',
+              maxLen:   320,
+              errorMsg: "EmailTooLong".loc(),
+              alwaysShowError: true,
+              stopValidatingOnFailure: true
+            },
+            {
+              method:   'validateEmail',
+              errorMsg: "EmailInvalid".loc(),
+              stopValidatingOnFailure: true
+            },
+            {
+              method: 'emailDoesNotMatchAppleID',
+              errorMsg: "EmailCannotBeTheSameAsAppleID".loc(),
+              alwaysShowError: true,
+              stopValidatingOnFailure: true
+            },
+            {
+              method: 'validateEmailNotAppleIdAliases',
+              errorMsg: "iCloudMailAliasesError".loc(),
+              alwaysShowError: true,
+              stopValidatingOnFailure: true
+            },
+            {
+             method: 'validateEmailNotOfficialEmail',
+             errorMsg: "AlternateAppleIDError".loc(),
+             alwaysShowError: true,
+             stopValidatingOnFailure: true
+            }
+        ];
+
+        var delayedChecks;
+        var inputHandler = function(evt){
+          var target = $(evt.target),
+              value = target.val().trim();
+
+          //always clear the timer for delayed checks on new input
+          if(delayedChecks) clearTimeout(delayedChecks);
+
+          if(value){
+            // silently validate immediately to disable the continue button
+            validateElement(recoveryEmailField,recoveryEmailValidations);
+
+            // setup a timeout to display the error to the user after 1 second
+            // this prevents a jarring experience if the user is still typing
+            // we assume 1 second will be enough time between keypresses for most
+            // users
+            delayedChecks = setTimeout(function(){
+              validations = $.extend(true, [], recoveryEmailValidations);
+              validations.map(function(v){ v.alwaysShowError = true; return v; });
+              validateElement(recoveryEmailField,validations);
+            }, 1000);
+
+          } else {
+            // If the field value is empty, then we need to mark the field as valid.
+            // The easiest way to do that is to revalidate with a method that will
+            // always mark the field as valid
+            validateElement(recoveryEmailField,[ {
+              method: 'validateAppleIdMinLength',
+              minLen: 0,
+              stopValidatingOnFailure: true
+            }]);
+          }
+        }.bind(this);
+
+
+        recoveryEmailField.bind('input',inputHandler);
+      },
+
+
+      getPageId: function() {
+          return "update_rescue_email_page";
+      },
+
+      getElements: function() {
+        return [$('#updateRecoveryEmailField')];
+      },
+
+      beforeShowPage: function(){
+        this.getNavigationBar().render();
+        $('#updateRecoveryEmailField').trigger('input');
+      },
+
+      previousPage: 'securityQuestions',
+
+      nextPage: 'tos',
+
+      beforeExitPage: function() {
+        var recoveryEmailField = $('#recoveryEmailField'),
+            recoveryEmail = recoveryEmailField.val().trim();
+
+        if(recoveryEmail){
+          validateElement(recoveryEmailField,[{
+            method:   'validateAnswerMinLength',
+            minLen:   1,
+            errorMsg: "EnterAnswerToSecurityQ".loc(),
+            alwaysShowError: true
+          }]);
+          var validationFailures = recoveryEmailField.data('_validationFailures');
+          if(!validationFailures || validationFailures.length === 0){
+            account.setRecoveryEmail(recoveryEmail);
+          }
+        }
+        return true;
+      },
+
+      getNavigationBar: function() {
+          if (navigationBar === undefined) {
+              var pageController = ICloudSetup.getPageController();
+
+              navigationBar = new ICloudSetup.NavigationBar({
+                  title:   "SecurityOptinPage.Title".loc(),
+                  subTitle: "RecoveryEmailPage.SubTitle".loc(),
+                  rightLabel: "Continue".loc(),
+                  leftLabel: "Back".loc()
+              });
+          }
+          return navigationBar;
+      }
+  };
+}();
+
+ICloudSetup.TOSPage = function() {
+	var navigationBar,
+      isTOSVisible = false,
+      selectedTerms = "",
+      agreedToTOS = false,
+      tosArray = [];
+
+	var getTOSSuccess = function(data) {
+    var account = ICloudSetup.getAccount();
+
+    if (data.acceptDialogString) account.setAcceptDialogString(data.acceptDialogString);
+    account.setTosVersions(data.versions);
+		account.setTosObjects(data.tosObjects);
+
+    // Use the native terms and conditions screen if available
+    if (AppleAccountSetup.showTermsAndConditions) {
+      _showNativeTerms(data);
+    } 
+    else {
+      _drawTOS(data);
+    }
+	};
+
+  var _drawTOS = function (data){
+        var i, obj, title, summary, item,
+        account = ICloudSetup.getAccount(),
+        hasiCloud = false,
+        hasGameCenter = false;
+
+    // reset our terms box:
+    $('#termsbox .scene1 .term-item').hide();
+
+    for (i = 0; i < data.tosObjects.length; i++) {
+      obj = data.tosObjects[i];
+      if(obj.type === 'iCloud'){ hasiCloud = true; }
+      if(obj.type === 'GameCenter'){ hasGameCenter = true; }
+      title = ICloudSetup.Util.unescapeHTML(ICloudSetup.Util.base64Decode(obj.title));
+      summary = ICloudSetup.Util.unescapeHTML(ICloudSetup.Util.base64Decode(obj.summary));
+      item = $('#termsbox .scene1 #'+obj.type);
+      item[0].style.display="block";
+      item.find('.terms-title').text(title);
+      item.find('.terms-summary').text(summary);
+    }
+
+    // update "Important" header with the message specific to the situation
+    // such as no iCloud or no Game Center
+    var header = $('#terms-header-summary');
+
+    if(hasGameCenter && hasiCloud){
+      summary = "TOSLegal.headerSummary".loc();
+    } else if(hasiCloud){
+      summary = "TOSLegal.headerSummaryNoGameCenter".loc();
+    } else {
+      summary = "TOSLegal.headerSummaryNoiCloud".loc();
+    }
+    header.text(summary);
+
+    var items = $('.term-item');
+    for (i = 0; i < items.length; i++) {
+      $(items[i]).find('.arrow')[0].style.top = (items[i].clientHeight-23)/(2)+"px";
+    }
+
+  };
+
+  var _showNativeTerms = function (data) {
+    var decode = ICloudSetup.Util.base64Decode,
+        terms = data.tosObjects.map(function (termsObj) {
+          var ret;
+          var lang = navigator.language.substring(2,0);
+          var type = termsObj.type;
+          
+          ret = {
+            title: decode(termsObj.title),
+            description: decode(termsObj.summary),
+            content: decode(termsObj.content),
+            type: termsObj.type,
+            version: termsObj.version,
+            contentType: "text/html"
+          }
+          
+          // rdar://problem/15815272
+          if(lang === 'ar' || (type === 'OSX' && lang === 'he')) {
+            ret.content = '<div dir="RTL">' + decode(termsObj.content) + '</div>';
+          }
+          return ret;
+        });
+
+      AppleAccountSetup.showTermsAndConditions(terms, function (accepted){
+        console.log('RETURNED FROM SHOWING TERMS', accepted);
+
+        var account = ICloudSetup.getAccount(),
+            tosPage = ICloudSetup.TOSPage;
+
+        if (accepted) {
+          agreedToTOS = true;
+          
+          // Store the agreed-upon TOS on the user's machine
+          account.getTosObjects().forEach(function(tosFile){
+            // skip saving of the OSX TOS.
+            if(tosFile.type != "OSX" && tosFile.type != "Privacy") {
+              var filename = ICloudSetup.Util.base64Decode(tosFile.title).replace(/\s/g,'_') + '.txt',
+                  contents = ICloudSetup.Util.unescapeHTMLNoStrip(ICloudSetup.Util.base64Decode(tosFile.content));
+                  
+                  contents = contents.replace(/<br[^>]*>/g, "\n" );
+              AppleAccountSetup.saveTOS(filename, contents);
+            }
+          });
+
+          // For under-13 accounts, or other skip reasons, we should simply exit the flow
+          if(tosPage.skipAppleID()){
+            AppleAccountSetup.dismiss('did-accept-terms');
+            return;
+
+          // Otherwise, we need to send the account information to the server
+          } else {
+            // If we are updating an existing id
+            if (ICloudSetup.isExistingAppleId) {
+              tosPage.updateAppleIDIfAppropriate();
+
+            // Else we must be creating a new one:
+            } else {
+              tosPage.createAppleId();
+            }
+          }
+        }
+        else {
+          ICloudSetup.getPageController().previousPage();
+        }
+      });
+  };
+
+  //  Returns true if the data string or XML object has a status key of "0" 
+  var _statusIsClean = function(data) {
+    try {
+      var overallStatus;
+      if (typeof data === 'string') {
+        //parse the string with jquery
+        var parsedData = $(data);
+        //loop through all top level parse results, in case there is whitespace or comments
+        for (var idx = 0, len = parsedData.length; idx < len; idx++) {
+          var element = parsedData[idx];
+          // Grab only HTMLElement type nodes
+          if (element instanceof HTMLElement) {
+            // Use jQuery traversal to find the top-level status node
+            overallStatus = $(element).children('dict').children('key:contains("status")').next().html();
+            if(overallStatus){ break; }
+          }
+        }
+      //data is already an xml node:
+      } else {
+        overallStatus = $(data).children('dict').children('key:contains("status")').next().html();
+      }
+
+      // .html() will always return the value as a string
+      return overallStatus === "0"; // 0 means "clean"
+    }
+    // Wrap the parsing in case a parse error of some kind occured. 
+    catch (err) {
+      console.debug("Error parsing server response", err);
+      return false;
+    }
+
+  };
+
+  var onDelegateCreateSuccess = function (data) {
+    console.debug("delegate create success");
+
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    //Dismiss the dialog
+    InternetAccountDialog.closeDialog();
+
+    //The delegate calls completed successfully
+    if (_statusIsClean(data)) {
+
+      //Check if we need to show update OS message
+      if(ICloudSetup.isExistingAppleId && ICloudSetup.repairSteps.ShowUpdateMailWarning) {
+        //store the delegate data for use by the update mail warning page
+        window._delegateData = data;
+        //go to update OS page
+        ICloudSetup.getPageController().goToPage('updateMailWarning');
+      }
+      else if(!ICloudSetup.isExistingAppleId && ICloudSetup.cannotConfigureEmail && ICloudSetup.getAccount().isMeDotCom() ){
+        //store the delegate data for use by the update mail warning page
+        window._delegateData = data;
+        //go to update OS page
+        ICloudSetup.getPageController().goToPage('updateMailWarning');
+      } else {
+        // Otherwise, account create has completed, so trigger the completed action
+        AppleAccountSetup.accountCreateCompleted(ICloudSetup.getAccount().getAppleId(), ICloudSetup.getAccount().getPassword(), data);
+      }
+
+    } else {
+      //The delegate calls failed, do we show a message to the user?
+      //For now, just pass through as if nothing happened:
+      console.debug('Delegates did not create cleanly.');
+      AppleAccountSetup.accountCreateCompleted(ICloudSetup.getAccount().getAppleId(), ICloudSetup.getAccount().getPassword(), data);
+    }
+  };
+
+  var onAppleIdSuccess = function(data){
+    var jsonObject = ICloudSetup.Util.parseStatusMessage(data);
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    if (jsonObject["status"] === "0") {
+      console.debug("Successfully created or updated Apple ID");
+      var account = ICloudSetup.getAccount(),
+          newAppleId = account.getNewAppleId();
+      
+      if(newAppleId !== null && newAppleId.length > 0) {
+        // overwriting old apple id with new apple id
+        console.log("overwriting old apple id: " + account.getAppleId() +
+                    " with new appleid: " + newAppleId);
+        account.setAppleId(newAppleId);
+      }
+
+      ICloudSetup.getSetupClient().createDelegates(ICloudSetup.getAccount(), onDelegateCreateSuccess, onDelegateCreateFailure);
+    }
+    else {
+      console.error("Error creating Apple ID: " + jsonObject["status-message"]);
+
+      //Setup error display on next page
+      ICloudSetup.accountCreateError = true;
+      $('#creatingView')[0].style.display="none";
+      $('#errorView')[0].style.display="block";
+      $('#errorLabelText').html(jsonObject["status-message"]);
+      $('#errorLabelText2').html("");
+
+      //Dismiss the dialog
+      InternetAccountDialog.closeDialog();
+      // Go to next page
+      ICloudSetup.getPageController().nextPage();
+    }
+  };
+
+  var onAppleIdFailure = onDelegateCreateFailure = function(data){
+    console.error('Could not create AppleID');
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    //Setup failure display on next page
+    ICloudSetup.accountCreateFailure = true;
+    $('#creatingView')[0].style.display="none";
+    $('#errorView')[0].style.display="block";
+
+    //Dismiss the dialog
+    InternetAccountDialog.closeDialog();
+
+    // Go to next page
+    ICloudSetup.getPageController().nextPage();
+  };
+
+	return {
+		nextPage: function(){
+      if(this.skipAppleID()){ AppleAccountSetup.dismiss('did-accept-terms'); } //should exit flow
+      return this.shouldUpdateAppleID() ? 'updateIDProgress' : 'createAppleIdProgress';
+    },
+
+    //currently we're only skipping this because the user is under 13, but there may be other conditions
+    skipAppleID: function(){
+      return ICloudSetup.repairSteps.Under13;
+    },
+
+    //update the ID for the following conditions
+    shouldUpdateAppleID: function(){
+      if(ICloudSetup.AppleID !== '') {
+        return  ICloudSetup.repairSteps.AppleIdNotAnEmail ||
+                ICloudSetup.repairSteps.NoBirthday ||
+                ICloudSetup.repairSteps.InvalidName ||
+                ICloudSetup.repairSteps.NoSecurityQuestion ||
+                ICloudSetup.optedInToSecurity; 
+      } else {
+        return false;
+      }
+    },
+
+		initialize: function() {
+
+      var drillDown = function(){
+        var i, iLen,
+            s1 = $(".scene1"),
+            s2 = $(".scene2"),
+            currentTerms = $("#currentTermsPage"),
+            termsBox = $('#termsbox');
+
+        var stripHTML = function(term){
+          return term.replace(/(.|\n)*<body>/g, "").replace(/<\/body>(.|\n)*/g, "");
+        };
+
+        if(tosArray.length===0){
+          var TOSObjects = ICloudSetup.getAccount().getTosObjects(),
+          tosObj, tmp;
+          for(i=0, iLen=TOSObjects.length; i<iLen; i++){
+            tosObj={};
+            tmp = TOSObjects[i];
+            tosObj.id = tmp.type;
+            tosObj.content = ICloudSetup.Util.unescapeHTMLNoStrip(ICloudSetup.Util.base64Decode(tmp.content));
+            tosArray.push(tosObj);
+            if(i===0)currentTerms[0].innerHTML=tosObj.content;
+            // if(i==0)currentTerms[0].innerHTML=stripHTML(decodeURIComponent(window.sss));
+          }
+        }
+
+        for(i=0, iLen=tosArray.length; i<iLen; i++){
+          if(tosArray[i].id===this.id){
+            selectedTerms = this.id;
+            // currentTerms[0].innerHTML = stripHTML(decodeURIComponent(window.sss));
+            currentTerms[0].innerHTML = tosArray[i].content;
+            break;
+          }
+        }
+        s2[0].scrollTop=0;
+        s2[0].style.visibility="visible";
+        s2[0].style.display="default";
+        currentTerms.attr('tabindex', '0');
+
+        setTimeout(function(){
+          var moveTo = '-500px';
+          if(termsBox.attr('dir') === 'rtl'){ moveTo = '500px'; }
+          s1.css("left", moveTo);
+          s2.css("left", "0px");
+        }, 0);
+
+
+        setTimeout(function(){
+          s1[0].style.visibility="hidden";
+          currentTerms[0].focus();
+        }, 360);
+
+
+        isTOSVisible = true;
+      };
+      $(".term-item").click(drillDown);
+    },
+
+
+		beforeShowPage: function() {
+			// load up the tos from the
+			// server based on the country and the
+			// age of the user
+      agreedToTOS = false;
+
+      var account = ICloudSetup.getAccount(),
+          navBar  = this.getNavigationBar(),
+          under13 = ICloudSetup.isExistingAppleId ? ICloudSetup.repairSteps.Under13 : account.isUnder13();
+
+      // If we are using the native terms and conditions screen, show a spinner
+      if (AppleAccountSetup.showTermsAndConditions) {
+        navBar.renderInvalidBar();
+        $('#tos_page').html('<div class="row row-label create-labels spinner-row"><div class="graphic sprited spinner"></div></div>');
+      }
+
+      // Web terms and conditions screen
+      else {
+        navBar.renderValidBar();
+        window.focus();
+        setTimeout(function(){$(".term-item-header")[0].focus();}, 500);
+      }
+
+      // Download the terms from the server
+      ICloudSetup.getSetupClient().getTosContent(under13, ICloudSetup.country, getTOSSuccess);
+    },
+
+    beforeExitPage: function() {
+      if(!agreedToTOS){
+        var account, includesiCloud, dialogTitleKey, titleReturned;
+
+        account = ICloudSetup.getAccount();
+
+        includesiCloud = $.grep(account.getTosObjects(),function(tosObj, idx){
+          return tosObj.type === 'iCloud';
+        }).length > 0;
+
+        dialogTitleKey = includesiCloud ? "TOSSheet.title" : "TOSSheet.titleNoiCloud";
+        titleReturned = account.getAcceptDialogString();
+
+        // If we have the InternetAccountDialog object, then we can show a nicer
+        // spinner experience inside the dialog itself, instead of a seperate page
+        if (typeof InternetAccountDialog !== 'undefined' && InternetAccountDialog.showDialogWithCallback) {
+          InternetAccountDialog.defaultEnabled = true;
+          InternetAccountDialog.alternateEnabled = true;
+          InternetAccountDialog.progress = false;
+
+          InternetAccountDialog.showDialogWithCallback("", titleReturned ? titleReturned : dialogTitleKey.loc(), mmejsloc.Disagree.loc(), "TOSPage.agree".loc(), function(buttonIdx){
+            if(buttonIdx === 0){ // Disagree
+              InternetAccountDialog.closeDialog();
+
+            } else { //Agree
+              try {
+                agreedToTOS = true;
+
+                // Disable buttons and show spinner
+                InternetAccountDialog.defaultEnabled = false;
+                InternetAccountDialog.alternateEnabled = false;
+                InternetAccountDialog.progress = true;
+
+                //Store the agreed-upon TOS on the user's machine
+                account.getTosObjects().forEach(function(tosFile){
+                  // skip saving of the OSX TOS.
+                  if(tosFile.type != "OSX" && tosFile.type != "Privacy") {
+                    var filename = ICloudSetup.Util.base64Decode(tosFile.title).replace(/\s/g,'_') + '.txt',
+                        contents = ICloudSetup.Util.unescapeHTMLNoStrip(ICloudSetup.Util.base64Decode(tosFile.content));
+                    AppleAccountSetup.saveTOS(filename, contents);
+                  }
+                });
+
+                // For under-13 accounts, or other skip reasons, we should simply exit the flow
+                if(this.skipAppleID()){
+                  InternetAccountDialog.closeDialog();
+                  AppleAccountSetup.dismiss('did-accept-terms');
+                  return;
+
+                // Otherwise, we need to send the account information to the server
+                } else {
+                  // If we are updating an existing id
+                  if (ICloudSetup.isExistingAppleId) {
+                    this.updateAppleIDIfAppropriate();
+
+                  // Else we must be creating a new one:
+                  } else {
+                    this.createAppleId();
+                  }
+                }
+              }
+
+              // if we have an error setting up the account or the delegates,
+              // we should close the dialog and show an error.
+              catch (err) {
+                console.error("Error setting up account");
+                onAppleIdFailure();
+                return false;
+              }
+
+            }
+
+          }.bind(this));
+
+          return false;
+
+        // Older clients don't support fancy spinner, so show the separate workflow page:
+        } else {
+
+          NativeClient.confirmWithCallback("", titleReturned ? titleReturned : dialogTitleKey, 'Disagree', "TOSPage.agree", function(index) {
+            if(index===0){ //Disagree
+              return false;
+            }else{ //Agree
+              agreedToTOS = true;
+              account.getTosObjects().forEach(function(tosFile){
+                // skip saving of the OSX TOS.
+                if(tosFile.type != "OSX" && tosFile.type != "Privacy") {
+                  var filename = ICloudSetup.Util.base64Decode(tosFile.title).replace(/\s/g,'_') + '.txt',
+                      contents = ICloudSetup.Util.unescapeHTMLNoStrip(ICloudSetup.Util.base64Decode(tosFile.content));
+                  AppleAccountSetup.saveTOS(filename, contents);
+                }
+              });
+              ICloudSetup.getPageController().nextPage();
+            }
+          });
+        }
+        return false;
+      }
+      else return true;
+    },
+
+
+    createAppleId: function(){
+      ICloudSetup.getSetupClient().setRequestInFlight(true);
+      ICloudSetup.getSetupClient().createAppleId(ICloudSetup.getAccount(), onAppleIdSuccess, onAppleIdFailure);
+    },
+
+    updateAppleIDIfAppropriate: function () {
+      var account = ICloudSetup.getAccount(),
+          setupClient = ICloudSetup.getSetupClient();
+
+      setupClient.setRequestInFlight(true);
+
+      if(!ICloudSetup.useNewId){
+        // populate the account appleid and password using the
+        // auth header
+        var decoded = ICloudSetup.Util.base64Decode(ICloudSetup.authHeader.substring(6)),
+            credentials = decoded.split(":", 2);
+        if (!ICloudSetup.repairSteps.AppleIdNotAnEmail){
+          account.setAppleId(credentials[0]);
+        }
+        account.setPassword(credentials[1]);
+      }
+
+      if (this.shouldUpdateAppleID()) {
+        setupClient.updateAppleId(account, onAppleIdSuccess, onAppleIdFailure);  
+      } else {
+        // Note: createDelegates will update the TOS if it is a TOS only change
+        setupClient.createDelegates(account, onDelegateCreateSuccess, onDelegateCreateFailure);
+      }
+    },
+
+    previousPage: function() {
+      if (isTOSVisible){
+        var s1 = $(".scene1")[0],
+            s2 = $(".scene2")[0],
+            termsBox = $('#termsbox');
+
+        s1.style.visibility="visible";
+        s1.style.left="0px";
+        s2.style.left= termsBox.attr('dir') === 'rtl' ? "-500px" : "500px";
+
+        isTOSVisible=false;
+        setTimeout(function(){
+          s2.style.visibility="hidden";
+          var termsItemSelected = $("#" + selectedTerms + " .terms-title");
+          if(termsItemSelected.length>0) termsItemSelected.focus();
+          selectedTerms="";
+        }, 360);
+        return null;
+      }
+      else if (ICloudSetup.repairSteps.Under13){
+        ICloudSetup.comingFromTOSPage = true;
+        AppleAccountSetup.dismiss("go-to-login");
+        return null;
+      }
+      else if (ICloudSetup.repairSteps.OneSecurityQuestion){
+        if (!ICloudSetup.optedInToSecurity) {
+          return 'updateQuestionsPermission';
+        } else if(ICloudSetup.repairSteps.ShowRescueEmail){
+          return 'updateRescueEmail';
+        } else {
+          return 'securityQuestions';
+        }
+      }
+      else if (ICloudSetup.repairSteps.NoSecurityQuestion){
+        if(ICloudSetup.repairSteps.ShowRescueEmail) {
+          return 'updateRescueEmail';
+        } else {
+          return 'securityQuestions';
+        }
+      }
+      else if (ICloudSetup.isExistingAppleId) {
+        AppleAccountSetup.dismiss("go-to-login");
+        return null;
+      }
+      else {
+        return 'securityQuestions';
+      }
+    },
+
+		validatePage: function() {
+			// check if the terms checkbox is checked and if not return false
+			// else set the terms in the model
+			return true;
+		},
+		getPageId: function() {
+			return "tos_page";
+		},
+
+		getNavigationBar: function() {
+			if (navigationBar === undefined) {
+				var pageController = ICloudSetup.getPageController(),
+            hasAccount = ICloudSetup.isExistingAppleId || ICloudSetup.repairSteps.Under13;
+
+				navigationBar = new ICloudSetup.NavigationBar({
+					title: "TOSPage.existingAppleID.title".loc(),
+					subTitle: "TOSPage.existingAppleID.subtitle".loc(),
+					rightLabel: "TOSPage.agree".loc()
+				});
+			}
+			return navigationBar;
+		}
+	};
+}();
+
+
+
+ICloudSetup.CreateAppleIdProgressPage = function() {
+	var navigationBar;
+  var onDelegateCreateSuccess = function(data) {
+		console.debug("delegate create success");
+    AppleAccountSetup.disableButtons=false;
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    //Check if we need to show update OS message
+    if(ICloudSetup.isExistingAppleId && ICloudSetup.repairSteps.ShowUpdateMailWarning) {
+      //store the delegate data for use by the update mail warning page
+      window._delegateData = data;
+      //go to update OS page
+      ICloudSetup.getPageController().goToPage('updateMailWarning');
+    }
+    else if(!ICloudSetup.isExistingAppleId && ICloudSetup.cannotConfigureEmail && ICloudSetup.getAccount().isMeDotCom() ){
+      //store the delegate data for use by the update mail warning page
+      window._delegateData = data;
+      //go to update OS page
+      ICloudSetup.getPageController().goToPage('updateMailWarning');
+    } else {
+      // Otherwise, account create has completed, so trigger the completed action
+      AppleAccountSetup.accountCreateCompleted(ICloudSetup.getAccount().getAppleId(), ICloudSetup.getAccount().getPassword(), data);
+    }
+  };
+
+  var onDelegateCreateFailure = function(data) {
+    console.error("Error creating Apple ID delegates");
+    $('#creatingView')[0].style.display="none";
+    $('#errorView')[0].style.display="block";
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+    navigationBar.renderValidBar();
+    NativeClient.setRightNavButton("Continue", function(){
+      AppleAccountSetup.dismiss('did-accept-terms');
+    });
+    NativeClient.setLeftNavButton("Back", function(){
+      AppleAccountSetup.dismiss('go-to-login');
+    });
+  };
+
+	var onAppleIdCreateSuccess = function(data) {
+		var jsonObject = ICloudSetup.Util.parseStatusMessage(data);
+    if (jsonObject["status"] === "0") {
+      console.debug("Successfully created Apple ID");
+      ICloudSetup.getSetupClient().createDelegates(ICloudSetup.getAccount(), onDelegateCreateSuccess, onDelegateCreateFailure);
+		}
+		else {
+      ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+			console.error("Error creating Apple ID: " + jsonObject["status-message"]);
+			$('#creatingView')[0].style.display="none";
+			$('#errorView')[0].style.display="block";
+			$('#errorLabelText').html(jsonObject["status-message"]);
+			$('#errorLabelText2').html("");
+      navigationBar.renderValidBar();
+      NativeClient.setLeftNavButton("Back", function(){
+       AppleAccountSetup.dismiss('go-to-login');
+      });
+		}
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+	};
+
+  var onAppleIdCreateFailure = function(data) {
+    console.error("Error creating Apple ID");
+    $('#creatingView')[0].style.display="none";
+    $('#errorView')[0].style.display="block";
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+    navigationBar.renderValidBar();
+    NativeClient.setRightNavButton("Continue", function(){
+      AppleAccountSetup.dismiss('did-accept-terms');
+    });
+    NativeClient.setLeftNavButton("Back", function(){
+      AppleAccountSetup.dismiss('go-to-login');
+    });
+  };
+
+	return {
+		beforeShowPage: function() {
+      this.getNavigationBar().render();
+      NativeClient.setLeftNavButton("Back", null);
+      NativeClient.setRightNavButton("Continue", null);
+      AppleAccountSetup.disableButtons=true;
+
+      if(ICloudSetup.accountCreateError || ICloudSetup.accountCreateFailure){
+        navigationBar.renderValidBar();
+        if(ICloudSetup.accountCreateFailure){
+          NativeClient.setRightNavButton("Continue", function(){
+            AppleAccountSetup.dismiss('did-accept-terms');
+          });
+        }
+        NativeClient.setLeftNavButton("Back", function(){
+          AppleAccountSetup.dismiss('go-to-login');
+        });
+
+
+      } else if (ICloudSetup.isExistingAppleId) {
+        var isBeingRepaired = false;
+        for(var key in ICloudSetup.repairSteps){
+          if(ICloudSetup.repairSteps[key]){ isBeingRepaired = true; }
+        }
+
+        //when we've had to do something that requires updating, show "Updating" labels/title
+        if(isBeingRepaired || ICloudSetup.useNewId){
+          $('#creatingViewLabel span').text("UpdatingAppleID.label".loc());
+          NativeClient.setNavTitle("UpdateAppleID.title");
+
+        //otherwise, we've only shown the TOS, so show the spinner while delegates run, but no titles
+        } else {
+          $('.create-labels.spinner-row').css("padding-top", '185px');
+          $('#creatingViewLabel span').html("");
+          NativeClient.setNavTitle("");
+        }
+
+        var account = ICloudSetup.getAccount();
+
+        if(!ICloudSetup.useNewId){
+          // populate the account appleid and password using the
+          // auth header
+          var decoded = ICloudSetup.Util.base64Decode(ICloudSetup.authHeader.substring(6));
+          var credentials = decoded.split(":", 2);
+          if (!ICloudSetup.repairSteps.AppleIdNotAnEmail){
+            account.setAppleId(credentials[0]);
+          }
+          account.setPassword(credentials[1]);
+        }
+        ICloudSetup.getSetupClient().createDelegates(ICloudSetup.getAccount(), onDelegateCreateSuccess, onDelegateCreateFailure);
+      }
+      else {
+        ICloudSetup.getSetupClient().setRequestInFlight(true);
+        ICloudSetup.getSetupClient().createAppleId(ICloudSetup.getAccount(), onAppleIdCreateSuccess, onAppleIdCreateFailure);
+      }
+
+
+      this.mousedownHandler = function(evt){
+        var target = $(evt.target);
+
+        //look for links
+        if( target.attr('href')){
+          //do not follow the link
+          target.click(function(evt){
+            evt.preventDefault();
+            evt.stopPropagation();
+          });
+          if(target.attr('href') === '#go-to-iforgot'){
+            AppleAccountSetup.dismiss(target.attr('href').replace(/^#/,''));
+          }
+          return false;
+        }
+      };
+
+      $(window).mousedown(this.mousedownHandler);
+		},
+
+    beforeExitPage: function(){
+      $(window).unbind('mousedown',this.mousedownHandler);
+      return true;
+    },
+
+		getPageId: function() {
+			return "create_appleid_progress";
+		},
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          rightLabel:    "Continue".loc(),
+          rightCallback: function(){ AppleAccountSetup.dismiss('did-accept-terms'); },
+          leftCallback: null,
+          title: "NewAppleID.title".loc(),
+          subTitle: " "
+        });
+      }
+
+      return navigationBar;
+    }
+	};
+}();
+
+
+ICloudSetup.UpdateIDPage = function() {
+  var navigationBar;
+
+  var _serverHasSuccessfullyValidatedUs = false,
+      _shouldAdvancePage = false,
+      _newEmailIsAvailable = false,
+      validationTimeout;
+
+  var _getPageElements = function() {
+    return [$('#existingEmailUpdateField')];
+  };
+
+
+
+  return {
+    nextPage: function() {
+      if(ICloudSetup.repairSteps.NoBirthday){
+        return 'birthday';
+      } else if(ICloudSetup.repairSteps.InvalidName){
+        return 'updateIDForm';
+      } else if(ICloudSetup.repairSteps.NoSecurityQuestion){
+        return 'securityQuestions';
+      } else if(ICloudSetup.repairSteps.OneSecurityQuestion){
+        return 'updateQuestionsPermission';
+      }
+      return 'tos';
+    },
+
+    getPageId: function() {
+			return "updateid_page";
+		},
+
+    getElements: function() {
+      return _getPageElements();
+    },
+
+    initialize: function() {
+      var newEmailField = $("#existingEmailUpdateField");
+      newEmailField.validateOnChange({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',    // Intentionally not showing the user a message while they're typing it
+            stopValidatingOnFailure: true
+          }
+        ]
+      });
+
+      newEmailField.validateOnBlur({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',    // Intentionally showing the user the message in this case
+            errorMsg: "EmailInvalid".loc(),
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      var serverValidation =  function(evt){
+        _newEmailIsAvailable = false;
+
+        if(typeof _validateEmailServerXHR !== 'undefined' && _validateEmailServerXHR.readyType !== 4){
+          _validateEmailServerXHR.abort();
+        }
+        if(typeof validationTimeout !== 'undefined'){ clearTimeout(validationTimeout); }
+        validationTimeout = setTimeout(function(){
+          var target = $(evt.target),
+              emailAddr = target.val(),
+              account = ICloudSetup.getAccount(),
+              setupClient = ICloudSetup.getSetupClient(),
+              method;
+
+          //do not run server check if other checks are failing
+          if(target.data('_validationFailures').length > 0){ return; }
+
+          //run server account check
+          account.setAppleId(emailAddr);
+          _validateEmailServerXHR = validateEmailServer(null, emailAddr, target, function(successful){
+            setupClient.setRequestInFlight(false);
+            if(successful){
+              _newEmailIsAvailable = true;
+              _serverHasSuccessfullyValidatedUs = true;
+              ICloudSetup.isExistingAppleId = true;
+              var newEmail = $('#existingEmailUpdateField').val();
+              ICloudSetup.getAccount().setNewAppleId(newEmail);
+              if(_shouldAdvancePage){ ICloudSetup.getPageController().nextPage(); }
+            }
+          });
+        }, 500);
+      };
+
+      newEmailField.bind('input', serverValidation);
+      newEmailField.bind('validateServer', serverValidation);
+
+    },
+
+    beforeShowPage: function(){
+      _serverHasSuccessfullyValidatedUs = false;
+      _shouldAdvancePage = false;
+    },
+
+    beforeExitPage: function() {
+      _shouldAdvancePage = true;
+      if(!_newEmailIsAvailable){ return false; }
+      if(!_serverHasSuccessfullyValidatedUs || ICloudSetup.getSetupClient().isRequestInFlight()){
+        AppleAccountSetup.disableButtons=true;
+        return false;
+      }
+      return !!_serverHasSuccessfullyValidatedUs;
+    },
+
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "UpdateAppleID.title".loc(),
+          subTitle: "UpdateAppleID.subtitle".loc(),
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); }
+        });
+      }
+      return navigationBar;
+    }
+	};
+}();
+
+ICloudSetup.ChangeEmailPage = function() {
+  var navigationBar,
+      _serverHasSuccessfullyValidatedUs = false,
+      _newEmailIsAvailable  = false,
+      _shouldAdvancePage = false;
+
+  var _getPageElements = function() {
+    return [$('#changeEmailField'),
+            $('#changeEmailPasswordField'),
+            $('#changeEmailNewField')];
+
+  };
+
+  var onAppleIdUpdateSuccess = function(data) {
+    console.log('onAppleIdUpdateSuccess');
+    var jsonObject = ICloudSetup.Util.parseStatusMessage(data);
+
+    AppleAccountSetup.disableButtons=false;
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    if (jsonObject["status"] === "0") {
+      console.debug("Successfully updated Apple ID");
+      var updateAppleIdSuccess = true;
+      _serverHasSuccessfullyValidatedUs = true;
+      // update the account model with the new apple id if present
+      var account = ICloudSetup.getAccount();
+      var newAppleId = account.getNewAppleId();
+      if(newAppleId !== null && newAppleId.length > 0) {
+        // overwriting old apple id with new apple id
+        console.log("overwriting old apple id: " + account.getAppleId() +
+                    " with new appleid: " + newAppleId);
+        account.setAppleId(newAppleId);
+      }
+      ICloudSetup.isExistingAppleId = true;
+      ICloudSetup.useNewId = true;
+      ICloudSetup.getPageController().nextPage();
+    } else {
+      console.error("Error updating Apple ID: " + jsonObject["status-message"]);
+      var passwordField = $("#changeEmailPasswordField"),
+          oldEmailField = $("#changeEmailField");
+      passwordField.data("_validationFailures", [{
+        source:   "server",
+        errorMsg: ""
+      }]);
+      oldEmailField.data("_validationFailures", [{
+        source:   "server",
+        errorMsg: ""
+      }]);
+      ICloudSetup.getPageController().failedServerLogin = true;
+      ICloudSetup.getPageController().updateErrorDisplayForField(oldEmailField, false, true);
+      ICloudSetup.getPageController().updateErrorDisplayForField(passwordField, false, true);
+      NativeClient.confirmWithCallback(jsonObject['status-message'], "ErrorChangingEmail.title", null, "OK", function(index) {
+        return false;
+      });
+    }
+  };
+
+  var onAppleIdUpdateFailure = function(data) {
+    console.error("Error updating Apple ID");
+    AppleAccountSetup.disableButtons=false;
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    // $('#updatingView')[0].style.display="none";
+    // $('#errorUpdateView')[0].style.display="block";
+    navigationBar.renderValidBar();
+    NativeClient.setLeftNavButton("Back", null);
+  };
+
+  return {
+    nextPage: 'tos',
+
+    getPageId: function() {
+      return "change_email_page";
+    },
+
+    getElements: function() {
+      return _getPageElements();
+    },
+
+    initialize: function() {
+      var oldEmailField = $("#changeEmailField");
+      oldEmailField.validateOnChange({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc()
+          },
+          {
+            method:   'validateEmail',    // Intentionally not showing the user a message while they're typing it
+            stopValidatingOnFailure: true
+          }
+        ]
+      });
+
+      oldEmailField.validateOnBlur({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateEmail',    // Intentionally showing the user the message in this case
+            errorMsg: "EmailInvalid".loc(),
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      var passwordField = $("#changeEmailPasswordField");
+      passwordField.validateOnChange({
+        validations: [
+          {
+            method:   'validatePasswordNotEmpty',
+            errorMsg: "EnterPassword".loc()
+          }
+        ]
+      });
+      passwordField.validateOnBlur({
+        validations: [
+          {
+            method:   'validatePasswordNotEmpty',
+            errorMsg: "EnterPassword".loc(),
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      var newEmailField = $("#changeEmailNewField");
+      newEmailField.validateOnChange({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',    // Intentionally not showing the user a message while they're typing it
+            stopValidatingOnFailure: true
+          }
+        ]
+      });
+
+      newEmailField.validateOnBlur({
+        validations: [
+          {
+            method: 'validateAppleIdMinLength',
+            minLen: 1,
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          },
+          {
+            method:   'validateAppleIdMaxLength',
+            maxLen:   320,
+            errorMsg: "EmailTooLong".loc(),
+            alwaysShowError: true
+          },
+          {
+            method:   'validateDomain',
+            alwaysShowError: true,
+            errorMsg: "EmailDotMac".loc(),
+            stopValidatingOnFailure: true
+          },
+          {
+            method:   'validateEmail',    // Intentionally showing the user the message in this case
+            errorMsg: "EmailInvalid".loc(),
+            stopValidatingOnFailure: true,
+            alwaysShowError: true
+          }
+        ]
+      });
+
+      var serverValidation =  function(evt){
+        _newEmailIsAvailable = false;
+
+        if(typeof _validateEmailServerXHR !== 'undefined' && _validateEmailServerXHR.readyType !== 4){
+          _validateEmailServerXHR.abort();
+        }
+        if(typeof validationTimeout !== 'undefined'){ clearTimeout(validationTimeout); }
+        validationTimeout = setTimeout(function(){
+          var target = $(evt.target),
+              isMeDotCom = target.attr('id') === 'meDotComEmailField',
+              emailAddr = target.val(),
+              account = ICloudSetup.getAccount(),
+              setupClient = ICloudSetup.getSetupClient(),
+              method;
+
+          //do not run server check if other checks are failing
+          if(target.data('_validationFailures').length > 0){ return; }
+
+          //run server account check
+          account.setAppleId(emailAddr);
+          _validateEmailServerXHR = validateEmailServer(null, emailAddr, target, function(successful){
+            setupClient.setRequestInFlight(false);
+            if(successful){
+              _newEmailIsAvailable = true;
+              if(_shouldAdvancePage){ ICloudSetup.getPageController().nextPage(); }
+            }
+          });
+        }, 500);
+      };
+
+      newEmailField.bind('input', serverValidation);
+      newEmailField.bind('validateServer', serverValidation);
+
+
+      // If we previously failed to auth against the server, then reset errors on input
+      oldEmailField.bind('input', function(){
+        if(ICloudSetup.getPageController().failedServerLogin){
+          ICloudSetup.getPageController().failedServerLogin = false;
+          passwordField.trigger('input');
+        }
+      });
+      passwordField.bind('input', function(){
+        if(ICloudSetup.getPageController().failedServerLogin){
+          ICloudSetup.getPageController().failedServerLogin = false;
+          oldEmailField.trigger('input');
+        }
+      });
+
+    },
+
+    beforeShowPage: function(){
+      _serverHasSuccessfullyValidatedUs = false;
+      _shouldAdvancePage = false;
+    },
+
+    beforeExitPage: function() {
+      _shouldAdvancePage = true;
+      if(!_newEmailIsAvailable){ return false; }
+      if(!_serverHasSuccessfullyValidatedUs || ICloudSetup.getSetupClient().isRequestInFlight()){
+        var setupClient = ICloudSetup.getSetupClient(),
+            account = ICloudSetup.getAccount(),
+            email = $('#changeEmailField').val(),
+            password = $('#changeEmailPasswordField').val(),
+            newEmail = $('#changeEmailNewField').val();
+
+        if(setupClient.requestInFlight){ return false; }
+        AppleAccountSetup.disableButtons=true;
+        account.setAppleId(email);
+        account.setPassword(password);
+        account.setNewAppleId(newEmail);
+
+        ICloudSetup.getPageController().failedServerLogin = false;
+        ICloudSetup.getSetupClient().updateAppleId(ICloudSetup.getAccount(), onAppleIdUpdateSuccess, onAppleIdUpdateFailure);
+
+        return false;
+      }
+      return !!_serverHasSuccessfullyValidatedUs;
+    },
+
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "ChangeEmail.title".loc(),
+          subTitle: "ChangeEmail.subtitle".loc()
+        });
+      }
+      return navigationBar;
+    }
+  };
+}();
+
+ICloudSetup.UpdateIDFormPage = function() {
+  var navigationBar;
+
+  return {
+    previousPage: function () {
+      var prevPage;
+      if(ICloudSetup.repairSteps.AppleIdNotAnEmail){
+        prevPage = 'updateID';
+      } 
+      else if (ICloudSetup.repairSteps.NoBirthday) {
+        prevPage = 'birthday';
+      } 
+      else {
+        ICloudSetup.getPageController().exitFlow();
+        prevPage = null;
+      }
+      return prevPage;
+    },
+
+    nextPage: function(){
+      if(ICloudSetup.repairSteps.NoSecurityQuestion){
+        return 'securityQuestions';
+      } else if (ICloudSetup.repairSteps.OneSecurityQuestion){
+        return 'updateQuestionsPermission';
+      }
+
+      return 'tos';
+    },
+
+		getPageId: function() {
+			return "updateidform_page";
+		},
+    initialize: function() {
+      $("#firstNameUpdateField").validateOnChange({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.FirstNameTooLong".loc()
+        }]
+      });
+
+      $("#firstNameUpdateField").validateOnBlur({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.FirstNameTooLong".loc(),
+          alwaysShowError: true
+        }]
+      });
+
+
+      $("#lastNameUpdateField").validateOnChange({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.LastNameTooLong".loc()
+        }]
+      });
+
+      $("#lastNameUpdateField").validateOnBlur({
+        validations: [{
+          method: 'minLen',
+          minLen: 1,
+          stopValidatingOnFailure: true,
+          alwaysShowError: true
+        },
+        {
+          method:   'maxLen',
+          maxLen:   32,
+          errorMsg: "Validation.LastNameTooLong".loc(),
+          alwaysShowError: true
+        }]
+      });
+
+    },
+
+
+    beforeExitPage: function() {
+      var account = ICloudSetup.getAccount();
+      account.setFirstName($('#firstNameUpdateField').val());
+      account.setLastName($('#lastNameUpdateField').val());
+      console.debug("FirstName set... "+ account.getFirstName());
+      console.debug("LastName set... "+ account.getLastName());
+      return true;
+    },
+
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "UpdateAppleID.title".loc(),
+          subTitle: "UpdateAppleID2.subtitle".loc()
+        });
+      }
+      return navigationBar;
+    }
+  };
+}();
+
+
+ICloudSetup.UpdateIDProgressPage = function() {
+  var navigationBar;
+  var updateAppleIdSuccess = false;
+
+
+  var onDelegateUpdateSuccess = function(data) {
+    console.debug("delegate update success");
+    AppleAccountSetup.disableButtons=false;
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    //Check if we need to show update OS message
+    if(ICloudSetup.isExistingAppleId && ICloudSetup.repairSteps.ShowUpdateMailWarning) {
+      //store the delegate data for use by the update mail warning page
+      window._delegateData = data;
+      //go to update OS page
+      ICloudSetup.getPageController().goToPage('updateMailWarning');
+    }
+    else if(!ICloudSetup.isExistingAppleId && ICloudSetup.cannotConfigureEmail && ICloudSetup.getAccount().isMeDotCom() ){
+      //store the delegate data for use by the update mail warning page
+      window._delegateData = data;
+      //go to update OS page
+      ICloudSetup.getPageController().goToPage('updateMailWarning');
+    } else {
+      // Otherwise, account create has completed, so trigger the completed action
+      AppleAccountSetup.accountCreateCompleted(ICloudSetup.getAccount().getAppleId(), ICloudSetup.getAccount().getPassword(), data);
+    }
+  };
+
+  var onDelegateUpdateFailure = function(data) {
+    console.error("Error updating Apple ID delegates");
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    $('#updatingView')[0].style.display="none";
+    $('#errorUpdateView')[0].style.display="block";
+    NativeClient.setLeftNavButton("Back", null);
+    NativeClient.setRightNavButton("Continue", function(){
+      AppleAccountSetup.dismiss('did-accept-terms');
+    });
+    navigationBar.renderValidBar();
+  };
+
+  var onAppleIdUpdateSuccess = function(data) {
+    var jsonObject = ICloudSetup.Util.parseStatusMessage(data);
+    if (jsonObject["status"] === "0") {
+      console.debug("Successfully updated Apple ID");
+      updateAppleIdSuccess = true;
+      $('#updatingView')[0].focus();
+      // update the account model with the new apple id if present
+      var account = ICloudSetup.getAccount();
+      var newAppleId = account.getNewAppleId();
+      if(newAppleId !== null && newAppleId.length > 0) {
+        // overwriting old apple id with new apple id
+        console.log("overwriting old apple id: " + account.getAppleId() +
+                    " with new appleid: " + newAppleId);
+        account.setAppleId(newAppleId);
+      }
+      ICloudSetup.getSetupClient().createDelegates(ICloudSetup.getAccount(), onDelegateUpdateSuccess, onDelegateUpdateFailure);
+    }
+    else {
+      ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+      console.error("Error updating Apple ID: " + jsonObject["status-message"]);
+      $('#updatingView')[0].style.display="none";
+      $('#errorUpdateView')[0].style.display="block";
+      $('#errorUpdateView')[0].focus();
+      $('#errorLabelText').html(jsonObject["status-message"]);
+      $('#errorLabelText2').html("");
+      navigationBar.renderValidBar();
+      NativeClient.setLeftNavButton("Back", null);
+    }
+  };
+
+  var onAppleIdUpdateFailure = function(data) {
+    console.error("Error updating Apple ID");
+    ICloudSetup.getSetupClient().setRequestInFlight(false);
+
+    $('#updatingView')[0].style.display="none";
+    $('#errorUpdateView')[0].style.display="block";
+    $('#errorUpdateView')[0].focus();
+    NativeClient.setLeftNavButton("Back", null);
+    NativeClient.setRightNavButton("Continue", function(){
+      AppleAccountSetup.dismiss('did-accept-terms');
+    });
+    navigationBar.renderValidBar();
+  };
+
+  return {
+    beforeShowPage: function() {
+      this.getNavigationBar().render();
+      // populate the account appleid and password using the
+      // auth header
+      ICloudSetup.getSetupClient().setRequestInFlight(true);
+      //Disable buttons
+      NativeClient.setLeftNavButton("Back", null);
+      NativeClient.setRightNavButton("Continue", null);
+      AppleAccountSetup.disableButtons=true;
+
+      var account = ICloudSetup.getAccount();
+      var decoded = ICloudSetup.Util.base64Decode(ICloudSetup.authHeader.substring(6));
+      var credentials = decoded.split(":", 2);
+      account.setAppleId(credentials[0]);
+      account.setPassword(credentials[1]);
+      ICloudSetup.getSetupClient().updateAppleId(ICloudSetup.getAccount(), onAppleIdUpdateSuccess, onAppleIdUpdateFailure);
+    },
+		nextPage: function() {
+      console.log('next page');
+      return null;
+    },
+    getPageId: function() {
+      return "updateidprogress_page";
+    },
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          rightLabel:    "Continue".loc(),
+          rightCallback: function(){ AppleAccountSetup.dismiss('did-accept-terms'); },
+          leftCallback: null,
+          title: "UpdateAppleID.title".loc(),
+          subTitle: " "
+        });
+      }
+      return navigationBar;
+    }
+  };
+}();
+
+
+ICloudSetup.ConfirmAppleIDPage = function() {
+  var navigationBar;
+
+  return {
+    initialize: function() {},
+
+    nextPage: '', //not defined at this point
+
+    getPageId: function() {
+      return "confirm_apple_id_page";
+    },
+
+    beforeShowPage: function(){
+      var account = ICloudSetup.getAccount();
+      var decoded = ICloudSetup.Util.base64Decode(ICloudSetup.authHeader.substring(6));
+      var credentials = decoded.split(":", 2);
+      if (!ICloudSetup.repairSteps.AppleIdNotAnEmail){
+        account.setAppleId(credentials[0]);
+      }
+      account.setPassword(credentials[1]);
+
+      $('#stealbackEmailAddress').html(account.getAppleId());
+    },
+
+    getNavigationBar: function() {
+      if (navigationBar === undefined) {
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "ConfirmAppleID.title".loc(),
+          subTitle: ""
+        });
+      }
+      return navigationBar;
+    }
+  };
+}();
+
+ICloudSetup.expiredSession = function(){
+  var navigationBar;
+  var numericWidget;
+
+  return {
+    initialize: function() {
+      $("#expired_session_page > #contentWrapper > #content h3").text("expiredSession.title".loc());
+      $("#expired_session_page > #contentWrapper > #content #description").text("expiredSession.message".loc());
+    },
+    nextPage: null,
+    getPageId: function() {
+      return "expired_session_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "",
+          subTitle: "",
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+          rightCallback: function(){AppleAccountSetup.dismiss('did-accept-terms');}
+        });
+      }
+      return navigationBar;
+    }    
+  };
+}();
+
+
+ICloudSetup.u13Warning = function(){
+  var navigationBar;
+  var numericWidget;
+
+  return {
+    initialize: function() {
+      $("#u13_warning_page > #contentWrapper > #content h3").text("U13Warning.title".loc());
+      $("#u13_warning_page > #contentWrapper > #content #description").text("U13Warning.message".loc().replace('@@number@@',mmesetupconstants.minAgeInYears));
+    },
+    nextPage: null,
+    getPageId: function() {
+      return "u13_warning_page";
+    },
+    getNavigationBar: function() {
+      if(navigationBar === undefined) {
+        var pageController = ICloudSetup.getPageController();
+        navigationBar = new ICloudSetup.NavigationBar({
+          title: "",
+          subTitle: "",
+          leftCallback: function(){ AppleAccountSetup.dismiss("go-to-login"); },
+          rightCallback: function(){AppleAccountSetup.dismiss('did-accept-terms');}
+        });
+      }
+      return navigationBar;
+    }    
+  };
+}();
+// localize strings before passing them on to AppleAccountSetup
+NativeClient = {
+  confirmWithCallback: function(message, title, okTitle, cancelTitle, callback) {
+    message =     message ? message.loc() : '';
+    title =       title ? title.loc() : '';
+    okTitle =     okTitle ? okTitle.loc() : '';
+    cancelTitle = cancelTitle ? cancelTitle.loc() : '';
+    AppleAccountSetup.confirmWithCallback(message, title, okTitle, cancelTitle, callback);
+  },
+
+  setLeftNavButton: function(title, callback) {
+    title = title ? title.loc() : '';
+    AppleAccountSetup.setLeftNavButton(title, callback);
+  },
+  
+  setRightNavButton: function(title, callback) {
+    title = title ? title.loc() : '';
+    AppleAccountSetup.setRightNavButton(title, callback);
+  },
+
+  setNavTitle: function(title) {
+    title = title ? title.loc() : '';
+    AppleAccountSetup.setNavTitle(title);
+  }
+  
+}
+
+ICloudSetup.initUI = function() {};
+
+var initialPage;
+
+$(function() {
+	// create the controller
+	// and call the onload handler
+
+  // For each page, we pass in a “symbolic” name and a reference to the actual
+  // page object.  This allows pages to reference the next page to go to by
+  // symbol, and allows for non-linear flows.  (For example, we only want to
+  // show the “Happy Birthday!” page if it’s actually the user’s birthday.)
+  var pages = {
+    deviceNotQualified:         ICloudSetup.DeviceNotQualifiedPage,
+    purchasedContent:           ICloudSetup.PurchasedContentPage,
+    birthday:                   ICloudSetup.BirthdayPage,
+    happyBirthday:              ICloudSetup.HappyBirthdayPage,
+    nameAndChooseAppleId:       ICloudSetup.NameAndChooseAppleId,
+    securityInformation:        ICloudSetup.SecurityInformationPage,
+    securityQuestions:          ICloudSetup.SecurityQuestionsPage,
+    updateQuestionsPermission:  ICloudSetup.UpdateQuestionsPermission,
+    tos:                        ICloudSetup.TOSPage,
+    createAppleIdProgress:      ICloudSetup.CreateAppleIdProgressPage,
+    updateID:                   ICloudSetup.UpdateIDPage,
+    updateIDForm:               ICloudSetup.UpdateIDFormPage,
+    updateIDProgress:           ICloudSetup.UpdateIDProgressPage,
+    updateRescueEmail:          ICloudSetup.UpdateRescueEmail,
+    updateMailWarning:          ICloudSetup.UpdateMailWarningPage,
+    confirmAppleIDPage:         ICloudSetup.ConfirmAppleIDPage,
+    changeEmailPage:            ICloudSetup.ChangeEmailPage,
+    secondFactorSend:           ICloudSetup.SecondFactorSendPage,
+    secondFactorValidate:       ICloudSetup.SecondFactorValidatePage,
+    recoveryKey:                ICloudSetup.RecoveryKeyPage,
+    hsa2Validate:               ICloudSetup.HSA2Validate,
+    u13Warning:                 ICloudSetup.u13Warning,
+    expiredSession:             ICloudSetup.expiredSession,
+  };
+
+  // var methodsaval="";
+  //   for (var member in window.InternetAccount) { methodsaval = methodsaval + ", " + member.toString()}
+  // $('#debugging').text(methodsaval);
+  // Note:  ICloudSetup.isExistingAppleId is specified by the server depending
+	//        on the context under which we have loaded.
+
+
+  if (ICloudSetup.repairSteps.RequiresTwoFactors && hasNoTrustedDevices) {
+    initialPage = 'recoveryKey';
+  }
+  else if (ICloudSetup.repairSteps.RequiresTwoFactors){
+    initialPage = 'secondFactorSend';
+  }else if(ICloudSetup.repairSteps.RequiresHSA2Validation){
+	initialPage = 'hsa2Validate';
+  }
+  else if (mmesetupconstants.deviceQualified === false){
+    initialPage = 'deviceNotQualified';
+  }
+  else if (ICloudSetup.repairSteps.ShowPurchasedContent){
+    initialPage = 'purchasedContent';
+  }
+	else if (ICloudSetup.repairSteps.AppleIdNotAnEmail){
+    initialPage = 'updateID';
+  }
+  else if (ICloudSetup.repairSteps.NoBirthday){
+    initialPage = 'birthday';
+  }
+  else if (ICloudSetup.repairSteps.InvalidName){
+    initialPage = 'updateIDForm';
+  }
+  // For NO security question, force the security questions
+  else if (ICloudSetup.repairSteps.NoSecurityQuestion){
+    initialPage = 'securityQuestions';
+  }
+  // For 1 security question, allow user to opt in to 3 questions
+  else if (ICloudSetup.repairSteps.OneSecurityQuestion){ //FIXME: Doesn't exist yet
+    initialPage = 'updateQuestionsPermission';
+  }
+
+  else if (ICloudSetup.repairSteps.Stealback){
+    initialPage = 'confirmAppleIDPage';
+  }
+  else if (ICloudSetup.isExistingAppleId) {
+    initialPage = 'tos';
+  }
+  else if (ICloudSetup.repairSteps.ShowupdateMailWarning){
+    initialPage = 'updateMailWarning';
+  }
+  else if (ICloudSetup.repairSteps.u13Warning){
+    initialPage = 'u13Warning';
+  }
+  else if (ICloudSetup.repairSteps.expiredSession){
+    initialPage = 'expiredSession';
+  }
+  else {
+    initialPage = 'birthday';
+	}
+	
+
+	ICloudSetup.createPageController(pages, initialPage);
+
+	var controller = ICloudSetup.getPageController();
+
+  /** In order to prevent flashing (<rdar://problem/10959893>)
+      we need to preload the background sprite, and then inject
+      it into the css.
+  */
+  var img = new Image();
+
+  $(img).one('load',function() {
+    //we will use a canvas element to generate a data:url
+    var cnvs = document.createElement('canvas'),
+        ctx = cnvs.getContext('2d'),
+        styleElm = document.createElement('style'),
+        dataURL;
+
+    //draw the image into the canvas
+    cnvs.width = img.width;
+    cnvs.height = img.height;
+    ctx.drawImage(img,0,0);
+
+    //convert to base64 data:url image
+    dataURL = cnvs.toDataURL();
+
+    //inject the appropriate CSS
+    styleElm.innerHTML = "div.graphic.sprited{ background-image: url("+dataURL+"); }";
+    document.body.appendChild(styleElm);
+
+    //continue loading the page
+    controller.onLoad();
+  });
+
+  $(img).one('error',function() {
+      //continue loading the page on image error
+      controller.onLoad();
+  });
+  
+  if($('body').hasClass('_10_6')
+  || $('body').hasClass('_10_7')
+  || $('body').hasClass('_10_8') 
+  || $('body').hasClass('_10_9')) {
+    // We are in old-fashioned MacBuddy
+    if(window.devicePixelRatio===2) img.src = "macbuddy/imgs/old_sprites@2x.png";
+    else img.src = "macbuddy/imgs/old_sprites.png";
+  }
+  else {
+    if(window.devicePixelRatio===2) img.src = "macbuddy/imgs/sprites@2x.png";
+    else img.src = "macbuddy/imgs/sprites.png";
+  }
+
+
+  //if the image has already loaded, manually trigger the load event (because the browser doesn't fire load event):
+  if( img.complete ) $(img).load();
+
+	setInterval(controller.checkFilledOut, 50);
+
+	if (ICloudSetup.TEST_MODE !== undefined) {
+		ICloudSetup.testCreateFlow();
+	}
+});
+
+
+// signal that we’re ready to be shown
+if(!!InternetAccount.webClientIsReady) {
+  InternetAccount.webClientIsReady();
+}
+
+
+var CW = window.CW || {};
+
+//code scrollers
+//
+CW.ScrollShadowHints = function () {
+
+  var topScrollClassList = document.getElementsByClassName('top-scroll')[0].classList,
+      bottomScrollClassList = document.getElementsByClassName('bottom-scroll')[0].classList,
+      topScrollBorderClassList = document.getElementsByClassName('top-scroll-border')[0].classList,
+      bottomScrollBorderClassList = document.getElementsByClassName('bottom-scroll-border')[0].classList,
+      scrollbox=document.getElementsByClassName('devices')[0];
+
+  if(scrollbox.offsetHeight!==scrollbox.scrollHeight) {
+    bottomScrollClassList.remove('hide');
+    bottomScrollBorderClassList.remove('hide');
+  }
+
+  scrollbox.addEventListener("scroll", function(){
+    if(scrollbox.scrollTop===0){
+      topScrollClassList.add('hide');
+      topScrollBorderClassList.add('hide');
+      bottomScrollClassList.remove('hide');
+      bottomScrollBorderClassList.remove('hide');
+    }else if(scrollbox.scrollTop===scrollbox.scrollHeight-scrollbox.offsetHeight){
+      topScrollClassList.remove('hide');
+      topScrollBorderClassList.remove('hide');
+      bottomScrollClassList.add('hide');
+      bottomScrollBorderClassList.add('hide');
+    }else{
+      topScrollClassList.remove('hide');
+      topScrollBorderClassList.remove('hide');
+      bottomScrollClassList.remove('hide');
+      bottomScrollBorderClassList.remove('hide');
+    }
+  }, false);
+};
+
+
+
+CW.CookieManager = {
+
+    _cookieString: null,
+
+    _cookiesObj: null,
+
+
+    getCookies: function () {
+        var cookieString = document.cookie;
+        if (this._cookieString === cookieString) return this._cookiesObj;
+
+        var cookiesObj = {};
+        this._cookieString = cookieString;
+
+        if (cookieString) {
+            var cookies = cookieString.split(';');
+            for (var i = 0, len = cookies.length; i < len; i++) {
+                var cookieKeyAndValue = cookies[i].split('=');
+                var cookieKey = cookieKeyAndValue[0].trim();
+                var cookieValue = cookieKeyAndValue[1];
+
+                if (!cookieValue) CW.fatalError('Invalid cookie - no value');
+
+                cookieValue = cookieValue.trim();
+                cookiesObj[cookieKey] = cookieValue;
+            }
+        }
+
+        return (this._cookiesObj = cookiesObj);
+    },
+
+
+    getCookie: function (name) {
+        var cookies = this.getCookies();
+        return cookies[name];
+    },
+
+
+    removeCookie: function (name, domain, path) {
+        var cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        if (domain) {
+            cookie = cookie + "; domain=" + domain;
+        }
+        if (path) {
+            cookie = cookie + "; path=" + path;
+        }
+        document.cookie = cookie;
+    },
+
+
+    removeCookies: function (names, domain, path) {
+        var i, len;
+        if (names instanceof Array) {
+            for (i = 0, len = names.length; i < len; i++) {
+                this.removeCookie(names[i], domain, path);
+            }
+            return;
+        }
+        var cookies = document.cookie.split(";");
+
+        for (i = 0, len = cookies.length; i < len; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            if (names.test(name)) {
+                this.removeCookie(name, domain, path);
+            }
+        }
+    },
+
+
+    setCookie: function (name, value) {
+        var cookie = name + "=" + value + ";";
+        document.cookie = cookie;
+    }
+
+};
+
+
+// Returns the number of keys on a given object.
+// This is particularly useful for getting the number of trusted devices.
+Object.prototype.numberOfItems = function () {
+  var numberOfItems = 0;
+  var key;
+  for (key in this) {
+    if (this.hasOwnProperty(key)) {
+      numberOfItems++;
+    }
+  }
+  return numberOfItems;
+};

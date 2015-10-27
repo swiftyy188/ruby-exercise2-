@@ -1,0 +1,94 @@
+ Time	               Bundle ID	              Status	Comment
+0.000	                       -	                   -	TALagent Started (system uptime: 81.89 sec)
+0.012	                       -	                   -	Liveness: 0 -> 1 (run_as_server)
+0.037	                       -	                   -	Successfully read encryption key from keychain in 0.024661 seconds
+0.149	                       -	                   -	server_show_windows_for_asns start
+0.198	                       -	                   -	TAL launch still in progress because com.apple.appstore is unstopped (yes) and/or unhidden (yes)
+0.198	                       -	                   -	Still waiting for registration from com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes, Finder
+0.209	                       -	                   -	Liveness: 1 -> 2 (add_app)
+0.209	      com.apple.appstore	           Launching	
+0.228	                       -	                   -	Symlinked '/Users/swifty/Library/Saved Application State/com.apple.appstore.savedState' to '/Users/swifty/Library/Containers/com.apple.appstore/Data/Library/Saved Application State/com.apple.appstore.savedState'
+0.433	      com.apple.appstore	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.433	       com.google.Chrome	           Launching	
+0.443	       com.google.Chrome	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.443	      com.apple.Terminal	           Launching	
+0.463	      com.apple.Terminal	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.475	       com.github.GitHub	           Launching	
+0.481	       com.github.GitHub	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.482	       com.sublimetext.3	           Launching	
+0.485	       com.sublimetext.3	                   -	Failed to create a window image: Failed to read metadata for file '/Users/swifty/Library/Saved Application State/com.sublimetext.3.savedState/window_1.data'. errno is 2 (No such file or directory)
+0.493	       com.sublimetext.3	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.494	         com.apple.Notes	           Launching	
+0.495	                       -	                   -	Symlinked '/Users/swifty/Library/Saved Application State/com.apple.Notes.savedState' to '/Users/swifty/Library/Containers/com.apple.Notes/Data/Library/Saved Application State/com.apple.Notes.savedState'
+0.581	         com.apple.Notes	                   -	Failed to create a window: Menu bar bounds {1280, 22} different from menu bar frame size {2560, 44}
+0.591	                       -	                   -	Finder not yet launched, but pretending it is
+0.591	        com.apple.finder	                   -	Skipping window creation because the archive was created prior to 10.10 (prev: 10.0)
+0.591	                       -	                   -	loginwindow launched apps com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes
+0.989	                       -	                   -	Bitmaps Ready (6 apps, 3 windows)
+0.990	       com.google.Chrome	                   -	Disposing because it has no windows
+0.991	       com.google.Chrome	            Disposed	
+0.991	       com.github.GitHub	                   -	Disposing because it has no windows
+0.991	       com.github.GitHub	            Disposed	
+0.991	       com.sublimetext.3	                   -	Disposing because it has no windows
+0.992	       com.sublimetext.3	            Disposed	
+0.992	        com.apple.finder	                   -	Disposing because it has no windows
+0.992	        com.apple.finder	            Disposed	
+0.992	                       -	                   -	server_show_windows_for_asns end
+1.146	                       -	                   -	Refusing connection from pid 346 (app was (null))
+1.147	      com.apple.appstore	           Connected	
+1.147	                       -	                   -	Acquired designated connection from pid 335 (app is <TCApplication: 0x7fc8f2d2dfb0 (com.apple.appstore)>)
+1.149	                       -	                   -	TAL launch still in progress because com.apple.appstore is unstopped (yes) and/or unhidden (yes)
+1.149	                       -	                   -	Still waiting for registration from com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes, Finder
+1.150	                       -	                   -	TAL launch still in progress because com.apple.appstore is unstopped (yes) and/or unhidden (yes)
+1.150	                       -	                   -	Still waiting for registration from com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes, Finder
+1.253	        com.apple.finder	                   -	Finder checked in
+1.254	                       -	                   -	TAL launch still in progress because com.apple.appstore is unstopped (yes) and/or unhidden (yes)
+1.254	                       -	                   -	Still waiting for registration from com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes
+1.641	                       -	                   -	TAL launch still in progress because com.apple.appstore is unstopped (yes) and/or unhidden (yes)
+1.642	                       -	                   -	Still waiting for registration from com.apple.appstore, com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes
+2.220	      com.apple.appstore	   Requested windows	1 window.
+2.221	      com.apple.appstore	 Transferred windows	
+2.223	      com.apple.appstore	                   -	Registered as TAL ready
+2.223	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+2.224	                       -	                   -	Still waiting for registration from com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.sublimetext.3, com.apple.Notes
+2.226	      com.apple.appstore	                   -	Reported finished launching.
+2.500	      com.apple.appstore	       Ready to Draw	
+2.883	         com.apple.Notes	           Connected	
+2.883	                       -	                   -	Acquired designated connection from pid 342 (app is <TCApplication: 0x7fc8f2c35020 (com.apple.Notes)>)
+2.907	                       -	                   -	Refusing connection from pid 341 (app was (null))
+2.951	                       -	                   -	Refusing connection from pid 341 (app was (null))
+2.952	       com.sublimetext.3	                   -	Registered as TAL ready
+2.953	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+2.953	                       -	                   -	Still waiting for registration from com.google.Chrome, com.apple.Terminal, com.github.GitHub, com.apple.Notes
+3.043	                       -	                   -	Refusing connection from pid 340 (app was (null))
+3.076	      com.apple.Terminal	           Connected	
+3.076	                       -	                   -	Acquired designated connection from pid 339 (app is <TCApplication: 0x7fc8f2c2fc30 (com.apple.Terminal)>)
+3.222	       com.github.GitHub	                   -	Registered as TAL ready
+3.222	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+3.222	                       -	                   -	Still waiting for registration from com.google.Chrome, com.apple.Terminal, com.apple.Notes
+3.277	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+3.277	                       -	                   -	Still waiting for registration from com.google.Chrome, com.apple.Terminal, com.apple.Notes
+3.508	      com.apple.appstore	            Disposed	
+3.547	      com.apple.Terminal	   Requested windows	1 window.
+3.548	      com.apple.Terminal	 Transferred windows	
+3.670	         com.apple.Notes	   Requested windows	1 window.
+3.670	         com.apple.Notes	 Transferred windows	
+3.676	         com.apple.Notes	                   -	Registered as TAL ready
+3.676	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+3.676	                       -	                   -	Still waiting for registration from com.google.Chrome, com.apple.Terminal
+3.693	         com.apple.Notes	                   -	Reported finished launching.
+3.886	      com.apple.Terminal	                   -	Registered as TAL ready
+3.886	                       -	                   -	TAL launch still in progress because com.google.Chrome is unstopped (yes) and/or unhidden (yes)
+3.886	                       -	                   -	Still waiting for registration from com.google.Chrome
+3.926	                       -	                   -	Refusing connection from pid 337 (app was (null))
+4.029	      com.apple.Terminal	                   -	Reported finished launching.
+4.109	       com.google.Chrome	                   -	Registered as TAL ready
+4.109	                       -	                   -	All started apps have registered (no remaining unregistered apps)
+4.110	                       -	                   -	TAL Relaunch - all apps registered as ready
+12.450	         com.apple.Notes	       Ready to Draw	
+12.686	      com.apple.Terminal	       Ready to Draw	
+12.939	      com.apple.Terminal	            Disposed	
+13.455	         com.apple.Notes	            Disposed	
+15.455	                       -	                   -	Liveness: 2 -> 1 (__run_as_server_block_invoke)
+15.455	                       -	                   -	Liveness: 1 -> 0 (__remove_app_block_invoke)
+15.455	                       -	                   -	Exiting out of boredom

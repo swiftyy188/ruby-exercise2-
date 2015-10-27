@@ -1,0 +1,1154 @@
+/*globals escape unescape AppleAccountSetup ICloudSetup macbuddyloc mmejsloc mmesetupconstants firstNameValidators lastNameValidators emailMeDotComValidators emailThirdPartyValidators passwordValidatorsWithoutMatch answerValidators yearIsLeapYear _hideFieldValidation _showFieldValidation isAppleIDRequired validationMethods*/
+/*jsl:import ../validation.js*/
+
+var fieldElementForElement = function(elem) {
+  var domElem = elem[0],
+      ret     = null;
+
+  if (domElem) {
+    // Iterate up the parents until we find the field.
+    ret = domElem;
+    while (ret  &&  !(ret.classList.contains("field") || ret.classList.contains("smallField"))) {
+      ret = ret.parentElement;
+    }
+  }
+  if (ret) ret = $(ret);
+
+  return ret;
+};
+
+
+var validateElement = function(elem, validations, validationsError, defaultValue, type, eventType) {
+  var currentValue   = elem.val(),
+  	  failures       = [],
+  	  pageController = ICloudSetup.getPageController(),
+  	  valid, i, iLen, validation, method, showMessageOnValues,
+  	  showMessageOnElem, showMessageOnElemValidationFailureMessages, j, jLen,
+  	  alreadyHaveIt, failureMessage, clonedValidation , showValidCheck = false;
+
+  // validations: { method: "confirmation", errorMsg: "Passwords do not match" }
+  for (i = 0, iLen = validations.length;  i < iLen;  ++i) {
+  	validation = validations[i];
+  	method     = validation.method;
+    if (validation.showValidCheck) showValidCheck = true;
+
+    // If this validation was not marked with a source ("client" or "server"),
+    // then we'll assume it is a client-side validation.
+    if (!validation.source) validation.source = "client";
+
+    // Evaluate the validation!
+    valid = validationMethods[method](validation, currentValue, elem);
+    // console.debug("Is value '" + currentValue + "' valid for validation '" + validation.method + "'?  The answer is " + valid);
+
+    // If this validation specifies an "showMessageOn" value, then we
+    // potentially want to show the validation message attached to that field.
+    // (In the Password / Verify case, when they don't match, the message is
+    // anchored to the former field, even though the validation is done on the
+    // latter.)
+    if (validation.showMessageOn) {
+      // Mark this element as having been affected, because we need to update
+      // its validation failures value to show/hide the appropriate messages
+      // at the end.
+      //
+      // First, we'll lazily create the structure.
+      if (!showMessageOnValues) showMessageOnValues = {};
+      showMessageOnValues[validation.showMessageOn] = !valid;
+
+
+      // Now, if we're not valid, we'll mark the other element with that
+      // information.  If we are valid, and it was previously marked, we'll
+      // remove the mark.
+      showMessageOnElem = $(validation.showMessageOn);
+      if (showMessageOnElem) {
+        showMessageOnElemValidationFailureMessages = showMessageOnElem.data('_validationFailureMessagesFromAnotherField');
+          // Lazily create the structure.
+        if (!showMessageOnElemValidationFailureMessages) {
+          showMessageOnElem.data('_validationFailureMessagesFromAnotherField', []);
+          showMessageOnElemValidationFailureMessages = showMessageOnElem.data('_validationFailureMessagesFromAnotherField');
+        }
+
+        alreadyHaveIt = false;
+
+        // Did we fail validation?
+        if (!valid) {
+        	if (validation.alwaysShowError) showValidCheck=false;
+          // Add it to the other element, unless it's already there.
+          for (j = 0, jLen = showMessageOnElemValidationFailureMessages.length;  j < jLen;  ++j) {
+            failureMessage = showMessageOnElemValidationFailureMessages[j];
+            if (failureMessage.method === method) {
+              alreadyHaveIt = true;
+              break;
+            }
+          }
+
+          // If the message isn't already there, add it!
+          if (!alreadyHaveIt) {
+            showMessageOnElemValidationFailureMessages.push(validation);
+            showMessageOnElem.data('_validationFailureMessagesFromAnotherField', showMessageOnElemValidationFailureMessages);
+          }
+
+          // We'll also mark ourselves as having failed this validation, but
+          // without the error message, since that's the intended UX.  (JQuery
+          // doesn't have a nice clone method, but this works.)
+          clonedValidation = $.extend({}, validation);
+          clonedValidation.errorMsg = " ";    // To force it to be shown
+          failures.unshift(clonedValidation);
+        }
+        else {
+          // Remove it from the other element if it was already there.
+          for (j = 0, jLen = showMessageOnElemValidationFailureMessages.length;  j < jLen;  ++j) {
+            failureMessage = showMessageOnElemValidationFailureMessages[j];
+            if (failureMessage.method === method) {
+              showMessageOnElemValidationFailureMessages.splice(j, 1);
+              showMessageOnElem.data('_validationFailureMessagesFromAnotherField', showMessageOnElemValidationFailureMessages);
+              break;
+            }
+          }
+        }
+      }
+    }
+    else if (!valid) {
+      // No 'showMessageOn' value?  Then simply add the validation failure!
+      failures.push(validation);
+      if (validation.alwaysShowError) showValidCheck = true; //if we're invalid, and we're supposed to show the error, then show it!
+      pageController.clearValidationDisplay(elem);
+    }
+
+    // If we know we should stop validating now, then do so.
+    if (!valid && validation.stopValidatingOnFailure) break;
+  }
+
+  //Clear the validation spinner if it exists
+  pageController.validationSpinnerVisibility(elem, false);
+
+  // Write the validation failures structure to the element and update the
+  // display of errors for it.
+  elem.data('_validationFailureMessagesFromAnotherField', []);
+  elem.data('_validationFailures', failures);
+  pageController.updateErrorDisplayForField(elem, valid, showValidCheck);
+
+  // Finally, if there were any 'showMessageOn' elements, update them, too.
+  if (showMessageOnValues) {
+    for (showMessageOnElem in showMessageOnValues) {
+      pageController.updateErrorDisplayForField($(showMessageOnElem), !showMessageOnValues[showMessageOnElem], showMessageOnValues[showMessageOnElem]);
+    }
+  }
+};
+
+var preventLeadingSpaces = function(elem){
+  $(elem).bind('keydown', function(evt){
+    if(evt.keyCode === 32 && evt.target.selectionStart === 0){ //spacebar at beginning
+      evt.preventDefault();
+    }
+  })
+};
+
+$.fn.validateOnEvent = function(options, eventType) {
+	var validations      = options.validations       ||  [],
+	    validationsError = options.validationsError  ||  null,
+      elem             = $(this),
+      dfltValue        = options.dfltValue         ||  "",
+      type             = options.dataType;
+
+  var validationFunc = function() {
+    validateElement(elem, validations, validationsError, dfltValue, type, eventType);
+  };
+
+  elem.bind(eventType, validationFunc);
+
+	return this;
+};
+
+
+$.fn.validateOnBlur = function(options) {
+  // If there's an onblur handler, it's nice to clear things when the element
+  // is focused, too.
+  //
+  // TODO: I'm not sure whether I like this yet.  -- Billy
+  // var elem = this;
+  // elem.focus(function() {
+  //   elem.data('_validationFailures', null);
+  //   ICloudSetup.getPageController().updateErrorDisplayForField(elem);
+  // });
+  return this.validateOnEvent(options, 'blur');
+};
+
+$.fn.validateOnChange = function(options) {
+  // Listening for the 'change' event on input fields doesn't do as-you-type
+  // validation.
+  var eventType = this.is('input') ? 'input' : 'change';
+  return this.validateOnEvent(options, eventType);
+};
+
+
+
+// create names space
+var ICloudSetup = function() {
+
+	var client = null;
+	var Client = function() {
+		var requestInFlight;
+
+		return {
+			checkAppleIdAvailability: function(appleId, isMe) {},
+			checkPasswordValidity: function(password) {},
+			createAppleId: function(account, callbackOnSuccess, callbackOnFailure) {
+				var xml = ICloudSetup.Util.jsonToPlist(account.objectHash());
+				console.debug("About to create Apple ID with XML: " + xml);
+				$.ajax({
+					type: "POST",
+					timeout: mmesetupconstants.ajaxTimeout,
+					contentType: "text/xml",
+					processData: false,
+					url: encodeURI("/setup/macbuddy/create_apple_id"),
+					data: xml,
+					beforeSend: function(xhr) {
+						requestInFlight = true;
+                        console.debug("  -  about to call 'create_apple_id' on server…");
+						xhr.setRequestHeader("X-Mme-Nas-Qualify", mmesetupconstants.nasQualify);
+						xhr.setRequestHeader("X-Mme-Client-Info", mmesetupconstants.clientInfo);
+					},
+					success: function(data, textStatus, xhr) {
+						console.debug("  -  success calling 'create_apple_id'");
+						requestInFlight = false;
+						callbackOnSuccess(data);
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						console.debug("  -  error calling 'create_apple_id'");
+						requestInFlight = false;
+						callbackOnFailure(xhr);
+					},
+					complete: function() {
+						console.debug("  -  completed calling 'create_apple_id'");
+						requestInFlight = false;
+					}
+				});
+			},
+
+			updateAppleId: function(account, callbackOnSuccess, callbackOnFailure) {
+				var xml = ICloudSetup.Util.jsonToPlist(account.objectHash());
+				console.debug("About to create Apple ID with XML: " + xml);
+				$.ajax({
+					type: "POST",
+					timeout: mmesetupconstants.ajaxTimeout,
+					contentType: "text/xml",
+					processData: false,
+					url: encodeURI("/setup/macbuddy/update_apple_id"),
+					data: xml,
+					beforeSend: function(xhr) {
+						requestInFlight = true;
+						console.debug("  -  about to call 'update_apple_id' on server…");
+					},
+					success: function(data, textStatus, xhr) {
+						console.debug("  -  success calling 'update_apple_id'");
+						requestInFlight = false;
+						callbackOnSuccess(data);
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						console.debug("  -  error calling 'update_apple_id' - ");
+            console.debug(xhr);
+						requestInFlight = false;
+						callbackOnFailure(xhr);
+					},
+					complete: function() {
+						console.debug("  -  completed calling 'update_apple_id'");
+						requestInFlight = false;
+					}
+				});
+			},
+
+			createDelegates: function(account, callbackOnSuccess, callbackOnFailure) {
+				var xml = ICloudSetup.Util.getCreateDelegateBody(account, ICloudSetup.macbuddyDelegateInput);
+
+				console.debug("About to create delegate with XML: " + xml);
+				$.ajax({
+					type: "POST",
+					timeout: mmesetupconstants.ajaxTimeout,
+					contentType: "text/xml",
+					processData: false,
+					dataType: "html",
+					url: encodeURI("/setup/macbuddy/create_delegate_accounts"),
+					data: xml,
+					beforeSend: function(xhr) {
+						requestInFlight = true;
+						console.debug("  -  about to call 'create_delegate_accounts' on server");
+						xhr.setRequestHeader("X-Mme-Nas-Qualify", mmesetupconstants.nasQualify);
+						xhr.setRequestHeader("X-Mme-Client-Info", mmesetupconstants.clientInfo);
+					},
+					success: function(data, textStatus, xhr) {
+						console.debug("  -   success calling 'create_delegate_accounts'");
+						callbackOnSuccess(data);
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						console.debug("  -  error calling 'create_delegate_accounts'");
+            console.debug(xhr);
+						requestInFlight = false;
+						if(callbackOnFailure) callbackOnFailure(xhr);
+					},
+					complete: function() {
+						console.debug("  -  completed calling 'create_delegate_accounts'");
+						requestInFlight = false;
+					}
+				});
+			},
+			updateAccount: function() {},
+			getTosContent: function(under13, country, callbackOnSuccess,callbackOnFailure) {
+				$.ajax({
+					type: "POST",
+					timeout: mmesetupconstants.ajaxTimeout,
+					url: encodeURI("/setup/tos"),
+					data: {
+						under13: under13,
+						country: country
+					},
+					beforeSend: function(xhr) {
+						requestInFlight = true;
+						xhr.setRequestHeader("X-Mme-Client-Info", mmesetupconstants.clientInfo);
+						if(mmesetupconstants.showWarranty) {
+						    xhr.setRequestHeader("X-MMe-Show-Warranty", true);
+						    xhr.setRequestHeader("X-Mme-Country",mmesetupconstants.selectedCountry);
+						}
+					},
+					success: function(data, textStatus, xhr) {
+						console.debug("  -  success calling /setup/tos");
+						callbackOnSuccess(data);
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						console.debug("  -  error calling /setup/tos");
+						console.debug(xhr);
+						requestInFlight = false;
+						if(callbackOnFailure) callbackOnFailure(xhr);
+					},
+					complete: function() {
+						console.debug("  -  completed calling /setup/tos");
+						requestInFlight = false;
+					}
+				});
+			},
+			isRequestInFlight: function() {
+				return requestInFlight;
+			},
+
+      setRequestInFlight: function(value) {
+        requestInFlight = value;
+      }
+		};
+	};
+
+	var accountInstance = null;
+	var AccountModel = function() {
+		var _birthDate,
+		    _country,
+		    _firstName,
+		    _lastName,
+		    _appleId,
+		    _isMeDotCom,
+		    _password,
+		    _question,
+		    _answer,
+		    _tosVersion,
+		    _timeZone,
+		    _holder = {};
+
+    if(ICloudSetup.country == null || ICloudSetup.country.length == 0) {
+		    _holder["country"] = "US";
+    }
+    else {
+		    _holder["country"] = ICloudSetup.country;
+    }
+		_holder["timezone"] = "America/Los_Angeles";
+
+		return {
+			setDate: function(day, month, year) {
+        _holder["birthday"] = year + "/" + month + "/" + day;
+			},
+			setTimezoneOffset: function(){
+				_holder["timezone-offset"] = new Date().getTimezoneOffset()+"";
+			},
+			isUnder13: function() {
+				var now = new Date(),
+				    cutoffDate = new Date();
+				cutoffDate.setHours(12); // No time zone (currently, at least!) has a DST cutover at noon, but some have them at midnight
+				cutoffDate.setFullYear(now.getFullYear() - mmesetupconstants.minAgeInYears);
+				cutoffDate.setMonth(now.getMonth());
+				cutoffDate.setDate(now.getDate());
+				cutoffDate.setMinutes(0);
+				cutoffDate.setSeconds(0);
+				return cutoffDate.getTime() < _holder["birthday"];
+			},
+			getDate: function() {
+				return _holder["birthday"];
+			},
+			getCountry: function() {
+        return ICloudSetup.country;
+			},
+			setFirstName: function(firstName) {
+				_holder["first-name"] = firstName;
+			},
+			getFirstName: function() {
+				return _holder["first-name"];
+			},
+			setLastName: function(lastName) {
+				_holder["last-name"] = lastName;
+			},
+			getLastName: function() {
+				return _holder["last-name"];
+			},
+			setAppleId: function(appleId) {
+        if(typeof appleId !== 'undefined' && appleId !== null) {
+          appleId = appleId.toLowerCase();
+        }
+				_holder["apple-id"] = appleId;
+			},
+			getAppleId: function() {
+				var appleId = _holder["apple-id"];
+        if(typeof appleId !== 'undefined' && appleId !== null) {
+          appleId = appleId.toLowerCase();
+        }
+        return appleId || null;
+			},
+			setNewAppleId: function(appleId) {
+        if(typeof appleId !== 'undefined' && appleId !== null) {
+          appleId = appleId.toLowerCase();
+        }
+				_holder["new-email"] = appleId;
+			},
+			getNewAppleId: function() {
+				var appleId = _holder["new-email"];
+        if(typeof appleId !== 'undefined' && appleId !== null) {
+          appleId = appleId.toLowerCase();
+        }
+        return appleId || null;
+
+			},
+			setIsMeDotCom: function(flag) {
+				if (flag) {
+				  _holder["email-choice"] = "castle";
+					_holder["castle"] = flag;
+				}
+				else {
+				  _holder["email-choice"] = "noncastle";
+					_holder["noncastle"] = flag;
+				}
+			},
+			isMeDotCom: function() {
+				return _holder["email-choice"] == "castle";
+			},
+			setEmailUpdates: function(hasEmailUpdates, send) {
+			  if (send === true) {
+			   return _holder["emailUpdates"] = hasEmailUpdates; 
+			  }
+			},
+			setPassword: function(password) {
+				_holder["password"] = password;
+			},
+			getPassword: function() {
+				return _holder["password"];
+			},
+			setQuestion: function(question, questionNumber) {
+        var q = "security-question" + ((typeof questionNumber !== 'undefined') ? '-'+questionNumber : '');
+        _holder[q] = question;
+			},
+			getQuestion: function(questionNumber) {
+        var q = "security-question" + ((typeof questionNumber !== 'undefined') ? '-'+questionNumber : '');
+				return _holder[q];
+			},
+      setRecoveryEmail: function(email) {
+        _holder["recovery-email"] = email;
+      },
+      getRecoveryEmail: function() {
+        return _holder["recovery-email"];
+      },
+			setAnswer: function(answer, questionNumber) {
+        var q = "security-answer" + ((typeof questionNumber !== 'undefined') ? '-'+questionNumber : '');
+        _holder[q] = answer;
+			},
+			getAnswer: function(questionNumber) {
+        var q = "security-answer" + ((typeof questionNumber !== 'undefined') ? '-'+questionNumber : '');
+        return _holder[q];
+			},
+			setTosVersions: function(tosVersion) {
+				_holder["tosVersions"] = tosVersion;
+			},
+			getTosVersions: function() {
+				return _holder["tosVersions"];
+			},
+			setTosObjects: function(tosObjects) {
+				_holder["tosObjects"] = tosObjects;
+			},
+			getTosObjects: function() {
+				return _holder["tosObjects"];
+			},
+			setAcceptDialogString: function(acceptDialogString){
+				_holder["acceptDialogString"] = acceptDialogString;
+			},
+			getAcceptDialogString: function() {
+				return _holder["acceptDialogString"];
+			},
+			objectHash: function() {
+				return _holder;
+			}
+		};
+	};
+
+	var controllerInstance = null;
+	var PageController = function(inPages, inInitialPageSymbol) {
+		// Sanity checks.
+		if (!inPages) throw new Error("You must specify a hash of page symbols and page instances");
+		if (!inInitialPageSymbol) throw new Error("You must specify an initial page symbol");
+
+		// We accept the list of pages as a hash of symbol —> page instance.
+		var pages = inPages,
+			initialPageSymbol = inInitialPageSymbol,
+			currentPageSymbol = initialPageSymbol,
+			pageStack         = [],       // Dynamically updated with page symbols via _setCurrentPage()
+			pageSymbol, page;
+
+		// Initialize each registered page.
+		for (pageSymbol in pages) {
+			if (pages.hasOwnProperty(pageSymbol)) {
+				page = pages[pageSymbol];
+				if (page.initialize) page.initialize();
+			}
+		}
+
+
+		var _getCurrentPage = function() {
+			return pages[currentPageSymbol];
+		};
+
+
+		var _setCurrentPage = function(pageSymbol, dontPushOntoStack) {
+			// Sanity check.
+			if (typeof(pageSymbol) !== "string") throw new Error("You can only set the current page to a symbol");
+
+			var currentPage = _getCurrentPage(),
+				  newPage     = pages[pageSymbol];
+
+			// Sanity check.
+			if (!newPage) throw new Error("Cannot find page instance for symbol '" + pageSymbol + "'");
+
+			if (currentPage) $('#' + currentPage.getPageId()).hide();
+
+			currentPageSymbol = pageSymbol;
+
+			if (!dontPushOntoStack) pageStack.push(currentPageSymbol);
+
+			if (newPage.beforeShowPage) newPage.beforeShowPage();
+
+			var newPageElem = $('#' + newPage.getPageId());
+
+			newPageElem.show();
+
+			console.debug("Now showing page '" + currentPageSymbol + "'");
+		};
+
+    var _updateValidationDiv = function(fieldElem, type, msg){
+
+      var validationDiv = fieldElem.children('.'+type);
+      if (!msg) msg = ""; //don't display "undefined"
+
+      if (validationDiv.length === 0) {
+        // Create the error element.
+        validationDiv = $('<div>');
+        validationDiv.addClass(type);
+        // if(type === 'error'){ validationDiv.attr("role", "alert"); }
+        if(ICloudSetup && ICloudSetup.textDirection === 'rtl'){ validationDiv.attr('dir', ICloudSetup.textDirection); }
+        validationDiv.html("<div class='icon graphic sprited'></div><div class='text'>" + msg + "</div>");
+        validationDiv.appendTo(fieldElem);
+      } else {
+        validationDiv.children(".text").html(msg);
+      }
+      if(msg.trim().length>0) $('#live-aria').text(msg);
+    };
+
+    var _repositionValidation = function(fieldElem) {
+      var validationClassNames = ['.error', '.check', '.small-spinner'];
+
+      if(!fieldElem || fieldElem.length === 0 ){ return; }
+
+      var validationElem = fieldElem.children(validationClassNames.join(','));
+
+      if (validationElem.length > 0) {
+        if(validationElem.attr('dir') === 'rtl'){
+          //RTL
+          validationElem.css('width', (fieldElem.position().left - 5)+"px");
+          validationElem.css('left', "0px");
+        } else {
+          //LTR
+          validationElem.css('left', (fieldElem.position().left + fieldElem.width() + 5)+"px");
+          validationElem.css('right', "0px");
+        }
+
+        // We also need to vertically center the text if it's smaller than the
+        // arrow, and vertically center the arrow if the text is taller than
+        // it.
+        var validationIconElem   = validationElem.children(".icon"),
+            validationTextElem   = validationElem.children(".text"),
+            validationIconHeight = validationIconElem.height(),
+            validationTextHeight = validationTextElem.height(),
+            validationElemHeight = validationIconHeight;
+
+
+        if (validationIconHeight > validationTextHeight) {
+          validationIconElem.css('top', 0);
+          validationTextElem.css('marginTop', ((validationIconHeight - validationTextHeight) / 2) + "px");
+        } else if (validationIconHeight < validationTextHeight) {
+          validationIconElem.css('top', ((validationTextHeight - validationIconHeight) / 2) + "px");
+          validationTextElem.css('marginTop', 0);
+          validationElemHeight = validationTextHeight;
+        } else {
+          validationIconElem.css('top', 0);
+          validationTextElem.css('marginTop', 0);
+        }
+
+        validationElem.css('top',(fieldElem.position().top + (fieldElem.height() / 2) - (validationElemHeight / 2)) + "px");
+
+        //if the field is not visible (usually because the page changed), we should hide it
+        //this is to solve a race condition on async validations
+        if(!validationElem.is(':visible')){ validationElem.hide(); }
+        else { validationElem.show(); }
+      }
+    };
+
+    var _updateErrorDisplayForField = function(elem, valid, showValidCheck, forceMsg) {
+      var messages, failures, i, len, failure, errorMsg;
+
+      // First off, does this field have any custom error messages from a
+      // “linked” field?  If so, those have the highest priority in terms of
+      // deciding which message to show, per UX.
+      messages = elem.data('_validationFailureMessagesFromAnotherField');
+      failures = elem.data('_validationFailures');
+
+      if (messages) failures = messages.concat(failures);
+
+      len = failures ? failures.length : 0;
+      for (i = 0;  i < len;  ++i) {
+        failure  = failures[i];
+        if(failure){
+        	errorMsg = failure.errorMsg;
+        	if (errorMsg) break;
+        }
+      }
+
+      // If we found a message, show it!  Otherwise, hide any error element
+      // that might have previously been shown.
+      _hideFieldValidation(elem, 'check');
+      _hideFieldValidation(elem, 'error');
+      if(showValidCheck){
+        if (errorMsg || !valid) {
+          _showFieldValidation(elem, 'error', forceMsg || errorMsg);
+        } else if(valid){
+          _showFieldValidation(elem,'check', forceMsg);
+        }
+      }
+
+    };
+
+
+    /**
+      Shows an error message (red arrow with red message to the right of the
+      field) or a green check check for the specified field.  If you do not specify an
+      message, only the icon will be shown.
+
+      @param {JQuery element}             elem
+      @param {String}                     type
+      @param {String}         (optional)  msg
+    */
+
+    var _showFieldValidation = function(elem, type, msg) {
+      var fieldElem = fieldElementForElement(elem);
+      if (!fieldElem) return;
+      _hideFieldValidation(fieldElem, type === 'error' ? 'check' : 'error' );
+      _updateValidationDiv(fieldElem, type, msg);
+      _repositionValidation(fieldElem);
+    };
+
+
+    var _hideFieldValidation = function(elem, type) {
+      var fieldElem = fieldElementForElement(elem);
+      if (fieldElem) fieldElem.children('.'+type).remove();
+    };
+
+
+    /**
+      Shows a checkmark, to show that field has been filled as expected.
+
+      @param {JQuery element}             fieldElem
+      @param {String}         (optional)  errorMsg
+    */
+    var _showValidationSpinner = function(elem) {
+      var fieldElem = fieldElementForElement(elem);
+      if (!fieldElem) return;
+
+      var fieldDomElem, spinnerElem, spinnerElemStyle, spinnerIconElem,
+          spinnerIconHeight, spinnerElemHeight;
+
+      // In order to correctly position the error divs, we'll look at where this
+      // field is positioned.
+      var existingChild = fieldElem.children('.error, .check');
+      if(existingChild.length > 0){ existingChild.hide(); }
+
+      _updateValidationDiv(fieldElem, 'small-spinner');
+      _repositionValidation(fieldElem);
+    };
+
+
+    var _hideValidationSpinner = function(elem) {
+      var fieldElem = fieldElementForElement(elem);
+      if (!fieldElem) return;
+
+      //show an existing validation child if one was previously showing
+      var existingChild = fieldElem.children('.error, .check');
+      if(existingChild.length > 0){ existingChild.show(); }
+
+      fieldElem.children('.small-spinner').remove();
+      _repositionValidation(fieldElem);
+    };
+
+		var _validatePage = function(page) {
+			// check if the page itself has overridden the validate page method
+			// if so call that method as well;
+			if (page.validatePage !== undefined) {
+				return page.validatePage();
+			}
+
+			var pageIsValid = true,
+			    elements, i, len, element, validationFailures, elementIsValid;
+
+			if (page.getElements) {
+				elements = page.getElements();
+
+        for (i = 0, len = elements.length;  i < len;  ++i) {
+				  element = elements[i];
+				  validationFailures = element.data('_validationFailures');
+
+          // If validationFailures exists but is empty, then the element is
+          // valid.  If it doesn't exist, that means it has not yet been
+          // validated.
+          elementIsValid = (validationFailures  &&  validationFailures.length === 0);
+
+          // While we're here, update the visible validation status for the
+          // element.
+          _updateErrorDisplayForField(element, elementIsValid);
+
+          pageIsValid = (pageIsValid  &&  elementIsValid);
+				}
+			}
+
+			// if after common validation the page has additional
+			// validation that needs to be performed
+			// we will call it here.
+			if (page.customPageValidation !== undefined) {
+				pageIsValid = (pageIsValid  &&  page.customPageValidation());
+			}
+
+			return pageIsValid;
+		};
+
+
+		var _exitFlow = function() {
+			console.debug("Exiting flow.  This was initiated while on page '" + currentPageSymbol + "'");
+			AppleAccountSetup.cancel();
+		};
+
+
+		return {
+			nextPage: function() {
+				var currentPage = _getCurrentPage(),
+					  nextPageSymbol, nextPage;
+
+				console.debug("Advancing from '" + currentPageSymbol + "' to the next page…");
+
+				// dont proceed further either validate page or
+				// before exit page both returned a bad error
+				if (!_validatePage(currentPage)) {
+					// show field errors for all fields
+					console.debug("nextPage():  We are not ready to advance from '" + currentPageSymbol + "'…");
+					return;
+				}
+				else {
+					if (currentPage.beforeExitPage) {
+						console.debug("  -  Invoking beforeExitPage() callback on page '" + currentPageSymbol + "'…");
+						if (!currentPage.beforeExitPage()) {
+							console.debug("nextPage():  The beforeExitPage() callback for page '" + currentPageSymbol + "' indicated that we cannot continue");
+							return;
+						}
+					}
+				}
+
+				// Ask the page for its next page.  If there is none, then we’re
+				// on the last page and can exit.
+				//
+				// But first, a quick sanity-check.
+				if (currentPage.nextPage === undefined) throw new Error("The current page (" + currentPageSymbol + ") does not have a 'nextPage' definition");
+
+				nextPageSymbol = currentPage.nextPage;
+
+				// If the 'nextPage' definition is a function, then evaluate it.
+				if (nextPageSymbol instanceof Function) {
+					nextPageSymbol = nextPageSymbol.call(currentPage);
+				}
+
+				if (!nextPageSymbol) {
+					console.debug("'" + currentPageSymbol + "' is the last page, so exiting the flow…");
+					_exitFlow();
+				}
+				else {
+					_setCurrentPage(nextPageSymbol);
+				}
+			},
+
+			previousPage: function() {
+				console.debug("Going back to the previous page from '" + currentPageSymbol + "'…");
+
+  			var currentPage = _getCurrentPage(),
+  					previousPageSymbol;
+
+				// If the page specifies a custom 'previousPage' property / method,
+				// respect it.  Otherwise, we’ll use our page stack.
+				if (currentPage.previousPage !== undefined) {
+
+  				previousPageSymbol = currentPage.previousPage;
+
+  				// If the 'previousPage' definition is a function, then evaluate it.
+  				if (previousPageSymbol instanceof Function) {
+  					previousPageSymbol = previousPageSymbol.call(currentPage);
+  				}
+  			}
+        else {
+          previousPageSymbol = pageStack[pageStack.length - 2];
+        }
+
+				if (previousPageSymbol) {
+          pageStack.pop();
+				  _setCurrentPage(previousPageSymbol, true);
+				}
+			},
+
+      //skips directly to another page (ignoring validations)
+      //this is assumed to be an action that disrupts the current flow
+      goToPage: function(pageName, runValidations){
+        if(runValidations){
+          var currentPage = _getCurrentPage();
+          if (!_validatePage(currentPage)) {
+            // show field errors for all fields
+            console.debug("goToPage(): We are not ready to advance from '" + currentPageSymbol + "'…");
+            return;
+          }
+        }
+        console.debug("Going directly to page: ", pageName);
+        _setCurrentPage(pageName);
+      },
+
+			exitFlow: function() {
+				_exitFlow();
+			},
+
+      validatePage: function(){
+        _validatePage(_getCurrentPage());
+      },
+
+			restartFlow: function() {
+			  var currentPage = _getCurrentPage();
+				if (currentPage > 0) {
+					$('#' + pages[currentPage].getPageId()).hide();
+					currentPage = 0;
+					pages[0].beforeShowPage();
+					pages[0].renderNavigationBar(_validatePage(pages[0]));
+					$('#' + pages[0].getPageId()).show();
+				}
+			},
+
+			onLoad: function() {
+				console.debug("Page controller:  onLoad() invoked");
+
+				// Now show the initial page.
+				_setCurrentPage(initialPageSymbol);
+			},
+
+			checkFilledOut: function() {
+				if (ICloudSetup.getSetupClient().isRequestInFlight() === true || AppleAccountSetup.disableButtons)  return;
+
+				var noBadFieldsYet    = true,
+					  page              = _getCurrentPage(),
+					  isSecondFactorValidate = page.getPageId() == "second_factor_validate_page",
+					  isHsa2Page = page.getPageId() == "hsa2_validate_page",
+					  appleIdIsRequired = isAppleIDRequired(),
+					  pageElements, i, len, elem, id, validationFailures;
+
+				if (page.getElements) {
+					pageElements = page.getElements();
+					if (pageElements) {
+						for (i = 0, len = pageElements.length;  (noBadFieldsYet && i < len);  ++i) {
+							elem = pageElements[i];
+
+							// validate emailField only if isAppleIdRequired is true
+							id = elem.attr('id');
+							if (!appleIdIsRequired && id === 'emailField') {
+								continue;
+							}
+							else if (appleIdIsRequired && id === 'createEmailField') {
+								continue;
+							}
+
+              // Does the field have a client-side validation error?
+              //
+              // If validationFailures exists but is empty, then the element is
+              // valid.  If it doesn't exist, that means it has not yet been
+              // validated.
+              if (noBadFieldsYet) {
+                validationFailures = elem.data('_validationFailures');
+                if (!validationFailures  ||  validationFailures.length !== 0) noBadFieldsYet = false;
+              }
+						}
+					}
+				}
+
+				if(isSecondFactorValidate) {
+				  page.getNavigationBar().render(false);
+				}
+				else if(isHsa2Page){
+					page.getNavigationBar().render(false);
+				} 
+				else {
+				  page.getNavigationBar().render(noBadFieldsYet);
+			  }
+			},
+
+
+      updateErrorDisplayForField: function(elem, valid, showValidCheck, message) {
+        _updateErrorDisplayForField(elem, valid, showValidCheck, message);
+      },
+
+      repositionValidation: function(elem) {
+        _repositionValidation(elem);
+      },
+
+      clearValidationDisplay: function(elem) {
+        _hideFieldValidation(elem, 'error');
+        _hideFieldValidation(elem, 'check');
+      },
+
+      validationSpinnerVisibility: function(elem, visibility){
+      	if(visibility) _showValidationSpinner(elem);
+      	else _hideValidationSpinner(elem);
+      }
+		};
+	};
+
+	return {
+		BUTTON_MIN_WIDTH: 74,
+		createPageController: function(pages, initialPageSymbol) {
+			if (controllerInstance === null) {
+				controllerInstance = new PageController(pages, initialPageSymbol);
+			}
+		},
+		getPageController: function() {
+			return controllerInstance;
+		},
+		getAccount: function() {
+			if (accountInstance === null) {
+				accountInstance = new AccountModel();
+			}
+			return accountInstance;
+		},
+		getSetupClient: function() {
+			if (client === null) {
+				client = new Client();
+			}
+			return client;
+		}
+	};
+
+}();
+
+ICloudSetup.Util = function() {
+
+	return {
+    unescapeHTML: function(input) {
+      return $('<div/>').html(input).text();
+    },
+
+    unescapeHTMLNoStrip: function(input) {
+      return $('<div/>').html(input).html();
+    },
+
+    base64Encode: function( str ) {
+    	return window.btoa(unescape(encodeURIComponent( str.trim() )));
+		},
+
+		base64Decode: function( str ) {
+			return decodeURIComponent(escape(window.atob( str.replace(/\s/gi,'' ))));
+		},
+
+
+		getCreateDelegateBody: function(account, delegateInput) {
+			var doc = $.parseXML(ICloudSetup.Util.base64Decode(delegateInput));
+			var root = doc.getElementsByTagName("dict")[0];
+
+			// create apple id element
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "key", "apple-id"));
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "string", account.getAppleId()));
+
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "key", "password"));
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "string", account.getPassword()));
+
+			if (account.isMeDotCom()) {
+				root.appendChild(ICloudSetup.Util.createPlistNode(doc, "key", "email-choice"));
+				root.appendChild(ICloudSetup.Util.createPlistNode(doc, "string", "castle"));
+			}
+      else {
+				root.appendChild(ICloudSetup.Util.createPlistNode(doc, "key", "email-choice"));
+				root.appendChild(ICloudSetup.Util.createPlistNode(doc, "string", "noncastle"));
+      }
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "key", "tos-versions"));
+			root.appendChild(ICloudSetup.Util.createPlistNode(doc, "string", account.getTosVersions()));
+
+			return doc;
+		},
+		createPlistNode: function(doc, name, value) {
+			var element = doc.createElement(name);
+			var text = doc.createTextNode(value);
+			element.appendChild(text);
+			return element;
+		},
+		jsonToXml: function(obj) {
+			var xString = "",
+				i, len, val;
+			if (typeof obj === "object") {
+				var typeName = obj.constructor.toString();
+
+				if (typeName.indexOf("Array") !== -1) {
+					xString = "<array>\n";
+					for (i = 0, len = obj.length;  i < len;  ++i) {
+						val = ICloudSetup.Util.jsonToXml(obj[i]);
+						if (!val) continue;
+						xString += val + "\n";
+					}
+					xString += "</array>";
+				}
+				else if (typeName.indexOf("Date") !== -1) {
+					var date = obj.getFullYear() + "-" + obj.getMonth() + "-" + obj.getDate() + "T00:00:00Z";
+					xString = "<date>" + date + "</date>";
+				}
+				else {
+					xString += "<dict>\n";
+					for (i in obj) {
+						val = ICloudSetup.Util.jsonToXml(obj[i]);
+						if (!val) continue;
+						var varname = String(i).replace(/_/g, '-');
+						xString += "<key>" + varname + "</key>";
+						xString += val + "\n";
+					}
+					xString += "</dict>\n";
+				}
+			}
+			else if (typeof obj === "string") {
+				xString = "<string>" + obj + "</string>";
+			}
+			else if (typeof obj === "number") {
+				xString = "<integer>" + obj + "</integer>";
+			}
+			else if (typeof obj === "boolean") {
+				xString = "<" + obj + "/>";
+			}
+			else {
+				return false;
+			}
+			return xString;
+		},
+		jsonToPlist: function(obj) {
+			var s = '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n';
+			s += '<plist version="1.0">\n';
+			s += ICloudSetup.Util.jsonToXml(obj);
+			s += '</plist>';
+			return s;
+		},
+		parseStatusMessage: function(data) {
+			var result = {};
+			var allDictChildren = data.getElementsByTagName("dict")[0].getElementsByTagName("*");
+			var lastKey = null;
+			var counter = 0;
+			var length = allDictChildren.length;
+			var child;
+			console.debug(" length=" + allDictChildren.length);
+			while (counter < allDictChildren.length) {
+				// if its a key , get the node name
+				console.debug(" counting=" + counter);
+				child = allDictChildren[counter];
+				if (child.nodeName === "key") {
+					lastKey = child.childNodes[0].nodeValue;
+				}
+				else {
+					result[lastKey] = child.childNodes[0].nodeValue;
+				}
+				counter++;
+			}
+			return result;
+		}
+	};
+} ();
+
+$(function() {
+	// replace with correct library
+	if (window.InternetAccount !== undefined) {
+		window.AppleAccountSetup = window.InternetAccount;
+	}
+	else {
+		// When we are in emulator mode
+		document.body.classList.add("emulator");
+
+		AppleAccountSetup.setButtonWidth = function(buttonElement) {
+			if (buttonElement.is(':visible')) {
+				buttonElement.css('width', 'auto');
+				// reset to auto so we can get a correct reading.
+				if (buttonElement[0].getBoundingClientRect().width <= ICloudSetup.BUTTON_MIN_WIDTH) {
+					buttonElement.css('width', ICloudSetup.BUTTON_MIN_WIDTH + 'px');
+				}
+				else {
+					buttonElement.css('width', 'auto');
+				}
+			}
+		};
+		AppleAccountSetup.setNavTitle = function(title) {
+			var pageTitle = $('#page-title');
+			pageTitle.show().text(title);
+		};
+
+		AppleAccountSetup.setPageSubTitle = function(title) {
+			var pageDesc = $('#page-desc');
+			pageDesc.show().text(title);
+		};
+		AppleAccountSetup.setLeftNavButton = function(label, callback) {
+			var prevButton = $('#prevButton');
+			prevButton.show().val(label);
+			prevButton.unbind('click');
+			prevButton.bind('click', function() {
+				callback.call();
+			});
+			if (callback === null) {
+				prevButton.attr('disabled', true);
+			}
+			else {
+				prevButton.attr('disabled', false);
+			}
+			AppleAccountSetup.setButtonWidth(prevButton);
+		};
+		AppleAccountSetup.setRightNavButton = function(label, callback) {
+			var nextButton = $('#nextButton');
+			nextButton.show().val(label);
+			nextButton.unbind('click');
+			nextButton.bind('click', function() {
+				callback.call();
+			});
+			if (callback === null) {
+				nextButton.attr('disabled', true);
+			}
+			else {
+				nextButton.attr('disabled', false);
+			}
+			AppleAccountSetup.setButtonWidth(nextButton);
+		};
+	}
+});

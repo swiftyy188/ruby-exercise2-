@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UDID</key>
+	<string>AADC63C3-353D-4A64-BD1F-C6B685DAD3F9</string>
+	<key>deviceType</key>
+	<string>com.apple.CoreSimulator.SimDeviceType.Apple-Watch-38mm</string>
+	<key>name</key>
+	<string>Apple Watch - 38mm</string>
+	<key>runtime</key>
+	<string>com.apple.CoreSimulator.SimRuntime.watchOS-2-0</string>
+	<key>state</key>
+	<integer>1</integer>
+</dict>
+</plist>

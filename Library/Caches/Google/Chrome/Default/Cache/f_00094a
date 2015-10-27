@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"b800a7824c","applicationID":"3203836","transactionName":"cApYEhRXWwkBQxlcUkAWWQgVF14LAFRO","queueTime":3,"applicationTime":162,"agent":"js-agent.newrelic.com/nr-768.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UAAOU15SGwACVFJaBAc="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t){try{i.console&&console.log(t)}catch(e){}}var n,r=t("ee"),o=t(1),i={};try{n=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(i.console=!0,-1!==n.indexOf("dev")&&(i.dev=!0),-1!==n.indexOf("nr_dev")&&(i.nrDev=!0))}catch(a){}i.nrDev&&r.on("internal-error",function(t){e(t.stack)}),i.dev&&r.on("fn-err",function(t,n,r){e(r.stack)}),i.dev&&(e("NR AGENT IN DEVELOPMENT MODE"),e("flags: "+o(i,function(t){return t}).join(", ")))},{1:20,ee:"QJf3ax"}],4:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,t(3),window.onerror=e;try{throw new Error}catch(f){"stack"in f&&(t(4),t(5),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:5,2:8,3:3,4:7,5:6,6:21,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=t("ee").create(),i=t(1)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t,e){function n(){return s}if(t[1]){var r=t[1];if("function"==typeof r){var s=a(r,"nr@wrapped",function(){return i(r,"fn-",n,r.name||"anonymous")});this.wrapped=t[1]=s,o.emit("initEventContext",[t,e],this.wrapped)}else"function"==typeof r.handleEvent&&i.inPlace(r,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:22,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=t("ee").create(),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:22,ee:"QJf3ax"}],7:[function(t,e){function n(t,e,n){t[0]=i(t[0],"fn-",null,n)}function r(t,e,n){function r(){return a}this.ctx={};var a={"nr@context":this.ctx};o.emit("initTimerContext",[t,n],a),t[0]=i(t[0],"fn-",r,n)}var o=t("ee").create(),i=t(1)(o);e.exports=o,i.inPlace(window,["setTimeout","setImmediate"],"setTimer-"),i.inPlace(window,["setInterval"],"setInterval-"),i.inPlace(window,["clearTimeout","clearImmediate"],"clearTimeout-"),o.on("setInterval-start",n),o.on("setTimer-start",r)},{1:22,ee:"QJf3ax"}],8:[function(t,e){function n(){f.inPlace(this,p,"fn-",o)}function r(t,e){f.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}function i(t,e){for(var n in t)e[n]=t[n];return e}var a=t("ee").create(),s=t(1),c=t(2),f=c(a),u=c(s),d=window.XMLHttpRequest,p=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=a,window.XMLHttpRequest=function(t){var e=new d(t);try{a.emit("new-xhr",[],e),e.hasOwnProperty("addEventListener")&&u.inPlace(e,["addEventListener","removeEventListener"],"-",o),e.addEventListener("readystatechange",n,!1)}catch(r){try{a.emit("internal-error",[r])}catch(i){}}return e},i(d,XMLHttpRequest),XMLHttpRequest.prototype=d.prototype,f.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),a.on("send-xhr-start",r),a.on("open-xhr-start",r)},{1:5,2:22,ee:"QJf3ax"}],9:[function(t){function e(t){var e=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!e.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=n(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(e.cat=d.split(", ").pop())}}else e.status=0;r.cbTime=this.cbTime,o("xhr",[e,r,this.startTime])}}}function n(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1),u=window.XMLHttpRequest;t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=e,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,e){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=n(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{a.emit("internal-error",[n])}catch(r){}}};for(var u=0;c>u;u++)e.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof u&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof u&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof u&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:10,3:8,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],10:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],11:[function(t,e){function n(t){return function(){r(t,[(new Date).getTime()].concat(i(arguments)))}}var r=t("handle"),o=t(1),i=t(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(t,e){window.NREUM[e]=n("api-"+e)}),e.exports=window.NREUM},{1:20,2:21,handle:"D5DuLP"}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):void(r.q&&(r.q[t]||(r.q[t]=[]),r.q[t].push(e)))}var r=t("ee").create();e.exports=n,n.ee=r,r.q={}},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info,e=f.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){s(d,function(e,n){e in t||(t[e]=n)});var n="https"===u.split(":")[0]||t.sslForHttp;p.proto=n?"https://":"http://",a("mark",["onload",i()]);var r=f.createElement("script");r.src=p.proto+t.agent,e.parentNode.insertBefore(r,e)}}function r(){"complete"===f.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=window,f=c.document;t(2);var u=(""+location).split("?")[0],d={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-768.min.js"},p=e.exports={offset:i(),origin:u,features:{}};f.addEventListener?(f.addEventListener("DOMContentLoaded",o,!1),c.addEventListener("load",n,!1)):(f.attachEvent("onreadystatechange",r),c.attachEvent("onload",n)),a("mark",["firstbyte",i()])},{1:20,2:11,handle:"D5DuLP"}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],20:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],21:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],22:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@original",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=t,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:21,ee:"QJf3ax"}]},{},["G9z0Bl",4,9]);</script>
+<title>Platform</title>
+<meta content='width=device-width,initial-scale=1.0' name='viewport'>
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-617cee3b03bb02f27b8e804468564d20b6076bcfb2efaa7ff789669d68ee57fe.ico" />
+<link rel="stylesheet" media="all" href="/assets/application-855a9d0044b0a1bf30c7d49464659ae127e54a9ae6f5a62201dc6165acbd7dc8.css" data-turbolinks-track="true" />
+<script src="/assets/application-c410072ec466b91f8eec2d5f8a0ebd8a224193325ed98e7fce2c27d81710e31f.js" data-turbolinks-track="true"></script>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="/ITH8o4ILxpv10kzyD1zoabhLsFBIaqKrsXMPpr2Uy7PARWcBOmWaCfSmNENLJ+gMK/ro78v2gMdokRyMsFnHA==" />
+</head>
+<body>
+<div class='div hidden' data-course='webdevelopment'></div>
+<div class='side-nav'>
+<div class='side-nav-border first-half hide-for-medium hide-for-small'></div>
+<div class='logo center'>
+<a href="/weeks/current"></a>
+</div>
+<ul class='side-nav-menu large-7 medium-36 small-36'>
+<div class='side-nav-border second-half hide-for-medium hide-for-small'></div>
+<li class='is-active side-nav-link' data-submenu='curriculum'>
+<div class='icon'>
+<i class='fa fa-file-text'></i>
+</div>
+<span>Curriculum</span>
+</li>
+<li class='side-nav-link' data-submenu='people'>
+<div class='icon'>
+<i class='fa fa-group'></i>
+</div>
+<span>Users</span>
+</li>
+<li>
+<a href="/events"><div class='icon'>
+<i class='fa fa-calendar'></i>
+</div>
+<span>Events</span>
+</a></li>
+<li class='side-nav-link' data-submenu='hiring_board'>
+<div class='icon'>
+<i class='fa fa-suitcase'></i>
+</div>
+<span>Hiring Board</span>
+</li>
+<li>
+<a target="_blank" href="/tickets"><div class='icon'>
+<i class='fa fa-stack-exchange'></i>
+</div>
+<span>Que</span>
+</a></li>
+<li class='unlock'>
+<a href="/cohorts/37/breakouts"><div class='icon'>
+<i class='fa fa-lock'></i>
+</div>
+<span>Breakouts</span>
+</a></li>
+<li class='side-nav-link nav' data-submenu='nav'>
+<div class='icon'>
+<i class='fa fa-user'></i>
+</div>
+<span>Jeff Ho</span>
+</li>
+</ul>
+<div class='side-nav-submenu-close'>
+<i class='fa fa-caret-left'></i>
+</div>
+<!-- the class .curriculum is needed in sidenav.js -->
+<ul class='side-nav-submenu curriculum'>
+<li><a href="/cohorts/37/assignments">Assignments</a></li>
+<li><a href="/cohorts/37/lessons">Lessons</a></li>
+<li><a href="/cohorts/37/quizzes">Quizzes</a></li>
+</ul>
+<!-- the class .people is needed in sidenav.js -->
+<ul class='side-nav-submenu people'>
+<li><a href="/cohorts/37/students">Students</a></li>
+<li class='submenu-link-indent'><a href="/cohorts/37/progress">Progress</a></li>
+<li><a href="/staffs">Staff</a></li>
+</ul>
+<ul class='side-nav-submenu hiring_board'>
+<li><a target="_blank" href="/hiring_board/job_postings">Job Postings</a></li>
+<li><a target="_blank" href="/hiring_board/companies">Companies</a></li>
+<li><a target="_blank" href="/hiring_board/hiring_boards">More Jobs!</a></li>
+<li><a target="_blank" href="/hiring_board/students">Students</a></li>
+</ul>
+<!-- the class .nav is needed in sidenav.js -->
+<ul class='side-nav-submenu nav'>
+<li>Courses</li>
+<li class='submenu-course submenu-browsing-course'>
+<i class='fa fa-circle small-fa'></i>
+Web Development
+</li>
+<li><a href="/students/jeff-ho/edit">Edit Profile</a></li>
+<li><a data-no-turbolink="" href="/logout">Log Out</a></li>
+</ul>
+
+</div>
+
+<main class='wrap medium-offset-0 large-offset-7 relative small-offset-0'>
+<h2 class='relative'>
+Lessons
+<div class='cohort-links'>
+<div class='active-cohort-link'>
+October 2015
+<i class='fa fa-caret-down'></i>
+</div>
+<div class='cohort-list'>
+<a href="/cohorts/1/lessons">Cohort 4</a><a href="/cohorts/2/lessons">Cohort 5</a><a href="/cohorts/6/lessons">Cohort 6</a><a href="/cohorts/10/lessons">Cohort 7</a><a href="/cohorts/12/lessons">Cohort 8</a><a href="/cohorts/14/lessons">October 2014</a><a href="/cohorts/16/lessons">January 2015</a><a href="/cohorts/23/lessons">March 2015</a><a href="/cohorts/27/lessons">June 2015</a><a href="/cohorts/31/lessons">August 2015</a></div>
+</div>
+
+</h2>
+<ul class='l-lessons'>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='os_and_git_fundamentals'>
+<h1><a href="/cohorts/37/lessons/958">OS and Git Fundamentals</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Before we dive into programming, it's good to get to know the lay of the land and how to get around our computers: our operating systems, the command-line interface and how to manage files and directories. We'll also learn about git and GitHub so that we can track changes to our projects.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Oct 26th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='ruby_fundamentals,_part_one'>
+<h1><a href="/cohorts/37/lessons/959">Ruby FUNdamentals, part One</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Ruby is the primary programming language we'll be learning in this course. Ruby was created by Yukihiro Matsumoto aka Matz in 1995. 
+
+Matz set out to design a language that emphasized human needs over those of the computer, which is why Ruby is so easy to pick up. Not only is it easy to learn, but has also become very popular for building web applications, thanks to Rails.
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Oct 27th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='ruby_fundamentals,_part_two'>
+<h1><a href="/cohorts/37/lessons/960">Ruby Fundamentals, part Two</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Introduction to Ruby methods, arrays, hashes.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Oct 28th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='object-oriented_programming'>
+<h1><a href="/cohorts/37/lessons/961">Object-Oriented Programming</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Introduction to objects and classes, what they are, why we use them, how to code them, and why they are important to Ruby.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Oct 29th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='how_to_think_like_a_developer'>
+<h1><a href="/cohorts/37/lessons/962">How To Think Like a Developer</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>This lesson is an overview about how to approach the problem of creating your first software application and software in general.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Oct 30th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='build-your-own_web_server'>
+<h1><a href="/cohorts/37/lessons/963">Build-Your-Own Web Server</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we take a look at how to build a simple web server. In order to do that, we need to cover some basics about reading and writing files, creating communication channels with Sockets, and the basics of the HyperText Transfer Protocol (HTTP).
+
+By the time you are done today, you will have a server that is capable of responding to various URLs and returning different html files to a browser.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Nov 2nd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='http_requests_and_responses'>
+<h1><a href="/cohorts/37/lessons/964">HTTP Requests and Responses</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Every time you enter a URL in your browser, you're making a request for certain information to a certain server. When your page loads, it's because you've received the response from the server with the information you requested.
+
+The entirety of the web is designed on the concept of clients that make requests to servers and servers returning a response for the requested information. 
+
+During this lecture, we'll cover how the web works and the different parts of the HTTP (Hypertext Transfer Protocol)
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Nov 3rd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='html,_css,_and_templates'>
+<h1><a href="/cohorts/37/lessons/965">HTML, CSS, and Templates</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this lecture, we'll learn the broadstrokes of HTML and CSS. We'll also cover how to work with ERB templates within our Ruby/Sinatra web application. They allow you to insert Ruby code inside your HTML!
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Nov 4th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='html_forms_and_submitting_data'>
+<h1><a href="/cohorts/37/lessons/966">HTML Forms and Submitting Data</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll be getting to know the different parts of an HTML form. Forms are special because they allow your users to input and submit data to your web application. Once you receive a submitted form, you can save that data to file or database so that you can access it again later.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Nov 5th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='saving_your_data_/_intro_to_databases'>
+<h1><a href="/cohorts/37/lessons/967">Saving your data / Intro to Databases</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>This lesson will cover how databases work at a very general level</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Nov 6th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='intro_to_testing'>
+<h1><a href="/cohorts/37/lessons/968">Intro to Testing</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will be looking at how to go about testing your applications using a framework called MiniTest. We will be looking at what testing is, why we want to test, a little bit of a discussion on testing approaches.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Nov 9th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='intro_to_rails'>
+<h1><a href="/cohorts/37/lessons/969">Intro to Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we take a first look at Rails.  On the agenda are:
+
+* Rails
+* MVC
+* Routes
+
+We will also be recreating the original Rails video by creating a very simple blog application.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Nov 10th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='forms,_forms,_forms'>
+<h1><a href="/cohorts/37/lessons/970">Forms, Forms, Forms</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will be looking at how to create Forms in Rails, how forms work, how we get information into and out of forms, etc.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Nov 11th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='sql_and_activerecord'>
+<h1><a href="/cohorts/37/lessons/971">SQL and ActiveRecord</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll be taking a further look at databases and how we interact with them in Rails. We'll also get to know the Active Record Query Interface.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Nov 12th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='associations_in_rails'>
+<h1><a href="/cohorts/37/lessons/972">Associations in Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Now that you have an understanding of how databases work, we will be looking at how models are associated in Rails</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Nov 13th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='sessions_and_authentication'>
+<h1><a href="/cohorts/37/lessons/974">Sessions and Authentication</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>We'll be learning how to create our very own signup + login!</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Nov 16th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='nested_resources,_validations,_callbacks,_partials'>
+<h1><a href="/cohorts/37/lessons/975">Nested resources, Validations, Callbacks, Partials</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will be taking a look at validations, callbacks, and partials. Validations allow us to apply business rules to our models, while callbacks give us the ability to run code at various stages in an objects life cycle. 
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Nov 17th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='planning_and_thinking_through_a_rails_application'>
+<h1><a href="/cohorts/37/lessons/976">Planning and thinking through a Rails application</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will be looking at how to go about planning and thinking through a Rails application. We will be talking about some of the things that need to be done before you start coding.
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Nov 18th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='debugging_and_dates/time_in_rails'>
+<h1><a href="/cohorts/37/lessons/977">Debugging and Dates/Time in Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>We will be looking at debugging a Rails app as well as Dates, Times, and Datetimes.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Nov 19th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='testing_with_rails'>
+<h1><a href="/cohorts/37/lessons/978">Testing with Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>We will cover ActiveSupport::TestCase, fixtures and factories, and all the levels of testing in a Rails application</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Nov 20th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='javascript_fundamentals'>
+<h1><a href="/cohorts/37/lessons/979">JavaScript FUNdamentals</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this lesson, we'll be covering the origins of JavaScript, as well as some the basic language constructs.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Nov 23rd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='javascript_fundamentals,_part_ii'>
+<h1><a href="/cohorts/37/lessons/980">JavaScript Fundamentals, part II</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll be diving in a bit deep into JS land.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Nov 24th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='manipulating_the_dom_&amp;_intro_to_jquery'>
+<h1><a href="/cohorts/37/lessons/981">Manipulating the DOM &amp; Intro to jQuery</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Now that we've got the basic language constructs of JavaScript down, we can now explore how to work with the DOM (Document Object Model).</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Nov 25th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='events,_callbacks,_and_closures'>
+<h1><a href="/cohorts/37/lessons/982">Events, Callbacks, and Closures</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this lesson, we'll learn a few more very useful JavaScript and jQuery concepts</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Nov 26th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='jquery_animations'>
+<h1><a href="/cohorts/37/lessons/983">jQuery animations</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this completely class-driven lesson, we'll be trying out the various different animations we can use with jQuery. Next, we'll build a game together that I put together in a few hours in the middle of the night :)</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Nov 27th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='intro_to_ajax'>
+<h1><a href="/cohorts/37/lessons/984">Intro to AJAX</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>AJAX stands for Asynchronous JavaScript and XML. Today we'll cover what it is and what it isn't and how to make simple AJAX calls with jQuery.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Nov 30th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='rails_and_ajax'>
+<h1><a href="/cohorts/37/lessons/985">Rails and AJAX</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today, we'll learn how to work with Rails and AJAX and all the different ways we can do that. We'll learn how to implement an auto-suggest and how to submit forms!</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Dec 1st</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='working_with_rails_and_javascript'>
+<h1><a href="/cohorts/37/lessons/986">Working with Rails and JavaScript</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this lesson, we'll cover  how to best structure and organize your Rails project with JavaScript assets, including jquery plugins</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Dec 2nd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='turbolinks_and_ajax_with_json_and_js_templates'>
+<h1><a href="/cohorts/37/lessons/987">Turbolinks and AJAX with JSON and JS Templates</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>We'll be diving a bit deeper into on how to do AJAX with JSON as a data type. We'll cover how using a JS template engine will help us easily update data in the DOM.
+
+We'll also cover what turbolinks is</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Dec 3rd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='crowdfunder,_git_workflow,_multi-model_forms'>
+<h1><a href="/cohorts/37/lessons/988">Crowdfunder, Git Workflow, Multi-model forms</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we begin work on the last Rails project. This is the biggest one you have worked on to date, so we will be talking about a bunch of stuff this week that will make things easier. 
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Dec 4th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='authentication_and_authorization'>
+<h1><a href="/cohorts/37/lessons/989">Authentication and Authorization</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today's lesson is all about Authorization and Authentication.
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Dec 7th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='intro_to_responsive_web_design'>
+<h1><a href="/cohorts/37/lessons/990">Intro to Responsive Web Design</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Intro to Responsive Web Design</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Dec 8th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='carrierwave,_rake_tasks,_testing_in_rails'>
+<h1><a href="/cohorts/37/lessons/991">Carrierwave, Rake Tasks, Testing in Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>In this lecture, we'll be looking at how to upload images and files to our web app through the Carrierwave gem, how to setup your own rake tasks, and some basics on testing in Rails.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Wednesday, Dec 9th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='namespacing,_tagging,_polymorphism_and_actionmailer'>
+<h1><a href="/cohorts/37/lessons/992">Namespacing, Tagging, Polymorphism and ActionMailer</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will take a look at how to divide your app into logical groups with namespacing, adding tags to multiple resources via the magic of polymorphism, and how to send emails from your Rails app.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Thursday, Dec 10th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='geolocation_using_rails_and_javascript'>
+<h1><a href="/cohorts/37/lessons/993">Geolocation using Rails and JavaScript</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll learn about geolocation, using the geocoder gem, learn how to make a custom Rake task and get a user's current location from their browser</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Dec 11th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='working_with_apis'>
+<h1><a href="/cohorts/37/lessons/995">Working with APIs</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we will learn how to work with various RESTful APIs, and how to build our own.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Sunday, Dec 13th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='designing_your_app_in_rails'>
+<h1><a href="/cohorts/37/lessons/996">Designing Your App in Rails</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll cover HAML, Sass &amp; Responsive Design</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Dec 14th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='google_maps_api,_configuration_management_&amp;_oauth2'>
+<h1><a href="/cohorts/37/lessons/994">Google Maps API, Configuration Management &amp; OAuth2</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll continue learning about Geolocation by working with the Google Maps API. We'll be adding our SeatYourself restaurants to Google Maps!
+
+While we're at it, we'll also cover how to handle all those pesky third party APIs with this sweet gem called &quot;figaro&quot; that helps us with &quot;configuration management&quot;
+
+We'll then move onto learning about OAuth and how to take advantage of various different OAuth providers to extend authentication through 3rd parties. We'll cover how to &quot;sign in with GitHub&quot;.
+</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Dec 14th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='running_tasks_and_jobs_(cron,_delayed::jobs,_resque,_sidekiq,_etc)'>
+<h1><a href="/cohorts/37/lessons/997">Running Tasks and Jobs (cron, delayed::jobs, resque, sidekiq, etc)</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll be covering a series of different tools that you can use to run tasks and jobs in the background.
+
+We'll see different use cases and examples for these tools as well</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Dec 15th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='thanksgiving:_no_lesson'>
+<h1><a href="/cohorts/37/lessons/998">Thanksgiving: NO LESSON</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Our classroom will be closed for Thanksgiving Monday. Have a great long weekend and see you bright and early on Tuesday!</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Friday, Dec 18th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='deployment,_capistrano_&amp;_metrics'>
+<h1><a href="/cohorts/37/lessons/999">Deployment, Capistrano &amp; Metrics</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today is a walkthrough on how to deploy your Rails application in another environment than Heroku. You'll learn how to read a Capistrano set up, a leading deploy configuration tool, to deploy your Rails applications. You'll also learn how to prepare and manage the asset pipeline for production
+
+We will also examine various tools developers use to monitor and examine site performance</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Saturday, Dec 19th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='moar_javascript_-_framework_survey'>
+<h1><a href="/cohorts/37/lessons/1000">Moar JavaScript - Framework Survey</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Quick look at various JS frameworks that people are using. </p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Sunday, Dec 20th</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='css3_transitions,_animations,_and_the_future_of_uis_on_the_web'>
+<h1><a href="/cohorts/37/lessons/1001">CSS3 Transitions, Animations, and the Future of UIs on the Web</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>With the building blocks of CSS and JavaScript, the missing piece to your UI, the &quot;wow-factor&quot;, is subtle transitions and animations that delight users and provide affordances that allow them to understand what's happening in your app.</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Monday, Dec 21st</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+<div class='l-lesson'>
+<div class='l-lesson-title relative' id='preparing_for_interviews_+_writing_faster_ruby_code'>
+<h1><a href="/cohorts/37/lessons/1002">Preparing for Interviews + Writing Faster Ruby Code</a></h1>
+</div>
+<div class='l-lesson-description-and-resources large-27 left'>
+<div class='l-lesson-description'>
+<p>Today we'll be covering some do's and don't's of finding junior programming jobs. We'll also present the Hiring Handbook - a great resource that should leave you very well prepared!
+
+* What employers are looking for
+* How you can bring it
+* The interview
+* Post-interview: rejection
+* Post-interview: offer
+* Hiring Handbook
+* Q &amp; A
+
+We'll also cover a few concepts on how to write better / faster Ruby and Rails code</p>
+</div>
+</div>
+<div class='l-lesson-date-and-links large-9 right'>
+<h3>Tuesday, Dec 22nd</h3>
+<a class='button disabled l-lesson-screencast-url'>Screencast</a>
+<p class='hidden l-lesson-screencast-msg'>Not Yet Available</p>
+</div>
+<div class='clearfix'></div>
+</div>
+</ul>
+
+</main>
+</body>
+</html>

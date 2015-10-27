@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" conent="width=device-width, initial-scale=1">
+    <title>Intro To Javascript</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+
+  <body>
+
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Intro to Javascript</h1>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <img src="http://i.imgur.com/9SV0hoF.gif" style="max-width: 100%;">
+          <h4 style="margin-top: 0;">
+            Javascript is really exciting to learn!
+          </h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <img src="http://i.imgur.com/Ncl6RXj.gif" style="max-width: 100%;">
+          <h4 style="margin-top: 0;">
+            It might be challenging at first ...
+          </h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <img src="http://i.imgur.com/Dsmm185.gif" style="max-width: 100%;">
+          <h4 style="margin-top: 0;">
+            But that's why we're here to help &lt;3
+          </h4>
+        </div>
+      </div>
+    </section> 
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <img src="http://media.giphy.com/media/7TUaMzjbQDtM4/giphy.gif" style="max-width: 100%;">
+           <h4 style="margin-top: 0;">
+            Don't be afraid of it!
+          </h4>
+        </div>
+      </div>
+    </section>  
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <img src="http://i.imgur.com/JPUN53Q.gif" style="max-width: 100%;">
+          <h4 style="margin-top: 0;">
+            Chances are ... we're all in the same boat :P.
+          </h4>
+        </div>
+      </div>
+    </section>   
+    <section id="pane-2" class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>What's Javascript used for?</h1>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Adds interactivity to your web pages</h1>
+          <h4 style="margin-bottom: 0;">Check out this fun <a href="http://lokeshdhakar.com/projects/lightbox2/" target="_blank">lightbox</a> example!</h4>
+          <h4 style="margin-top: 0; margin-bottom: 0;">Behold! The powers of <a href="http://pressels.com/" target="_blank">parallax</a>!</h4>
+          <h4 style="margin-top: 0;">"Ooo. Ahh."</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is available in every browser</h1>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>A little background info on Javascript ...</h1>
+        </div>
+      </div>
+    </section>    
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Created by Netscape back in 1994</h1>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is NOT Java</h1>
+          <h4>This is a common misconception</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is an interpreted language</h1>
+          <h4>There's no compile step</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is single threaded</h1>
+          <h4>It can only do one thing at a time</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is dynamically typed</h1>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is object-oriented</h1>
+          <h4>Use a car object as an example</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript is asynchronous</h1>
+          <h4 style="margin-bottom: 0;">The order that the code is written in does not necessarily determine the order in which it executes</h4>
+          <h4 style="margin-top: 0;">Use web server in Japan as an example</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>It's code time!</h1>
+          <h4 style="margin-bottom: 0">If you want to follow along, feel free to clone down this repo: </h4>
+          <h4 style="margin-top: 0;">
+            <a style="font-size: 0.75em;" href="https://github.com/bitmakerlabs/fed-js-fundamentals" target="_blank">fed-javascript-fundamentals repo on GitHub</a>
+          </h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Basic Syntax</h1>
+          <h4 class="code">var someNumber = 10;</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Comments</h1>
+          <h4 class="code">// This is a comment</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>How do you store values?</h1>
+          <h4>Values are stored in <em>variables</em></h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Variables</h1>
+          <img src="images/variables.jpg" style="max-width: 100%;">
+           <h4 style="margin-top: 0;">
+            <a style="font-size: 0.75em;" href="http://eloquentjavascript.net/02_program_structure.html" target="_blank">Eloquent Javascript Explanation</a>
+          </h4>
+        </div>
+      </div>
+    </section>
+
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Declaring a variable</h1>
+          <h4 class="code">var someNumber = 5;</h4>
+          <ul>
+            <li>var is reserved keyword</li>
+            <li>prefix a statement with 'var' to delcare a variable</li>
+            <li>can change its value at anytime</li>
+            <li>equal sign is the assignment operator</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Value Types</h1>
+          <h4>There are 6 different types of values:</h4>
+          <ul>
+            <li>numbers</li>
+            <li>strings</li>
+            <li>Booleans</li>
+            <li>objects</li>
+            <li>functions</li>
+            <li>undefined/null</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Numbers</h1>
+          <h4 class="code">var someDecimalNumber = 5.23698;</h4>
+          <ul>
+            <li>Values of the number type are numerical values</li>
+            <li>Can be a regular integer</li>
+            <li>Can be a decimal number</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Strings</h1>
+          <h4 class="code">var someString = "I am some text";</h4>
+          <ul>
+            <li>Strings are used to represent text</li>
+            <li>Defined by enclosing string of text characters in quotes</li>
+            <li>Can use "" or ''</li>
+            <li>May need to use \ to escape your quotes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Booleans</h1>
+          <h4 class="code">
+            var aTruthyValue = true;
+            <br>
+            var aFalseyValue = false; </h4>
+          <ul>
+            <li><em>true</em> and <em>false</em> are reserved words</li>
+            <li>Similar to the concept of 1 &amp; 0</li>
+            <li><em>true</em> is different from "true"</li>
+            <li>Similar to numbers &amp; strings, can reassign values to variable</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>undefined</h1>
+          <h4 class="code">var someUndefinedValue;</h4>
+          <ul>
+            <li>‘undefined’ is used to denote the absence of a meaningful value</li>
+            <li>If you declare a variable with no value, it's assigned undefined</li>
+            <li>Can unset a value by setting it to undefined</li>
+            <li>Will be seeing a lot of this while debugging Javascript</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>null</h1>
+          <h4 class="code">var someNullValue = null;</h4>
+          <ul>
+            <li>undefined means there was never a value set to this variable</li>
+            <li>null is when you explicitly want to say a variable does not have a value</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Arrays</h1>
+          <h4 class="code">var someArray = [45, "bloop", true, null];</h4>
+          <ul>
+            <li>Allow you to store sequences of values</li>
+            <li>It’s a list of values stored between square brackets, separated by commas</li>
+            <li>Give example of reducing repetitive tasks (credit card processing)</li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Arrays cont'd</h1>
+          <h4 class="code">
+            var someArray = [45, "bloop", true, null];
+            <br>
+            someArray[1] // returns "bloop"
+          </h4>
+          <ul>
+            <li>Arrays are an ordered list of items</li>
+            <li>Each element in the array has an index position</li>
+            <li>Array index position always starts counting at 0</li>
+            <li>syntax: nameOfArray[indexPosition]</li>
+          </ul>
+        </div> 
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Arrays cont'd</h1>
+          <h4 class="code">
+            var someArray = [45, "bloop", true, null];
+            <br>
+            someArray.length // returns 4
+          </h4>
+          <ul>
+            <li>To check how long an array is, check its length property</li>
+            <li>This checks how many elements are store in the array</li>
+            <li>Array index position always starts counting at 0</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Objects</h1>
+          <h4 class="code">
+            var someObject = {"key" : "value"};
+            <br>
+            someObject["key"] &nbsp;&nbsp;// returns "value"
+            <br>
+            someObject.key &nbsp;&nbsp;&nbsp;&nbsp;// returns "value"
+          </h4>
+          <ul>
+            <li>There are no orders to objects (no index positions)</li>
+            <li>You get to define how to look it up: key, value pairs</li>
+            <li>Can retrieve value stored by using the key name</li>
+            <li>Multiple syntax to retrieve value</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Quick review</h1>
+          <h4>back to the code</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Let's try it out ourselves!</h1>
+          <h4 style="margin-top: 0;">
+            <a href="http://bettymakes.github.io/fed-intro-to-js-variables/" target="_blank">Javascript Variables Drill</a>
+          </h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>So many Equals Signs! @_@</h1>
+          <h4 class="code">
+            = &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// assignment
+            <br>
+            == &nbsp;&nbsp;&nbsp;// loose equality
+            <br>
+            === &nbsp;&nbsp;// strict equality
+          </h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Other Operators</h1>
+          <ul>
+            <li><strong>&gt;</strong> greater than</li>
+            <li><strong>&lt;</strong>  less than</li>
+            <li><strong>&gt;=</strong>  greater than or equals to</li>
+            <li><strong>&lt;=</strong>  less than or equals to</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Use <strong>!</strong> for Negation</h1>
+          <h4>This will always return a boolean value</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>5 things that evaluate to false</h1>
+          <h4>Everything else is truthy</h4>
+          <ul>
+            <li>undefined</li>
+            <li>null</li>
+            <li>empty string "" or ''</li>
+            <li>0</li>
+            <li>NaN</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Go forth and Drillz!</h1>
+          <h4>Review before drills if you haven't done so already:</h4>
+          <ul>
+            <li>String concatenation</li>
+            <li>console.log</li>
+            <li>Links in Alexa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Javascript Part 2</h1>
+          <h4>Flow controls &amp; Looping!</h4>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Flow Control. C'est quoi ça?</h1>
+          <h4>Allows us to add decision points in our program, executing x if some conditions are true or y if conditions are false</h4>
+        </div>
+      </div>
+    </section>
+        <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>Why for art thou looping?</h1>
+          <h4>Allows you to do repetitive tasks over and over again (like iterating over an array)</h4>
+        </div>
+      </div>
+    </section>
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>It's flow_control.js time!</h1>
+          <h4>You'll find it under the <em>app/scripts</em> folder you cloned earlier</h4>
+        </div>
+      </div>
+    </section>
+       
+    <section class="pane">
+      <div class="stage">
+        <div class="content">
+          <h1>jQuery Next Week!</h1>
+        </div>
+      </div>
+    </section>
+
+    <div class="btn-actions">
+      <div id="prev" class="btn-prev">
+        <img src="http://uxrepo.com/static/icon-sets/flat-arrows/png32/256/000000/flat-circle-round-up-arrow-256-000000.png">
+      </div>
+
+      <div id="next" class="btn-next">
+        <img src="http://uxrepo.com/static/icon-sets/flat-arrows/png32/256/000000/flat-circle-round-up-arrow-256-000000.png">
+      </div>
+    </div>
+
+
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/main.js"></script>
+
+  </body>
+</html>
